@@ -1,0 +1,85 @@
+networks:
+  service-connection:
+    driver: bridge
+
+services:
+  frontend-compose:
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+    expose:
+      - "3000"
+    networks:
+      - service-connection
+    logging:
+      options:
+        max-size: "${DOCKER_LOGS_MAX_SIZE:-100M}"
+
+  backend-compose:
+    build:
+      dockerfile: Dockerfile
+      context: ./backend
+    expose:
+      - "5000"
+    networks:
+      - service-connection
+    logging:
+      options:
+        max-size: "${DOCKER_LOGS_MAX_SIZE:-100M}"
+
+  ai-compose:
+    build:
+      dockerfile: Dockerfile
+      context: ./ai
+    expose:
+      - "8000"
+    networks:
+      - service-connection
+    logging:
+      options:
+        max-size: "${DOCKER_LOGS_MAX_SIZE:-100M}"
+
+  nginx:
+    image: nginx:1.15-alpine
+    restart: unless-stopped
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - service-connection
+    depends_on:
+      - frontend-compose
+      - backend-compose
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    logging:
+      options:
+        max-size: "${DOCKER_LOGS_MAX_SIZE:-100M}"
+
+  certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    logging:
+      options:
+        max-size: "${DOCKER_LOGS_MAX_SIZE:-100M}"
+
+  ### http ###
+  # nginx:
+  #   restart: always
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: ./nginx
+  #   ports:
+  #     - "80:80"
+  #   networks:
+  #     - service-connection
+  #   depends_on:
+  #     - frontend-compose
+  #     - backend-compose
