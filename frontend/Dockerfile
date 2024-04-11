@@ -1,9 +1,10 @@
 FROM node:20.11.1-alpine as builder
 WORKDIR /app
 COPY package.json .
-RUN npm install
+RUN npm install --global yarn
+RUN yarn
 COPY . .
-RUN npm run build
+RUN yarn build
 
 FROM nginx:stable-alpine as runner
 COPY ./nginx_stage/default.conf /etc/nginx/conf.d/default.conf
