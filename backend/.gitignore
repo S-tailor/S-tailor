@@ -40,6 +40,8 @@ out/
 
 ### FrontEnd build files ###
 /src/main/resources/dist/
+package*.json
+yarn*.lock
 
 ## BackEnd log files ##
 *.gz
