@@ -1,7 +1,6 @@
 FROM node:20.11.1-alpine as builder
 WORKDIR /app
 COPY package.json .
-RUN npm install --global yarn
 RUN yarn
 COPY . .
 RUN yarn build
