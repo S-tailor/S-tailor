@@ -10,32 +10,6 @@ export default defineConfig({
       registerType: 'autoUpdate',
       devOptions: {
         enabled: true
-      },
-      manifest: {
-        icons: [
-          {
-            src: 'icons/favicon-196x196.png',
-            type: 'image/png',
-            sizes: '196x196'
-          },
-          {
-            src: 'icons/favicon-196x196.png',
-            type: 'image/png',
-            sizes: '196x196',
-            purpose: 'maskable'
-          },
-          {
-            src: 'icons/favicon-512x512.png',
-            type: 'image/png',
-            sizes: '512x512'
-          },
-          {
-            src: 'icons/favicon-512x512.png',
-            type: 'image/png',
-            sizes: '512x512',
-            purpose: 'maskable'
-          }
-        ]
       }
     })
   ]
