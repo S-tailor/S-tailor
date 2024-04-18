@@ -1,30 +1,26 @@
 {
   "name": "lookfit",
   "short_name": "lookfit",
-  "start_url": "https://ourtrip.store",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#fff",
   "theme_color": "#fff",
   "description": "A virtual cloth app.",
   "icons": [
     {
-      "src": "icons/favicon-196x196.png",
-      "type": "image/png",
-      "sizes": "196x196"
-    },
-    {
-      "src": "icons/favicon-196x196.png",
+      "src": "favicon-196x196.png",
       "type": "image/png",
       "sizes": "196x196",
-      "purpose": "maskable"
+      "purpose": "any"
     },
     {
-      "src": "icons/favicon-512x512.png",
+      "src": "favicon-512x512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any"
     },
     {
-      "src": "icons/favicon-512x512.png",
+      "src": "favicon-maskable-512x512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"

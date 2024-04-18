@@ -7,7 +7,32 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'autoUpdate'
+      registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true
+      },
+      manifest: {
+        icons: [
+          {
+            src: 'favicon-196x196.png',
+            type: 'image/png',
+            sizes: '196x196',
+            purpose: 'any'
+          },
+          {
+            src: 'favicon-512x512.png',
+            type: 'image/png',
+            sizes: '512x512',
+            purpose: 'any'
+          },
+          {
+            src: 'favicon-maskable-512x512.png',
+            type: 'image/png',
+            sizes: '512x512',
+            purpose: 'maskable'
+          }
+        ]
+      }
     })
   ]
 })
