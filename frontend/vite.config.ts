@@ -14,19 +14,19 @@ export default defineConfig({
       manifest: {
         icons: [
           {
-            src: 'icons/favicon-196x196.png',
+            src: 'favicon-196x196.png',
             type: 'image/png',
             sizes: '196x196',
             purpose: 'any'
           },
           {
-            src: 'icons/favicon-512x512.png',
+            src: 'favicon-512x512.png',
             type: 'image/png',
             sizes: '512x512',
             purpose: 'any'
           },
           {
-            src: 'icons/favicon-maskable-512x512.png',
+            src: 'favicon-maskable-512x512.png',
             type: 'image/png',
             sizes: '512x512',
             purpose: 'maskable'
