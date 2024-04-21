@@ -12,8 +12,8 @@ export default defineConfig({
         enabled: true
       },
       manifest: {
-        name: 'lookfit',
-        short_name: 'lookfit',
+        name: 'S-tailor',
+        short_name: 'S-tailor',
         start_url: '/',
         display: 'standalone',
         description: 'A virtual cloth app.',
