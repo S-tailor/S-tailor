@@ -12,6 +12,11 @@ export default defineConfig({
         enabled: true
       },
       manifest: {
+        name: 'lookfit',
+        short_name: 'lookfit',
+        start_url: '/',
+        display: 'standalone',
+        description: 'A virtual cloth app.',
         icons: [
           {
             src: 'favicon-196x196.png',
