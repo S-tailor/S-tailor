@@ -54,6 +54,7 @@ services:
     depends_on:
       - frontend-compose
       - backend-compose
+      - jenkins-compose
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     logging:
       options:
@@ -66,6 +67,29 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    logging:
+      options:
+        max-size: "${DOCKER_LOGS_MAX_SIZE:-100M}"
+  
+  jenkins-compose:
+    image: jenkins/jenkins:jdk17
+    restart: unless-stopped
+    user: root
+    privileged: true
+    expose:
+      - "8080"
+      - "50000"
+    networks:
+      - service-connection
+    volumes:
+      - ./jenkins:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - ./:/home
+        #container_name: 'jenkins'
+    environment:
+      - TZ=Asia/Seoul
+      - JENKINS_OPTS="--prefix=/jenkins"
     logging:
       options:
         max-size: "${DOCKER_LOGS_MAX_SIZE:-100M}"
