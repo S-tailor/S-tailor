@@ -11,6 +11,9 @@ export default defineConfig({
       devOptions: {
         enabled: true
       },
+      workbox: {
+    	navigateFallbackDenylist: [/^\/jenkins/]
+      },
       manifest: {
         name: 'S-tailor',
         short_name: 'S-tailor',
