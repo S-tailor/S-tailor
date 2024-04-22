@@ -12,16 +12,5 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUserIdAndIsDelete(String id, int isDelete);
-
-    @Transactional
-    @Modifying(clearAutomatically = true)
-    @Query(value = "update User set userId = :userId, password = :password, nickname = :nickname, gender = :gender " +
-            "where userPk = :userPk", nativeQuery = true)
-    int updateUserInfo(String userId, String password, String nickname, String gender, int userPk);
-
-    Long countByUserIdAndIsDelete(String userId, int isDelete);
-
-    @Query(value = "select userKey from User where userPk = :userPk", nativeQuery = true)
-    String findUserKey(int userPk);
+    User findById(String id);
 }
