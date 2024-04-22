@@ -8,6 +8,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -19,12 +21,10 @@ import javax.persistence.Id;
 @ToString
 public class User{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int userPk;
-    String userId;
-    String gender;
-    String nickname;
-    int isDelete;
-    String userKey;
+
+    String id;
 
     @JsonIgnore
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

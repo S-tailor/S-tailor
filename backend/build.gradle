@@ -145,6 +145,9 @@ dependencies {
     implementation 'org.apache.httpcomponents:httpclient:4.5.13'
 
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.5.0'
+    runtimeOnly 'org.postgresql:postgresql'
 }
 
 
