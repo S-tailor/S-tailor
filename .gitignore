@@ -28,3 +28,6 @@ out/
 
 ### certbot ###
 /certbot
+
+### jenkins ###
+/jenkins
