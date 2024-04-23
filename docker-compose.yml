@@ -85,8 +85,7 @@ services:
       - ./jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
-      - ./:/home
-        #container_name: 'jenkins'
+      - /usr/bin/docker-compose:/usr/bin/docker-compose
     environment:
       - TZ=Asia/Seoul
       - JENKINS_OPTS="--prefix=/jenkins"
