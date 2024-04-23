@@ -1,6 +1,5 @@
 package com.ssafy.api.controller;
 
-import com.azul.tooling.in.Model;
 import com.ssafy.api.request.ProfileCreateReq;
 import com.ssafy.api.request.UserLoginPostReq;
 import com.ssafy.api.request.UserRegisterPostReq;
