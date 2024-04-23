@@ -55,10 +55,10 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             아래 if문 주석 삭제하면 로그인과 회원가입을 제외한 모든 API 요청시 헤더에 JWT 토큰을 포함 해야 함
             */
 
-            if(!(request.getRequestURI().equals("/api/user/login") || request.getRequestURI().equals("/api/user/create"))) {
-                ResponseBodyWriteUtil.sendError(request, response, new Exception());
-                return;
-            }
+//            if(!(request.getRequestURI().equals("/api/user/login") || request.getRequestURI().equals("/api/user/create"))) {
+//                ResponseBodyWriteUtil.sendError(request, response, new Exception());
+//                return;
+//            }
             filterChain.doFilter(request, response);
             return;
         }
