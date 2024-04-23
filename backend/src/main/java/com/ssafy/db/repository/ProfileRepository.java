@@ -12,7 +12,7 @@ import java.util.List;
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
 
     @Query(value = "select profilePk from profile order by profilePk desc limit 1", nativeQuery = true)
-    int getCount();
+    Integer getCount();
 
     Profile findByProfilePk(int profilePk);
 

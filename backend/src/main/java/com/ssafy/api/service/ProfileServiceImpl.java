@@ -36,9 +36,14 @@ public class ProfileServiceImpl implements ProfileService{
 
         try {
             MultipartFile image = info.getImage();
-            profile.setImage(s3UpDownloadService.saveProfileImage(image,image.getOriginalFilename(),profileRepository.getCount()+1));
+            Integer count = profileRepository.getCount();
+            if(count == null) {
+                count = 0;
+            }
+            profile.setImage(s3UpDownloadService.saveProfileImage(image,image.getOriginalFilename(),count+1));
             profileRepository.save(profile);
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
 
