@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * 유저 로그인 API ([POST] /api/v1/auth/login) 요청에 필요한 리퀘스트 바디 정의.
@@ -11,9 +12,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @ApiModel("UserLoginPostRequest")
+@ToString
 public class UserLoginPostReq {
-	@ApiModelProperty(name="유저 ID", example="ssafy@ssafy.com")
-	String userId;
-	@ApiModelProperty(name="유저 Password", example="password")
+	String id;
 	String password;
 }

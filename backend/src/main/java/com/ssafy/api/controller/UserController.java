@@ -1,57 +1,59 @@
 package com.ssafy.api.controller;
 
+import com.azul.tooling.in.Model;
+import com.ssafy.api.request.ProfileCreateReq;
 import com.ssafy.api.request.UserLoginPostReq;
 import com.ssafy.api.request.UserRegisterPostReq;
+import com.ssafy.api.response.ProfileListRes;
+import com.ssafy.api.response.ProfileSelectRes;
 import com.ssafy.api.response.UserLoginPostRes;
+import com.ssafy.api.service.ProfileService;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.common.util.JwtTokenUtil;
+import com.ssafy.db.entity.Profile;
 import com.ssafy.db.entity.User;
+import com.ssafy.db.join.ProfileList;
 import io.swagger.annotations.*;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-@Api(value = "유저 API", tags = {"User"})
+import java.util.List;
+
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-     UserService userService;
+    UserService userService;
+
+    @Autowired
+    ProfileService profileService;
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
     @PostMapping("/create")
-    @ApiOperation(value = "사용자 회원 가입", notes = "<strong>아이디, 패스워드, 닉네임, 성별 </strong>를 통해 회원가입 한다.")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "성공"),
-            @ApiResponse(code = 401, message = "인증 실패"),
-            @ApiResponse(code = 404, message = "사용자 없음"),
-            @ApiResponse(code = 500, message = "서버 오류")
-    })
-    public ResponseEntity<? extends BaseResponseBody> createUser(
-            @RequestBody @ApiParam(value="회원가입 정보", required = true) UserRegisterPostReq registerInfo){
-        String userId = registerInfo.getUserId();
+    public ResponseEntity<? extends BaseResponseBody> createUser(@RequestBody UserRegisterPostReq registerInfo){
+        String userId = registerInfo.getId();
         User user = userService.getUserByUserId(userId);
 
         if(user != null){
             return ResponseEntity.ok(BaseResponseBody.of(400,"ID Existed"));
         }
 
-//        if(userService.createUser(registerInfo)) {
-//            return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
-//        } else {
-//            return ResponseEntity.ok(BaseResponseBody.of(400,"Fail"));
-//        }
-        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+        if(userService.userCreate(registerInfo)) {
+            return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+        } else {
+            return ResponseEntity.ok(BaseResponseBody.of(400,"Fail"));
+        }
     }
 
     @PostMapping("/login")
     public ResponseEntity<? extends BaseResponseBody> login(@RequestBody UserLoginPostReq loginInfo){
-        String userId = loginInfo.getUserId();
+        String userId = loginInfo.getId();
         String password = loginInfo.getPassword();
         User user = userService.getUserByUserId(userId);
 
@@ -63,6 +65,49 @@ public class UserController {
             return ResponseEntity.ok(BaseResponseBody.of(400,"Passsword Invaild"));
         }
 
-        return ResponseEntity.ok(UserLoginPostRes.of(200, "Success", JwtTokenUtil.getToken(userId), userId, null, null));
+        return ResponseEntity.ok(UserLoginPostRes.of(200, "Success", JwtTokenUtil.getToken(userId), userId));
+    }
+
+    @PostMapping("/profile/create")
+    public ResponseEntity<? extends BaseResponseBody> profileCreate(@ModelAttribute ProfileCreateReq info) {
+        try {
+            if(profileService.profileCreate(info)) {
+                return ResponseEntity.ok(BaseResponseBody.of(200,"Success"));
+            } else {
+                return ResponseEntity.ok(BaseResponseBody.of(400,"Fail"));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.ok(BaseResponseBody.of(400,"Fail"));
+        }
+    }
+
+    @PostMapping("/profile")
+    public ResponseEntity<? extends BaseResponseBody> profileSelect(int profilePk) {
+        Profile profile = profileService.profileSelect(profilePk);
+
+        if(profile != null) {
+            return ResponseEntity.ok(ProfileSelectRes.of(200, "Success", profile));
+        } else {
+            return ResponseEntity.ok(BaseResponseBody.of(400, "Fail"));
+        }
+    }
+
+    @GetMapping("/profile/list")
+    public ResponseEntity<? extends BaseResponseBody> profileList(String id) {
+        List<ProfileList> list = profileService.profileList(id);
+        if(list != null) {
+            return ResponseEntity.ok(ProfileListRes.of(200,"Success", list));
+        } else {
+            return ResponseEntity.ok(BaseResponseBody.of(400, "Fail"));
+        }
+    }
+
+    @PutMapping("/profile/edit")
+    public ResponseEntity<? extends BaseResponseBody> profileEdit(ProfileCreateReq info) {
+        if(profileService.profileEdit(info)) {
+            return ResponseEntity.ok(BaseResponseBody.of(200, "Success"));
+        } else {
+            return ResponseEntity.ok(BaseResponseBody.of(400, "Fail"));
+        }
     }
 }
