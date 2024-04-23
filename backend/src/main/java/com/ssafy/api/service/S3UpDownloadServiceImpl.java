@@ -40,19 +40,19 @@ public class S3UpDownloadServiceImpl implements S3UpDownloadService{
     private String cloudfrontUrl;
 
     @Override
-    public String saveImage(@RequestParam MultipartFile multipartFile,String fileName,int userPk) throws IOException {
+    public String saveProfileImage(@RequestParam MultipartFile multipartFile,String fileName,int profilePk) throws IOException {
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentLength(multipartFile.getSize());
         metadata.setContentType(multipartFile.getContentType());
 
 
         try {
-            amazonS3Client.putObject(bucket, "Emobank/accountImg/"+userPk+"/"+fileName, multipartFile.getInputStream(), metadata);
+            amazonS3Client.putObject(bucket, "S-Tailor/profileImg/"+profilePk+"/"+fileName, multipartFile.getInputStream(), metadata);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return cloudfrontUrl+"/Emobank/accountImg/"+userPk+"/"+fileName;
+        return cloudfrontUrl+"S-Tailor/profileImg/"+profilePk+"/"+fileName;
     }
 
     public Map<String, Object> getFile(String s3FileName) throws IOException{

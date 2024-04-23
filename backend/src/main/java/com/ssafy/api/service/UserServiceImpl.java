@@ -31,6 +31,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
 
+	@Autowired
+	PasswordEncoder passwordEncoder;
+
 	@Override
 	public User getUserByUserId(String userId) {
 		try {
@@ -39,6 +42,21 @@ public class UserServiceImpl implements UserService {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+
+	@Override
+	public boolean userCreate(UserRegisterPostReq info) {
+		User user = new User();
+		user.setId(info.getId());
+		user.setPassword(passwordEncoder.encode(info.getPassword()));
+
+		try {
+			userRepository.save(user);
+		} catch (Exception e) {
+			return false;
+		}
+
+		return true;
 	}
 
 }
