@@ -5,9 +5,12 @@ async function userCreate(userInfo: string) {
 }
 
 async function userLogin(userInfo: string) {
+  console.log(userInfo)
   return await api.post('/user/login', userInfo)
-  
 }
 
+async function userCheck(userInfo: string) {
+  return await api.get('user/check', { params: { id: userInfo } })
+}
 
-export { userCreate, userLogin,}
+export { userCreate, userLogin, userCheck }

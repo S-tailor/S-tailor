@@ -1,13 +1,13 @@
-import create from "zustand";
+import create from 'zustand'
 // yarn add zustand
 
 const useStore = create((set) => ({
-    example: 0,
-    
-    setExample: () => set((state)=> ({
-        count: state.count+1
-    })),
+  example: 0,
 
-  }));
-  
-  export default useStore;
+  setExample: () =>
+    set((state) => ({
+      count: state.count + 1
+    }))
+}))
+
+export default useStore
