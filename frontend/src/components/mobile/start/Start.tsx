@@ -11,8 +11,6 @@ const Start: React.FC = () => {
     setIsUser(event.target.value)
   }
 
-  // id(이메일)를 로그인 페이지로 함께 넘기자.
-
   const ContinueClick = async () => {
     try {
       // 이메일 존재 여부 확인
@@ -21,7 +19,7 @@ const Start: React.FC = () => {
       if (response.data.isUser == true) {
         // 이메일이 존재하면 로그인 화면으로 이동
         startTransition(() => {
-          navigate('/mobile/login')
+          navigate('/mobile/login', { state: { id: response.config.params.id } })
         })
       } else {
         // 이메일이 존재하지 않으면 회원가입 화면으로 이동
