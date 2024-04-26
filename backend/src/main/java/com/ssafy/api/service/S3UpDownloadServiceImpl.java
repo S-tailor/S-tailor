@@ -78,4 +78,20 @@ public class S3UpDownloadServiceImpl implements S3UpDownloadService{
         return map;
 
     }
+
+    @Override
+    public String imageSearchUpload(MultipartFile image) {
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(image.getSize());
+        metadata.setContentType(image.getContentType());
+
+
+        try {
+            amazonS3Client.putObject(bucket, "S-Tailor/searchImg/"+image.getOriginalFilename(), image.getInputStream(), metadata);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return cloudfrontUrl+"S-Tailor/searchImg/"+image.getOriginalFilename();
+    }
 }
