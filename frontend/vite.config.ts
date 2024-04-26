@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -12,7 +13,7 @@ export default defineConfig({
         enabled: true
       },
       workbox: {
-    	navigateFallbackDenylist: [/^\/jenkins/]
+        navigateFallbackDenylist: [/^\/jenkins/]
       },
       manifest: {
         name: 'S-tailor',
@@ -42,5 +43,10 @@ export default defineConfig({
         ]
       }
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  }
 })
