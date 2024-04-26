@@ -1,7 +1,11 @@
 import React from 'react'
 
 const Ask: React.FC = () => {
-  return <div></div>
+  return (
+    <div>
+      <h1>Ask Component</h1>
+    </div>
+  )
 }
 
 export default Ask
