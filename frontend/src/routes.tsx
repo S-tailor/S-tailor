@@ -31,13 +31,13 @@ const routes: RouteType[] = [
   },
   {
     path: '/mobile/login',
-    element: React.lazy(() => import('./pages/mobile/login'))
-    // children: [
-    //   {
-    //     path: '',
-    //     element: React.lazy(() => import('./components/mobile/main/Main'))
-    //   }
-    // ]
+    element: React.lazy(() => import('./pages/mobile/login')),
+    children: [
+      {
+        path: '',
+        element: React.lazy(() => import('./components/mobile/login/Login'))
+      }
+    ]
   },
   {
     path: '/mobile/signup',
