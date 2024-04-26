@@ -1,7 +1,11 @@
 import React from 'react'
 
 const TryOnCode: React.FC = () => {
-  return <div></div>
+  return (
+    <div>
+      <h1>TryOnCode Component</h1>
+    </div>
+  )
 }
 
 export default TryOnCode

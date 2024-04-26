@@ -1,7 +1,11 @@
 import React from 'react'
 
 const ClosetCodeInput: React.FC = () => {
-  return <div></div>
+  return (
+    <div>
+      <h1>ClosetCodeInput Component</h1>
+    </div>
+  )
 }
 
 export default ClosetCodeInput
