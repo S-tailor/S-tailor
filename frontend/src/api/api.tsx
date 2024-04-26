@@ -8,7 +8,7 @@ function getInstance() {
     baseURL: VITE_BASE_URL
   })
 
-  const jwtFilter = (config) => {
+  const jwtFilter = (config: any) => {
     const route = config.url.replace(new RegExp(config.baseURL, 'gi'), '')
     let isNotWhiteList = !whiteList.includes(route)
 
@@ -22,7 +22,7 @@ function getInstance() {
     return config
   }
 
-  const errorHandler = (error) => {
+  const errorHandler = (error: any) => {
     console.log(error)
     return Promise.reject(error)
   }
