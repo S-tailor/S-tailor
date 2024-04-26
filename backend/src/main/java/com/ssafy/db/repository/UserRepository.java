@@ -13,4 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     User findById(String id);
+
+    Long countById(String id);
 }

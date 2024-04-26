@@ -59,4 +59,13 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 
+	@Override
+	public Long idCheck(String id) {
+		try {
+			return userRepository.countById(id);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 }

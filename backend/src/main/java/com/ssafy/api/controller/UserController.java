@@ -5,6 +5,7 @@ import com.ssafy.api.request.UserLoginPostReq;
 import com.ssafy.api.request.UserRegisterPostReq;
 import com.ssafy.api.response.ProfileListRes;
 import com.ssafy.api.response.ProfileSelectRes;
+import com.ssafy.api.response.UserIdCheckRes;
 import com.ssafy.api.response.UserLoginPostRes;
 import com.ssafy.api.service.ProfileService;
 import com.ssafy.api.service.UserService;
@@ -105,6 +106,18 @@ public class UserController {
     public ResponseEntity<? extends BaseResponseBody> profileEdit(ProfileCreateReq info) {
         if(profileService.profileEdit(info)) {
             return ResponseEntity.ok(BaseResponseBody.of(200, "Success"));
+        } else {
+            return ResponseEntity.ok(BaseResponseBody.of(400, "Fail"));
+        }
+    }
+
+    @GetMapping("/check")
+    public ResponseEntity<? extends BaseResponseBody> idCheck(String id) {
+        Long result = userService.idCheck(id);
+        if(result == 0) {
+            return ResponseEntity.ok(UserIdCheckRes.of(200, "Success", false));
+        } else if(result > 0){
+            return ResponseEntity.ok(UserIdCheckRes.of(200, "Success", true));
         } else {
             return ResponseEntity.ok(BaseResponseBody.of(400, "Fail"));
         }
