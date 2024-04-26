@@ -10,4 +10,6 @@ public interface UserService {
 	User getUserByUserId(String userId);
 
 	boolean userCreate(UserRegisterPostReq info);
+
+	Long idCheck(String id);
 }
