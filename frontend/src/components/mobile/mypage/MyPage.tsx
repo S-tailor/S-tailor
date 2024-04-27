@@ -32,6 +32,9 @@ const MyPage: React.FC = () => {
 
       <button onClick={ProfileChangeClick}>프로필 변경</button>
       <button onClick={LogoutClick}>로그아웃</button>
+      <div>
+        <h4>프로필 사진</h4>
+      </div>
       <h1>MyPage Component</h1>
 
       <div>
