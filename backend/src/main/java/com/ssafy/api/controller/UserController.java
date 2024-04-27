@@ -65,7 +65,7 @@ public class UserController {
             return ResponseEntity.ok(BaseResponseBody.of(400,"Passsword Invaild"));
         }
 
-        return ResponseEntity.ok(UserLoginPostRes.of(200, "Success", JwtTokenUtil.getToken(userId), userId));
+        return ResponseEntity.ok(UserLoginPostRes.of(200, "Success", JwtTokenUtil.getToken(userId), userId, user.getUserPk()));
     }
 
     @PostMapping("/profile/create")
