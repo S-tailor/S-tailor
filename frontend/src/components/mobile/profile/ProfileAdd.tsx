@@ -1,4 +1,4 @@
-import React,{ startTransition, useState} from 'react'
+import React,{ startTransition, useState, useRef} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { profileCreate } from '@/api/apiProfile'
 
@@ -14,13 +14,15 @@ const ProfileAdd: React.FC = () => {
   const [gender, setGender] = useState<string>("");
   const [height, setHeight] = useState<string>("")
   const [weight, setWeight] = useState<string>("")
-  const userInfo = {
-    'name': '',
-    'height':'',
-    'weight':'',
-    'gender': '',
-    'image':'',
-  }
+  // const userInfo = {
+  //   'name': '',
+  //   'height':'',
+  //   'weight':'',
+  //   'gender': '',
+  //   'image':'',
+  // }
+
+  const formData = useRef(new FormData());
 
   const navigate = useNavigate()
   const goBack = () => {
@@ -32,7 +34,10 @@ const ProfileAdd: React.FC = () => {
   // 입력단계바꾸기
   const toGender = () => {
     if (name.trim() !== "") {
-      userInfo['name'] = name
+      formData.current.append('name', name);
+      if (file) {
+        formData.current.append('image', file);
+      }
       setmessage('')
       setPage1(false);
       setPage2(true);
@@ -44,7 +49,7 @@ const ProfileAdd: React.FC = () => {
 
   const toHeight = () => {
     if (gender !== "") {
-      userInfo['gender'] = gender
+      formData.current.append('gender', gender);
       setmessage('')
       setPage2(false);
       setPage3(true);
@@ -55,7 +60,7 @@ const ProfileAdd: React.FC = () => {
 
   const toWeight = () => {
     if (height !== "") {
-      userInfo['height'] = height
+      formData.current.append('height', height);
       setmessage('')
       setPage3(false);
       setPage4(true);
@@ -64,14 +69,16 @@ const ProfileAdd: React.FC = () => {
     }
   };
 
-  const complete = () => {
+  const complete = async () => {
     if (weight !== "") {
-      userInfo['weight'] = weight
+      formData.current.append('weight', weight);
       setmessage('')
-      profileCreate(userInfo)
-      startTransition(() => {
+      try {
+        await profileCreate(formData.current);
         navigate('/mobile/closet');
-      });
+      } catch (error) {
+        console.error('Profile creation failed:', error);
+      }
     } else {
       setmessage('입력을 완료해주세요')
     }
@@ -101,8 +108,7 @@ const ProfileAdd: React.FC = () => {
       reader.onload = () => {
         if (typeof reader.result === 'string') {
           setFile(reader.result);
-  
-          userInfo['image'] = file
+          
           console.log(11111111,file)
         }
       };
