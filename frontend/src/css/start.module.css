@@ -1,0 +1,117 @@
+@font-face {
+  font-family: "main-title";
+  src: url("../assets/fonts/ANEK-BANGLA-EXPANDED-EXTRABOLD.TTF") format("truetype");
+}
+@font-face {
+  font-family: "sub-title";
+  src: url("../assets/fonts/SAMSUNGSHARPSANS-BOLD.TTF") format("truetype");
+}
+@font-face {
+  font-family: "samsung-one-400";
+  src: url("../assets/fonts/SAMSUNGONE-400.TTF") format("truetype");
+}
+@font-face {
+  font-family: "samsung-one-700";
+  src: url("../assets/fonts/SAMSUNGONE-700.TTF") format("truetype");
+}
+@font-face {
+  font-family: "NotoSansKR-ExtraBold";
+  src: url("../assets/fonts/NotoSansKR-ExtraBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Pretendard-ExtraBold";
+  src: url("../assets/fonts/Pretendard-ExtraBold.otf");
+}
+@font-face {
+  font-family: "Pretendard-Bold";
+  src: url("../assets/fonts/Pretendard-Bold.otf");
+}
+@font-face {
+  font-family: "Pretendard-SemiBold";
+  src: url("../assets/fonts/Pretendard-SemiBold.otf");
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/src/assets/background_light.gif");
+  background-size: cover;
+  background-color: white;
+}
+
+header {
+  width: 100vw;
+  height: 10%;
+  display: flex;
+  align-items: center;
+}
+
+.closeBtn {
+  width: 7vw;
+  margin-left: 10vw;
+}
+
+.topInfo {
+  width: 100vw;
+  height: 27%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.texts {
+  font-family: "Pretendard-Bold";
+  font-size: 2.5em;
+  margin-left: 10vw;
+  padding-top: 0.7vh;
+}
+
+.middleInput {
+  width: 100vw;
+  height: 39%;
+  padding-top: 5%;
+}
+
+.subtexts {
+  font-family: "Pretendard-Bold";
+  margin-left: 10vw;
+  color: #222222;
+  opacity: 80%;
+  font-size: 0.9em;
+}
+
+.emailInput {
+  outline: none;
+  background-color: transparent;
+  font-family: "Pretendard-SemiBold";
+  font-size: 1.4em;
+  color: #222222;
+  opacity: 50%;
+  margin-top: 1.5vh;
+  margin-left: 10vw;
+  border-width: 0 0 2px;
+}
+
+.bottomButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 24%;
+}
+
+.btn {
+  width: 80vw;
+  height: 7vh;
+  border: 1px solid #222222;
+  background-color: transparent;
+  color: #222222;
+  border-radius: 50px;
+  font-family: "samsung-one-700";
+  font-weight: 600;
+  font-size: 0.9em;
+  letter-spacing: 1px;
+}
+.btn:hover {
+  background-color: #222222;
+  color: white;
+}

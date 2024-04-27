@@ -1,0 +1,56 @@
+@import "fonts";
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/src/assets/background.gif");
+  background-size: cover;
+}
+
+p {
+  margin: 0;
+}
+
+.topTitle {
+  width: 100vw;
+  height: 38%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.middleTitle{
+  width: 100vw;
+  height: 38%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.texts {
+  font-family: 'main-title';
+  font-size: 3.5em;
+  color: white;
+  margin-top: -6vh;
+  margin-left: -1vw;
+}
+
+.bottomButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 24%;
+}
+
+.btn {
+  width: 80vw;
+  height: 7vh;
+  border: none;
+  background-color: #222222;
+  color: white;
+  border-radius: 50px;
+  font-family: 'samsung-one-700';
+  font-weight: 600;
+  font-size: 0.9em;
+  letter-spacing: 1px;
+}
