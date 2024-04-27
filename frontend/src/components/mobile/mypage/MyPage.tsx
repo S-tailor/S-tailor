@@ -1,4 +1,4 @@
-import React, { startTransition, useState } from 'react'
+import React, { startTransition } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const MyPage: React.FC = () => {
