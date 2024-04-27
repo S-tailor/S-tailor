@@ -4,6 +4,12 @@ import { useNavigate } from 'react-router-dom'
 const MyPage: React.FC = () => {
   const navigate = useNavigate()
 
+  const ProfileChangeClick = () => {
+    startTransition(() => {
+      navigate('/mobile/profile')
+    })
+  }
+
   const LogoutClick = () => {
     startTransition(() => {
       // 로그아웃 전, accessToken의 존재 여부 확인
@@ -20,6 +26,7 @@ const MyPage: React.FC = () => {
 
   return (
     <div>
+      <button onClick={ProfileChangeClick}>프로필 변경</button>
       <button onClick={LogoutClick}>로그아웃</button>
       <h1>MyPage Component</h1>
     </div>
