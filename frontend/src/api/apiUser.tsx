@@ -20,9 +20,4 @@ async function userCheck(id: string) {
   return await api.get('user/check', { params: { id: id } })
 }
 
-// async function userLogout() {
-//   return await api.
-
-// }
-
 export { userCreate, userLogin, userCheck }
