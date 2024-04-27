@@ -13,6 +13,8 @@ public interface S3UpDownloadService {
 
 	public String saveProfileImage(@RequestParam MultipartFile multipartFile,String fileName,int profilePk) throws IOException;
 	public Map<String, Object> getFile(String s3FileName) throws IOException;
+
+	public String imageSearchUpload(MultipartFile image);
 }
 
 
