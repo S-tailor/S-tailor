@@ -1,4 +1,4 @@
-import React,{ startTransition, useState, useRef} from 'react'
+import React,{ startTransition, useState, useRef, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { profileCreate } from '@/api/apiProfile'
 
@@ -21,8 +21,11 @@ const ProfileAdd: React.FC = () => {
   //   'gender': '',
   //   'image':'',
   // }
-
   const formData = useRef(new FormData());
+  useEffect(() => {
+    // 컴포넌트가 처음 렌더링될 때 FormData 객체를 초기화합니다.
+    formData.current = new FormData();
+  }, []);
 
   const navigate = useNavigate()
   const goBack = () => {
@@ -53,6 +56,7 @@ const ProfileAdd: React.FC = () => {
       setmessage('')
       setPage2(false);
       setPage3(true);
+      console.log('중간정산',formData.current)
     } else {
       setmessage('입력을 완료해주세요')
     }
@@ -73,6 +77,14 @@ const ProfileAdd: React.FC = () => {
     if (weight !== "") {
       formData.current.append('weight', weight);
       setmessage('')
+      formData.current.append('name', name);
+      formData.current.append('gender', gender);
+      formData.current.append('height', height);
+      formData.current.append('weight', weight);
+      if (file) {
+        formData.current.append('image', file);
+      }
+      console.log('result',formData.current)
       try {
         await profileCreate(formData.current);
         navigate('/mobile/closet');
@@ -105,11 +117,11 @@ const ProfileAdd: React.FC = () => {
     if (selectedFile) {
       const reader = new FileReader();
       reader.readAsDataURL(selectedFile);
+      
       reader.onload = () => {
         if (typeof reader.result === 'string') {
           setFile(reader.result);
-          
-          console.log(11111111,file)
+          formData.current.set('image', selectedFile);
         }
       };
     }
