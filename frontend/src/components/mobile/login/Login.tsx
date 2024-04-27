@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { userLogin } from '../../../api/apiUser'
 
 const Login: React.FC = () => {
-  const [password, setPassword] = useState('')
+  const [password, setPassword] = useState<string>('')
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -18,9 +18,12 @@ const Login: React.FC = () => {
       const response = await userLogin(id, password)
       console.log(response)
       if (response.data.statusCode === 200) {
+        console.log('로그인 성공', response.data)
         startTransition(() => {
           navigate('/mobile/profile')
         })
+        // accessToken 저장
+        window.localStorage.setItem('accessToken', response.data.accessToken)
       } else {
         alert('비밀번호가 틀렸습니다.')
       }
