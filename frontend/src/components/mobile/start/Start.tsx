@@ -24,7 +24,7 @@ const Start: React.FC = () => {
       } else {
         // 이메일이 존재하지 않으면 회원가입 화면으로 이동
         startTransition(() => {
-          navigate('/mobile/signup')
+          navigate('/mobile/signup', { state: { id: response.config.params.id } })
         })
       }
     } catch (error) {
