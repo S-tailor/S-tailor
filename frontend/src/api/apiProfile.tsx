@@ -1,6 +1,6 @@
 import { api } from './api'
 
-async function profileCreate(userInfo: string) {
+async function profileCreate(userInfo: any) {
     return await api.post('/user/profile/create', userInfo, {
         headers: {
             'Content-Type': 'multipart/form-data'
