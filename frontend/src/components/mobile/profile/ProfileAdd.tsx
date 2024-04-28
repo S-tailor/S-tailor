@@ -1,4 +1,4 @@
-import React,{ startTransition, useState} from 'react'
+import React,{ startTransition, useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { profileCreate } from '@/api/apiProfile'
 
@@ -9,19 +9,22 @@ const ProfileAdd: React.FC = () => {
   const [page3, setPage3] = useState(false)
   const [page4, setPage4] = useState(false)
   const [message, setmessage] = useState('')
-  const [file, setFile] = useState<string>("");
+  const [file, setFile] = useState<File>();
   const [name, setName] = useState<string>("");
   const [gender, setGender] = useState<string>("");
   const [height, setHeight] = useState<string>("")
   const [weight, setWeight] = useState<string>("")
-  const userInfo = {
-    'name': '',
-    'height':'',
-    'weight':'',
-    'gender': '',
-    'image':'',
-  }
-
+  const [fileUrl, setFileUrl] = useState<string>("")
+ 
+  // const userInfo = {
+  //   'name': '',
+  //   'height':'',
+  //   'weight':'',
+  //   'gender': '',
+  //   'image':'',
+  //   'userPk':'',
+  // }
+  const formData = new FormData()
   const navigate = useNavigate()
   const goBack = () => {
     startTransition(() => {
@@ -32,7 +35,7 @@ const ProfileAdd: React.FC = () => {
   // 입력단계바꾸기
   const toGender = () => {
     if (name.trim() !== "") {
-      userInfo['name'] = name
+      
       setmessage('')
       setPage1(false);
       setPage2(true);
@@ -44,7 +47,7 @@ const ProfileAdd: React.FC = () => {
 
   const toHeight = () => {
     if (gender !== "") {
-      userInfo['gender'] = gender
+      
       setmessage('')
       setPage2(false);
       setPage3(true);
@@ -55,7 +58,7 @@ const ProfileAdd: React.FC = () => {
 
   const toWeight = () => {
     if (height !== "") {
-      userInfo['height'] = height
+      
       setmessage('')
       setPage3(false);
       setPage4(true);
@@ -64,14 +67,24 @@ const ProfileAdd: React.FC = () => {
     }
   };
 
-  const complete = () => {
+  const complete = async () => {
+    const userPk = String(localStorage.getItem('userPk'))
     if (weight !== "") {
-      userInfo['weight'] = weight
+      formData.append('name',name)
+      formData.append('height',height)
+      formData.append('weight',weight)
+      formData.append('gender',gender)
+      formData.append('image', file)
+      formData.append('userPk',userPk)
       setmessage('')
-      profileCreate(userInfo)
+      console.log('result',formData)
+      const response = await profileCreate(formData)
+      console.log(response)
+      if (response.status == 200) {
       startTransition(() => {
         navigate('/mobile/closet');
       });
+    }
     } else {
       setmessage('입력을 완료해주세요')
     }
@@ -93,20 +106,29 @@ const ProfileAdd: React.FC = () => {
     setPage3(true)
   }
 
+  // const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const selectedFile = e.target.files?.[0];
+  //   if (selectedFile) {
+  //     // const reader = new FileReader();
+  //     // reader.readAsDataURL(selectedFile);
+  //     setFile(selectedFile);
+  //     const fileUrl = URL.createObjectURL(selectedFile); 
+  //     setFileUrl(fileUrl);
+  //   }
+  // }
+
   const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.currentTarget
     const selectedFile = e.target.files?.[0];
-    if (selectedFile) {
-      const reader = new FileReader();
-      reader.readAsDataURL(selectedFile);
-      reader.onload = () => {
-        if (typeof reader.result === 'string') {
-          setFile(reader.result);
-  
-          userInfo['image'] = file
-          console.log(11111111,file)
-        }
-      };
+    // const files = (target.files as FileList)[0]
+    // console.log(selectedFile, files)
+    const fileUrl = URL.createObjectURL(selectedFile); 
+
+    if (selectedFile === undefined) {
+      return
     }
+    setFileUrl(fileUrl);
+    setFile(selectedFile)
   }
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -155,7 +177,7 @@ const ProfileAdd: React.FC = () => {
     (<div>
       <img src="" alt="back" onClick={goBack} />
       <input id="profileImg" type="file" onChange={changePic}></input>
-      {file && <img src={file} alt="Uploaded Profile" />}
+      {file && <img src={fileUrl} alt="Uploaded Profile" />}
       <input type="text" placeholder='프로필 이름을 입력해주세요.' value={name} onChange={handleNameChange}/>
       <br />
       {message}
