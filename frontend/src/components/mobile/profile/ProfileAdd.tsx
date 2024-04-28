@@ -1,4 +1,4 @@
-import React,{ startTransition, useState, useRef, useEffect} from 'react'
+import React,{ startTransition, useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { profileCreate } from '@/api/apiProfile'
 
@@ -9,24 +9,22 @@ const ProfileAdd: React.FC = () => {
   const [page3, setPage3] = useState(false)
   const [page4, setPage4] = useState(false)
   const [message, setmessage] = useState('')
-  const [file, setFile] = useState<string>("");
+  const [file, setFile] = useState<File>();
   const [name, setName] = useState<string>("");
   const [gender, setGender] = useState<string>("");
   const [height, setHeight] = useState<string>("")
   const [weight, setWeight] = useState<string>("")
+  const [fileUrl, setFileUrl] = useState<string>("")
+ 
   // const userInfo = {
   //   'name': '',
   //   'height':'',
   //   'weight':'',
   //   'gender': '',
   //   'image':'',
+  //   'userPk':'',
   // }
-  const formData = useRef(new FormData());
-  useEffect(() => {
-    // 컴포넌트가 처음 렌더링될 때 FormData 객체를 초기화합니다.
-    formData.current = new FormData();
-  }, []);
-
+  const formData = new FormData()
   const navigate = useNavigate()
   const goBack = () => {
     startTransition(() => {
@@ -37,10 +35,7 @@ const ProfileAdd: React.FC = () => {
   // 입력단계바꾸기
   const toGender = () => {
     if (name.trim() !== "") {
-      formData.current.append('name', name);
-      if (file) {
-        formData.current.append('image', file);
-      }
+      
       setmessage('')
       setPage1(false);
       setPage2(true);
@@ -52,11 +47,10 @@ const ProfileAdd: React.FC = () => {
 
   const toHeight = () => {
     if (gender !== "") {
-      formData.current.append('gender', gender);
+      
       setmessage('')
       setPage2(false);
       setPage3(true);
-      console.log('중간정산',formData.current)
     } else {
       setmessage('입력을 완료해주세요')
     }
@@ -64,7 +58,7 @@ const ProfileAdd: React.FC = () => {
 
   const toWeight = () => {
     if (height !== "") {
-      formData.current.append('height', height);
+      
       setmessage('')
       setPage3(false);
       setPage4(true);
@@ -74,23 +68,23 @@ const ProfileAdd: React.FC = () => {
   };
 
   const complete = async () => {
+    const userPk = String(localStorage.getItem('userPk'))
     if (weight !== "") {
-      formData.current.append('weight', weight);
+      formData.append('name',name)
+      formData.append('height',height)
+      formData.append('weight',weight)
+      formData.append('gender',gender)
+      formData.append('image', file)
+      formData.append('userPk',userPk)
       setmessage('')
-      formData.current.append('name', name);
-      formData.current.append('gender', gender);
-      formData.current.append('height', height);
-      formData.current.append('weight', weight);
-      if (file) {
-        formData.current.append('image', file);
-      }
-      console.log('result',formData.current)
-      try {
-        await profileCreate(formData.current);
+      console.log('result',formData)
+      const response = await profileCreate(formData)
+      console.log(response)
+      if (response.status == 200) {
+      startTransition(() => {
         navigate('/mobile/closet');
-      } catch (error) {
-        console.error('Profile creation failed:', error);
-      }
+      });
+    }
     } else {
       setmessage('입력을 완료해주세요')
     }
@@ -112,19 +106,29 @@ const ProfileAdd: React.FC = () => {
     setPage3(true)
   }
 
+  // const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const selectedFile = e.target.files?.[0];
+  //   if (selectedFile) {
+  //     // const reader = new FileReader();
+  //     // reader.readAsDataURL(selectedFile);
+  //     setFile(selectedFile);
+  //     const fileUrl = URL.createObjectURL(selectedFile); 
+  //     setFileUrl(fileUrl);
+  //   }
+  // }
+
   const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.currentTarget
     const selectedFile = e.target.files?.[0];
-    if (selectedFile) {
-      const reader = new FileReader();
-      reader.readAsDataURL(selectedFile);
-      
-      reader.onload = () => {
-        if (typeof reader.result === 'string') {
-          setFile(reader.result);
-          formData.current.set('image', selectedFile);
-        }
-      };
+    // const files = (target.files as FileList)[0]
+    // console.log(selectedFile, files)
+    const fileUrl = URL.createObjectURL(selectedFile); 
+
+    if (selectedFile === undefined) {
+      return
     }
+    setFileUrl(fileUrl);
+    setFile(selectedFile)
   }
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -173,7 +177,7 @@ const ProfileAdd: React.FC = () => {
     (<div>
       <img src="" alt="back" onClick={goBack} />
       <input id="profileImg" type="file" onChange={changePic}></input>
-      {file && <img src={file} alt="Uploaded Profile" />}
+      {file && <img src={fileUrl} alt="Uploaded Profile" />}
       <input type="text" placeholder='프로필 이름을 입력해주세요.' value={name} onChange={handleNameChange}/>
       <br />
       {message}
