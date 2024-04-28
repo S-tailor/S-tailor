@@ -34,6 +34,7 @@ const MyPage: React.FC = () => {
       <button onClick={LogoutClick}>로그아웃</button>
       <div>
         <h4>프로필 사진</h4>
+        <h5>프로필 이름</h5>
       </div>
       <h1>MyPage Component</h1>
 
