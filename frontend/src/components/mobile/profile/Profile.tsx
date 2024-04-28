@@ -1,6 +1,6 @@
 import React, {startTransition, useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { profileList } from '@/api/apiProfile'
+import { profileList, profileSelect } from '@/api/apiProfile'
 
 
 const Profile: React.FC = () => {
@@ -29,9 +29,17 @@ const Profile: React.FC = () => {
   const fetchUser = async (id:string) => {
     const response = await profileList(id)
     setUserList(response.data.result);
+    
    
   }
 
+  const userDetail = async (userPk:number) => {
+    console.log('유저번호',userPk)
+    let response = await profileSelect(userPk)
+    if (response.status == 200) {
+      navigate('/mobile/closet')
+    }
+  }
 
 
   return (
@@ -44,10 +52,12 @@ const Profile: React.FC = () => {
 
        {userList.map((user, index) => (
           <div key={index}>
-            <p>
+            <p onClick={() => userDetail(user.profilePk)}>
             {user.image && <img src={user.image} alt="Uploaded Profile" />}
               <br />
               {user.profileName}
+          
+              
             </p> 
           </div>
         ))}
