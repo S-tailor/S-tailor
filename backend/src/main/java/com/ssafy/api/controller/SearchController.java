@@ -1,15 +1,13 @@
 package com.ssafy.api.controller;
 
+import com.ssafy.api.request.SearchImageReq;
 import com.ssafy.api.response.SearchResultDTO;
 import com.ssafy.api.response.SearchRes;
 import com.ssafy.api.service.SearchService;
 import com.ssafy.common.model.response.BaseResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -32,8 +30,8 @@ public class SearchController {
     }
 
     @PostMapping("/image")
-    public ResponseEntity<? extends BaseResponseBody> imageSearch(MultipartFile image) {
-        List<SearchResultDTO> result = searchService.imageSearch(image);
+    public ResponseEntity<? extends BaseResponseBody> imageSearch(@ModelAttribute SearchImageReq info) {
+        List<SearchResultDTO> result = searchService.imageSearch(info.getImage());
         if(result != null) {
             return ResponseEntity.ok(SearchRes.of(200,"Success",result));
         } else {
