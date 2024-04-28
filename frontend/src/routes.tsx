@@ -104,6 +104,17 @@ const routes: RouteType[] = [
     ]
   },
   {
+    path: '/mobile/mypage',
+    element: React.lazy(() => import('./pages/mobile/mypage')),
+    children: [
+      {
+        path: '',
+        element: React.lazy(() => import('./components/mobile/mypage/MyPage'))
+      }
+    ]
+  },
+
+  {
     path: '/mobile/ask',
     element: React.lazy(() => import('./pages/mobile/ask')),
     children: [

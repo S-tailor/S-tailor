@@ -1,13 +1,17 @@
 import './App.css'
 import { BrowserRouter as Router } from 'react-router-dom'
 import RenderRoutes from './routes'
+import { RecoilRoot } from 'recoil'
+
 import { startTransition, useEffect } from 'react'
 
 function App() {
   return (
-    <Router>
-      <RenderRoutesWithTransition />
-    </Router>
+    <RecoilRoot>
+      <Router>
+        <RenderRoutesWithTransition />
+      </Router>
+    </RecoilRoot>
   )
 }
 
