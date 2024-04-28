@@ -55,6 +55,7 @@ const Start: React.FC = () => {
         </div>
         <div className={styles.textfield}>
           <input className={styles.emailInput} type="email" onChange={checkEmail} placeholder="이메일 주소를 입력해주세요." autoFocus />
+          <p className={styles.line}></p>
         </div>
       </section>
 
