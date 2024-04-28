@@ -1,6 +1,7 @@
 import React, { startTransition, useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import { userCreate } from '@/api/apiUser'
+import styles from '../../../scss/signup.module.scss';
 
 const Signup: React.FC = () => {
   const [password, setPassword] = useState('')
@@ -54,22 +55,56 @@ const Signup: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>Signup Component</h1>
-      <input
-        type="password"
-        value={password}
-        onChange={handlePasswordChange}
-        placeholder="비밀번호를 입력해주세요."
-      />
-      <input
-        type="password"
-        value={confirmPassword}
-        onChange={handleConfirmPasswordChange}
-        placeholder="다시 한 번 입력해주세요."
-      />
+    <div className={styles.container}>
+      
+      <header>
+        <div className={styles.headerInner1}>
+          <Link to={'/mobile/start'}>
+            <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
+          </Link>
+        </div>
+        <div className={styles.headerInner2}>
+          <p className={styles.signup}>회원가입</p>
+        </div>
+        <div className={styles.headerInner3}>
+        </div>
+      </header>
 
-      <button onClick={SignupClick}>회원가입</button>
+      <article className={styles.topArticle}>
+        <section className={styles.firstInfo}>
+          <p className={styles.title1}>비밀번호 입력</p>
+          <input
+            className={styles.passwordInput}
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+            placeholder="비밀번호를 입력해주세요."
+            autoFocus
+          />
+          <p className={styles.line}></p>
+        </section>
+
+        <section className={styles.secondInfo}>
+        <p className={`${styles.title2} ${password.length >= 4 ? styles.active : ''}`}>비밀번호 확인</p>
+          <input
+            className={styles.passwordInput}
+            type="password"
+            value={confirmPassword}
+            onChange={handleConfirmPasswordChange}
+            placeholder="다시 한 번 입력해주세요."
+          />
+          <p className={`${styles.line2} ${password.length >= 4 ? styles.animate : ''}`}></p>
+        </section>
+      </article>
+
+      <article className={styles.bottomArticle}>
+        <section className={styles.privacyPolicy}>
+            <p className={styles.privacy}>회원가입 시 S-Tailor의 <u>개인정보 보호정책</u>에 동의하게 됩니다.</p>
+        </section>
+        <section className={styles.bottomButton}>
+            <button className={styles.btn} onClick={SignupClick}>회원가입</button>
+        </section>
+      </article>
     </div>
   )
 }
