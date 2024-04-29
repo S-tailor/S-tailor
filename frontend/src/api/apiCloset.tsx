@@ -12,8 +12,8 @@ async function closetItemSave(Info: string) {
   return await api.post('/closet/save', Info)
 }
 
-async function closetItemList() {
-  return await api.get('/closet/list')
+async function closetItemList(pk: number) {
+    return await api.get(`/closet/list?profilePk=${pk}`)
 }
 
 async function closetItemDelete(Info: any) {
