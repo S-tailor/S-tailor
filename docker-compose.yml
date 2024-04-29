@@ -1,6 +1,8 @@
 networks:
   service-connection:
     driver: bridge
+  redis-connection:
+    driver: bridge
 
 services:
   frontend-compose:
@@ -23,6 +25,7 @@ services:
       - "5000"
     networks:
       - service-connection
+      - redis-connection
     logging:
       options:
         max-size: "${DOCKER_LOGS_MAX_SIZE:-100M}"
@@ -89,6 +92,21 @@ services:
     environment:
       - TZ=Asia/Seoul
       - JENKINS_OPTS="--prefix=/jenkins"
+    logging:
+      options:
+        max-size: "${DOCKER_LOGS_MAX_SIZE:-100M}"
+
+  redis-compose:
+    image: redis
+    restart: unless-stopped
+    expose:
+      - "6379"
+    networks:
+      - redis-connection
+    depends_on:
+      - backend-compose
+    environment:
+      - TZ=Asia/Seoul
     logging:
       options:
         max-size: "${DOCKER_LOGS_MAX_SIZE:-100M}"
