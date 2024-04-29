@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "main-title";
   src: url("../assets/fonts/ANEK-BANGLA-EXPANDED-EXTRABOLD.TTF") format("truetype");
@@ -31,6 +32,9 @@
   src: url("../assets/fonts/Pretendard-SemiBold.otf");
 }
 .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100vw;
   height: 100vh;
   background-image: url("/src/assets/background_light.gif");
@@ -45,48 +49,49 @@ header {
   align-items: center;
 }
 
-.closeBtn {
+.headerInner1 {
+  width: 30%;
+}
+
+.headerInner2 {
+  display: flex;
+  justify-content: center;
+  width: 45%;
+}
+
+.headerInner3 {
+  width: 25%;
+}
+
+.backBtn {
   width: 5vw;
   margin-left: 10vw;
 }
 
-.topInfo {
-  width: 100vw;
-  height: 27%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.login {
+  font-family: "Pretendard-Bold";
+  font-size: 1.2em;
 }
 
-.texts {
+.firstInfo {
+  width: 100vw;
+}
+
+.title1 {
   font-family: "Pretendard-Bold";
   font-size: 2.5em;
   margin-left: 10vw;
-  padding-top: 0.7vh;
+  padding-top: 9vh;
 }
 
-.middleInput {
-  width: 100vw;
-  height: 39%;
-  padding-top: 5%;
-}
-
-.subtexts {
-  font-family: "Pretendard-Bold";
-  margin-left: 10vw;
-  color: #222222;
-  opacity: 80%;
-  font-size: 0.9em;
-}
-
-.emailInput {
+.passwordInput {
   outline: none;
   background-color: transparent;
   font-family: "Pretendard-SemiBold";
   font-size: 1.4em;
   color: #222222;
   opacity: 50%;
-  margin-top: 1.5vh;
+  padding-top: 10vh;
   margin-left: 10vw;
   border: 0;
 }
@@ -119,12 +124,69 @@ header {
     transform: scaleX(1);
   }
 }
+.topArticle {
+  width: 100vw;
+  height: 66%;
+}
+
+.subtexts {
+  font-family: "Pretendard-Bold";
+  margin-left: 10vw;
+  color: #222222;
+  opacity: 80%;
+  font-size: 0.9em;
+  padding-top: 2vh;
+}
+
+.checkboxLabel {
+  font-family: "Pretendard-Bold";
+  margin-left: 10vw;
+  width: 80vw;
+  color: #222222;
+  opacity: 80%;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+}
+.checkboxLabel:active {
+  color: rgb(184, 184, 184);
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+.checkboxIcon {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #222222;
+  margin-right: 10px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+}
+
+input[type=checkbox]:checked + .checkboxIcon::before {
+  content: "✓";
+  position: absolute;
+  top: -0.3vh;
+  text-align: center;
+  color: #222222;
+}
+
+.bottomArticle {
+  height: 24%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .bottomButton {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 24%;
 }
 
 .btn {

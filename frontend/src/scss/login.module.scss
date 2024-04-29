@@ -33,7 +33,7 @@ header {
 }
 
 .backBtn {
-  width: 7vw;
+  width: 5vw;
   margin-left: 10vw;
 }
 
@@ -120,7 +120,9 @@ header {
   font-size: 0.9em;
   display: flex;
   align-items: center;
-  cursor: pointer;
+  &:active {
+    color: rgb(184, 184, 184);
+  }
 }
 
 input[type="checkbox"] {

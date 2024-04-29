@@ -1,6 +1,35 @@
-@import "fonts";
-
-
+@font-face {
+  font-family: "main-title";
+  src: url("../assets/fonts/ANEK-BANGLA-EXPANDED-EXTRABOLD.TTF") format("truetype");
+}
+@font-face {
+  font-family: "sub-title";
+  src: url("../assets/fonts/SAMSUNGSHARPSANS-BOLD.TTF") format("truetype");
+}
+@font-face {
+  font-family: "samsung-one-400";
+  src: url("../assets/fonts/SAMSUNGONE-400.TTF") format("truetype");
+}
+@font-face {
+  font-family: "samsung-one-700";
+  src: url("../assets/fonts/SAMSUNGONE-700.TTF") format("truetype");
+}
+@font-face {
+  font-family: "NotoSansKR-ExtraBold";
+  src: url("../assets/fonts/NotoSansKR-ExtraBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Pretendard-ExtraBold";
+  src: url("../assets/fonts/Pretendard-ExtraBold.otf");
+}
+@font-face {
+  font-family: "Pretendard-Bold";
+  src: url("../assets/fonts/Pretendard-Bold.otf");
+}
+@font-face {
+  font-family: "Pretendard-SemiBold";
+  src: url("../assets/fonts/Pretendard-SemiBold.otf");
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -19,7 +48,7 @@ header {
   align-items: center;
 }
 
-.headerInner1{
+.headerInner1 {
   width: 30%;
 }
 
@@ -39,42 +68,40 @@ header {
 }
 
 .signup {
-  font-family: 'Pretendard-Bold';
+  font-family: "Pretendard-Bold";
   font-size: 1.2em;
 }
 
-.firstInfo{
+.firstInfo {
   width: 100vw;
-
 }
 
 .secondInfo {
   width: 100vw;
-
 }
 
 .title1 {
-  font-family: 'Pretendard-Bold';
+  font-family: "Pretendard-Bold";
   font-size: 2.5em;
   margin-left: 10vw;
   padding-top: 8vh;
 }
 
 .title2 {
-  font-family: 'Pretendard-Bold';
+  font-family: "Pretendard-Bold";
   font-size: 2.5em;
   margin-left: 10vw;
   padding-top: 8vh;
   opacity: 25%;
-  &.active {
-    opacity: 100%;
-  }
+}
+.title2.active {
+  opacity: 100%;
 }
 
 .passwordInput {
   outline: none;
   background-color: transparent;
-  font-family: 'Pretendard-SemiBold';
+  font-family: "Pretendard-SemiBold";
   font-size: 1.4em;
   color: #222222;
   opacity: 50%;
@@ -85,23 +112,22 @@ header {
 
 .line {
   display: inline-block;
-  width: 80vw; 
-  height: 3px; 
+  width: 80vw;
+  height: 3px;
   position: relative;
   margin-left: 10vw;
-
-  &:after {
-    content: '';
-    width: 100%;
-    height: 2px;
-    background: #222222;
-    opacity: 30%;
-    transform: scaleX(0);
-    transition: transform 250ms ease-in-out;
-    position: absolute;
-    bottom: 0;
-    animation: underline-slide 1s ease forwards;
-  }
+}
+.line:after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background: #222222;
+  opacity: 30%;
+  transform: scaleX(0);
+  transition: transform 250ms ease-in-out;
+  position: absolute;
+  bottom: 0;
+  animation: underline-slide 1s ease forwards;
 }
 
 .line2 {
@@ -110,17 +136,17 @@ header {
   height: 3px;
   position: relative;
   margin-left: 10vw;
-  &:after {
-    content: '';
-    width: 100%;
-    height: 2px;
-    background: #222222;
-    opacity: 30%;
-    transform: scaleX(0);
-    transition: transform 250ms ease-in-out;
-    position: absolute;
-    bottom: 0;
-  }
+}
+.line2:after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background: #222222;
+  opacity: 30%;
+  transform: scaleX(0);
+  transition: transform 250ms ease-in-out;
+  position: absolute;
+  bottom: 0;
 }
 
 .line2.animate:after {
@@ -135,8 +161,6 @@ header {
     transform: scaleX(1);
   }
 }
-
-
 .topArticle {
   width: 100vw;
   height: 66%;
@@ -156,13 +180,13 @@ header {
 }
 
 .privacy {
-  font-family: 'Pretendard-SemiBold';
+  font-family: "Pretendard-SemiBold";
   font-size: 0.79em;
   color: #222222;
   opacity: 50%;
 }
 
-.bottomButton{
+.bottomButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -176,12 +200,12 @@ header {
   background-color: transparent;
   color: #222222;
   border-radius: 50px;
-  font-family: 'samsung-one-700';
+  font-family: "samsung-one-700";
   font-weight: 600;
   font-size: 0.9em;
   letter-spacing: 1px;
-  &:hover {
-    background-color: #222222;
-    color: white;
-  }
+}
+.btn:hover {
+  background-color: #222222;
+  color: white;
 }

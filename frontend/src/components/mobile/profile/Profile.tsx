@@ -1,8 +1,8 @@
 import React, {Suspense, startTransition, useEffect, useState} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { profileList, profileSelect } from '@/api/apiProfile'
 import userStore from '@/store/store'
-
+import styles from '../../../scss/profile.module.scss';
 
 const Profile: React.FC = () => {
   interface UserProfile {
@@ -56,33 +56,92 @@ const Profile: React.FC = () => {
 
 
   return (
-    <div>
+    <div className={styles.container}>
       <Suspense>
 
-      
-      <img src="" alt="back" onClick={goBack} />
+      <header>
+        <div className={styles.headerInner}>
+          <Link to={'/'}>
+            <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
+          </Link>
+        </div>
+      </header>
 
-      <h1>프로필 선택</h1>
-      <p>가상 피팅 서비스를 이용할 프로필을 선택하세요.</p>
+      <section className={styles.topInfo}>
+        <p className={styles.texts}>프로필 선택</p>
+        <p className={styles.subtexts}>가상 피팅 서비스를 이용할 프로필을 선택하세요.</p>
+      </section>
 
-       {userList.map((user, index) => (
-         <div key={index}>
-            <p onClick={() => userDetail(user.profilePk)}>
-            {user.image && <img src={user.image} alt="Uploaded Profile" />}
-              <br />
-              {user.profileName}
-          
-              
-            </p> 
-          </div>
-        ))}
- 
-    
-      <img src="" alt="user-add" onClick={userAdd}/>
-    
-    
-    
-        </Suspense>
+      <section className={styles.select}>
+        <div className={styles.selectInner}>
+          {userList.length > 0 ? (
+            <>
+              {userList[0] ? (
+                <div className={styles.member1}>
+                  <p onClick={() => userDetail(userList[0].profilePk)}>
+                    {userList[0].image && <img className={styles.member1Img} src={userList[0].image} alt="Uploaded Profile" />}
+                    <br />
+                    {userList[0].profileName}
+                  </p>
+                </div>
+              ) : (
+                <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={userAdd} />
+              )}
+            </>
+          ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={userAdd} />}
+
+          {userList.length > 1 ? (
+            <>
+              {userList[1] ? (
+                <div className={styles.member2}>
+                  <p onClick={() => userDetail(userList[1].profilePk)}>
+                    {userList[1].image && <img className={styles.member2Img} src={userList[1].image} alt="Uploaded Profile" />}
+                    <br />
+                    {userList[1].profileName}
+                  </p>
+                </div>
+              ) : (
+                <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={userAdd} />
+              )}
+            </>
+          ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={userAdd} />}
+
+          {userList.length > 2 ? (
+            <>
+            
+              {userList[2] ? (
+                <div className={styles.member3}>
+                  <p onClick={() => userDetail(userList[2].profilePk)}>
+                    {userList[2].image && <img className={styles.member3Img} src={userList[2].image} alt="Uploaded Profile" />}
+                    <br />
+                    {userList[2].profileName}
+                  </p>
+                </div>
+              ) : (
+                <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={userAdd} />
+              )}
+            </>
+          ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={userAdd} />}
+
+          {userList.length > 3 ? (
+            <>
+              {userList[3] ? (
+                <div className={styles.member4}>
+                  <p onClick={() => userDetail(userList[3].profilePk)}>
+                    {userList[3].image && <img className={styles.member4Img} src={userList[3].image} alt="Uploaded Profile" />}
+                    <br />
+                    {userList[3].profileName}
+                  </p>
+                </div>
+              ) : (
+                <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={userAdd} />
+              )}
+            </>
+          ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={userAdd} />}
+        </div>
+      </section>
+
+      </Suspense>
     </div>
   )
 }
