@@ -13,8 +13,8 @@ async function profileCreate(userInfo: any) {
     })
   }
 
-async function profileSelect(userInfo: number) {
-    return await api.post('/user/profile', userInfo)
+async function profileSelect(id: number) {
+    return await api.post(`/user/profile?profilePk=${id}`)
 }
 
 async function profileList(id : string) {

@@ -1,12 +1,13 @@
 import React, {startTransition, useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { profileList } from '@/api/apiProfile'
+import { profileList, profileSelect } from '@/api/apiProfile'
+import userStore from '@/store/store'
 
 
 const Profile: React.FC = () => {
   const navigate = useNavigate()
-  const [userList, setUserList] = useState([]);  // 상태로 userList를 관리
-
+  const [userList, setUserList] = useState([]);  
+  const {user, setUser} = userStore()
 
 
   const goBack = () => {
@@ -29,9 +30,21 @@ const Profile: React.FC = () => {
   const fetchUser = async (id:string) => {
     const response = await profileList(id)
     setUserList(response.data.result);
+    
    
   }
 
+  const userDetail = async (userPk:number) => {
+    console.log('유저번호',userPk)
+    let response = await profileSelect(userPk)
+    if (response.status === 200) {
+      console.log(response.data.result)
+      setUser(response.data.result)
+      startTransition(() => {
+        navigate('/mobile/closet')
+      })
+    }
+  }
 
 
   return (
@@ -44,10 +57,12 @@ const Profile: React.FC = () => {
 
        {userList.map((user, index) => (
           <div key={index}>
-            <p>
+            <p onClick={() => userDetail(user.profilePk)}>
             {user.image && <img src={user.image} alt="Uploaded Profile" />}
               <br />
               {user.profileName}
+          
+              
             </p> 
           </div>
         ))}
