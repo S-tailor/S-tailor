@@ -1,9 +1,14 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+
+interface userProfile {
+    profileName: string;
+}
+
 interface User {
-    user: string[];
-    setUser: (user: string) => void
-    
+    user: userProfile[]
+    setUser: (user: userProfile) => void
+    clearUsers: () => void;
   }
 
   const userStore = create(
@@ -11,6 +16,7 @@ interface User {
     (set) => ({
     user: [],
     setUser: (by) => set(() => ({user: [by] })),
+    clearUsers: () => set({ user: [] })
     }),
     {
         name: "userIdStorage",

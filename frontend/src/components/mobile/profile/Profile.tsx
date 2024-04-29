@@ -1,16 +1,23 @@
-import React, {startTransition, useEffect, useState} from 'react'
+import React, {Suspense, startTransition, useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { profileList, profileSelect } from '@/api/apiProfile'
 import userStore from '@/store/store'
 
 
 const Profile: React.FC = () => {
+  interface UserProfile {
+    profilePk: number;
+    image?: string;
+    profileName: string;
+  }
+  const [userList, setUserList] = useState<UserProfile[]>([]); 
   const navigate = useNavigate()
-  const [userList, setUserList] = useState([]);  
-  const {user, setUser} = userStore()
+  
+  const {setUser} = userStore()
 
 
   const goBack = () => {
+    
     startTransition(() => {
     navigate('/')
     })
@@ -28,6 +35,7 @@ const Profile: React.FC = () => {
 
  
   const fetchUser = async (id:string) => {
+    
     const response = await profileList(id)
     setUserList(response.data.result);
     
@@ -49,6 +57,8 @@ const Profile: React.FC = () => {
 
   return (
     <div>
+      <Suspense>
+
       
       <img src="" alt="back" onClick={goBack} />
 
@@ -56,7 +66,7 @@ const Profile: React.FC = () => {
       <p>가상 피팅 서비스를 이용할 프로필을 선택하세요.</p>
 
        {userList.map((user, index) => (
-          <div key={index}>
+         <div key={index}>
             <p onClick={() => userDetail(user.profilePk)}>
             {user.image && <img src={user.image} alt="Uploaded Profile" />}
               <br />
@@ -72,6 +82,7 @@ const Profile: React.FC = () => {
     
     
     
+        </Suspense>
     </div>
   )
 }
