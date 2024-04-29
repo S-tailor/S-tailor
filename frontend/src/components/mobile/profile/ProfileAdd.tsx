@@ -1,7 +1,7 @@
-import React,{ startTransition, useEffect, useState} from 'react'
+import React,{ startTransition,useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { profileCreate } from '@/api/apiProfile'
-
+import userStore from '@/store/store'
 
 const ProfileAdd: React.FC = () => {
   const [page1, setPage1] = useState(true)
@@ -16,6 +16,7 @@ const ProfileAdd: React.FC = () => {
   const [weight, setWeight] = useState<string>("")
   const [fileUrl, setFileUrl] = useState<string>("")
  
+  const {setUser} = userStore()
   // const userInfo = {
   //   'name': '',
   //   'height':'',
@@ -74,16 +75,25 @@ const ProfileAdd: React.FC = () => {
       formData.append('height',height)
       formData.append('weight',weight)
       formData.append('gender',gender)
-      formData.append('image', file)
+      if (file) {
+        formData.append('image', file)
+      } else {
+        console.error('No file to append')
+      }
       formData.append('userPk',userPk)
       setmessage('')
-      console.log('result',formData)
+      
       const response = await profileCreate(formData)
-      console.log(response)
+     
       if (response.status == 200) {
-      startTransition(() => {
-        navigate('/mobile/closet');
-      });
+        const userName = formData.get('name')
+        if (typeof userName === 'string') {
+          const userProfileData = { profileName: userName };
+          setUser(userProfileData)
+          startTransition(() => {
+            navigate('/mobile/closet');
+          });
+        }
     }
     } else {
       setmessage('입력을 완료해주세요')
@@ -118,17 +128,14 @@ const ProfileAdd: React.FC = () => {
   // }
 
   const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const target = e.currentTarget
     const selectedFile = e.target.files?.[0];
-    // const files = (target.files as FileList)[0]
-    // console.log(selectedFile, files)
+    if (selectedFile) {
     const fileUrl = URL.createObjectURL(selectedFile); 
-
-    if (selectedFile === undefined) {
-      return
-    }
     setFileUrl(fileUrl);
     setFile(selectedFile)
+  } else {
+    console.error('No file selected')
+  }
   }
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
