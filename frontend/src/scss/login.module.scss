@@ -1,6 +1,5 @@
 @import "fonts";
 
-
 .container {
   display: flex;
   flex-direction: column;
@@ -115,9 +114,13 @@ header {
 .checkboxLabel {
   font-family: 'Pretendard-Bold';
   margin-left: 10vw;
+  width: 80vw;
   color: #222222;
   opacity: 80%;
   font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 input[type="checkbox"] {
@@ -125,10 +128,9 @@ input[type="checkbox"] {
 }
 
 .checkboxIcon {
-  // display: inline-block;
   width: 15px;
   height: 15px;
-  border: 1px solid #222;
+  border: 1px solid #222222;
   margin-right: 10px;
   cursor: pointer;
   position: relative;
@@ -138,25 +140,9 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked + .checkboxIcon::before {
   content: '✓';
   position: absolute;
-  left: 0;
-  right: 0;
+  top: -0.3vh;
   text-align: center;
-  color: #222;
-}
-
-input[type="checkbox"]:focus {
-  outline: none;
-}
-input[type="checkbox"]:focus + .checkboxIcon {
-  outline: none;
-}
-
-.checkboxLabel {
-  display: flex;
-  align-items: center;
-  font-size: 0.9em;
   color: #222222;
-  cursor: pointer;
 }
 
 .bottomArticle {

@@ -70,15 +70,16 @@ const Login: React.FC = () => {
             <p className={styles.line}></p>
             <br />
             <br />
+            
             <label className={styles.checkboxLabel}>
-            <input
-              className='checkInput'
-              type="checkbox"
-              checked={showPassword}
-              onChange={togglePasswordVisibility}
-            />
-            <span className={styles.checkboxIcon}></span>
-            비밀번호 보기
+              <input
+                className='checkInput'
+                type="checkbox"
+                checked={showPassword}
+                onChange={togglePasswordVisibility}
+              />
+              <span className={styles.checkboxIcon}></span>
+              비밀번호 보기
           </label>
 
         </section>
