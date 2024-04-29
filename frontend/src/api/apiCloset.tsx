@@ -1,24 +1,41 @@
 import { api } from './api'
 
-async function closetImgSearch(Info:FormData) {
-    return await api.post('/closet/search', Info)
-  }
-
-async function closetTextSearch() {
-    return await api.get('/closet/search')
+interface SaveClothData {
+  price: string
+  image: string
+  title: string
+  link: string
+  source: string
 }
 
-async function closetItemSave(Info:string) {
-    return await api.post('/closet/save', Info)
+async function closetImgSearch(Info: FormData) {
+  return await api.post('/search/image', Info)
 }
 
-async function closetItemList() {
-    return await api.get('/closet/list')
+async function closetTextSearch(content: string) {
+  return await api.get(`/search/text?content=${content}`)
 }
 
-async function closetItemDelete(Info:any) {
-    return await api.delete('/closet/list', Info)
+async function closetItemSave(data: SaveClothData): Promise<any> {
+  const formData = new FormData()
+  formData.append('price', data.price)
+  formData.append('link', data.link)
+  formData.append('thumbnail', data.image)
+  formData.append('name', data.title)
+
+  return await api.post('/closet/save', formData, {
+    headers: {
+      'content-type': 'multipart/form-data'
+    }
+  })
 }
 
-export {closetImgSearch, closetTextSearch, closetItemSave, closetItemList, closetItemDelete}
+async function closetItemList(pk: number) {
+    return await api.get(`/closet/list?profilePk=${pk}`)
+}
 
+async function closetItemDelete(Info: any) {
+  return await api.delete('/closet/list', Info)
+}
+
+export { closetImgSearch, closetTextSearch, closetItemSave, closetItemList, closetItemDelete }

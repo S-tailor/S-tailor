@@ -12,47 +12,36 @@ const Profile: React.FC = () => {
   }
   const [userList, setUserList] = useState<UserProfile[]>([]); 
   const navigate = useNavigate()
-  
   const {setUser} = userStore()
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-
-  const goBack = () => {
-    
-    startTransition(() => {
-    navigate('/')
-    })
-  }
-
-  const userAdd = () => {
-    startTransition(() => {
-      navigate('add')
-    })
-  }
+  // 유저 프로필 리스트 불러오기
   useEffect(()=>{
     const id = String(localStorage.getItem('id'))
-    fetchUser(id)  
+      fetchUser(id)  
   },[])
 
- 
+ // 유저 프로필 리스트
   const fetchUser = async (id:string) => {
-    
     const response = await profileList(id)
-    setUserList(response.data.result);
-    
-   
+    setTimeout(() => {
+      setUserList(response.data.result);
+      setIsLoading(!isLoading);
+    }, 100);
   }
 
+  // 유저 프로필 클릭시 
   const userDetail = async (userPk:number) => {
-    console.log('유저번호',userPk)
     let response = await profileSelect(userPk)
     if (response.status === 200) {
-      console.log(response.data.result)
+     
       setUser(response.data.result)
       startTransition(() => {
         navigate('/mobile/closet')
       })
     }
   }
+
 
 
   return (
@@ -85,10 +74,12 @@ const Profile: React.FC = () => {
                   </p>
                 </div>
               ) : (
-                <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={userAdd} />
+                <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
+                  startTransition(()=>{navigate('/mobile/profile/add')})}} />
               )}
             </>
-          ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={userAdd} />}
+          ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
+            startTransition(()=>{navigate('/mobile/profile/add')})}} />}
 
           {userList.length > 1 ? (
             <>
@@ -101,10 +92,12 @@ const Profile: React.FC = () => {
                   </p>
                 </div>
               ) : (
-                <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={userAdd} />
+                <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
+                  startTransition(()=>{navigate('/mobile/profile/add')})}} />
               )}
             </>
-          ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={userAdd} />}
+          ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
+            startTransition(()=>{navigate('/mobile/profile/add')})}} />}
 
           {userList.length > 2 ? (
             <>
@@ -118,10 +111,12 @@ const Profile: React.FC = () => {
                   </p>
                 </div>
               ) : (
-                <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={userAdd} />
+                <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
+                  startTransition(()=>{navigate('/mobile/profile/add')})}} />
               )}
             </>
-          ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={userAdd} />}
+          ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
+            startTransition(()=>{navigate('/mobile/profile/add')})}} />}
 
           {userList.length > 3 ? (
             <>
@@ -134,10 +129,12 @@ const Profile: React.FC = () => {
                   </p>
                 </div>
               ) : (
-                <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={userAdd} />
+                <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
+                  startTransition(()=>{navigate('/mobile/profile/add')})}} />
               )}
             </>
-          ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={userAdd} />}
+          ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
+            startTransition(()=>{navigate('/mobile/profile/add')})}} />}
         </div>
       </section>
 
