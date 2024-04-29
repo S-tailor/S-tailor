@@ -18,7 +18,6 @@ async function profileSelect(id: number) {
 }
 
 async function profileList(id : string) {
-    console.log('api',id)
     return await api.get(`/user/profile/list?id=${id}`)
 }
 

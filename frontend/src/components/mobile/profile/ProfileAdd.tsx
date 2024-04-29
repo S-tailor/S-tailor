@@ -15,16 +15,11 @@ const ProfileAdd: React.FC = () => {
   const [height, setHeight] = useState<string>("")
   const [weight, setWeight] = useState<string>("")
   const [fileUrl, setFileUrl] = useState<string>("")
- 
-  const {setUser} = userStore()
-  // const userInfo = {
-  //   'name': '',
-  //   'height':'',
-  //   'weight':'',
-  //   'gender': '',
-  //   'image':'',
-  //   'userPk':'',
-  // }
+ const {setUser} = userStore()
+ interface userProfile {
+  profileName: string;
+  profilePk: number;
+}
   const formData = new FormData()
   const navigate = useNavigate()
   const goBack = () => {
@@ -87,8 +82,12 @@ const ProfileAdd: React.FC = () => {
      
       if (response.status == 200) {
         const userName = formData.get('name')
-        if (typeof userName === 'string') {
-          const userProfileData = { profileName: userName };
+        const profilePk = parseInt(userPk); // userPk를 숫자로 변환합니다. 실제 응답 구조에 따라 조정 필요
+        if (typeof userName === 'string' && !isNaN(profilePk)) {
+          const userProfileData: userProfile = {
+            profileName: userName,
+            profilePk: profilePk
+          };
           setUser(userProfileData)
           startTransition(() => {
             navigate('/mobile/closet');
@@ -116,16 +115,6 @@ const ProfileAdd: React.FC = () => {
     setPage3(true)
   }
 
-  // const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const selectedFile = e.target.files?.[0];
-  //   if (selectedFile) {
-  //     // const reader = new FileReader();
-  //     // reader.readAsDataURL(selectedFile);
-  //     setFile(selectedFile);
-  //     const fileUrl = URL.createObjectURL(selectedFile); 
-  //     setFileUrl(fileUrl);
-  //   }
-  // }
 
   const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
