@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { startTransition } from 'react'
 
 const Closet: React.FC = () => {
-  const{user, setUser} = userStore()
+  const{user, clearUsers} = userStore()
   const navigate = useNavigate()
   const goSearch = () => {
     startTransition(() => {
@@ -12,10 +12,18 @@ const Closet: React.FC = () => {
       navigate('/mobile/add-cloth')
     })
   } 
-  console.log(user)
-  const userName = user.length > 0 ? user[0].profileName : 'Guest';
+ 
+  const goBack = () => {
+    clearUsers()
+    startTransition(() => {
+    navigate('/mobile/profile')
+    })
+  }
+
+  const userName= user[0]?.profileName  ?? 'Guest';
   return (
     <div>
+      <img src="" alt="back" onClick={goBack} />
       <h1>S-TAILOR</h1>
       
         <img src="" alt="search" onClick={goSearch}/>
