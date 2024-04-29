@@ -7,20 +7,21 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class ChatbotServiceImpl implements ChatbotService{
 
+    @Value("${Lambda_URL}")
+    private String url;
+
     @Override
     public ChatResultDTO chatSend(ChatSendReq body) {
         RestTemplate restTemplate = new RestTemplate();
-        String url = "https://5i1x32xfy5.execute-api.ap-northeast-2.amazonaws.com/production/chatbot";
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("profile", body.getProfile());
