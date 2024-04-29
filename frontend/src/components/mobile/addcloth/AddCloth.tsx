@@ -23,7 +23,7 @@ const AddCloth: React.FC = () => {
   }
 
   // 검색어 저장
-  function saveText(event) {
+  function saveText(event: any) {
     setText(event.target.value)
   }
 
@@ -36,14 +36,16 @@ const AddCloth: React.FC = () => {
   }
 
   // 업로드 이미지 저장
-  function saveImage(event) {
+  function saveImage(event: any) {
     setImage(event.target.files[0])
   }
 
   // 이미지 업로드 검색
   async function imageSearch() {
     const formdata = new FormData()
-    formdata.append('image', image)
+    if (image) {
+      formdata.append('image', image)
+    }
     const response = await closetImgSearch(formdata)
     console.log(response)
     // setCount(response.data.result.length)
