@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { closetImgSearch, closetTextSearch } from '@/api/apiCloset'
+import { closetImgSearch, closetTextSearch, closetItemSave } from '@/api/apiCloset'
 // import Pagination from 'react-js-pagination'
 
+// 검색 결과 항목
 interface SearchResultItem {
   price: string
   link: string
@@ -10,33 +11,71 @@ interface SearchResultItem {
   source: string
 }
 
+// 선택한 옷들의 항목
+interface SelectedClothItem extends SearchResultItem {}
+
 const AddCloth: React.FC = () => {
   const [image, setImage] = useState(null)
   const [text, setText] = useState('')
   const [results, setResults] = useState<SearchResultItem[]>([])
+
+  const [selectedCloths, setSelectedCloths] = useState<SelectedClothItem[]>([])
+
   // const [count, setCount] = useState(1)
 
+  // 옷 선택
+  const handleSelectCloth = (cloth: SearchResultItem) => {
+    setSelectedCloths((prev) => {
+      const isAlreadySelected = prev.find((item) => item.link === cloth.link)
+      if (isAlreadySelected) {
+        return prev.filter((item) => item.link !== cloth.link)
+      } else {
+        return [...prev, cloth]
+      }
+    })
+  }
+
+  // 옷 저장
+  const handleSaveCloths = async () => {
+    for (const cloth of selectedCloths) {
+      try {
+        const response = await closetItemSave({
+          price: cloth.price,
+          image: cloth.image,
+          title: cloth.title,
+          link: cloth.link,
+          source: cloth.source
+        })
+        console.log('저장 성공', response.data)
+      } catch (error) {
+        console.error('저장 실패', error)
+      }
+    }
+    // 저장 후 선택한 옷 초기화
+    setSelectedCloths([])
+  }
+
   // 가격이 있는 정보만 가져온다.
-  async function updateResults(data: any[]) {
+  async function updateResults(data: SearchResultItem[]) {
     const filteredResults = data.filter((item) => item.price !== null) as SearchResultItem[]
     setResults(filteredResults)
   }
 
   // 검색어 저장
-  function saveText(event) {
+  function saveText(event: any) {
     setText(event.target.value)
   }
 
   // 텍스트 검색
   async function textSearch() {
-    let response = await closetTextSearch(text)
+    const response = await closetTextSearch(text)
     // setCount(response.data.result.length)
     console.log(response.data.result)
     updateResults(response.data.result)
   }
 
   // 업로드 이미지 저장
-  function saveImage(event) {
+  function saveImage(event: any) {
     setImage(event.target.files[0])
   }
 
@@ -56,7 +95,12 @@ const AddCloth: React.FC = () => {
       <div>
         {results.map((item: SearchResultItem, index: number) => (
           <div key={index}>
-            <img src={item.image} alt={item.title} style={{ width: '100px', height: '100px' }} />
+            <img
+              src={item.image}
+              alt={item.title}
+              onClick={() => handleSelectCloth(item)}
+              style={{ width: '100px', height: '100px' }}
+            />
             <p>{item.title}</p>
             <p>{item.price}</p>
             <p>{item.source}</p>
@@ -73,6 +117,18 @@ const AddCloth: React.FC = () => {
       <button onClick={() => textSearch()}>Text Search</button>
       <input type="file" onChange={(e) => saveImage(e)}></input>
       <button onClick={() => imageSearch()}>Image Search</button>
+      <div>
+        <h2>선택한 옷</h2>
+        {selectedCloths.map((cloth, index) => (
+          <div key={index}>
+            <img src={cloth.image} alt={cloth.title} />
+            <h4>{cloth.title}</h4>
+            <p>{cloth.price}</p>
+            <button onClick={() => handleSelectCloth(cloth)}>취소</button>
+          </div>
+        ))}
+        <button onClick={handleSaveCloths}>추가</button>
+      </div>
       <RenderResult />
       {/* <Pagination totalItemsCount={count} onChange={(e) => console.log(e)}></Pagination> */}
     </div>
