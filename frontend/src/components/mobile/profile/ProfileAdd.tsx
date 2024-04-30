@@ -84,7 +84,10 @@ const ProfileAdd: React.FC = () => {
       if (response.status == 200) {
         const userName = formData.get('name')
         if (typeof userName === 'string' && !isNaN(profilePk)) {
-          const userProfileData = { profileName: userName, profilePk: profilePk }
+          const userProfileData: userProfile = {
+            profileName: userName,
+            profilePk: profilePk
+          }
 
           setUser(userProfileData)
           startTransition(() => {
