@@ -38,13 +38,14 @@ const AddCloth: React.FC = () => {
   // 옷 저장
   const handleSaveCloths = async () => {
     for (const cloth of selectedCloths) {
+      console.log(cloth)
       try {
         const response = await closetItemSave({
           price: cloth.price,
-          image: cloth.image,
-          title: cloth.title,
+          thumbNail: cloth.image,
+          name: cloth.title,
           link: cloth.link,
-          source: cloth.source
+          profilePk: 1
         })
         console.log('저장 성공', response.data)
       } catch (error) {
@@ -82,7 +83,9 @@ const AddCloth: React.FC = () => {
   // 이미지 업로드 검색
   async function imageSearch() {
     const formdata = new FormData()
-    formdata.append('image', image)
+    if (image) {
+      formdata.append('image', image)
+    }
     const response = await closetImgSearch(formdata)
     console.log(response)
     // setCount(response.data.result.length)

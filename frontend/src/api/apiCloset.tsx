@@ -2,10 +2,10 @@ import { api } from './api'
 
 interface SaveClothData {
   price: string
-  image: string
-  title: string
+  thumbNail: string
+  name: string
   link: string
-  source: string
+  profilePk: number
 }
 
 async function closetImgSearch(Info: FormData) {
@@ -17,17 +17,7 @@ async function closetTextSearch(content: string) {
 }
 
 async function closetItemSave(data: SaveClothData): Promise<any> {
-  const formData = new FormData()
-  formData.append('price', data.price)
-  formData.append('link', data.link)
-  formData.append('thumbnail', data.image)
-  formData.append('name', data.title)
-
-  return await api.post('/closet/save', formData, {
-    headers: {
-      'content-type': 'multipart/form-data'
-    }
-  })
+  return await api.post('/closet/save', data)
 }
 
 async function closetItemList() {
