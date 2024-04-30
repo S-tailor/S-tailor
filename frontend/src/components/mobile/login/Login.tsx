@@ -16,9 +16,9 @@ const Login: React.FC = () => {
   const LoginClick = async () => {
     try {
       const response = await userLogin(id, password)
-      console.log(response)
+
       if (response.data.statusCode === 200) {
-        console.log('로그인 성공', response.data)
+       
         startTransition(() => {
           navigate('/mobile/profile')
         })

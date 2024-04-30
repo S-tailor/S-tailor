@@ -4,6 +4,7 @@ import { persist } from "zustand/middleware";
 interface userProfile {
     profileName: string;
     profilePk: number;
+  
     
 }
 

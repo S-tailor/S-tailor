@@ -39,14 +39,14 @@ const AddCloth: React.FC = () => {
   const handleSaveCloths = async () => {
     for (const cloth of selectedCloths) {
       try {
-        const response = await closetItemSave({
+       await closetItemSave({
           price: cloth.price,
           image: cloth.image,
           title: cloth.title,
           link: cloth.link,
           source: cloth.source
         })
-        console.log('저장 성공', response.data)
+
       } catch (error) {
         console.error('저장 실패', error)
       }
@@ -70,7 +70,7 @@ const AddCloth: React.FC = () => {
   async function textSearch() {
     const response = await closetTextSearch(text)
     // setCount(response.data.result.length)
-    console.log(response.data.result)
+
     updateResults(response.data.result)
   }
 
@@ -86,7 +86,7 @@ const AddCloth: React.FC = () => {
       formdata.append('image', image)
     }
     const response = await closetImgSearch(formdata)
-    console.log(response)
+    
     // setCount(response.data.result.length)
     updateResults(response.data.result)
   }
