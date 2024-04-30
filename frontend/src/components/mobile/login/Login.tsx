@@ -16,7 +16,7 @@ const Login: React.FC = () => {
   const LoginClick = async () => {
     try {
       const response = await userLogin(id, password)
-      console.log(response)
+      // console.log(response)
       if (response.data.statusCode === 200) {
         console.log('로그인 성공', response.data)
         startTransition(() => {
@@ -24,7 +24,7 @@ const Login: React.FC = () => {
         })
         // accessToken 저장
         window.localStorage.setItem('accessToken', response.data.accessToken)
-        window.localStorage.setItem('userPk',response.data.userPk)
+        window.localStorage.setItem('userPk', response.data.userPk)
         window.localStorage.setItem('id', id)
       } else {
         alert('비밀번호가 틀렸습니다.')

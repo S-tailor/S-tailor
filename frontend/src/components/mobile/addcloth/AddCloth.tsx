@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { closetImgSearch, closetTextSearch, closetItemSave } from '@/api/apiCloset'
+import userStore from '@/store/store'
 // import Pagination from 'react-js-pagination'
 
 // 검색 결과 항목
@@ -35,17 +36,19 @@ const AddCloth: React.FC = () => {
     })
   }
 
+  const { profilePk } = userStore()
+
   // 옷 저장
   const handleSaveCloths = async () => {
     for (const cloth of selectedCloths) {
-      console.log(cloth)
+      // console.log(cloth)
       try {
         const response = await closetItemSave({
           price: cloth.price,
           thumbNail: cloth.image,
           name: cloth.title,
           link: cloth.link,
-          profilePk: 1
+          profilePk: profilePk
         })
         console.log('저장 성공', response.data)
       } catch (error) {
@@ -71,7 +74,7 @@ const AddCloth: React.FC = () => {
   async function textSearch() {
     const response = await closetTextSearch(text)
     // setCount(response.data.result.length)
-    console.log(response.data.result)
+    // console.log(response.data.result)
     updateResults(response.data.result)
   }
 
@@ -87,7 +90,7 @@ const AddCloth: React.FC = () => {
       formdata.append('image', image)
     }
     const response = await closetImgSearch(formdata)
-    console.log(response)
+    // console.log(response)
     // setCount(response.data.result.length)
     updateResults(response.data.result)
   }

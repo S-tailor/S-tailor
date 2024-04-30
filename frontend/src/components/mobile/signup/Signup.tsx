@@ -38,7 +38,7 @@ const Signup: React.FC = () => {
 
     try {
       const response = await userCreate(id, password)
-      console.log(response)
+      // console.log(response)
       if (response.data.statusCode === 200) {
         const configData = JSON.parse(response.config.data)
         const signupId = configData.id
