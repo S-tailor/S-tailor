@@ -20,8 +20,8 @@ async function closetItemSave(data: SaveClothData): Promise<any> {
   return await api.post('/closet/save', data)
 }
 
-async function closetItemList() {
-  return await api.get('/closet/list')
+async function closetItemList(pk: number) {
+    return await api.get(`/closet/list?profilePk=${pk}`)
 }
 
 async function closetItemDelete(Info: any) {

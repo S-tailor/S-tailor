@@ -1,0 +1,7 @@
+// import Local SCSS files
+@import "variables", "fonts", "reset", "start", "signup", "responsive-flip", "profileadd", "profile", "main", "login";
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,89 @@
+@import "fonts";
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/src/assets/background_light.gif");
+  background-size: cover;
+  background-color: white;
+}
+
+.member1 p, .member2 p, .member3 p, .member4 p {
+  text-align: center;
+  font-family: 'Pretendard-Bold';
+  color: #222222;
+  font-size: 0.9em;
+}
+
+.member1Img, .member2Img, .member3Img, .member4Img {
+  object-fit: cover;
+  width: 20vw;
+  // border: 1px solid #afafaf;
+  border-radius: 100%;
+  margin-bottom: 1vh;
+}
+
+.addIcon {
+  width: 20vw;
+  border: 1px solid #222222;
+  border-radius: 100%;
+  margin-bottom: 3vh;
+}
+
+header {
+  width: 100vw;
+  height: 10%;
+  display: flex;
+  align-items: center;
+}
+
+.headerInner{
+  display: flex;
+  align-items: center;
+}
+
+.backBtn {
+  width: 5vw;
+  margin-left: 10vw;
+  cursor: pointer;
+}
+
+.topInfo{
+  width: 100vw;
+  height: 27%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.texts {
+  font-family: 'Pretendard-Bold';
+  font-size: 2.5em;
+  margin-left: 10vw;
+  padding-top: 0.7vh;
+}
+
+.select {
+  width: 100vw;
+  height: 39%;
+  padding-top: 8%;
+}
+
+.selectInner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70vw;
+  margin-left: 15vw;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.subtexts {
+  font-family: 'Pretendard-Bold';
+  margin-top: 1.5vh;
+  margin-left: 10vw;
+  color: #222222;
+  opacity: 80%;
+  font-size: 0.9em;
+}
