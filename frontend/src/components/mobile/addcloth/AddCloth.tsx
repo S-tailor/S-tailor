@@ -36,7 +36,8 @@ const AddCloth: React.FC = () => {
     })
   }
 
-  const { profilePk } = userStore()
+  const user = userStore((state) => state.user)
+  const profilePk = user[0]?.profilePk
 
   // 옷 저장
   const handleSaveCloths = async () => {
