@@ -20,6 +20,7 @@ const ProfileAdd: React.FC = () => {
   interface userProfile {
     profileName: string
     profilePk: number
+    image: string
   }
   const formData = new FormData()
   const navigate = useNavigate()
@@ -78,7 +79,8 @@ const ProfileAdd: React.FC = () => {
         if (typeof userName === 'string' && !isNaN(profilePk)) {
           const userProfileData: userProfile = {
             profileName: userName,
-            profilePk: profilePk
+            profilePk: profilePk,
+            image: ''
           }
 
           setUser(userProfileData)
