@@ -20,13 +20,15 @@ header {
 }
 
 .headerInner1{
-  width: 30%;
+  width: 25%;
+  display: flex;
+  align-items: center;
 }
 
 .headerInner2 {
   display: flex;
   justify-content: center;
-  width: 45%;
+  width: 50%;
 }
 
 .headerInner3 {

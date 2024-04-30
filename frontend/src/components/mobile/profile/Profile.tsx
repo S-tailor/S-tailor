@@ -1,5 +1,5 @@
 import React, {Suspense, startTransition, useEffect, useState} from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { profileList, profileSelect } from '@/api/apiProfile'
 import userStore from '@/store/store'
 import styles from '../../../scss/profile.module.scss';
@@ -42,6 +42,11 @@ const Profile: React.FC = () => {
     }
   }
 
+  const goHome = () => {
+    startTransition(() => {
+      navigate('/')
+    })
+  }
 
 
   return (
@@ -50,9 +55,7 @@ const Profile: React.FC = () => {
 
       <header>
         <div className={styles.headerInner}>
-          <Link to={'/'}>
-            <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
-          </Link>
+          <img onClick={goHome} className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
         </div>
       </header>
 

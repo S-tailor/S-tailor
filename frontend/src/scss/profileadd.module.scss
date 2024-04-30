@@ -1,5 +1,9 @@
 @import "fonts";
 
+* {
+  // border: 1px solid red;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -20,6 +24,8 @@ header {
 
 .headerInner1{
   width: 25%;
+  display: flex;
+  align-items: center;
 }
 
 .headerInner2 {
@@ -35,6 +41,7 @@ header {
 .backBtn {
   width: 5vw;
   margin-left: 10vw;
+  cursor: pointer;
 }
 
 .profileadd {
@@ -54,11 +61,16 @@ header {
 
 .create2 {
   width: 100vw;
-  height: 66%;
+  height: 26%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 7vh;
+  justify-content: center;
+}
+
+.empty {
+  width: 100vw;
+  height: 40%;
 }
 
 .create3 {
@@ -92,6 +104,7 @@ input[type="file"] {
   background-color: white;
   border-radius: 50%;
   padding: 1vw;
+  cursor: pointer;
   &:active {
     background-color: gray;
   }
@@ -107,6 +120,7 @@ input[type="file"] {
   padding-top: 4vh;
   margin-bottom: 1.5vh;
   border: 0;
+  width: 80vw;
 }
 
 .profileNameInput2 {
@@ -118,7 +132,7 @@ input[type="file"] {
   opacity: 50%;
   padding-top: 3vh;
   border: 0;
-  // margin-left: 10vw;
+  width: 80vw;
 }
 
 .line {
@@ -187,12 +201,13 @@ input[type="file"] {
   font-family: 'Pretendard-Bold';
   font-size: 2.5em;
   margin-left: 10vw;
+  width: 80vw;
 }
 
 .subtexts {
   font-family: 'Pretendard-Bold';
   margin-left: 10vw;
-  width: 100vw;
+  width: 80vw;
   color: #222222;
   opacity: 80%;
   font-size: 0.9em;
@@ -358,8 +373,8 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
 
 .cm {
   position: fixed;
-  top: 28.5%;
-  right: 18%;
+  top: 30%;
+  right: 10%;
   font-family: 'Pretendard-Bold';
   font-size: 2em;
   opacity: 30%;
@@ -378,9 +393,14 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
   font-size: 1em;
   letter-spacing: 1px;
   color: rgb(226, 92, 92); 
-
+  position: fixed;
+  top: 38%;
+  height: 15px;
 }
 
 .showMessage {
-  display: block;
+  display: flex;
+  align-items: center;
+  font-size: 0.8em;
+  height: 15px;
 }

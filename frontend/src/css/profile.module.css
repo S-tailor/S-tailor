@@ -66,9 +66,15 @@ header {
   align-items: center;
 }
 
+.headerInner {
+  display: flex;
+  align-items: center;
+}
+
 .backBtn {
   width: 5vw;
   margin-left: 10vw;
+  cursor: pointer;
 }
 
 .topInfo {

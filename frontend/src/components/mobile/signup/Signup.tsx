@@ -54,14 +54,18 @@ const Signup: React.FC = () => {
     }
   }
 
+  const goEmail = () => {
+    startTransition(() => {
+      navigate('/mobile/start')
+    })
+  }
+
   return (
     <div className={styles.container}>
       
       <header>
         <div className={styles.headerInner1}>
-          <Link to={'/mobile/start'}>
-            <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
-          </Link>
+          <img onClick={goEmail} className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
         </div>
         <div className={styles.headerInner2}>
           <p className={styles.signup}>회원가입</p>

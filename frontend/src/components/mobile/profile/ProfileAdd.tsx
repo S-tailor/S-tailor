@@ -1,5 +1,5 @@
 import React,{ startTransition,useState} from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { profileCreate } from '@/api/apiProfile'
 import userStore from '@/store/store'
 import styles from '../../../scss/profileadd.module.scss';
@@ -96,6 +96,12 @@ const ProfileAdd: React.FC = () => {
   };
 
   // 뒤로가기
+  const goSelect = () => {
+    startTransition(() => {
+      navigate('/mobile/profile')
+    })
+  }
+
   const goName = () => {
     setPage2(false)
     setPage1(true)
@@ -171,9 +177,7 @@ const ProfileAdd: React.FC = () => {
 
         <header>
           <div className={styles.headerInner1}>
-            <Link to={'/mobile/profile'}>
-              <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
-            </Link>
+            <img onClick={goSelect} className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
           </div>
           <div className={styles.headerInner2}>
             <p className={styles.profileadd}>프로필 추가</p>
@@ -238,7 +242,7 @@ const ProfileAdd: React.FC = () => {
             className={styles.toggleButton}
             onClick={handleGenderChange}
             onBlur={handleGenderBlur}
-            autoFocus
+            
           >
            남성
           </button>
@@ -254,6 +258,9 @@ const ProfileAdd: React.FC = () => {
         <p className={`${styles.message} ${message ? styles.showMessage : ''}`}>
             {message}
         </p>
+      </section>
+
+      <section className={styles.empty}>
       </section>
 
       <section className={styles.bottomButton2}>
