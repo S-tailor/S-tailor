@@ -12,7 +12,7 @@ const Profile: React.FC = () => {
   }
   const [userList, setUserList] = useState<UserProfile[]>([])
   const navigate = useNavigate()
-  const { setUser, setProfilePk } = userStore()
+  const { setUser } = userStore()
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   // 유저 프로필 리스트 불러오기
@@ -24,6 +24,7 @@ const Profile: React.FC = () => {
   // 유저 프로필 리스트
   const fetchUser = async (id: string) => {
     const response = await profileList(id)
+    console.log(response)
     setTimeout(() => {
       setUserList(response.data.result)
       setIsLoading(!isLoading)
@@ -35,7 +36,6 @@ const Profile: React.FC = () => {
     let response = await profileSelect(userPk)
     if (response.status === 200) {
       setUser(response.data.result)
-      setProfilePk(response.data.result.profilePk)
       startTransition(() => {
         navigate('/mobile/closet')
       })
