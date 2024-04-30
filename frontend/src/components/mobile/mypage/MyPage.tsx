@@ -2,7 +2,6 @@ import userStore from '@/store/store'
 // import { all } from 'axios'
 import React, { startTransition } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { profileList } from '@/api/apiProfile'
 
 const MyPage: React.FC = () => {
   const navigate = useNavigate()
@@ -12,6 +11,12 @@ const MyPage: React.FC = () => {
   const profileName = user[0]?.profileName ?? 'Guest'
   // 프로필 사진
   const profileImg = user[0]?.image
+
+  const ClosetSearchClick = () => {
+    startTransition(() => {
+      navigate('/mobile/closet/search')
+    })
+  }
 
   const ProfileChangeClick = () => {
     startTransition(() => {
@@ -37,7 +42,7 @@ const MyPage: React.FC = () => {
   return (
     <div>
       {/* 검색 아이콘으로 변경 필요 */}
-      <button>옷장 검색</button>
+      <button onClick={ClosetSearchClick}>옷장 검색</button>
 
       <button onClick={ProfileChangeClick}>프로필 변경</button>
       <button onClick={LogoutClick}>로그아웃</button>
