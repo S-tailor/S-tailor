@@ -1,5 +1,5 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { startTransition, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const BASE_URL = 'http://localhost:5000'
 const TIME = {
@@ -8,6 +8,7 @@ const TIME = {
 }
 
 const TryOn: React.FC = () => {
+  const navigate = useNavigate()
   const [sessionId, setSessionId] = useState('')
   const [token, setToken] = useState('')
   const [remainTime, setRemainTime] = useState(TIME.ONE_MINUTE)
@@ -35,6 +36,13 @@ const TryOn: React.FC = () => {
       setToken(receivedToken)
       sessionStorage.setItem('token', receivedToken)
       console.log('token event data', receivedToken)
+
+      if (receivedToken) {
+        setTimeout(() => console.log('피팅룸으로 모시겠습니다'), 3000)
+        startTransition(() => {
+          navigate('/flip/tryon')
+        })
+      }
     })
   }
 
