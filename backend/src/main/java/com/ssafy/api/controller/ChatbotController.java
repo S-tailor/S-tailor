@@ -24,15 +24,20 @@ public class ChatbotController {
     SearchService searchService;
 
     @PostMapping("/chat")
-    public ResponseEntity<? extends BaseResponseBody> chat(@RequestBody ChatSendReq body) {
+    public ResponseEntity<? extends BaseResponseBody> chat(@ModelAttribute ChatSendReq body) {
 
         boolean flag =false;
-        ChatResultDTO res= chatbotService.chatSend(body);
+
+        List<String> urls=chatbotService.saveImage(body);
+
+
+        ChatResultDTO res= chatbotService.chatSend(body,urls);
 
         if(res!=null)
             flag=true;
 
         System.out.println(res);
+
         if(res.getType().equals("recommend")){
             List<SearchResultDTO> result = searchService.textSearch(res.getBody());
             return ResponseEntity.ok(ChatImageRes.of(200,"Success",res.getBody(), result));

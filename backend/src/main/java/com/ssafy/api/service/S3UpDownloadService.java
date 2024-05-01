@@ -15,6 +15,9 @@ public interface S3UpDownloadService {
 	public Map<String, Object> getFile(String s3FileName) throws IOException;
 
 	public String imageSearchUpload(MultipartFile image);
+
+
+	String imageChatUpload(MultipartFile image, String profile);
 }
 
 
