@@ -12,7 +12,6 @@ const Closet: React.FC = () => {
     image?: string,
     link: string,
     closetPk: number
-
   }
   const{user, clearUsers} = userStore()
   const [clothList, setClothList] = useState<clothInfo[]>([])
@@ -21,10 +20,11 @@ const Closet: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const profilePk = user[0]?.profilePk;
+    const profilePk = Number(sessionStorage.getItem('profilePk'))
     if (profilePk) {
         fetchItem(profilePk)
         }
+      
   }, []); 
 
   const fetchItem = async (profilePk: number) => {
@@ -50,9 +50,10 @@ const Closet: React.FC = () => {
   return (
     <div>
       <header>
-      <img src="" alt="back" onClick={()=>{clearUsers(),
+      <img src="" alt="back" onClick={()=>{
         startTransition(()=>{
-          navigate('/mobile/profile')})} 
+          clearUsers() 
+          navigate('/mobile/profile')})}
         }
           />
       <h1>S-TAILOR</h1>
