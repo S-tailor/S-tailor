@@ -16,7 +16,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
 
     Profile findByProfilePk(int profilePk);
 
-    @Query(value = "select profilePk, image, profileName from profile where userPk = :userPk", nativeQuery = true)
+    @Query(value = "select profilePk, image, profileName from profile where userPk = :userPk order by profilePk", nativeQuery = true)
     List<ProfileList> getProfileList(int userPk);
 
     @Transactional
