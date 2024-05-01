@@ -12,7 +12,6 @@ const Closet: React.FC = () => {
     image?: string,
     link: string,
     closetPk: number
-
   }
   const{user, clearUsers} = userStore()
   const [clothList, setClothList] = useState<clothInfo[]>([])
@@ -20,22 +19,22 @@ const Closet: React.FC = () => {
   const userName= user[0]?.profileName  ?? 'Guest';
   const [isLoading, setIsLoading] = useState(true);
 
-
   useEffect(() => {
-    const profilePk = user[0]?.profilePk;
+    const profilePk = Number(sessionStorage.getItem('profilePk'))
     if (profilePk) {
         fetchItem(profilePk)
         }
+      
   }, []); 
 
   const fetchItem = async (profilePk: number) => {
     await closetItemList(profilePk)
         .then((response) => {
+          setClothList(response.data.result)
           setTimeout(() => {
-            
-            setClothList(response.data.result)
-            setIsLoading(!isLoading)
-          }, 100)
+              setIsLoading(!isLoading)
+            }, 500)
+          setIsLoading(!isLoading)
         })
       }
 
@@ -51,9 +50,10 @@ const Closet: React.FC = () => {
   return (
     <div>
       <header>
-      <img src="" alt="back" onClick={()=>{clearUsers(),
+      <img src="" alt="back" onClick={()=>{
         startTransition(()=>{
-          navigate('/mobile/profile')})} 
+          clearUsers() 
+          navigate('/mobile/profile')})}
         }
           />
       <h1>S-TAILOR</h1>
@@ -75,6 +75,7 @@ const Closet: React.FC = () => {
       <h2>{userName} 님의 옷장</h2>
       <br />
       <h3>{isLoading ? "옷장 문 여는중..." : ""}</h3>
+      <h3>{clothList.length == 0 ? "아직 마음에 드는 옷을 못찾으셨나요?" : ""}</h3>
       {clothList.map((cloth, idx) => (
         <div key={idx}>
           <p>

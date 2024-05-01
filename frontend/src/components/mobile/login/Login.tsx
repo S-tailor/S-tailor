@@ -23,7 +23,7 @@ const Login: React.FC = () => {
     try {
       const response = await userLogin(id, password)
       if (response.data.statusCode === 200) {
-        console.log('로그인 성공', response.data)
+       
         startTransition(() => {
           navigate('/mobile/profile')
         })

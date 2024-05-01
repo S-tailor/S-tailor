@@ -75,14 +75,13 @@ const ProfileAdd: React.FC = () => {
 
       if (response.status == 200) {
         const userName = formData.get('name')
-        const profilePk = parseInt(userPk) // userPk를 숫자로 변환합니다. 실제 응답 구조에 따라 조정 필요
+        const profilePk = parseInt(userPk);
         if (typeof userName === 'string' && !isNaN(profilePk)) {
           const userProfileData: userProfile = {
             profileName: userName,
             profilePk: profilePk,
-            image: ''
-          }
-
+            image: fileUrl
+          };
           setUser(userProfileData)
           startTransition(() => {
             navigate('/mobile/closet')
