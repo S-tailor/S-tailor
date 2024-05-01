@@ -1,7 +1,9 @@
 package com.ssafy.api.controller;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +14,29 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 @RestController
 @RequestMapping("/tryon")
 public class TryOnController {
+    private final Map<UUID, SseEmitter> emitters = new ConcurrentHashMap<>();
+
     @GetMapping(value = "/connect", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public ResponseEntity<SseEmitter> sseRequest() throws IOException {
         final UUID sessionId = UUID.randomUUID();
         final SseEmitter emitter = new SseEmitter(60 * 1000L);
+
+        emitter.onCompletion(() -> {
+            emitters.remove(sessionId);
+            cleanupEmitter(emitter);
+        });
+        emitter.onError ((ex) -> {
+            emitters.remove(sessionId);
+            cleanupEmitter(emitter);
+        });
+        emitter.onTimeout (() -> {
+            emitters.remove(sessionId);
+            cleanupEmitter(emitter);
+        });
+
+        emitters.put(sessionId, emitter);
+        System.out.println(emitters);
+        System.out.println(emitters.get(sessionId));
         try {
             emitter.send(SseEmitter.event()
                     .name("connect")
@@ -25,4 +46,28 @@ public class TryOnController {
         }
         return ResponseEntity.ok(emitter);
     }
+
+    private void cleanupEmitter(SseEmitter emitter){
+        try {
+            emitter.complete();
+        } catch (Exception e) {
+        }
+    }
+
+    @GetMapping("/verify")
+    public ResponseEntity<SseEmitter> verify(String sessionId, String token, String id, int profilePk) throws IOException {
+
+//        System.out.println("Verifying:" + emitters.get(UUID.fromString((sessionId))));
+        final SseEmitter emitter = emitters.get(UUID.fromString((sessionId)));
+        try {
+            emitter.send(SseEmitter.event()
+                    .name("getToken")
+                    .data(token));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return ResponseEntity.ok(emitter);
+    }
+
+
 }
