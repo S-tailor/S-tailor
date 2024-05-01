@@ -90,6 +90,10 @@ const routes: RouteType[] = [
       {
         path: 'tryon/wait',
         element: React.lazy(() => import('./components/mobile/closet/ClosetWait'))
+      },
+      {
+        path: 'code/input/test',
+        element: React.lazy(() => import('./components/mobile/closet/ClosetCodeInputTest'))
       }
     ]
   },
