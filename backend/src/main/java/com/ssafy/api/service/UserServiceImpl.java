@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
+
+
 	@Override
 	public User getUserByUserId(String userId) {
 		try {
@@ -55,6 +58,7 @@ public class UserServiceImpl implements UserService {
 		} catch (Exception e) {
 			return false;
 		}
+
 
 		return true;
 	}
