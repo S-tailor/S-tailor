@@ -145,6 +145,10 @@ const routes: RouteType[] = [
       {
         path: 'code',
         element: React.lazy(() => import('./components/flip/tryon/TryOnCode'))
+      },
+      {
+        path: 'test',
+        element: React.lazy(() => import('./components/flip/tryon/TryOnCodeTest'))
       }
     ]
   }
