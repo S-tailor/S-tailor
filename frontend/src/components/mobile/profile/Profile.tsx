@@ -1,32 +1,33 @@
-import React, {Suspense, startTransition, useEffect, useState} from 'react'
+import React, {startTransition, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { profileList, profileSelect } from '@/api/apiProfile'
 import userStore from '@/store/store'
-import styles from '../../../scss/profile.module.scss';
+import styles from '../../../scss/profile.module.scss'
 
 const Profile: React.FC = () => {
   interface UserProfile {
-    profilePk: number;
-    image?: string;
-    profileName: string;
+    profilePk: number
+    image?: string
+    profileName: string
   }
-  const [userList, setUserList] = useState<UserProfile[]>([]); 
+  const [userList, setUserList] = useState<UserProfile[]>([])
   const navigate = useNavigate()
   const {setUser} = userStore()
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [modify, setModify] = useState<boolean>(false)
  
   // 유저 프로필 리스트 불러오기
-  useEffect(()=>{
+  useEffect(() => {
     const id = String(localStorage.getItem('id'))
     fetchUser(id)  
     sessionStorage.removeItem('profilePk')
       
   },[])
 
- // 유저 프로필 리스트
-  const fetchUser = async (id:string) => {
+  // 유저 프로필 리스트
+  const fetchUser = async (id: string) => {
     const response = await profileList(id)
+    // console.log(response)
     setTimeout(() => {
       setUserList(response.data.result);
       setIsLoading(!isLoading);
@@ -34,11 +35,10 @@ const Profile: React.FC = () => {
     setIsLoading(!isLoading)
   }
 
-  // 유저 프로필 클릭시 
-  const userDetail = async (userPk:number) => {
+  // 유저 프로필 클릭시
+  const userDetail = async (userPk: number) => {
     let response = await profileSelect(userPk)
     if (response.status === 200) {
-     
       setUser(response.data.result)
       startTransition(() => {
         navigate('/mobile/closet')
@@ -65,10 +65,18 @@ const Profile: React.FC = () => {
     })
   }
 
-
   return (
     <div className={styles.container}>
-      <Suspense>
+        <header>
+          <div className={styles.headerInner}>
+            <img
+              onClick={goHome}
+              className={styles.backBtn}
+              src="/src/assets/backBtn.svg"
+              alt="backBtn"
+            />
+          </div>
+        </header>
 
       <header>
         <div className={styles.headerInner}>
@@ -170,8 +178,42 @@ const Profile: React.FC = () => {
             startTransition(()=>{navigate('/mobile/profile/add')})}} />}
         </div>
       </section>}
-
-      </Suspense>
+            {userList.length > 3 ? (
+              <>
+                {userList[3] ? (
+                  <div className={styles.member4}>
+                    <p onClick={() => userDetail(userList[3].profilePk)}>
+                      {userList[3].image && (
+                        <img
+                          className={styles.member4Img}
+                          src={userList[3].image}
+                          alt="Uploaded Profile"
+                        />
+                      )}
+                      <br />
+                      {userList[3].profileName}
+                    </p>
+                  </div>
+                ) : (
+                  <img
+                    className={styles.addIcon}
+                    src="/src/assets/add.svg"
+                    alt="user-add"
+                    onClick={() => {
+                      startTransition(() => {
+                        navigate('/mobile/profile/add')})}}
+                  />)}
+              </>
+            ) : (
+              <img
+                className={styles.addIcon}
+                src="/src/assets/add.svg"
+                alt="user-add"
+                onClick={() => {
+                  startTransition(() => {
+                    navigate('/mobile/profile/add')})}}
+              />)}
+       
     </div>
   )
 }

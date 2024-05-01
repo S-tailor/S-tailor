@@ -1,6 +1,7 @@
 package com.ssafy.api.controller;
 
 import com.ssafy.api.request.ClosetSaveReq;
+import com.ssafy.api.request.ClosetSearchReq;
 import com.ssafy.api.response.ClosetListRes;
 import com.ssafy.api.service.ClosetService;
 import com.ssafy.common.model.response.BaseResponseBody;
@@ -43,6 +44,16 @@ public class ClosetController {
             return ResponseEntity.ok(BaseResponseBody.of(200,"Success"));
         } else {
             return ResponseEntity.ok(BaseResponseBody.of(400,"Fail"));
+        }
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<? extends BaseResponseBody> closetSearch(@RequestBody ClosetSearchReq info) {
+        List<Closet> data = closetService.closetSearch(info);
+        if(data != null) {
+            return ResponseEntity.ok(ClosetListRes.of(200,"Success",data));
+        } else {
+            return ResponseEntity.ok(BaseResponseBody.of(400, "Fail"));
         }
     }
 }

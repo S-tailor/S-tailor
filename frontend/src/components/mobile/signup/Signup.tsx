@@ -1,7 +1,7 @@
 import React, { startTransition, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { userCreate } from '@/api/apiUser'
-import styles from '../../../scss/signup.module.scss';
+import styles from '../../../scss/signup.module.scss'
 
 const Signup: React.FC = () => {
   const [password, setPassword] = useState('')
@@ -61,16 +61,19 @@ const Signup: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      
       <header>
         <div className={styles.headerInner1}>
-          <img onClick={goEmail} className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
+          <img
+            onClick={goEmail}
+            className={styles.backBtn}
+            src="/src/assets/backBtn.svg"
+            alt="backBtn"
+          />
         </div>
         <div className={styles.headerInner2}>
           <p className={styles.signup}>회원가입</p>
         </div>
-        <div className={styles.headerInner3}>
-        </div>
+        <div className={styles.headerInner3}></div>
       </header>
 
       <article className={styles.topArticle}>
@@ -88,7 +91,9 @@ const Signup: React.FC = () => {
         </section>
 
         <section className={styles.secondInfo}>
-        <p className={`${styles.title2} ${password.length >= 4 ? styles.active : ''}`}>비밀번호 확인</p>
+          <p className={`${styles.title2} ${password.length >= 4 ? styles.active : ''}`}>
+            비밀번호 확인
+          </p>
           <input
             className={styles.passwordInput}
             type="password"
@@ -102,10 +107,14 @@ const Signup: React.FC = () => {
 
       <article className={styles.bottomArticle}>
         <section className={styles.privacyPolicy}>
-            <p className={styles.privacy}>회원가입 시 S-Tailor의 <u>개인정보 보호정책</u>에 동의하게 됩니다.</p>
+          <p className={styles.privacy}>
+            회원가입 시 S-Tailor의 <u>개인정보 보호정책</u>에 동의하게 됩니다.
+          </p>
         </section>
         <section className={styles.bottomButton}>
-            <button className={styles.btn} onClick={SignupClick}>회원가입</button>
+          <button className={styles.btn} onClick={SignupClick}>
+            회원가입
+          </button>
         </section>
       </article>
     </div>

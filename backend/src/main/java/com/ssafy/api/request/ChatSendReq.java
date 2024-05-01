@@ -3,6 +3,7 @@ package com.ssafy.api.request;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ import java.util.List;
 public class ChatSendReq {
     String profile;
     String text;
-    List<String> image;
+    List<MultipartFile> image;
 }

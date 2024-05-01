@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 interface userProfile {
     profileName: string;
@@ -9,25 +9,24 @@ interface userProfile {
 }
 
 interface User {
-    user: userProfile[]
-    setUser: (user: userProfile) => void
-    clearUsers: () => void;
-  }
+  user: userProfile[]
+  // profilePk: number | 0
+  setUser: (user: userProfile) => void
+  clearUsers: () => void
+}
 
-  const userStore = create(
+const userStore = create(
   persist<User>(
     (set) => ({
-    user: [],
-    setUser: (by) => set(() => ({user: [by] })),
-    clearUsers: () => set({ user: [] })
+      user: [],
+      // profilePk: 0,
+      setUser: (by) => set(() => ({ user: [by] })),
+      clearUsers: () => set({ user: [] })
     }),
     {
-        name: "userIdStorage",
-      }
+      name: 'userIdStorage'
+    }
   )
 )
-    
- 
 
-  export default userStore
-  
+export default userStore
