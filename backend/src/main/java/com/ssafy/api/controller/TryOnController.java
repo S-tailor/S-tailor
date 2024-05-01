@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 @RestController
-@RequestMapping("/sse")
-public class SseController {
+@RequestMapping("/tryon")
+public class TryOnController {
     @GetMapping(value = "/connect", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public ResponseEntity<SseEmitter> sseRequest() throws IOException {
         final UUID sessionId = UUID.randomUUID();
