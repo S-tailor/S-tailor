@@ -1,0 +1,314 @@
+@import "fonts";
+
+header {
+  padding-top: 3%;
+  padding-bottom: 4%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1005;
+  background-color: white;
+  // box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.headerInner {
+  width: 90vw;
+  display: flex;
+  justify-content: center;
+}
+
+.headerInner1 {
+  width: 30vw;
+  display: flex;
+  justify-content: center;
+  margin-right: auto;
+  cursor: pointer;
+}
+
+.headerInner2, .headerInner3 {
+  width: 12vw;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.headerInner3 {
+  position: relative;
+}
+
+.logo{
+  width: 30vw;
+}
+
+.search {
+  width: 7vw;
+}
+
+.cart {
+  width: 5vw;
+}
+
+.cartAdd {
+  width: 15px;
+  height: 15px;
+  background-color: #D99AFC;
+  border-radius: 100px;
+  position: absolute;
+  bottom: 13px;
+  right: 6px;
+  color: white;
+  font-family: 'Pretendard-SemiBold';
+  font-size: 0.7em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1px;
+}
+
+.closetMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+}
+
+.mainCategory {
+  font-family: 'Pretendard-Medium';
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 0.8em;
+  padding-top: 1%;
+  height: 10px;
+  padding-bottom: 7%;
+  background-color: white;
+  color:rgb(179, 179, 179);
+  position: fixed;
+  top: 80px;
+  left: 0;
+  z-index: 1004;
+  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.slider {
+  margin-top: 13vh;
+}
+
+.slider {
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  height: 25vh;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  animation: slider 7.5s infinite linear;
+}
+
+.slide:nth-child(1) {
+  background-image: url("/src/assets/광고1.png");
+  animation-delay: 0;
+}
+.slide:nth-child(2) {
+  background-image: url("/src/assets/광고2.png");
+  animation-delay: -2.5s;
+}
+.slide:nth-child(3) {
+  background-image: url("/src/assets/광고3.png");
+  animation-delay: -5s;
+}
+
+@keyframes slider {
+  0% {
+    transform: translateX(0);
+  }
+
+  26% {
+    transform: translateX(0);
+  }
+  33% {
+    transform: translateX(-100%);
+    animation-timing-function: step-end;
+  }
+  93% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.mainTitle {
+  display: flex;
+  align-items: center;
+  width: 90vw;
+  height: 7vh;
+}
+
+.userName {
+  width: 100%;
+  font-family: 'Pretendard-Bold';
+  font-size: 1.6em;
+  color :#3d3d3d;
+}
+
+.mainClothes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clothesContent {
+  width: 90vw;
+  margin-bottom: 20vh;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.clothesItem {
+  position: relative;
+  width: 29vw;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+
+.clothesImg {
+  width: 100%;
+  border-radius: 5px;
+  filter: drop-shadow(0px 0px 1px #c4c4c4);
+}
+
+.clothesName {
+  margin: 0;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100px;
+  padding-top: 10px;
+  font-size: 0.7em;
+  font-family: 'Pretendard-Bold';
+  color :#3d3d3d;
+}
+
+.clothesPrice {
+  font-family: 'Pretendard-Bold';
+  font-size: 0.7em;
+  margin: 0;
+  padding-top: 5px;
+  color :#3d3d3d;
+}
+
+.addCartBtn {
+  width: 5vw;
+  cursor: pointer;
+  position: absolute;
+  bottom: 50px;
+  right: 10px;
+}
+
+.addCartBtnImg {
+  width: 5vw;
+  filter: drop-shadow(1px 1px 3px #000000);
+}
+
+.bottomNavInnerBtn {
+  cursor: pointer;
+}
+
+.closetImg {
+  width: 30px;
+  height: 30px;
+}
+
+.addClothesImg {
+  margin-left: 2px;
+  width: 30px;
+  height: 30px;
+}
+
+.recommendImg {
+  width: 35px;
+  height: 30px;
+}
+
+.mypageImg {
+  width: 30px;
+  height: 30px;
+}
+
+.mypageImg {
+  border-radius: 100px;
+  filter: drop-shadow(0px 0px 1.5px #000000);
+}
+
+.wearingBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  position: fixed;
+  bottom: 13%;
+  left: 0;
+  z-index: 1000;
+}
+
+.btn {
+  width: 80vw;
+  height: 7vh;
+  border: 1px solid #222222;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #222222;
+  border-radius: 50px;
+  font-family: 'NotoSansKR-Medium';
+  font-weight: 600;
+  font-size: 0.9em;
+  letter-spacing: 2px;
+  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
+  &:hover {
+    background-color: #222222;
+    color: white;
+  }
+}
+
+.bottomNav{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10%;
+  background-color: #ffffff;
+  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-around;
+}
+
+.bottomNavInner {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+}
+
+.bottomNavLabel {
+  font-family: 'Pretendard-Regular';
+  font-size: 0.5em;
+  text-align: center;
+}

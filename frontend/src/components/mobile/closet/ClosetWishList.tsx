@@ -56,6 +56,11 @@ const ClosetWishList: React.FC = () => {
           <h1>장바구니</h1>
           <hr />
           <h3>{isLoading? "장바구니 불러오는중...":""}</h3>
+          {cartList.length > 0 && (
+            <div>
+              장바구니에 {cartList.length}개의 상품이 있습니다.
+            </div>
+          )}
       {cartList.map((item, idx) => (
         <div key={idx}>
           <div>
