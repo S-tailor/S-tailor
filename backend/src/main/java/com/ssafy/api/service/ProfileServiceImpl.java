@@ -72,7 +72,12 @@ public class ProfileServiceImpl implements ProfileService{
     @Override
     public boolean profileEdit(ProfileCreateReq info) {
         try {
-            String image = s3UpDownloadService.saveProfileImage(info.getImage(), info.getImage().getOriginalFilename(), info.getProfilePk());
+            String image;
+            if(info.getImage() == null) {
+                image = profileSelect(info.getProfilePk()).getImage();
+            } else {
+                image = s3UpDownloadService.saveProfileImage(info.getImage(), info.getImage().getOriginalFilename(), info.getProfilePk());
+            }
             profileRepository.profileEdit(info.getName(), image, info.getHeight(), info.getWeight(), info.getGender(), info.getProfilePk());
         } catch (Exception e) {
             e.printStackTrace();

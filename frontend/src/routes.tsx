@@ -64,6 +64,10 @@ const routes: RouteType[] = [
       {
         path: 'add/info',
         element: React.lazy(() => import('./components/mobile/profile/ProfileAddInfo'))
+      },
+      {
+        path: 'edit',
+        element: React.lazy(() => import('./components/mobile/profile/ProfileEdit'))
       }
     ]
   },

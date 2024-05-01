@@ -2,9 +2,10 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 interface userProfile {
-  profileName: string
-  profilePk: number
-  image: string
+    profileName: string;
+    profilePk: number;
+    image: string
+  
 }
 
 interface User {

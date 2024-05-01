@@ -16,7 +16,6 @@ const Start: React.FC = () => {
     try {
       // 이메일 존재 여부 확인
       const response = await userCheck(isUser)
-      // console.log(response)
       if (response.data.isUser == true) {
         // 이메일이 존재하면 로그인 화면으로 이동
         startTransition(() => {

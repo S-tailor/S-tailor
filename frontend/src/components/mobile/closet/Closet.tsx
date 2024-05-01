@@ -20,7 +20,7 @@ const Closet: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const profilePk = user[0]?.profilePk
+    const profilePk = Number(sessionStorage.getItem('profilePk'))
     if (profilePk) {
       fetchItem(profilePk)
     }
@@ -28,10 +28,11 @@ const Closet: React.FC = () => {
 
   const fetchItem = async (profilePk: number) => {
     await closetItemList(profilePk).then((response) => {
+      setClothList(response.data.result)
       setTimeout(() => {
-        setClothList(response.data.result)
         setIsLoading(!isLoading)
-      }, 100)
+      }, 500)
+      setIsLoading(!isLoading)
     })
   }
 
@@ -100,60 +101,85 @@ const Closet: React.FC = () => {
           </div>
         ))}
 
-        {/* {showLink && 
+        <div>
+          <h2>{userName} 님의 옷장</h2>
+          <br />
+          <h3>{isLoading ? '옷장 문 여는중...' : ''}</h3>
+          <h3>{clothList.length == 0 ? '아직 마음에 드는 옷을 못찾으셨나요?' : ''}</h3>
+          {clothList.map((cloth, idx) => (
+            <div key={idx}>
+              <p>
+                {cloth.image && <img src={cloth.image} alt="옷 사진" />}
+                <br />
+                <b>{cloth.name}</b>
+                <br />
+                {cloth.price} ￦
+                <img
+                  src=""
+                  alt="cart에 담기"
+                  onClick={() => {
+                    addCart(cloth.closetPk)
+                  }}
+                />
+              </p>
+            </div>
+          ))}
+
+          {/* {showLink && 
       <p onClick={()=>{navigate('/')}}>
         {link}
       </p>
       } */}
-        <button
-          onClick={() => {
-            startTransition(() => {
-              navigate('/mobile/closet/code/input')
-            })
-          }}
-        >
-          옷 입어보기
-        </button>
-      </div>
+          <button
+            onClick={() => {
+              startTransition(() => {
+                navigate('/mobile/closet/code/input')
+              })
+            }}
+          >
+            옷 입어보기
+          </button>
+        </div>
 
-      <footer>
-        <img
-          src=""
-          alt="closet-home"
-          onClick={() => {
-            startTransition(() => {
-              navigate('/mobile/closet')
-            })
-          }}
-        />
-        <img
-          src=""
-          alt="clothes-add"
-          onClick={() => {
-            startTransition(() => {
-              navigate('/mobile/add-cloth')
-            })
-          }}
-        />
-        <img
-          src=""
-          alt="style-recomm"
-          onClick={() => {
-            startTransition(() => {
-              navigate('/mobile/ask')
-            })
-          }}
-        />
-        <img
-          src=""
-          alt="myPage"
-          onClick={() => {
-            startTransition(() => {
-              navigate('/mobile/mypage')
-            })
-          }}
-        />
-      </footer>
+        <footer>
+          <img
+            src=""
+            alt="closet-home"
+            onClick={() => {
+              startTransition(() => {
+                navigate('/mobile/closet')
+              })
+            }}
+          />
+          <img
+            src=""
+            alt="clothes-add"
+            onClick={() => {
+              startTransition(() => {
+                navigate('/mobile/add-cloth')
+              })
+            }}
+          />
+          <img
+            src=""
+            alt="style-recomm"
+            onClick={() => {
+              startTransition(() => {
+                navigate('/mobile/ask')
+              })
+            }}
+          />
+          <img
+            src=""
+            alt="myPage"
+            onClick={() => {
+              startTransition(() => {
+                navigate('/mobile/mypage')
+              })
+            }}
+          />
+        </footer>
+      </div>
     </div>
   )
 }
