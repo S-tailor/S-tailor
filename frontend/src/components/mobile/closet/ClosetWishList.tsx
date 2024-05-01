@@ -23,7 +23,7 @@ const ClosetWishList: React.FC = () => {
     })
   }
   
-  const profilePk = Number(localStorage.getItem('userPk'))
+  const profilePk = Number(sessionStorage.getItem('profilePk'))
   useEffect(()=>{
       fetchCart(profilePk)
   },[])
