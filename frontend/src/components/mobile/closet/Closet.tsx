@@ -20,30 +20,34 @@ const Closet: React.FC = () => {
     closetPk: number
 
   }
-  const{user, clearUsers} = userStore() as {user: UserProfile[], clearUsers: () => void};
+  const { user } = userStore() as {
+    user: { profilePk: number; image?: string; profileName: string }[];
+  };
   const [clothList, setClothList] = useState<clothInfo[]>([])
   const navigate = useNavigate()
   const userName= user[0]?.profileName  ?? 'Guest';
   const [isLoading, setIsLoading] = useState(true);
   const [cartCount, setCartCount] = useState<number>(0)
 
-  useEffect(() => {
-    const profilePk = user[0]?.profilePk;
-    if (profilePk) {
-        fetchItem(profilePk)
-        }
-  }, []); 
+  // useEffect(() => {
+  //   const profilePk = user[0]?.profilePk;
+  //   if (profilePk) {
+  //       fetchItem(profilePk)
+  //       }
+  // }, []); 
 
-  const fetchItem = async (profilePk: number) => {
-    await closetItemList(profilePk)
-        .then((response) => {
-          setTimeout(() => {
+
+
+  // const fetchItem = async (profilePk: number) => {
+  //   await closetItemList(profilePk)
+  //       .then((response) => {
+  //         setTimeout(() => {
             
-            setClothList(response.data.result)
-            setIsLoading(!isLoading)
-          }, 100)
-        })
-      }
+  //           setClothList(response.data.result)
+  //           setIsLoading(!isLoading)
+  //         }, 100)
+  //       })
+  //     }
 
 
     const addCart = async (pk: number) => {
@@ -69,9 +73,36 @@ const Closet: React.FC = () => {
     })
   }
 
+  useEffect(() => {
+    const fetchData = async () => {
+      setTimeout(async () => {
+        const profilePk = user[0]?.profilePk;
+        if (profilePk) {
+          await closetItemList(profilePk).then((response) => {
+            setClothList(response.data.result);
+            setIsLoading(false);
+          });
+        }
+      }, 5000);
+    };
+
+    fetchData(); 
+
+    return () => {
+    };
+  }, []);
+
 
   return (
     <div className={styles.container}>
+      {isLoading ? (
+        <div className={styles.wait}>
+            <p className={styles.loadingMessage1}>MY CLOSET</p>
+            <p className={styles.loadingMessage2}>OPENING...</p>
+            <img src="/src/assets/background.gif" alt="로딩 중" />
+        </div>
+      ) : (
+        <>
       <header>
         <div className={styles.headerInner}>
 
@@ -122,8 +153,7 @@ const Closet: React.FC = () => {
           <div className={styles.slide}></div>          
         </div>
         <div className={styles.mainTitle}>
-          <p className={styles.userName}>{userName} 님의 옷장</p>          
-          <p className={styles.loadingMessage}>{isLoading ? "옷장 문 여는중..." : ""}</p>
+          <p className={styles.userName}>{userName} 님의 옷장</p>
         </div>
         <div className={styles.mainClothes}> 
           <div className={styles.clothesContent}>
@@ -208,7 +238,8 @@ const Closet: React.FC = () => {
             </label>
         </div>
       </footer>
-
+      </>
+      )}
     </div>
   )
 }

@@ -1,5 +1,27 @@
 @import "fonts";
 
+.wait {
+  width: 100vw;
+  height: 100vh;
+}
+
+.loadingMessage1 {
+  position: fixed;
+  top: 35%;
+  left: 0;
+  font-family: 'main-title';
+  color: white;
+  font-size: 3em;
+}
+.loadingMessage2 {
+  position: fixed;
+  top: 45%;
+  right: 0;
+  font-family: 'main-title';
+  color: white;
+  font-size: 3em;
+}
+
 header {
   padding-top: 3%;
   padding-bottom: 4%;
@@ -233,19 +255,23 @@ header {
 }
 
 .closetImg {
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
+  margin-bottom: -6px;
 }
 
 .addClothesImg {
-  margin-left: 2px;
+  margin-left: 3px;
   width: 30px;
   height: 30px;
+  margin-top: 3px;
+  margin-bottom: -3px;
 }
 
 .recommendImg {
-  width: 35px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
+  margin-bottom: -4px;
 }
 
 .mypageImg {
@@ -311,4 +337,5 @@ header {
   font-family: 'Pretendard-Regular';
   font-size: 0.5em;
   text-align: center;
+  margin-top: 4px;
 }
