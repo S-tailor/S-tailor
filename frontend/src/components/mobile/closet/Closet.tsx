@@ -89,9 +89,11 @@ const Closet: React.FC = () => {
               <p>
                 {cloth.image && <img src={cloth.image} alt="옷 사진" />}
                 <br />
+                <b>{cloth.source}</b>
+                <br />
                 <b>{cloth.name}</b>
                 <br />
-                {cloth.price} ￦
+                {cloth.price}
                 <img
                   src=""
                   alt="cart에 담기"
