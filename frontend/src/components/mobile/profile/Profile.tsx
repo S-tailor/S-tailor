@@ -37,6 +37,8 @@ const Profile: React.FC = () => {
 
   // 유저 프로필 클릭시
   const userDetail = async (userPk: number) => {
+    let Pk = String(userPk)
+    sessionStorage.setItem('profilePk', Pk)
     let response = await profileSelect(userPk)
     if (response.status === 200) {
       setUser(response.data.result)
@@ -67,17 +69,6 @@ const Profile: React.FC = () => {
 
   return (
     <div className={styles.container}>
-        <header>
-          <div className={styles.headerInner}>
-            <img
-              onClick={goHome}
-              className={styles.backBtn}
-              src="/src/assets/backBtn.svg"
-              alt="backBtn"
-            />
-          </div>
-        </header>
-
       <header>
         <div className={styles.headerInner}>
           <img onClick={goHome} className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
@@ -178,42 +169,7 @@ const Profile: React.FC = () => {
             startTransition(()=>{navigate('/mobile/profile/add')})}} />}
         </div>
       </section>}
-            {userList.length > 3 ? (
-              <>
-                {userList[3] ? (
-                  <div className={styles.member4}>
-                    <p onClick={() => userDetail(userList[3].profilePk)}>
-                      {userList[3].image && (
-                        <img
-                          className={styles.member4Img}
-                          src={userList[3].image}
-                          alt="Uploaded Profile"
-                        />
-                      )}
-                      <br />
-                      {userList[3].profileName}
-                    </p>
-                  </div>
-                ) : (
-                  <img
-                    className={styles.addIcon}
-                    src="/src/assets/add.svg"
-                    alt="user-add"
-                    onClick={() => {
-                      startTransition(() => {
-                        navigate('/mobile/profile/add')})}}
-                  />)}
-              </>
-            ) : (
-              <img
-                className={styles.addIcon}
-                src="/src/assets/add.svg"
-                alt="user-add"
-                onClick={() => {
-                  startTransition(() => {
-                    navigate('/mobile/profile/add')})}}
-              />)}
-       
+           
     </div>
   )
 }
