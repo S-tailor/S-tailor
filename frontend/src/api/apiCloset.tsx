@@ -9,6 +9,11 @@ interface SaveClothData {
   source: string
 }
 
+interface ClosetSearch {
+  profilePk: string | null
+  content: string
+}
+
 async function closetImgSearch(Info: FormData) {
   return await api.post('/search/image', Info)
 }
@@ -25,8 +30,19 @@ async function closetItemList(pk: number) {
   return await api.get(`/closet/list?profilePk=${pk}`)
 }
 
+async function closetSearch(data: ClosetSearch) {
+  return await api.post('/closet/search', data)
+}
+
 async function closetItemDelete(Info: any) {
   return await api.delete('/closet/list', Info)
 }
 
-export { closetImgSearch, closetTextSearch, closetItemSave, closetItemList, closetItemDelete }
+export {
+  closetImgSearch,
+  closetTextSearch,
+  closetItemSave,
+  closetItemList,
+  closetSearch,
+  closetItemDelete
+}

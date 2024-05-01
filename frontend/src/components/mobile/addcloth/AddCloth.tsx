@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { closetImgSearch, closetTextSearch, closetItemSave } from '@/api/apiCloset'
-import userStore from '@/store/store'
+// import userStore from '@/store/store'
 // import Pagination from 'react-js-pagination'
 
 // 검색 결과 항목
@@ -36,7 +36,7 @@ const AddCloth: React.FC = () => {
     })
   }
 
-  const user = userStore((state) => state.user)
+  // const user = userStore((state) => state.user)
   const profilePk = sessionStorage.getItem('profilePk')
 
   // 옷 저장
