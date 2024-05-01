@@ -58,7 +58,7 @@ public class ClosetServiceImpl implements ClosetService{
     @Override
     public List<Closet> closetSearch(ClosetSearchReq info) {
         try {
-            return closetRepository.findAllByProfilePkAndSourceContaining(info.getProfilePk(), info.getContent());
+            return closetRepository.closetSearch(info.getContent(), info.getProfilePk());
         } catch (Exception e) {
             return null;
         }
