@@ -47,7 +47,7 @@ public class ClosetController {
         }
     }
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     public ResponseEntity<? extends BaseResponseBody> closetSearch(@RequestBody ClosetSearchReq info) {
         List<Closet> data = closetService.closetSearch(info);
         if(data != null) {
