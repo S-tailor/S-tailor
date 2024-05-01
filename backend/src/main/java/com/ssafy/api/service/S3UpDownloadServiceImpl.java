@@ -6,8 +6,6 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.j2objc.annotations.ObjectiveCName;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -93,5 +91,21 @@ public class S3UpDownloadServiceImpl implements S3UpDownloadService{
         }
 
         return cloudfrontUrl+"S-Tailor/searchImg/"+image.getOriginalFilename();
+    }
+
+    @Override
+    public String imageChatUpload(MultipartFile image, String profile) {
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(image.getSize());
+        metadata.setContentType(image.getContentType());
+
+
+        try {
+            amazonS3Client.putObject(bucket, "S-Tailor/chatImg/"+profile+"/"+image.getOriginalFilename(), image.getInputStream(), metadata);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return image.getOriginalFilename();
     }
 }
