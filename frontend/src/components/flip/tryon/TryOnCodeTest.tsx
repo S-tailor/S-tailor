@@ -1,4 +1,4 @@
-import React, { startTransition, useState } from 'react'
+import React, { startTransition, useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const BASE_URL = 'http://localhost:5000'
@@ -9,14 +9,28 @@ const TIME = {
 
 const TryOn: React.FC = () => {
   const navigate = useNavigate()
-  const [sessionId, setSessionId] = useState('')
+  const [sessionId, setSessionId] = useState()
   const [token, setToken] = useState('')
   const [remainTime, setRemainTime] = useState(TIME.ONE_MINUTE)
-  const startTimer = () => {
-    setInterval(() => {
-      setRemainTime((remainTime) => remainTime - 1)
-    }, TIME.ONE_SECOND)
+
+  const useInterval = (callback: () => void, delay: number) => {
+    const savedCallback = useRef(callback)
+    useEffect(() => {
+      savedCallback.current = callback
+    }, [callback])
+
+    useEffect(() => {
+      function tick() {
+        savedCallback.current()
+      }
+      const id = setInterval(tick, delay)
+      return () => clearInterval(id)
+    }, [])
   }
+
+  useInterval(() => {
+    remainTime > 0 && sessionId && setRemainTime(remainTime - 1)
+  }, TIME.ONE_SECOND)
   const resetTimer = () => setRemainTime(TIME.ONE_MINUTE)
 
   const handleConnect = () => {
@@ -28,7 +42,6 @@ const TryOn: React.FC = () => {
       console.log('connect event data: ', receivedConnectData)
       setSessionId(receivedConnectData)
       resetTimer()
-      startTimer()
     })
 
     sse.addEventListener('getToken', (e) => {
