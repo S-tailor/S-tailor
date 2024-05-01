@@ -79,28 +79,6 @@ const Closet: React.FC = () => {
       <nav></nav>
 
       <div>
-        <h2>{userName} 님의 옷장</h2>
-        <br />
-        <h3>{isLoading ? '옷장 문 여는중...' : ''}</h3>
-        {clothList.map((cloth, idx) => (
-          <div key={idx}>
-            <p>
-              {cloth.image && <img src={cloth.image} alt="옷 사진" />}
-              <br />
-              <b>{cloth.name}</b>
-              <br />
-              {cloth.price} ￦
-              <img
-                src=""
-                alt="cart에 담기"
-                onClick={() => {
-                  addCart(cloth.closetPk)
-                }}
-              />
-            </p>
-          </div>
-        ))}
-
         <div>
           <h2>{userName} 님의 옷장</h2>
           <br />
