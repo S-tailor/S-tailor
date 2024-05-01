@@ -91,6 +91,7 @@ const Closet: React.FC = () => {
                 <br />
                 <b>{cloth.name}</b>
                 <br />
+                {cloth.closetPk}aaaaaaaaaaaaaaaaaaaaaaaa
                 {cloth.price} ￦
                 <img
                   src=""
