@@ -6,6 +6,7 @@ interface SaveClothData {
   name: string
   link: string
   profilePk: number
+  source: string
 }
 
 async function closetImgSearch(Info: FormData) {
@@ -21,7 +22,7 @@ async function closetItemSave(data: SaveClothData): Promise<any> {
 }
 
 async function closetItemList(pk: number) {
-    return await api.get(`/closet/list?profilePk=${pk}`)
+  return await api.get(`/closet/list?profilePk=${pk}`)
 }
 
 async function closetItemDelete(Info: any) {
