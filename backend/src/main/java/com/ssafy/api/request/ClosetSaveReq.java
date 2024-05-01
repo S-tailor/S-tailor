@@ -13,5 +13,6 @@ public class ClosetSaveReq {
     String link;
     String name;
     String thumbNail;
+    String source;
     int profilePk;
 }
