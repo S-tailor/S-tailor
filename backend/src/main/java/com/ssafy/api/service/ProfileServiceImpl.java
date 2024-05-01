@@ -28,7 +28,7 @@ public class ProfileServiceImpl implements ProfileService{
     @Autowired
     UserService userService;
 
-    @Value("${Lambda_URL2}")
+    @Value("${Lambda_URL}")
     String url;
 
     @Override
@@ -55,7 +55,8 @@ public class ProfileServiceImpl implements ProfileService{
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("profile", savedProfile.getProfilePk());
 
-            ResponseEntity<String> response = restTemplate.postForEntity(url, jsonObject, String.class);
+            ResponseEntity<String> response = restTemplate.postForEntity(url+"/connect", jsonObject, String.class);
+            System.out.println(response.getBody());
         } catch (Exception e) {
             e.printStackTrace();
             return false;
