@@ -63,4 +63,16 @@ public class ChatbotServiceImpl implements ChatbotService{
 
         return urls;
     }
+
+    @Override
+    public boolean clearMessages(String profile) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("profile", profile);
+
+        ResponseEntity<String> response = restTemplate.postForEntity(url+"/clear", jsonObject, String.class);
+
+        return true;
+    }
 }
