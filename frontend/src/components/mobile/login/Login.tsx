@@ -23,14 +23,21 @@ const Login: React.FC = () => {
     try {
       const response = await userLogin(id, password)
       if (response.data.statusCode === 200) {
-       
+        const phase = localStorage.getItem('phase')
+        window.localStorage.setItem('accessToken', response.data.accessToken)
+        window.localStorage.setItem('userPk', response.data.userPk)
+        window.localStorage.setItem('id', id)
+        if (phase ===  '2') {
+          startTransition(()=>{
+            navigate('/mobile/closet/code/input')
+          })
+        }
+        else {
         startTransition(() => {
           navigate('/mobile/profile')
         })
         // accessToken 저장
-        window.localStorage.setItem('accessToken', response.data.accessToken)
-        window.localStorage.setItem('userPk', response.data.userPk)
-        window.localStorage.setItem('id', id)
+      }
       } else {
         alert('비밀번호가 틀렸습니다.')
       }

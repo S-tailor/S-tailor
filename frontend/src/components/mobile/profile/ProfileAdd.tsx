@@ -16,6 +16,7 @@ const ProfileAdd: React.FC = () => {
   const [height, setHeight] = useState<string>('')
   const [weight, setWeight] = useState<string>('')
   const [fileUrl, setFileUrl] = useState<string>('')
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { setUser } = userStore()
   interface userProfile {
     profileName: string
@@ -57,6 +58,8 @@ const ProfileAdd: React.FC = () => {
   }
 
   const complete = async () => {
+    console.log('생성중')
+    setIsSubmitting(true)
     const userPk = String(localStorage.getItem('userPk'))
     if (weight !== '') {
       formData.append('name', name)
@@ -75,7 +78,7 @@ const ProfileAdd: React.FC = () => {
 
       if (response.status == 200) {
         const userName = formData.get('name')
-        const profilePk = parseInt(userPk);
+        const profilePk = Number(userPk);
         if (typeof userName === 'string' && !isNaN(profilePk)) {
           const userProfileData: userProfile = {
             profileName: userName,
@@ -89,6 +92,7 @@ const ProfileAdd: React.FC = () => {
         }
       }
     } else {
+      setIsSubmitting(false)
       setmessage('입력을 완료해주세요')
     }
   }
@@ -363,7 +367,7 @@ const ProfileAdd: React.FC = () => {
             <section className={styles.bottomButton3}>
               <p className={styles.subtexts2}>이제 마지막입니다!</p>
               <p className={`${styles.message} ${message ? styles.showMessage : ''}`}>{message}</p>
-              <button className={styles.btn3} onClick={complete}>
+              <button className={styles.btn3} onClick={complete} disabled={isSubmitting}>
                 완료
               </button>
             </section>

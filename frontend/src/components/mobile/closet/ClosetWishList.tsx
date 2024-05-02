@@ -18,9 +18,8 @@ const ClosetWishList: React.FC = () => {
 
 
   const goShopping = (link:string) => {
-    startTransition(()=>{
-      navigate(`/somewhere/${link}`)
-    })
+   
+    window.open(link, '_blank');
   }
   
   const profilePk = Number(sessionStorage.getItem('profilePk'))
@@ -44,8 +43,8 @@ const ClosetWishList: React.FC = () => {
     .then((response) => {
       setTimeout(() => {
         setCartList(response.data.result)
-        setIsLoading(!isLoading)
-      },100)
+        setIsLoading(false)
+      },500)
     })
   }
 

@@ -37,21 +37,22 @@ const AddCloth: React.FC = () => {
   }
 
   // const user = userStore((state) => state.user)
-  const profilePk = sessionStorage.getItem('profilePk')
+  const profilePk = (sessionStorage.getItem('profilePk'))
 
   // 옷 저장
   const handleSaveCloths = async () => {
     for (const cloth of selectedCloths) {
-      console.log(cloth)
+      // console.log(cloth)
       try {
-        await closetItemSave({
+       await closetItemSave({
           price: cloth.price,
           thumbNail: cloth.image,
           name: cloth.title,
           link: cloth.link,
           profilePk: profilePk,
-          source: cloth.source
+          source: ''
         })
+
       } catch (error) {
         console.error('저장 실패', error)
       }
@@ -74,8 +75,7 @@ const AddCloth: React.FC = () => {
   // 텍스트 검색
   async function textSearch() {
     const response = await closetTextSearch(text)
-    console.log(response)
-
+   
     updateResults(response.data.result)
   }
 
@@ -91,7 +91,7 @@ const AddCloth: React.FC = () => {
       formdata.append('image', image)
     }
     const response = await closetImgSearch(formdata)
-
+    
     // setCount(response.data.result.length)
     updateResults(response.data.result)
   }
@@ -129,7 +129,6 @@ const AddCloth: React.FC = () => {
         {selectedCloths.map((cloth, index) => (
           <div key={index}>
             <img src={cloth.image} alt={cloth.title} />
-            <h3>{cloth.source}</h3>
             <h4>{cloth.title}</h4>
             <p>{cloth.price}</p>
             <button onClick={() => handleSelectCloth(cloth)}>취소</button>
