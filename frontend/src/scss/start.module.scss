@@ -1,5 +1,6 @@
 @import "fonts";
 
+
 .container {
   width: 100vw;
   height: 100vh;
@@ -9,7 +10,6 @@
 }
 
 header {
-  width: 100vw;
   height: 10%;
   display: flex;
   align-items: center;
@@ -21,7 +21,6 @@ header {
 }
 
 .topInfo{
-  width: 100vw;
   height: 27%;
   display: flex;
   flex-direction: column;
@@ -36,7 +35,6 @@ header {
 }
 
 .middleInput {
-  width: 100vw;
   height: 39%;
   padding-top: 5%;
 }
@@ -58,6 +56,7 @@ header {
   opacity: 50%;
   margin-top: 1.5vh;
   margin-left: 10vw;
+  width: 90vw;
   border: 0;
 }
 
@@ -95,7 +94,6 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
   height: 24%;
 }
 
