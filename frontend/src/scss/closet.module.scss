@@ -3,28 +3,25 @@
 .wait {
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.loadingMessage1 {
-  position: fixed;
-  top: 35%;
-  left: 0;
-  font-family: 'main-title';
-  color: white;
-  font-size: 3em;
+.loading {
+  width: 20vw;
 }
-.loadingMessage2 {
-  position: fixed;
-  top: 45%;
-  right: 0;
+
+.loadingMessage {
   font-family: 'main-title';
-  color: white;
-  font-size: 3em;
+  color: #A48FFC;
+  opacity: 50%;
+  font-size: 1em;
 }
 
 header {
   padding-top: 3%;
-  padding-bottom: 4%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,6 +61,7 @@ header {
 
 .logo{
   width: 30vw;
+  margin-left: -10px;
 }
 
 .search {
@@ -80,7 +78,7 @@ header {
   background-color: #D99AFC;
   border-radius: 100px;
   position: absolute;
-  bottom: 13px;
+  bottom: 16px;
   right: 6px;
   color: white;
   font-family: 'Pretendard-SemiBold';
@@ -89,6 +87,7 @@ header {
   justify-content: center;
   align-items: center;
   padding-right: 1px;
+  padding-bottom: 1px;
 }
 
 .closetMain {
@@ -104,7 +103,7 @@ header {
   display: flex;
   justify-content: space-evenly;
   font-size: 0.8em;
-  padding-top: 1%;
+  padding-top: 2%;
   height: 10px;
   padding-bottom: 7%;
   background-color: white;
@@ -255,31 +254,24 @@ header {
 }
 
 .closetImg {
-  width: 36px;
-  height: 36px;
-  margin-bottom: -6px;
+  width: 7.5vw;
+  height: 4vh;
+  margin-left: 1px;
 }
 
 .addClothesImg {
-  margin-left: 3px;
-  width: 30px;
-  height: 30px;
-  margin-top: 3px;
-  margin-bottom: -3px;
+  width: 7.5vw;
+  height: 4vh;
 }
 
 .recommendImg {
-  width: 34px;
-  height: 34px;
-  margin-bottom: -4px;
+  width: 9vw;
+  height: 4vh;
 }
 
 .mypageImg {
-  width: 30px;
-  height: 30px;
-}
-
-.mypageImg {
+  width: 8.5vw;
+  height: 4vh;
   border-radius: 100px;
   filter: drop-shadow(0px 0px 1.5px #000000);
 }
@@ -330,12 +322,14 @@ header {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  text-align: center;
   width: 100vw;
+  margin-top: 1vh;
 }
 
-.bottomNavLabel {
+.bottomNavLabel1, .bottomNavLabel2, .bottomNavLabel3, .bottomNavLabel4 {
   font-family: 'Pretendard-Regular';
-  font-size: 0.5em;
+  font-size: 0.55em;
   text-align: center;
   margin-top: 4px;
 }

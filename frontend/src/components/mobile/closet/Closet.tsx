@@ -1,6 +1,6 @@
-import React,{ useEffect, startTransition, useState } from 'react'
+import React,{ useEffect, startTransition, useState, useMemo } from 'react'
 import userStore from '@/store/store'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { closetItemList } from '@/api/apiCloset'
 import { cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/closet.module.scss';
@@ -20,34 +20,71 @@ const Closet: React.FC = () => {
     closetPk: number
 
   }
+
+  const location = useLocation()
   const { user } = userStore() as {
     user: { profilePk: number; image?: string; profileName: string }[];
   };
   const [clothList, setClothList] = useState<clothInfo[]>([])
   const navigate = useNavigate()
-  const userName= user[0]?.profileName  ?? 'Guest';
-  const [isLoading, setIsLoading] = useState(true);
+  const userName= user[0]?.profileName  ?? 'Guest'
+  const [isLoading, setIsLoading] = useState(true)
   const [cartCount, setCartCount] = useState<number>(0)
-
-  // useEffect(() => {
-  //   const profilePk = user[0]?.profilePk;
-  //   if (profilePk) {
-  //       fetchItem(profilePk)
-  //       }
-  // }, []); 
+  const [selectedCategory, setSelectedCategory] = useState('전체')
 
 
+  //////////// 상단 카테고리 선택 시 스타일 변경 ///////////////////////
+  const categories = ['전체', '아우터', '상의', '하의', '원피스', '기타']
 
-  // const fetchItem = async (profilePk: number) => {
-  //   await closetItemList(profilePk)
-  //       .then((response) => {
-  //         setTimeout(() => {
-            
-  //           setClothList(response.data.result)
-  //           setIsLoading(!isLoading)
-  //         }, 100)
-  //       })
-  //     }
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category)
+  }
+
+  const getCategoryStyle = (category: string) => {
+    return category === selectedCategory ? { fontWeight: '700', color: '#424242' } : {};
+  }
+  ////////////////////////////////////////////////////////////////////
+
+  /////////// 하단 내비게이션 바 선택 시 아이콘(컬러) 변경 //////////////
+  const getIconSrc = (iconName: string) => {
+    const path = location.pathname
+    const iconPaths: { [key: string]: { [icon: string]: string } } = {
+      '/mobile/closet': {
+        'closet': '/src/assets/closetFill.png',
+        'add-cloth': '/src/assets/upload.png',
+        'ask': '/src/assets/shirt.png',
+        'mypage': user[0]?.image || "/src/assets/avatar.PNG"
+      },
+      '/mobile/add-cloth': {
+        'closet': '/src/assets/closet.png',
+        'add-cloth': '/src/assets/uploadFill.png',
+        'ask': '/src/assets/shirt.png',
+        'mypage': user[0]?.image || "/src/assets/avatar.PNG"
+      },
+      '/mobile/ask': {
+        'closet': '/src/assets/closet.png',
+        'add-cloth': '/src/assets/upload.png',
+        'ask': '/src/assets/shirtFill.png',
+        'mypage': user[0]?.image || "/src/assets/avatar.PNG"
+      },
+      '/mobile/mypage': {
+        'closet': '/src/assets/closet.png',
+        'add-cloth': '/src/assets/upload.png',
+        'ask': '/src/assets/shirt.png',
+        'mypage': user[0]?.image || "/src/assets/avatar.PNG"
+      }
+    }
+    return iconPaths[path][iconName] || '/src/assets/' + iconName + '.png';
+  }
+
+  const getMypageImgStyle = useMemo(() => {
+    return location.pathname === '/mobile/mypage' ? { border: '2px solid #9091FB', width: '9.5vw', height: '4.5vh', marginTop: '-2px'} : { filter: 'drop-shadow(0px 0px 1.5px #000000)' };
+  }, [location.pathname])
+
+  const getActiveStyle = (path: string) => {
+    return location.pathname === path ? { fontFamily: 'Pretendard-Bold', color: '#9091FB', marginTop: '2px' } : {}
+  }
+  ////////////////////////////////////////////////////////////////////
 
 
     const addCart = async (pk: number) => {
@@ -97,9 +134,8 @@ const Closet: React.FC = () => {
     <div className={styles.container}>
       {isLoading ? (
         <div className={styles.wait}>
-            <p className={styles.loadingMessage1}>MY CLOSET</p>
-            <p className={styles.loadingMessage2}>OPENING...</p>
-            <img src="/src/assets/background.gif" alt="로딩 중" />
+            <img className={styles.loading} src="/src/assets/loading.gif" alt="로딩 중" />
+            <p className={styles.loadingMessage}>MY CLOSET OPENING...</p>
         </div>
       ) : (
         <>
@@ -140,12 +176,16 @@ const Closet: React.FC = () => {
      
       <section className={styles.closetMain}>
         <div className={styles.mainCategory}>
-          <a href="">전체</a>
-          <a href="">아우터</a>
-          <a href="">상의</a>
-          <a href="">하의</a>
-          <a href="">원피스</a>
-          <a href="">기타</a>
+          {categories.map((category) => (
+            <a
+              key={category}
+              href="#"
+              onClick={() => handleCategoryClick(category)}
+              style={getCategoryStyle(category)}
+            >
+              {category}
+            </a>
+          ))}
         </div>
         <div className={styles.slider}>
           <div className={styles.slide}></div>
@@ -187,54 +227,55 @@ const Closet: React.FC = () => {
             <label className={styles.bottomNavInnerBtn}>
               <img 
                 className={styles.closetImg}
-                src="/src/assets/closet.svg" 
+                src={getIconSrc('closet')}
                 alt="closet-home" 
                 onClick={()=>{
                 startTransition(()=>{
                   navigate('/mobile/closet')})} 
                 }
               />
-              <p className={styles.bottomNavLabel}>옷장 홈</p>
+              <p className={styles.bottomNavLabel1} style={getActiveStyle('/mobile/closet')}>옷장 홈</p>
             </label>
            
             <label className={styles.bottomNavInnerBtn}>
               <img 
                 className={styles.addClothesImg}
-                src="/src/assets/upload.svg" 
+                src={getIconSrc('add-cloth')} 
                 alt="clothes-add" 
                 onClick={()=>{
                 startTransition(()=>{
                   navigate('/mobile/add-cloth')})} 
                 }
               />
-              <p className={styles.bottomNavLabel}>옷 추가하기</p>
+              <p className={styles.bottomNavLabel2} style={getActiveStyle('/mobile/add-cloth')}>옷 추가하기</p>
             </label>
 
             <label className={styles.bottomNavInnerBtn}>
               <img 
                 className={styles.recommendImg}
-                src="/src/assets/shirt.svg" 
+                src={getIconSrc('ask')} 
                 alt="style-recomm" 
                 onClick={()=>{
                 startTransition(()=>{
                   navigate('/mobile/ask')})} 
                 }
               />
-              <p className={styles.bottomNavLabel}>스타일추천</p>
+              <p className={styles.bottomNavLabel3} style={getActiveStyle('/mobile/ask')}>스타일추천</p>
             </label>
 
             <label className={styles.bottomNavInnerBtn}>
               <img 
                 className={styles.mypageImg}
-                src={user[0]?.image || "/src/assets/avatar.PNG"}
+                src={getIconSrc('mypage')}
                 alt="myPage" 
+                style={getMypageImgStyle}
                 onClick={() => {
                   startTransition(() => {
                     navigate('/mobile/mypage')
                   })
                 }}
               />
-              <p className={styles.bottomNavLabel}>마이페이지</p>
+              <p className={styles.bottomNavLabel4} style={getActiveStyle('/mobile/mypage')}>마이페이지</p>
             </label>
         </div>
       </footer>
