@@ -5,7 +5,7 @@ interface SaveClothData {
   thumbNail: string
   name: string
   link: string
-  profilePk: string | null
+  profilePk: string | null 
   source: string
 }
 

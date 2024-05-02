@@ -11,7 +11,7 @@ const ClosetCodeInput: React.FC = () => {
     if (code.length > 5){
       const res = (code.join(''))
       setConfirmCode(res)
-      
+      confirmCode
     }
   },[code])
 
