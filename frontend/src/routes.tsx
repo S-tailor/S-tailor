@@ -94,6 +94,10 @@ const routes: RouteType[] = [
       {
         path: 'tryon/wait',
         element: React.lazy(() => import('./components/mobile/closet/ClosetWait'))
+      },
+      {
+        path: 'code/input/test',
+        element: React.lazy(() => import('./components/mobile/closet/ClosetCodeInputTest'))
       }
     ]
   },
@@ -149,6 +153,10 @@ const routes: RouteType[] = [
       {
         path: 'code',
         element: React.lazy(() => import('./components/flip/tryon/TryOnCode'))
+      },
+      {
+        path: 'test',
+        element: React.lazy(() => import('./components/flip/tryon/TryOnCodeTest'))
       }
     ]
   }
