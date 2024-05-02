@@ -38,19 +38,20 @@ const TryOn: React.FC = () => {
 
     sse.addEventListener('connect', (e) => {
       const { data: receivedConnectData } = e
-
       console.log('connect event data: ', receivedConnectData)
       setSessionId(receivedConnectData)
       resetTimer()
     })
 
-    sse.addEventListener('getToken', (e) => {
-      const { data: receivedToken } = e
-      setToken(receivedToken)
-      sessionStorage.setItem('token', receivedToken)
-      console.log('token event data', receivedToken)
+    sse.addEventListener('getUserInfo', (e) => {
+      const { data: receivedUserInfo } = e
+      setToken(receivedUserInfo)
+      sessionStorage.setItem('token', receivedUserInfo)
+      console.log('token event data', receivedUserInfo)
 
-      if (receivedToken != '') {
+      console.log('json', JSON.parse(receivedUserInfo))
+
+      if (receivedUserInfo != '') {
         sse.close()
         navigate('/flip/tryon')
       }

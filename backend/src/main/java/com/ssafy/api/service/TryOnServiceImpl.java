@@ -1,5 +1,7 @@
 package com.ssafy.api.service;
 
+import com.ssafy.api.request.TryOnVerifyReq;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -51,11 +53,18 @@ public class TryOnServiceImpl implements TryOnService{
     }
 
     @Override
-    public Boolean sendUserInfoToMobile(String sessionId, String token, String id, int profilePk, SseEmitter emitter) {
+    public Boolean sendUserInfoToMobile(TryOnVerifyReq info, SseEmitter emitter) {
         try {
+            JSONObject data = new JSONObject();
+
+            data.put("sessionId", info.getSessionId());
+            data.put("token", info.getToken());
+            data.put("id", info.getId());
+            data.put("profilePk", info.getProfilePk());
+
             emitter.send(SseEmitter.event()
-                    .name("getToken")
-                    .data(token));
+                    .name("getUserInfo")
+                    .data(data.toJSONString()));
             emitter.complete();
             return true;
         } catch (IOException e) {

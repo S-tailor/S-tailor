@@ -3,14 +3,13 @@ package com.ssafy.api.controller;
 import java.io.IOException;
 import java.util.UUID;
 
+import com.ssafy.api.request.TryOnVerifyReq;
 import com.ssafy.api.service.TryOnService;
+import org.joda.time.Minutes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 @RestController
@@ -29,10 +28,10 @@ public class TryOnController {
         return ResponseEntity.ok(emitter);
     }
 
-    @GetMapping("/verify")
-    public ResponseEntity<String> verify(String sessionId, String token, String id, int profilePk) throws IOException {
-        SseEmitter emitter = tryOnService.getEmitterBySessionId(UUID.fromString((sessionId)));
-        Boolean success = tryOnService.sendUserInfoToMobile(sessionId, token, id, profilePk, emitter);
+    @PostMapping("/verify")
+    public ResponseEntity<String> verify(@RequestBody TryOnVerifyReq info) throws IOException {
+        SseEmitter emitter = tryOnService.getEmitterBySessionId(UUID.fromString((info.getSessionId())));
+        Boolean success = tryOnService.sendUserInfoToMobile(info, emitter);
         if (success) {
             return ResponseEntity.ok("success");
         } else {

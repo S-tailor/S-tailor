@@ -27,7 +27,7 @@ const ClosetCodeInput: React.FC = () => {
     console.log(params)
 
     await axios
-      .get(`${BASE_URL}/verify`, { params })
+      .post(`${BASE_URL}/verify`, params)
       .then(function (response) {
         if (response.data == 'success') {
           //alert('로그인 성공!')
