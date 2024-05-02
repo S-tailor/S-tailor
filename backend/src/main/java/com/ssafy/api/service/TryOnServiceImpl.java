@@ -1,6 +1,7 @@
 package com.ssafy.api.service;
 
 import com.ssafy.api.request.TryOnVerifyReq;
+import com.ssafy.common.util.JwtTokenUtil;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -27,9 +28,7 @@ public class TryOnServiceImpl implements TryOnService{
 
     @Override
     public SseEmitter sendSessionIdToFlip(UUID sessionId, SseEmitter emitter) {
-        emitter.onCompletion(() -> {
-            emitters.remove(sessionId);
-        });
+        emitter.onCompletion(() -> emitters.remove(sessionId));
         emitter.onError ((ex) -> {
             emitters.remove(sessionId);
             emitter.complete();
@@ -75,7 +74,8 @@ public class TryOnServiceImpl implements TryOnService{
     }
 
     @Override
-    public Boolean verifyRealUser(String token, String id) {
-        return null;
+    public Boolean isYourToken(String token, String id) {
+        String decodedUserId = JwtTokenUtil.getDecodedUserId(token);
+        return decodedUserId.equals(id);
     }
 }

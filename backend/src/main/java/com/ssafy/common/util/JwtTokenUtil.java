@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.*;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -13,9 +14,6 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 /**
  * jwt 토큰 유틸 정의.
@@ -55,6 +53,12 @@ public class JwtTokenUtil {
                 .withIssuer(ISSUER)
                 .withIssuedAt(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()))
                 .sign(Algorithm.HMAC512(secretKey.getBytes()));
+    }
+
+    public static String getDecodedUserId(String token){
+        JWTVerifier verifier = getVerifier();
+        DecodedJWT decodedJWT = verifier.verify(token.replace(TOKEN_PREFIX, ""));
+        return decodedJWT.getSubject();
     }
 
     public static String getToken(Instant expires, String userId) {

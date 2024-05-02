@@ -11,5 +11,5 @@ public interface TryOnService {
     SseEmitter sendSessionIdToFlip(UUID sessionId, SseEmitter emitter);
     SseEmitter getEmitterBySessionId(UUID sessionId);
     Boolean sendUserInfoToMobile(TryOnVerifyReq info, SseEmitter emitter);
-    Boolean verifyRealUser(String token, String id);
+    Boolean isYourToken(String token, String id);
 }
