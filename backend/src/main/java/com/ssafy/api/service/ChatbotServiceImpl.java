@@ -35,10 +35,10 @@ public class ChatbotServiceImpl implements ChatbotService{
         jsonObject.put("profile", body.getProfile());
         if (body.getText() != null)
             jsonObject.put("text", body.getText());
-        if (body.getImage() != null)
+        if (urls != null)
             jsonObject.put("image", urls);
 
-        ResponseEntity<String> response = restTemplate.postForEntity(url, jsonObject, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(url+"/chatbot", jsonObject, String.class);
 
         ChatResultDTO dto = new ChatResultDTO();
         try {

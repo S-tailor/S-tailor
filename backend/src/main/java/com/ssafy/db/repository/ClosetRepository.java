@@ -18,8 +18,11 @@ public interface ClosetRepository extends JpaRepository<Closet, Long> {
     @Query(value = "update closet set isDelete = true where closetPk = :closetPk", nativeQuery = true)
     int closetDelete(int closetPk);
 
-    @Query(value = "select * from closet where profilePk = :profilePk and source like '%':content'%'", nativeQuery = true)
+    @Query(value = "select * from closet " +
+            "where profilePk = :profilePk and " +
+            "(source like concat('%',:content,'%') or name like concat('%',:content,'%')) and" +
+            " isdelete = false", nativeQuery = true)
     List<Closet> closetSearch(String content, int profilePk);
 
-    List<Closet> findAllByProfilePkAndSourceContaining(int profilePk, String source);
+    List<Closet> findAllByProfilePkAndSourceContainingOrNameContaining(int profilePk, String source, String name);
 }

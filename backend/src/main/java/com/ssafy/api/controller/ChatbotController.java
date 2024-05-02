@@ -28,9 +28,9 @@ public class ChatbotController {
 
         boolean flag =false;
 
-        List<String> urls=chatbotService.saveImage(body);
-
-
+        List<String> urls=null;
+        if(body.getImage()!=null)
+            urls=chatbotService.saveImage(body);
         ChatResultDTO res= chatbotService.chatSend(body,urls);
 
         if(res!=null)
