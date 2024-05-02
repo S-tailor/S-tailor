@@ -23,20 +23,14 @@ public class TryOnController {
 
         emitter.onCompletion(() -> {
             emitters.remove(sessionId);
-            cleanupEmitter(emitter);
         });
         emitter.onError ((ex) -> {
             emitters.remove(sessionId);
-            cleanupEmitter(emitter);
+            emitter.complete();
         });
-        emitter.onTimeout (() -> {
-            emitters.remove(sessionId);
-            cleanupEmitter(emitter);
-        });
+        emitter.onTimeout (emitter::complete);
 
         emitters.put(sessionId, emitter);
-        System.out.println(emitters);
-        System.out.println(emitters.get(sessionId));
         try {
             emitter.send(SseEmitter.event()
                     .name("connect")
@@ -47,26 +41,23 @@ public class TryOnController {
         return ResponseEntity.ok(emitter);
     }
 
-    private void cleanupEmitter(SseEmitter emitter){
-        try {
-            emitter.complete();
-        } catch (Exception e) {
-        }
-    }
-
     @GetMapping("/verify")
-    public ResponseEntity<SseEmitter> verify(String sessionId, String token, String id, int profilePk) throws IOException {
+    public ResponseEntity<String> verify(String sessionId, String token, String id, int profilePk) throws IOException {
 
 //        System.out.println("Verifying:" + emitters.get(UUID.fromString((sessionId))));
-        final SseEmitter emitter = emitters.get(UUID.fromString((sessionId)));
+        SseEmitter emitter = emitters.get(UUID.fromString((sessionId)));
         try {
             emitter.send(SseEmitter.event()
                     .name("getToken")
                     .data(token));
+            emitter.complete();
+            return ResponseEntity.ok("success");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            //throw new RuntimeException(e);
+            return ResponseEntity.ok("fail");
         }
-        return ResponseEntity.ok(emitter);
+
     }
 
 

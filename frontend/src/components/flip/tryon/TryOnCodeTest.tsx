@@ -9,7 +9,7 @@ const TIME = {
 
 const TryOn: React.FC = () => {
   const navigate = useNavigate()
-  const [sessionId, setSessionId] = useState()
+  const [sessionId, setSessionId] = useState('')
   const [token, setToken] = useState('')
   const [remainTime, setRemainTime] = useState(TIME.ONE_MINUTE)
 
@@ -50,11 +50,9 @@ const TryOn: React.FC = () => {
       sessionStorage.setItem('token', receivedToken)
       console.log('token event data', receivedToken)
 
-      if (receivedToken) {
-        setTimeout(() => console.log('피팅룸으로 모시겠습니다'), 3000)
-        startTransition(() => {
-          navigate('/flip/tryon')
-        })
+      if (receivedToken != '') {
+        sse.close()
+        navigate('/flip/tryon')
       }
     })
   }

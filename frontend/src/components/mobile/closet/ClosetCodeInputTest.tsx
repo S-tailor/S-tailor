@@ -29,6 +29,10 @@ const ClosetCodeInput: React.FC = () => {
     await axios
       .get(`${BASE_URL}/verify`, { params })
       .then(function (response) {
+        if (response.data == 'success') {
+          //alert('로그인 성공!')
+          navigate('/mobile/closet/tryon/wait')
+        }
         console.log('handleVerify', response)
       })
       .catch(function (error) {
