@@ -72,7 +72,13 @@ public class ChatbotServiceImpl implements ChatbotService{
         jsonObject.put("profile", profile);
 
         ResponseEntity<String> response = restTemplate.postForEntity(url+"/clear", jsonObject, String.class);
+        System.out.println(profile);
+        System.out.println(jsonObject);
+        System.out.println(response);
 
-        return true;
+        if(response!=null)
+            return true;
+        else
+            return false;
     }
 }

@@ -1,5 +1,6 @@
 package com.ssafy.api.controller;
 
+import com.ssafy.api.request.ChatClearReq;
 import com.ssafy.api.request.ChatSendReq;
 import com.ssafy.api.response.ChatImageRes;
 import com.ssafy.api.response.ChatRes;
@@ -49,8 +50,8 @@ public class ChatbotController {
     }
 
     @PostMapping("/clear")
-    public ResponseEntity<? extends BaseResponseBody> chat(@RequestBody String profile) {
-        if(chatbotService.clearMessages(profile)) {
+    public ResponseEntity<? extends BaseResponseBody> chat(@RequestBody ChatClearReq clearReq) {
+        if(chatbotService.clearMessages(clearReq.getProfile())) {
             return ResponseEntity.ok(BaseResponseBody.of(200,"Success"));
         } else {
             return ResponseEntity.ok(BaseResponseBody.of(400,"Fail"));
