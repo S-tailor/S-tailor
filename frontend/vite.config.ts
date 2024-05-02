@@ -16,6 +16,7 @@ export default defineConfig({
         navigateFallbackDenylist: [/^\/jenkins/]
       },
       manifest: {
+        theme_color: '#ffffff',
         name: 'S-tailor',
         short_name: 'S-tailor',
         start_url: '/',

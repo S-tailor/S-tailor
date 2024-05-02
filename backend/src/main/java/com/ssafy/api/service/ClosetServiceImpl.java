@@ -1,6 +1,7 @@
 package com.ssafy.api.service;
 
 import com.ssafy.api.request.ClosetSaveReq;
+import com.ssafy.api.request.ClosetSearchReq;
 import com.ssafy.db.entity.Closet;
 import com.ssafy.db.repository.ClosetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class ClosetServiceImpl implements ClosetService{
         closet.setImage(info.getThumbNail());
         closet.setName(info.getName());
         closet.setProfilePk(info.getProfilePk());
+        closet.setSource(info.getSource());
 
         try {
             closetRepository.save(closet);
@@ -51,5 +53,14 @@ public class ClosetServiceImpl implements ClosetService{
             return false;
         }
         return true;
+    }
+
+    @Override
+    public List<Closet> closetSearch(ClosetSearchReq info) {
+        try {
+            return closetRepository.closetSearch(info.getContent(), info.getProfilePk());
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

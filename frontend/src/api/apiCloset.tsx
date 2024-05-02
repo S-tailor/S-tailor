@@ -2,10 +2,16 @@ import { api } from './api'
 
 interface SaveClothData {
   price: string
-  image: string
-  title: string
+  thumbNail: string
+  name: string
   link: string
+  profilePk: string | null 
   source: string
+}
+
+interface ClosetSearch {
+  profilePk: string | null
+  content: string
 }
 
 async function closetImgSearch(Info: FormData) {
@@ -17,25 +23,26 @@ async function closetTextSearch(content: string) {
 }
 
 async function closetItemSave(data: SaveClothData): Promise<any> {
-  const formData = new FormData()
-  formData.append('price', data.price)
-  formData.append('link', data.link)
-  formData.append('thumbnail', data.image)
-  formData.append('name', data.title)
-
-  return await api.post('/closet/save', formData, {
-    headers: {
-      'content-type': 'multipart/form-data'
-    }
-  })
+  return await api.post('/closet/save', data)
 }
 
 async function closetItemList(pk: number) {
-    return await api.get(`/closet/list?profilePk=${pk}`)
+  return await api.get(`/closet/list?profilePk=${pk}`)
 }
 
-async function closetItemDelete(Info: any) {
-  return await api.delete('/closet/list', Info)
+async function closetSearch(data: ClosetSearch) {
+  return await api.post('/closet/search', data)
 }
 
-export { closetImgSearch, closetTextSearch, closetItemSave, closetItemList, closetItemDelete }
+async function closetItemDelete(pk: number): Promise<any> {
+  return await api.delete(`/closet/delete?closetPk=${pk}`)
+}
+
+export {
+  closetImgSearch,
+  closetTextSearch,
+  closetItemSave,
+  closetItemList,
+  closetSearch,
+  closetItemDelete
+}

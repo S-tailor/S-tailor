@@ -11,6 +11,18 @@ const MyPage: React.FC = () => {
   };
   const userName= user[0]?.profileName  ?? 'Guest'
 
+  // 프로필 이름
+
+  const profileName = user[0]?.profileName ?? 'Guest'
+  // 프로필 사진
+  const profileImg = user[0]?.image
+
+  const ClosetSearchClick = () => {
+    startTransition(() => {
+      navigate('/mobile/closet/search')
+    })
+  }
+
   const ProfileChangeClick = () => {
     startTransition(() => {
       navigate('/mobile/profile')
@@ -20,7 +32,7 @@ const MyPage: React.FC = () => {
   const LogoutClick = () => {
     startTransition(() => {
       // 로그아웃 전, accessToken의 존재 여부 확인
-      console.log('로그아웃 전 accessToken:', window.localStorage.getItem('accessToken'))
+      // console.log('로그아웃 전 accessToken:', window.localStorage.getItem('accessToken'))
 
       // accessToken 삭제로 로그아웃
       window.localStorage.removeItem('accessToken')
@@ -73,18 +85,25 @@ const MyPage: React.FC = () => {
   }
   ////////////////////////////////////////////////////////////////////
 
+  const CameraClick = () => {
+    startTransition(() => {
+      navigate('/mobile/camera')
+    })
+  }
+
   return (
     <div>
       {/* 검색 아이콘으로 변경 필요 */}
-      <button>옷장 검색</button>
+      <button onClick={ClosetSearchClick}>옷장 검색</button>
 
       <button onClick={ProfileChangeClick}>프로필 변경</button>
       <button onClick={LogoutClick}>로그아웃</button>
       <div>
-        <h4>프로필 사진</h4>
-        <h5>프로필 이름</h5>
+        <img src={profileImg} alt="프로필 이미지" />
+        <h3>{profileName}</h3>
       </div>
       <h1>MyPage Component</h1>
+      <button onClick={CameraClick}>카메라</button>
 
       <div>
         <h3>2D 가상 피팅 결과 사진 확인</h3>

@@ -6,8 +6,12 @@ import com.ssafy.db.entity.User;
 import com.ssafy.db.join.ProfileList;
 import com.ssafy.db.repository.ProfileRepository;
 import com.ssafy.db.repository.UserRepository;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -24,6 +28,9 @@ public class ProfileServiceImpl implements ProfileService{
     @Autowired
     UserService userService;
 
+    @Value("${Lambda_URL}")
+    String url;
+
     @Override
     public boolean profileCreate(ProfileCreateReq info) {
         Profile profile = new Profile();
@@ -34,6 +41,7 @@ public class ProfileServiceImpl implements ProfileService{
         profile.setGender(info.getGender());
         profile.setUserPk(info.getUserPk());
 
+
         try {
             MultipartFile image = info.getImage();
             Integer count = profileRepository.getCount();
@@ -41,11 +49,20 @@ public class ProfileServiceImpl implements ProfileService{
                 count = 0;
             }
             profile.setImage(s3UpDownloadService.saveProfileImage(image,image.getOriginalFilename(),count+1));
-            profileRepository.save(profile);
+            Profile savedProfile = profileRepository.save(profile);
+
+            RestTemplate restTemplate = new RestTemplate();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("profile", savedProfile.getProfilePk());
+
+            ResponseEntity<String> response = restTemplate.postForEntity(url+"/connect", jsonObject, String.class);
+            System.out.println(response.getBody());
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
+
+
 
         return true;
     }
@@ -72,7 +89,12 @@ public class ProfileServiceImpl implements ProfileService{
     @Override
     public boolean profileEdit(ProfileCreateReq info) {
         try {
-            String image = s3UpDownloadService.saveProfileImage(info.getImage(), info.getImage().getOriginalFilename(), info.getProfilePk());
+            String image;
+            if(info.getImage() == null) {
+                image = profileSelect(info.getProfilePk()).getImage();
+            } else {
+                image = s3UpDownloadService.saveProfileImage(info.getImage(), info.getImage().getOriginalFilename(), info.getProfilePk());
+            }
             profileRepository.profileEdit(info.getName(), image, info.getHeight(), info.getWeight(), info.getGender(), info.getProfilePk());
         } catch (Exception e) {
             e.printStackTrace();

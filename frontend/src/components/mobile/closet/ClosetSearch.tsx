@@ -1,40 +1,51 @@
-import React from 'react'
-// import { closetImgSearch, closetTextSearch } from '@/api/apiCloset'
-
-// 현재 코드는 구글 검색 코드입니다.
-// 이 화면에서는 각 프로필의 옷장 DB에 있는 옷을 검색할 수 있게 해야합니다.
+import React, { useState } from 'react'
+import { closetSearch } from '@/api/apiCloset'
 
 const ClosetSearch: React.FC = () => {
-  //   const [image, setImage] = useState(null)
-  //   const [text, setText] = useState('')
+  const [searchText, setSearchText] = useState<string>('')
+  const [searchResults, setSearchResults] = useState<any[]>([])
 
-  //   async function textSearch() {
-  //     let response = await closetTextSearch(text)
-  //     console.log(response.data.result)
-  //   }
+  const profilePk = sessionStorage.getItem('profilePk')
 
-  //   function saveImage(event) {
-  //     setImage(event.target.files[0])
-  //   }
+  function saveText(event: string) {
+    setSearchText(event)
+  }
 
-  //   async function imageSearch() {
-  //     const formdata = new FormData()
-  //     formdata.append('image', image)
-  //     const response = await closetImgSearch(formdata)
-  //     console.log(response)
-  //   }
-
-  //   function saveText(event) {
-  //     setText(event.target.value)
-  //   }
+  const handleSearch = async () => {
+    if (!searchText) {
+      alert('검색어를 입력해주세요!')
+      return
+    }
+    try {
+      const response = await closetSearch({ profilePk, content: searchText })
+      console.log(profilePk)
+      console.log(response.data)
+      setSearchResults(response.data.result)
+    } catch (error) {
+      console.log('에러 발생:', error)
+    }
+  }
 
   return (
     <div>
       <h1>ClosetSearch Component</h1>
-      {/* <input type="text" onChange={(e) => saveText(e)} placeholder="검색어를 입력하세요." />
-      <button onClick={() => textSearch()}>Text Search</button>
-      <input type="file" onChange={(e) => saveImage(e)}></input>
-      <button onClick={() => imageSearch()}>Image Search</button> */}
+      <input
+        type="text"
+        value={searchText}
+        onChange={(e) => saveText(e.target.value)}
+        placeholder="옷장 안의 옷을 검색해보세요 :)"
+      />
+      <button onClick={handleSearch}>검색</button>
+      <div>
+        {searchResults.map((item, index) => (
+          <div key={index}>
+            <img src={item.image} alt={item.name} />
+            <p>{item.name}</p>
+            <p>가격: {item.price}</p>
+            <p>판매처: {item.source}</p>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

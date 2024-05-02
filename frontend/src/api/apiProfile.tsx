@@ -2,10 +2,6 @@ import { api } from './api'
 
 async function profileCreate(userInfo: any) {
 
-     for (let [key, value] of userInfo.entries()) {
-        console.log('요청',`${key}: ${value}`);
-    } 
-    
     return await api.post('/user/profile/create', userInfo, {
         headers: {
             'Content-Type': 'multipart/form-data'

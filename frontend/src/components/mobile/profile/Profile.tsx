@@ -1,40 +1,46 @@
-import React, {Suspense, startTransition, useEffect, useState} from 'react'
+import React, {startTransition, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { profileList, profileSelect } from '@/api/apiProfile'
 import userStore from '@/store/store'
-import styles from '../../../scss/profile.module.scss';
+import styles from '../../../scss/profile.module.scss'
 
 const Profile: React.FC = () => {
   interface UserProfile {
-    profilePk: number;
-    image?: string;
-    profileName: string;
+    profilePk: number
+    image?: string
+    profileName: string
   }
-  const [userList, setUserList] = useState<UserProfile[]>([]); 
+  const [userList, setUserList] = useState<UserProfile[]>([])
   const navigate = useNavigate()
   const {setUser} = userStore()
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
+  const [modify, setModify] = useState<boolean>(false)
+ 
   // 유저 프로필 리스트 불러오기
-  useEffect(()=>{
+  useEffect(() => {
     const id = String(localStorage.getItem('id'))
-      fetchUser(id)  
+    fetchUser(id)  
+    sessionStorage.removeItem('profilePk')
+      
   },[])
 
- // 유저 프로필 리스트
-  const fetchUser = async (id:string) => {
+  // 유저 프로필 리스트
+  const fetchUser = async (id: string) => {
     const response = await profileList(id)
+    // console.log(response)
     setTimeout(() => {
       setUserList(response.data.result);
       setIsLoading(!isLoading);
-    }, 100);
+    }, 2000);
+    setIsLoading(!isLoading)
   }
 
-  // 유저 프로필 클릭시 
-  const userDetail = async (userPk:number) => {
+  // 유저 프로필 클릭시
+  const userDetail = async (userPk: number) => {
+    let Pk = String(userPk)
+    sessionStorage.setItem('profilePk', Pk)
     let response = await profileSelect(userPk)
     if (response.status === 200) {
-     
       setUser(response.data.result)
       startTransition(() => {
         navigate('/mobile/closet')
@@ -42,20 +48,33 @@ const Profile: React.FC = () => {
     }
   }
 
+  const profileModify = () => {
+    setModify(!modify)
+  }
+
+  const profileModify2 = (profilePk: number) => {
+    let Pk = String(profilePk)
+    sessionStorage.setItem('profilePk', Pk)
+    startTransition(() => {
+      navigate('/mobile/profile/edit/');
+    });
+  };
+
+
   const goHome = () => {
     startTransition(() => {
       navigate('/')
     })
   }
 
-
   return (
     <div className={styles.container}>
-      <Suspense>
-
       <header>
         <div className={styles.headerInner}>
           <img onClick={goHome} className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
+        </div>
+        <div>
+          <button onClick={profileModify}>{modify? '취소':'수정하기'}</button>
         </div>
       </header>
 
@@ -63,8 +82,10 @@ const Profile: React.FC = () => {
         <p className={styles.texts}>프로필 선택</p>
         <p className={styles.subtexts}>가상 피팅 서비스를 이용할 프로필을 선택하세요.</p>
       </section>
-
-      <section className={styles.select}>
+        <h2>
+        {isLoading ? "프로필 로딩중":" "}  
+        </h2>
+      {!isLoading && <section className={styles.select}>
         <div className={styles.selectInner}>
           {userList.length > 0 ? (
             <>
@@ -75,6 +96,8 @@ const Profile: React.FC = () => {
                     <br />
                     {userList[0].profileName}
                   </p>
+                  {modify ? <img src='' alt='수정하기' onClick={()=>profileModify2(userList[0].profilePk)}/>:" " }
+                  {/* 수정하기버튼 pop up */}
                 </div>
               ) : (
                 <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
@@ -93,6 +116,8 @@ const Profile: React.FC = () => {
                     <br />
                     {userList[1].profileName}
                   </p>
+                  {modify ? <img src='' alt='수정하기' onClick={()=>profileModify2(userList[1].profilePk)}/>:" " }
+                  {/* 수정하기버튼 pop up */}
                 </div>
               ) : (
                 <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
@@ -112,6 +137,8 @@ const Profile: React.FC = () => {
                     <br />
                     {userList[2].profileName}
                   </p>
+                  {modify ? <img src='' alt='수정하기' onClick={()=>profileModify2(userList[2].profilePk)}/>:" " }
+                  {/* 수정하기버튼 pop up */}
                 </div>
               ) : (
                 <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
@@ -130,6 +157,8 @@ const Profile: React.FC = () => {
                     <br />
                     {userList[3].profileName}
                   </p>
+                  {modify ? <img src='' alt='수정하기' onClick={()=>profileModify2(userList[3].profilePk)}/>:" " }
+                  {/* 수정하기버튼 pop up */}
                 </div>
               ) : (
                 <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
@@ -139,9 +168,8 @@ const Profile: React.FC = () => {
           ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
             startTransition(()=>{navigate('/mobile/profile/add')})}} />}
         </div>
-      </section>
-
-      </Suspense>
+      </section>}
+           
     </div>
   )
 }

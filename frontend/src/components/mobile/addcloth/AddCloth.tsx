@@ -1,6 +1,7 @@
-import React, { useState, useMemo, startTransition } from 'react'
+import React, { useState, useMemo, startTransition, useRef } from 'react'
 import userStore from '@/store/store'
 import { closetImgSearch, closetTextSearch, closetItemSave } from '@/api/apiCloset'
+// import userStore from '@/store/store'
 // import Pagination from 'react-js-pagination'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styles from '../../../scss/addcloth.module.scss';
@@ -16,6 +17,9 @@ interface SearchResultItem {
 
 // 선택한 옷들의 항목
 interface SelectedClothItem extends SearchResultItem {}
+
+// 카메라
+type CameraMode = 'user' | 'environment'
 
 const AddCloth: React.FC = () => {
   const location = useLocation();
@@ -33,6 +37,59 @@ const AddCloth: React.FC = () => {
   const [showResults, setShowResults] = useState(false)
   // const [count, setCount] = useState(1)
 
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [camera, setCamera] = useState<CameraMode>('environment')
+
+  const CameraClick = () => {
+    const constraints = { video: { facingMode: camera } }
+    navigator.mediaDevices
+      .getUserMedia(constraints)
+      .then((stream) => {
+        const video = videoRef.current
+        if (video) {
+          video.srcObject = stream
+        }
+      })
+      .catch((error) => {
+        console.error('카메라 접근 오류:', error)
+      })
+  }
+
+  const handleCapture = () => {
+    const canvas = document.createElement('canvas')
+    const video = videoRef.current
+    if (video && video.videoWidth > 0) {
+      canvas.width = video.videoWidth
+      canvas.height = video.videoHeight
+      const ctx = canvas.getContext('2d')
+      if (ctx) {
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const url = URL.createObjectURL(blob)
+            console.log(url) // 로그로 URL을 찍어 확인
+            const img = document.createElement('img')
+            img.onload = () => {
+              URL.revokeObjectURL(url)
+            }
+            img.src = url
+            document.body.appendChild(img)
+          }
+        })
+      }
+    }
+  }
+
+  const toggleCamera = () => {
+    setCamera((prevCamera) => (prevCamera === 'environment' ? 'user' : 'environment'))
+    const video = videoRef.current
+    if (video && video.srcObject) {
+      const tracks = (video.srcObject as MediaStream).getTracks()
+      tracks.forEach((track) => track.stop())
+    }
+    CameraClick()
+  }
+
   // 옷 선택
   const handleSelectCloth = (cloth: SearchResultItem) => {
     setSelectedCloths((prev) => {
@@ -45,19 +102,22 @@ const AddCloth: React.FC = () => {
     })
   }
 
+  // const user = userStore((state) => state.user)
+  const profilePk = sessionStorage.getItem('profilePk')
+
   // 옷 저장
   const handleSaveCloths = async () => {
     for (const cloth of selectedCloths) {
+      // console.log(cloth)
       try {
-        const response = await closetItemSave({
+        await closetItemSave({
           price: cloth.price,
-          image: cloth.image,
-          title: cloth.title,
+          thumbNail: cloth.image,
+          name: cloth.title,
           link: cloth.link,
-          source: cloth.source
+          profilePk: profilePk,
+          source: ''
         })
-        setmessage('저장이 완료 되었습니다.')
-        console.log('저장 성공', response.data)
       } catch (error) {
         setmessage('저장에 실패했습니다.')
         console.error('저장 실패', error)
@@ -81,8 +141,7 @@ const AddCloth: React.FC = () => {
   // 텍스트 검색
   async function textSearch() {
     const response = await closetTextSearch(text)
-    // setCount(response.data.result.length)
-    console.log(response.data.result)
+
     updateResults(response.data.result)
     setShowResults(true)
   }
@@ -101,7 +160,7 @@ const AddCloth: React.FC = () => {
       formdata.append('image', image)
     }
     const response = await closetImgSearch(formdata)
-    console.log(response)
+
     // setCount(response.data.result.length)
     updateResults(response.data.result)
     setShowResults(true)
@@ -239,6 +298,20 @@ const AddCloth: React.FC = () => {
       </section>
       
       {/* <section className={styles.searchClothes}>
+    <div>
+      <h1>AddCloth Component</h1>
+      <div>
+        <button onClick={CameraClick}>카메라 켜기</button>
+        <button onClick={handleCapture}>사진 촬영</button>
+        <button onClick={toggleCamera}>카메라 전환</button>
+        <video ref={videoRef} autoPlay playsInline style={{ width: '100%' }}></video>
+      </div>
+      <input type="text" onChange={(e) => saveText(e)} placeholder="검색어를 입력하세요." />
+      <button onClick={() => textSearch()}>Text Search</button>
+      <input type="file" onChange={(e) => saveImage(e)}></input>
+      <button onClick={() => imageSearch()}>Image Search</button>
+      <div>
+        <h2>선택한 옷</h2>
         {selectedCloths.map((cloth, index) => (
           <div key={index}>
             <img src={cloth.image} alt={cloth.title} />

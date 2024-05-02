@@ -1,7 +1,7 @@
 import React,{ useEffect, startTransition, useState, useMemo } from 'react'
 import userStore from '@/store/store'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { closetItemList } from '@/api/apiCloset'
+import { closetItemList, closetItemDelete } from '@/api/apiCloset'
 import { cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/closet.module.scss';
 
@@ -13,12 +13,12 @@ const Closet: React.FC = () => {
   }
 
   interface clothInfo {
-    name: string,
-    price: string,
-    image?: string,
-    link: string,
+    name: string
+    price: string
+    image?: string
+    link: string
     closetPk: number
-
+    source: string
   }
 
   const location = useLocation()
@@ -38,6 +38,34 @@ const Closet: React.FC = () => {
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category)
+  const { clearUsers } = userStore()
+  }
+
+  useEffect(() => {
+    const profilePk = Number(sessionStorage.getItem('profilePk'))
+    if (profilePk) {
+      fetchItem(profilePk)
+    }
+  }, [])
+
+  const fetchItem = async (profilePk: number) => {
+    await closetItemList(profilePk).then((response) => {
+      setClothList(response.data.result)
+      setTimeout(() => {
+        setIsLoading(!isLoading)
+      }, 500)
+      setIsLoading(!isLoading)
+    })
+  }
+
+  const DeleteClothClick = async (pk: number) => {
+    const response = await closetItemDelete(pk)
+    if (response.status === 200) {
+      setClothList((currentList) => currentList.filter((item) => item.closetPk !== pk))
+      alert('장바구니에서 삭제되었습니다!')
+    } else {
+      console.error('Failed to delete', pk)
+    }
   }
 
   const getCategoryStyle = (category: string) => {
@@ -203,6 +231,9 @@ const Closet: React.FC = () => {
                 <div className={styles.addCartBtn} onClick={() => addCart(cloth.closetPk)}>
                   <img className={styles.addCartBtnImg} src="/src/assets/shoppingbagW.png" alt="cart에 담기" />
                 </div>
+                <div className={styles.deleteCartBtn} onClick={() => DeleteClothClick(cloth.closetPk)}>
+                  <img className={styles.deleteCartBtnImg} src="/src/assets/closeBtn.svg" alt="deleteBtn" />
+                </div>
                 <p className={styles.clothesName}>{cloth.name}</p>
                 <p className={styles.clothesPrice}>{cloth.price.substring(1)}원</p>
               </div>
@@ -280,9 +311,10 @@ const Closet: React.FC = () => {
         </div>
       </footer>
       </>
-      )}
+      )}      
     </div>
   )
 }
+
 
 export default Closet

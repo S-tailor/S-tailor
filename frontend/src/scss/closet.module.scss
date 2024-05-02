@@ -244,9 +244,21 @@ header {
   right: 10px;
 }
 
+.deleteCartBtn {
+  width: 5vw;
+  cursor: pointer;
+  position: absolute;
+  top: 2px;
+  right: 0px;
+}
+
 .addCartBtnImg {
   width: 5vw;
   filter: drop-shadow(1px 1px 3px #000000);
+}
+
+.deleteCartBtnImg {
+  width: 2vw;
 }
 
 .bottomNavInnerBtn {

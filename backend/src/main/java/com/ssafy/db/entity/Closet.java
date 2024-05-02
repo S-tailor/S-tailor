@@ -24,6 +24,7 @@ public class Closet {
     Timestamp date;
     String name;
     String category;
+    String source;
     boolean cart;
     boolean isDelete;
     int profilePk;

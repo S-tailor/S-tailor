@@ -45,3 +45,6 @@ yarn*.lock
 
 ## BackEnd log files ##
 *.gz
+
+### Mac fileSysten logs ###
+.DS_Store

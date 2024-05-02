@@ -24,15 +24,18 @@ public class ChatbotController {
     SearchService searchService;
 
     @PostMapping("/chat")
-    public ResponseEntity<? extends BaseResponseBody> chat(@RequestBody ChatSendReq body) {
+    public ResponseEntity<? extends BaseResponseBody> chat(@ModelAttribute ChatSendReq body) {
 
         boolean flag =false;
-        ChatResultDTO res= chatbotService.chatSend(body);
+
+        List<String> urls=null;
+        if(body.getImage()!=null)
+            urls=chatbotService.saveImage(body);
+        ChatResultDTO res= chatbotService.chatSend(body,urls);
 
         if(res!=null)
             flag=true;
 
-        System.out.println(res);
         if(res.getType().equals("recommend")){
             List<SearchResultDTO> result = searchService.textSearch(res.getBody());
             return ResponseEntity.ok(ChatImageRes.of(200,"Success",res.getBody(), result));
@@ -40,6 +43,15 @@ public class ChatbotController {
 
         if(flag) {
             return ResponseEntity.ok(ChatRes.of(200,"Success",res.getBody()));
+        } else {
+            return ResponseEntity.ok(BaseResponseBody.of(400,"Fail"));
+        }
+    }
+
+    @PostMapping("/clear")
+    public ResponseEntity<? extends BaseResponseBody> chat(@RequestBody String profile) {
+        if(chatbotService.clearMessages(profile)) {
+            return ResponseEntity.ok(BaseResponseBody.of(200,"Success"));
         } else {
             return ResponseEntity.ok(BaseResponseBody.of(400,"Fail"));
         }
