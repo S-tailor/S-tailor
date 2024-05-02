@@ -8,7 +8,7 @@ const ClosetCodeInput: React.FC = () => {
   const navigate = useNavigate()
   const [sessionId, setSessionId] = useState('')
   useEffect(() => {
-    sessionStorage.setItem('profilePk', 2)
+    sessionStorage.setItem('profilePk', '2')
     sessionStorage.setItem('id', 'test1')
     sessionStorage.setItem(
       'token',

@@ -1,4 +1,4 @@
-import React, { startTransition, useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const BASE_URL = 'http://localhost:5000'
