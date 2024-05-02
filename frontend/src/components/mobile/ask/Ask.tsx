@@ -1,6 +1,6 @@
 import React,{startTransition, useState, useRef} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { chatbot } from '@/api/apiAsk'
+import { chatbot, reset } from '@/api/apiAsk'
 
 
 const Ask: React.FC = () => {
@@ -16,10 +16,20 @@ const Ask: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
   const userName = localStorage.getItem('id')
   
+  const profilePk = String(sessionStorage.getItem('profilePk'))
   const saveText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value)
 
   }
+
+
+
+  const resetConversation = async() => {
+    await reset(profilePk)
+    .then((response)=>{console.log(response)})
+    .catch(()=>{console.error})
+  }
+
 
   const sendInfo = async () => {
     setText('')
@@ -30,7 +40,7 @@ const Ask: React.FC = () => {
     setMessages([...messages, newMessage]);
 
     setIsLoading(true)
-    const profilePk = String(sessionStorage.getItem('profilePk'))
+   
     formData.append('profile',profilePk)
     formData.append('text',text)
     if (file) {
@@ -69,10 +79,12 @@ const Ask: React.FC = () => {
       <header>
         <img src="" alt="search" onClick={()=>{
           startTransition(()=>{
+            resetConversation()
             navigate('/mobile/closet/search')})}}
             />
              <img src="" alt="cart" onClick={()=>{
                startTransition(()=>{
+                resetConversation()
                  navigate('/mobile/closet/wishlist')})}} 
                  />
                  <h1>스타일 추천</h1>
@@ -120,21 +132,25 @@ const Ask: React.FC = () => {
       <footer>
         <img src="" alt="closet-home" onClick={()=>{
         startTransition(()=>{
+          resetConversation()
           navigate('/mobile/closet')})} 
         }
         />
         <img src="" alt="clothes-add" onClick={()=>{
         startTransition(()=>{
+          resetConversation()
           navigate('/mobile/add-cloth')})} 
         }
         />
         <img src="" alt="style-recomm" onClick={()=>{
         startTransition(()=>{
+          resetConversation()
           navigate('/mobile/ask')})} 
         }
         />
         <img src="" alt="myPage" onClick={()=>{
         startTransition(()=>{
+          resetConversation()
           navigate('/mobile/mypage')})} 
         }
         />
