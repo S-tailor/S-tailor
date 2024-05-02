@@ -9,6 +9,6 @@ public interface TryOnService {
     SseEmitter getEmitterByTimeOut(Long timeout);
     SseEmitter sendSessionIdToFlip(UUID sessionId, SseEmitter emitter);
     SseEmitter getEmitterBySessionId(UUID sessionId);
-    Boolean sendUserInfoToMobile(String sessionId, String token, String id, int profilePk, SseEmitter emitter);
+    Boolean sendUserInfoToFlip(String sessionId, String token, String id, int profilePk, SseEmitter emitter);
     Boolean verifyRealUser(String token, String id);
 }

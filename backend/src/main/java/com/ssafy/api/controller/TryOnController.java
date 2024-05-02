@@ -32,7 +32,7 @@ public class TryOnController {
     @GetMapping("/verify")
     public ResponseEntity<String> verify(String sessionId, String token, String id, int profilePk) throws IOException {
         SseEmitter emitter = tryOnService.getEmitterBySessionId(UUID.fromString((sessionId)));
-        Boolean success = tryOnService.sendUserInfoToMobile(sessionId, token, id, profilePk, emitter);
+        Boolean success = tryOnService.sendUserInfoToFlip(sessionId, token, id, profilePk, emitter);
         if (success) {
             return ResponseEntity.ok("success");
         } else {

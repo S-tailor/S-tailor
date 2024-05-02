@@ -51,7 +51,7 @@ public class TryOnServiceImpl implements TryOnService{
     }
 
     @Override
-    public Boolean sendUserInfoToMobile(String sessionId, String token, String id, int profilePk, SseEmitter emitter) {
+    public Boolean sendUserInfoToFlip(String sessionId, String token, String id, int profilePk, SseEmitter emitter) {
         try {
             emitter.send(SseEmitter.event()
                     .name("getToken")
