@@ -103,8 +103,6 @@ const MyPage: React.FC = () => {
         <h3>{profileName}</h3>
       </div>
       <h1>MyPage Component</h1>
-      <button onClick={CameraClick}>카메라</button>
-
       <div>
         <h3>2D 가상 피팅 결과 사진 확인</h3>
       </div>
