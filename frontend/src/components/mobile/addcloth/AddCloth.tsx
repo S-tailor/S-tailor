@@ -25,6 +25,7 @@ const AddCloth: React.FC = () => {
 
   const [selectedCloths, setSelectedCloths] = useState<SelectedClothItem[]>([])
 
+  // 카메라
   const videoRef = useRef<HTMLVideoElement>(null)
   const [camera, setCamera] = useState<CameraMode>('environment')
 
@@ -76,6 +77,12 @@ const AddCloth: React.FC = () => {
       tracks.forEach((track) => track.stop())
     }
     CameraClick()
+  }
+
+  // 전면 카메라 사용시 거울 모드 적용
+  const videoStyle = {
+    width: '100%',
+    transform: camera === 'user' ? 'scaleX(-1)' : 'none'
   }
 
   // 옷 선택
@@ -177,7 +184,7 @@ const AddCloth: React.FC = () => {
         <button onClick={CameraClick}>카메라 켜기</button>
         <button onClick={handleCapture}>사진 촬영</button>
         <button onClick={toggleCamera}>카메라 전환</button>
-        <video ref={videoRef} autoPlay playsInline style={{ width: '100%' }}></video>
+        <video ref={videoRef} autoPlay playsInline style={videoStyle}></video>
       </div>
       <input type="text" onChange={(e) => saveText(e)} placeholder="검색어를 입력하세요." />
       <button onClick={() => textSearch()}>Text Search</button>

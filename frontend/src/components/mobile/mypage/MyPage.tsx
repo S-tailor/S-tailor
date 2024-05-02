@@ -39,12 +39,6 @@ const MyPage: React.FC = () => {
     })
   }
 
-  const CameraClick = () => {
-    startTransition(() => {
-      navigate('/mobile/camera')
-    })
-  }
-
   return (
     <div>
       {/* 검색 아이콘으로 변경 필요 */}
@@ -57,8 +51,6 @@ const MyPage: React.FC = () => {
         <h3>{profileName}</h3>
       </div>
       <h1>MyPage Component</h1>
-      <button onClick={CameraClick}>카메라</button>
-
       <div>
         <h3>2D 가상 피팅 결과 사진 확인</h3>
       </div>
