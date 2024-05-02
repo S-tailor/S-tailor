@@ -34,8 +34,8 @@ async function closetSearch(data: ClosetSearch) {
   return await api.post('/closet/search', data)
 }
 
-async function closetItemDelete(Info: any) {
-  return await api.delete('/closet/list', Info)
+async function closetItemDelete(pk: number): Promise<any> {
+  return await api.delete(`/closet/delete?closetPk=${pk}`)
 }
 
 export {
