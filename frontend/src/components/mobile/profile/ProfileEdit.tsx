@@ -32,10 +32,12 @@ const getUser = async() => {
   const pk = Number(sessionStorage.getItem('profilePk'))
   const res =  await profileSelect(pk)
   const profile = res.data.result
+  
   setProfilePk(profile.profilePk)
   setFileUrl(profile.image);
   setName(profile.profileName);
-
+  setWeight(profile.weight)
+  setHeight(profile.height)
 }
 
 useEffect(() => {
@@ -70,7 +72,7 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
       setmessage('')
       
       const response = await profileEdit(formData)
-      console.log(response)
+     
      
       if (response.status == 200) {
         const userName = formData.get('name')
@@ -280,7 +282,7 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
           <input 
               className={styles.profileNameInput2}
               type="text" 
-              placeholder='키를 입력해주세요.' 
+              placeholder={height}
               value={height}
               onChange={handleHeightChange}
               autoFocus
@@ -324,7 +326,7 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
           <input 
               className={styles.profileNameInput2}
               type="text" 
-              placeholder='몸무게를 입력해주세요.' 
+              placeholder={weight} 
               value={weight}
               onChange={handleWeightChange}
               autoFocus
