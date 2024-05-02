@@ -1,7 +1,7 @@
 import React, { useEffect, startTransition, useState } from 'react'
 import userStore from '@/store/store'
 import { useNavigate } from 'react-router-dom'
-import { closetItemList } from '@/api/apiCloset'
+import { closetItemList, closetItemDelete } from '@/api/apiCloset'
 import { cartItemAdd } from '@/api/apiCart'
 
 const Closet: React.FC = () => {
@@ -40,6 +40,16 @@ const Closet: React.FC = () => {
     await cartItemAdd(pk).then(() => {
       alert('장바구니에 추가되었습니다!')
     })
+  }
+
+  const DeleteClothClick = async (pk: number) => {
+    const response = await closetItemDelete(pk)
+    if (response.status === 200) {
+      setClothList((currentList) => currentList.filter((item) => item.closetPk !== pk))
+      alert('장바구니에서 삭제되었습니다!')
+    } else {
+      console.error('Failed to delete', pk)
+    }
   }
 
   return (
@@ -93,8 +103,7 @@ const Closet: React.FC = () => {
                 <br />
                 <b>{cloth.name}</b>
                 <br />
-                {cloth.closetPk}aaaaaaaaaaaaaaaaaaaaaaaa
-                {cloth.price} ￦
+                {cloth.price}
                 <img
                   src=""
                   alt="cart에 담기"
@@ -102,6 +111,7 @@ const Closet: React.FC = () => {
                     addCart(cloth.closetPk)
                   }}
                 />
+                <button onClick={() => DeleteClothClick(cloth.closetPk)}>삭제</button>
               </p>
             </div>
           ))}
