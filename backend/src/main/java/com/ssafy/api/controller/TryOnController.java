@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import com.ssafy.api.request.TryOnVerifyReq;
 import com.ssafy.api.service.TryOnService;
-import org.joda.time.Minutes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +31,8 @@ public class TryOnController {
     public ResponseEntity<String> verify(@RequestBody TryOnVerifyReq info) throws IOException {
         SseEmitter emitter = tryOnService.getEmitterBySessionId(UUID.fromString((info.getSessionId())));
         Boolean success = tryOnService.sendUserInfoToMobile(info, emitter);
-        if (success) {
+        Boolean isYourToken = tryOnService.isYourToken(info.getToken(), info.getId());
+        if (success & isYourToken) {
             return ResponseEntity.ok("success");
         } else {
             return ResponseEntity.ok("fail");
