@@ -133,6 +133,10 @@ const routes: RouteType[] = [
     ]
   },
   {
+    path: '/mobile/camera',
+    element: React.lazy(() => import('./components/mobile/Camera'))
+  },
+  {
     path: '/flip/main',
     element: React.lazy(() => import('./pages/flip/main')),
     children: [
