@@ -29,9 +29,13 @@ public class TryOnController {
 
     @PostMapping("/verify")
     public ResponseEntity<String> verify(@RequestBody TryOnVerifyReq info) throws IOException {
+        Boolean isYourToken = tryOnService.isYourToken(info.getToken(), info.getId());
+        if(!isYourToken) {
+            return ResponseEntity.ok("fail");
+        }
         SseEmitter emitter = tryOnService.getEmitterBySessionId(UUID.fromString((info.getSessionId())));
         Boolean success = tryOnService.sendUserInfoToMobile(info, emitter);
-        Boolean isYourToken = tryOnService.isYourToken(info.getToken(), info.getId());
+
         if (success & isYourToken) {
             return ResponseEntity.ok("success");
         } else {
