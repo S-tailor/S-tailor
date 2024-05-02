@@ -57,13 +57,13 @@ header {
 }
 
 .passwordInput {
+  width: 80vw;
   outline: none;
   background-color: transparent;
   font-family: 'Pretendard-SemiBold';
   font-size: 1.4em;
   color: #222222;
   opacity: 50%;
-  padding-top: 10vh;
   margin-left: 10vw;
   border: 0;
 }
@@ -110,7 +110,8 @@ header {
   color: #222222;
   opacity: 80%;
   font-size: 0.9em;
-  padding-top: 2vh;
+  padding-top: 1.5vh;
+  padding-bottom: 5vh;
 }
 
 .checkboxLabel {

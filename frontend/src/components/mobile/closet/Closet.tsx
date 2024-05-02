@@ -167,7 +167,7 @@ const Closet: React.FC = () => {
         </div>
       ) : (
         <>
-      <header>
+      <div className={styles.header}>
         <div className={styles.headerInner}>
 
         <div className={styles.headerInner1}>
@@ -200,7 +200,7 @@ const Closet: React.FC = () => {
         </div>
 
         </div>
-      </header>
+      </div>
      
       <section className={styles.closetMain}>
         <div className={styles.mainCategory}>

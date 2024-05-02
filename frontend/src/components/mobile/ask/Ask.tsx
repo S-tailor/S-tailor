@@ -1,7 +1,8 @@
-import React,{startTransition, useMemo, useState, useRef} from 'react'
+import React,{startTransition, useMemo, useState, useRef, useEffect} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { chatbot } from '@/api/apiAsk'
 import userStore from '@/store/store'
+import { cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/ask.module.scss';
 
 const Ask: React.FC = () => {
@@ -14,6 +15,7 @@ const Ask: React.FC = () => {
   const location = useLocation();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const formData = new FormData()
+  const [cartCount, setCartCount] = useState<number>(0)
   // const {user} = userStore()
   const [isLoading, setIsLoading] = useState(false)
   const { user } = userStore() as {
@@ -109,25 +111,63 @@ const Ask: React.FC = () => {
   }
   ////////////////////////////////////////////////////////////////////
 
+  const addCart = async (pk: number) => {
+    await cartItemAdd(pk)
+      .then(() => {
+        alert('장바구니에 추가되었습니다!')
+        const newCartCount = cartCount + 1
+        localStorage.setItem('cartCount', JSON.stringify(newCartCount))
+        setCartCount(newCartCount)
+      })
+  }
+
+  useEffect(() => {
+    const storedCartCount = localStorage.getItem('cartCount')
+    if (storedCartCount) {
+      setCartCount(JSON.parse(storedCartCount))
+    }
+  }, [])
   
     return (
-    <div>
-      <header>
-        <img src="" alt="search" onClick={()=>{
-          startTransition(()=>{
-            navigate('/mobile/closet/search')})}}
-            />
-             <img src="" alt="cart" onClick={()=>{
-               startTransition(()=>{
-                 navigate('/mobile/closet/wishlist')})}} 
-                 />
-                 <h1>스타일 추천</h1>
-                 <p>* 페이지를 벗어나면 대화가 사라집니다.</p>
-      </header>
+    <div className={styles.container}>
+
+      <div className={styles.header}>
+              <div className={styles.headerInner}>
+              <div className={styles.headerInner1}>
+              <img className={styles.logo} src="/src/assets/styleReco.png" alt="logo" />
+              </div>
+          
+              <div className={styles.headerInner2}>
+                <img 
+                  className={styles.search}
+                  src="/src/assets/search.svg" 
+                  alt="search"
+                  onClick={()=>{
+                    startTransition(()=>{
+                      navigate('/mobile/closet/search')})}}  
+                />
+              </div>
+              
+              <div className={styles.headerInner3}>
+                <img 
+                  className={styles.cart}
+                  src="/src/assets/shoppingbag.svg" 
+                  alt="cart"
+                  onClick={()=>{
+                    startTransition(()=>{
+                      navigate('/mobile/closet/wishlist')})}} 
+                />
+                <span className={styles.cartAdd}>{cartCount}</span>
+              </div>
+
+              </div>
+            </div>
+
       <hr />
 
-      <div>
+      <div className={styles.askMain}>
        <div >
+                 <p>* 페이지를 벗어나면 대화가 사라집니다.</p>
           {messages.map((msg, index) => (
             <p key={index} className={msg.sender === 'user' ? 'user-msg' : 'bot-msg'}>
               {/* 여기서 className이 user면 왼쪽으로 bot이면 오른쪽으로 정렬  */}
@@ -150,7 +190,6 @@ const Ask: React.FC = () => {
 
 
 
-      </div>
    
         <hr />
         <img src="" alt="플러스버튼" onClick={()=>{fileInputRef.current?.click()}}/>
@@ -162,6 +201,7 @@ const Ask: React.FC = () => {
         <img src="" alt="삼각형의 전송버튼" onClick={sendInfo}/>
         </button>
     
+      </div>
       
         <footer className={styles.bottomNav}>
         <div className={styles.bottomNavInner}>
