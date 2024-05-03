@@ -53,7 +53,7 @@ const Closet: React.FC = () => {
     const response = await closetItemDelete(pk)
     if (response.status === 200) {
       setClothList((currentList) => currentList.filter((item) => item.closetPk !== pk))
-      alert('장바구니에서 삭제되었습니다!')
+      alert('옷장에서 삭제되었습니다!')
     } else {
       console.error('Failed to delete', pk)
     }
