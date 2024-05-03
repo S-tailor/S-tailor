@@ -1,8 +1,6 @@
-import React, { useState, useMemo, startTransition, useRef } from 'react'
+import React, { useState, useEffect, useMemo, startTransition, useRef } from 'react'
 import userStore from '@/store/store'
 import { closetImgSearch, closetTextSearch, closetItemSave } from '@/api/apiCloset'
-// import userStore from '@/store/store'
-// import Pagination from 'react-js-pagination'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styles from '../../../scss/addcloth.module.scss'
 
@@ -27,50 +25,55 @@ const AddCloth: React.FC = () => {
   const { user } = userStore() as {
     user: { profilePk: number; image?: string; profileName: string }[]
   }
-  // const userName = user[0]?.profileName ?? 'Guest'
   const navigate = useNavigate()
-  const [image, setImage] = useState(null)
+  const [, setImage] = useState(null)
   const [text, setText] = useState('')
   const [results, setResults] = useState<SearchResultItem[]>([])
-  const [message, setmessage] = useState('')
+  const [, setMessage] = useState('')
   const [selectedCloths, setSelectedCloths] = useState<SelectedClothItem[]>([])
   const [showResults, setShowResults] = useState(false)
   const [imagePath, setImagePath] = useState('')
-  // const [count, setCount] = useState(1)
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null)
+  const [cameraActive, setCameraActive] = useState(false)
+  const [captureMode, setCaptureMode] = useState(false)
 
   // 카메라 켜기
   const videoRef = useRef<HTMLVideoElement>(null)
   const [camera, setCamera] = useState<CameraMode>('environment')
 
-  const CameraClick = () => {
+  const CameraClick = async () => {
     const constraints = { video: { facingMode: camera } }
-    navigator.mediaDevices
-      .getUserMedia(constraints)
-      .then((stream) => {
-        const video = videoRef.current
-        if (video) {
-          video.srcObject = stream
-        }
-      })
-      .catch((error) => {
-        console.error('카메라 접근 오류:', error)
-      })
-  }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia(constraints)
+      const video = videoRef.current
 
+      if (video) {
+        video.srcObject = stream
+        setCameraActive(true)
+        setCaptureMode(true) // 촬영 모드로 전환
+      }
+    } catch (error) {
+      console.error('카메라 접근 오류:', error)
+    }
+  }
   // 사진 촬영
   const handleCapture = () => {
     const canvas = document.createElement('canvas')
     const video = videoRef.current
+
     if (video && video.videoWidth > 0) {
       canvas.width = video.videoWidth
       canvas.height = video.videoHeight
+
       const ctx = canvas.getContext('2d')
+
       if (ctx) {
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
         canvas.toBlob((blob) => {
           if (blob) {
             const url = URL.createObjectURL(blob)
             console.log(url) // 로그로 URL을 찍어 확인
+
             const img = document.createElement('img')
             img.onload = () => {
               URL.revokeObjectURL(url)
@@ -80,6 +83,14 @@ const AddCloth: React.FC = () => {
           }
         })
       }
+    }
+  }
+
+  const onCameraClick = () => {
+    if (cameraActive && captureMode) {
+      handleCapture()
+    } else {
+      CameraClick()
     }
   }
 
@@ -129,7 +140,7 @@ const AddCloth: React.FC = () => {
           source: ''
         })
       } catch (error) {
-        setmessage('저장에 실패했습니다.')
+        setMessage('저장에 실패했습니다.')
         console.error('저장 실패', error)
       }
     }
@@ -158,34 +169,54 @@ const AddCloth: React.FC = () => {
 
   // 업로드 이미지 저장
   function saveImage(event: any) {
-    alert('해당 이미지로 검색 하시겠습니까?')
+    const file = event.target.files[0]
+
     if (event.target.files) {
-      setImage(event.target.files[0])
+      setImage(file)
     }
     console.log(event)
 
     const reader = new FileReader()
-    reader.readAsDataURL(event.target.files[0])
     reader.onload = () => {
       setImagePath(reader.result as string)
+      setUploadedFile(file)
     }
-    setShowResults(false)
+    reader.readAsDataURL(file)
   }
+
+  useEffect(() => {
+    if (uploadedFile) {
+      // 이미지가 표시된 후 confirm 창 띄우기
+      setTimeout(() => {
+        if (confirm('해당 사진으로 검색하시겠습니까?')) {
+          imageSearch(uploadedFile) // 이미지 검색 함수 실행
+        }
+        setUploadedFile(null) // 중복 실행 방지
+      }, 100)
+    }
+  }, [uploadedFile])
 
   // 이미지 업로드 검색
-  async function imageSearch() {
+  async function imageSearch(file: any) {
     const formdata = new FormData()
-    if (image) {
-      formdata.append('image', image)
+    formdata.append('image', file)
+    // if (image) {
+    //   formdata.append('image', file)
+    // }
+
+    try {
+      const response = await closetImgSearch(formdata)
+      updateResults(response.data.result)
+      setShowResults(true)
+    } catch (error) {
+      console.log('이미지 검색 실패:', error)
     }
-    const response = await closetImgSearch(formdata)
 
     // setCount(response.data.result.length)
-    updateResults(response.data.result)
-    setShowResults(true)
   }
 
-  function RenderImage(image: File) {
+  // 업로드 이미지 띄우기
+  function RenderImage() {
     return (
       <div>
         <img src={imagePath}></img>
@@ -193,7 +224,7 @@ const AddCloth: React.FC = () => {
     )
   }
 
-  // 결과 렌더링
+  // 검색 결과 렌더링
   function RenderResult() {
     return (
       <div className={styles.searchClothes}>
@@ -325,10 +356,17 @@ const AddCloth: React.FC = () => {
               </label>
               <img
                 className={styles.camera}
-                src="/src/assets/camera.png"
-                alt="camera"
-                onClick={CameraClick}
+                src={captureMode ? '/src/assets/avatar.png' : '/src/assets/camera.png'}
+                alt={captureMode ? 'capture' : 'camera'}
+                onClick={onCameraClick}
               />
+              {cameraActive && (
+                <video
+                  ref={videoRef}
+                  style={videoStyle} // 여기에 스타일을 적용합니다.
+                  autoPlay
+                ></video>
+              )}
               <img
                 className={styles.switch}
                 src="/src/assets/switch.png"
