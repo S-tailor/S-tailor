@@ -175,7 +175,7 @@ const Ask: React.FC = () => {
 
       <section className={styles.askMain}>
         <div className={styles.askMainInner}>
-          <p className={styles.infoText}>* 페이지를 벗어나면 대화가 사라집니다.</p>
+          <p className={styles.infoText}>* 페이지를 벗어나면 대화가 사라집니다!</p>
           {messages.map((msg, index) => (
             <div key={index} className={msg.sender === 'user' ? styles.userMsg : styles.botMsg}>
               <div className={msg.sender === 'user' ? styles.userNameRight : styles.userNameLeft}>
@@ -186,7 +186,7 @@ const Ask: React.FC = () => {
                 className={msg.sender === 'user' ? styles.userMessageText : styles.botMessageText}
               >
                 {msg.text}
-              </span>
+              </span >
             </div>
           ))}
         </div>
