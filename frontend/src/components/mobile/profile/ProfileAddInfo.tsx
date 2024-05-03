@@ -3,7 +3,7 @@ import React from 'react'
 const ProfileAddInfo: React.FC = () => {
   return (
     <div>
-      <h1>ProfileAddInfo Component</h1>
+      <h1>ProfileAddInfo Compo</h1>
     </div>
   )
 }

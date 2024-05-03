@@ -54,6 +54,11 @@ const Login: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.bgVideo}>
+        <video className={styles.bgVideoContent} autoPlay muted loop>
+          <source src='/src/assets/background_light.mp4' />
+        </video>
+      </div>
       <header>
         <div className={styles.headerInner1}>
           <img

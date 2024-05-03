@@ -7,9 +7,23 @@
   justify-content: space-between;
   width: 100vw;
   height: 100vh;
-  background-image: url("/src/assets/background_light.gif");
-  background-size: cover;
-  background-color: white;
+}
+
+.bgVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.bgVideoContent {
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
 }
 
 header {
@@ -59,14 +73,16 @@ header {
   font-family: 'Pretendard-Bold';
   font-size: 2.5em;
   margin-left: 10vw;
-  padding-top: 8vh;
+  margin-bottom: 1vh;
+  padding-top: 2vh;
 }
 
 .title2 {
   font-family: 'Pretendard-Bold';
   font-size: 2.5em;
   margin-left: 10vw;
-  padding-top: 8vh;
+  padding-top: 2vh;
+  margin-bottom: 1vh;
   opacity: 25%;
   &.active {
     opacity: 100%;

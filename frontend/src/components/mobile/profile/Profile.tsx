@@ -69,6 +69,11 @@ const Profile: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.bgVideo}>
+        <video className={styles.bgVideoContent} autoPlay muted loop>
+          <source src='/src/assets/background_light.mp4' />
+        </video>
+			</div>
       <div className={styles.header}>
         <div className={styles.headerInner}>
           <img onClick={goHome} className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
