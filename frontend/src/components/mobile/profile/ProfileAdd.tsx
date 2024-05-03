@@ -368,7 +368,11 @@ const ProfileAdd: React.FC = () => {
               <p className={styles.subtexts2}>이제 마지막입니다!</p>
               <p className={`${styles.message} ${message ? styles.showMessage : ''}`}>{message}</p>
               <button className={styles.btn3} onClick={complete} disabled={isSubmitting}>
-                완료
+                {isSubmitting ? (
+                  <img className={styles.loading} src="/src/assets/loading.gif" alt="로딩 중" />
+                ) : (
+                  "완료"
+                )}
               </button>
             </section>
           </>

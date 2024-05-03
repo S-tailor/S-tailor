@@ -20,7 +20,7 @@
   font-size: 1em;
 }
 
-header {
+.header {
   padding-top: 3%;
   display: flex;
   justify-content: center;
@@ -31,7 +31,6 @@ header {
   width: 100%;
   z-index: 1005;
   background-color: white;
-  // box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .headerInner {

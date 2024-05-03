@@ -1,5 +1,55 @@
-@import "fonts";
-
+@font-face {
+  font-family: "main-title";
+  src: url("../assets/fonts/ANEK-BANGLA-EXPANDED-EXTRABOLD.TTF") format("truetype");
+}
+@font-face {
+  font-family: "sub-title";
+  src: url("../assets/fonts/SAMSUNGSHARPSANS-BOLD.TTF") format("truetype");
+}
+@font-face {
+  font-family: "samsung-one-400";
+  src: url("../assets/fonts/SAMSUNGONE-400.TTF") format("truetype");
+}
+@font-face {
+  font-family: "samsung-one-700";
+  src: url("../assets/fonts/SAMSUNGONE-700.TTF") format("truetype");
+}
+@font-face {
+  font-family: "NotoSansKR-ExtraBold";
+  src: url("../assets/fonts/NotoSansKR-ExtraBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "NotoSansKR-SemiBold";
+  src: url("../assets/fonts/NotoSansKR-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "NotoSansKR-Bold";
+  src: url("../assets/fonts/NotoSansKR-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "NotoSansKR-Medium";
+  src: url("../assets/fonts/NotoSansKR-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Pretendard-ExtraBold";
+  src: url("../assets/fonts/Pretendard-ExtraBold.otf");
+}
+@font-face {
+  font-family: "Pretendard-Bold";
+  src: url("../assets/fonts/Pretendard-Bold.otf");
+}
+@font-face {
+  font-family: "Pretendard-SemiBold";
+  src: url("../assets/fonts/Pretendard-SemiBold.otf");
+}
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("../assets/fonts/Pretendard-Regular.otf");
+}
+@font-face {
+  font-family: "Pretendard-Medium";
+  src: url("../assets/fonts/Pretendard-Medium.otf");
+}
 .header {
   padding-top: 3%;
   display: flex;
@@ -38,7 +88,7 @@
   position: relative;
 }
 
-.logo{
+.logo {
   width: 30vw;
   margin-left: -10px;
 }
@@ -60,7 +110,7 @@
   bottom: 16px;
   right: 6px;
   color: white;
-  font-family: 'Pretendard-SemiBold';
+  font-family: "Pretendard-SemiBold";
   font-size: 0.7em;
   display: flex;
   justify-content: center;
@@ -68,7 +118,6 @@
   padding-right: 1px;
   padding-bottom: 1px;
 }
-
 
 .mypageMain {
   display: flex;
@@ -80,14 +129,14 @@
 
 .profile {
   text-align: center;
-  font-family: 'Pretendard-SemiBold';
+  font-family: "Pretendard-SemiBold";
   padding: 0;
   margin: 0;
 }
 
 .profile > p {
   text-align: center;
-  font-family: 'Pretendard-SemiBold';
+  font-family: "Pretendard-SemiBold";
   padding-top: 5%;
   padding-bottom: 0;
   margin: 0;
@@ -113,38 +162,38 @@
 }
 
 .changeBtn {
-  background: inherit; 
-  font-family: 'Pretendard-Bold';
-  border:none; 
-  box-shadow:none; 
+  background: inherit;
+  font-family: "Pretendard-Bold";
+  border: none;
+  box-shadow: none;
   background-color: #EBEBEB;
   border-radius: 50px;
   width: 32vw;
   height: 4vh;
   padding-left: 15%;
-  padding-right: 15%; 
+  padding-right: 15%;
   margin-top: 7%;
-  overflow:visible;
-  cursor:pointer;
+  overflow: visible;
+  cursor: pointer;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
 .logoutBtn {
-  background: inherit; 
-  font-family: 'Pretendard-Bold';
-  border:none; 
-  box-shadow:none; 
+  background: inherit;
+  font-family: "Pretendard-Bold";
+  border: none;
+  box-shadow: none;
   background-color: #EBEBEB;
   border-radius: 50px;
   width: 32vw;
   height: 4vh;
   padding-left: 15%;
-  padding-right: 23%; 
+  padding-right: 23%;
   margin-top: 10%;
-  overflow:visible;
-  cursor:pointer;
+  overflow: visible;
+  cursor: pointer;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -183,18 +232,18 @@
   background-color: rgba(255, 255, 255, 0.9);
   color: #222222;
   border-radius: 50px;
-  font-family: 'NotoSansKR-Medium';
+  font-family: "NotoSansKR-Medium";
   font-weight: 600;
   font-size: 0.9em;
   letter-spacing: 2px;
   box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
-  &:hover {
-    background-color: #222222;
-    color: white;
-  }
+}
+.btn:hover {
+  background-color: #222222;
+  color: white;
 }
 
-.bottomNav{
+.bottomNav {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -217,7 +266,7 @@
 }
 
 .bottomNavLabel1, .bottomNavLabel2, .bottomNavLabel3, .bottomNavLabel4 {
-  font-family: 'Pretendard-Regular';
+  font-family: "Pretendard-Regular";
   font-size: 0.55em;
   text-align: center;
   margin-top: 4px;

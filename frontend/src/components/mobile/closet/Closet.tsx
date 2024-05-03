@@ -6,12 +6,6 @@ import { cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/closet.module.scss'
 
 const Closet: React.FC = () => {
-  // interface UserProfile {
-  //   profilePk: number
-  //   image?: string
-  //   profileName: string
-  // }
-
   interface clothInfo {
     name: string
     price: string
@@ -32,12 +26,10 @@ const Closet: React.FC = () => {
   const [cartCount, setCartCount] = useState<number>(0)
   const [selectedCategory, setSelectedCategory] = useState('전체')
 
-  //////////// 상단 카테고리 선택 시 스타일 변경 ///////////////////////
   const categories = ['전체', '아우터', '상의', '하의', '원피스', '기타']
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category)
-    // const { clearUsers } = userStore()
   }
 
   useEffect(() => {
@@ -57,7 +49,7 @@ const Closet: React.FC = () => {
     })
   }
 
-  const DeleteClothClick = async (pk: number) => {
+  const deleteCloth = async (pk: number) => {
     const response = await closetItemDelete(pk)
     if (response.status === 200) {
       setClothList((currentList) => currentList.filter((item) => item.closetPk !== pk))
@@ -70,9 +62,7 @@ const Closet: React.FC = () => {
   const getCategoryStyle = (category: string) => {
     return category === selectedCategory ? { fontWeight: '700', color: '#424242' } : {}
   }
-  ////////////////////////////////////////////////////////////////////
 
-  /////////// 하단 내비게이션 바 선택 시 아이콘(컬러) 변경 //////////////
   const getIconSrc = (iconName: string) => {
     const path = location.pathname
     const iconPaths: { [key: string]: { [icon: string]: string } } = {
@@ -115,7 +105,6 @@ const Closet: React.FC = () => {
       ? { fontFamily: 'Pretendard-Bold', color: '#9091FB', marginTop: '2px' }
       : {}
   }
-  ////////////////////////////////////////////////////////////////////
 
   const addCart = async (pk: number) => {
     await cartItemAdd(pk).then(() => {
@@ -139,24 +128,6 @@ const Closet: React.FC = () => {
     })
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setTimeout(async () => {
-        const profilePk = user[0]?.profilePk
-        if (profilePk) {
-          await closetItemList(profilePk).then((response) => {
-            setClothList(response.data.result)
-            setIsLoading(false)
-          })
-        }
-      }, 5000)
-    }
-
-    fetchData()
-
-    return () => {}
-  }, [])
-
   return (
     <div className={styles.container}>
       {isLoading ? (
@@ -166,7 +137,7 @@ const Closet: React.FC = () => {
         </div>
       ) : (
         <>
-          <header>
+          <div className={styles.header}>
             <div className={styles.headerInner}>
               <div className={styles.headerInner1}>
                 <img
@@ -204,7 +175,7 @@ const Closet: React.FC = () => {
                 <span className={styles.cartAdd}>{cartCount}</span>
               </div>
             </div>
-          </header>
+          </div>
 
           <section className={styles.closetMain}>
             <div className={styles.mainCategory}>
@@ -221,7 +192,7 @@ const Closet: React.FC = () => {
             </div>
             <div className={styles.slider}>
               <div className={styles.slide}></div>
-              <div className={styles.slide}></div>
+              <div class는 className={styles.slide}></div>
               <div className={styles.slide}></div>
             </div>
             <div className={styles.mainTitle}>
@@ -241,7 +212,7 @@ const Closet: React.FC = () => {
                     </div>
                     <div
                       className={styles.deleteCartBtn}
-                      onClick={() => DeleteClothClick(cloth.closetPk)}
+                      onClick={() => deleteCloth(cloth.closetPk)}
                     >
                       <img
                         className={styles.deleteCartBtnImg}

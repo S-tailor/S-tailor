@@ -1,20 +1,17 @@
-import React, { useMemo, startTransition } from 'react'
+import React, { useState, useMemo, startTransition, useEffect } from 'react'
 import userStore from '@/store/store'
 import { useLocation, useNavigate } from 'react-router-dom'
+// import { cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/mypage.module.scss'
 
 const MyPage: React.FC = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const [cartCount, setCartCount] = useState<number>(0)
   const { user } = userStore() as {
     user: { profilePk: number; image?: string; profileName: string }[]
   }
-  // const userName = user[0]?.profileName ?? 'Guest'
-
-  // 프로필 이름
-
   const profileName = user[0]?.profileName ?? 'Guest'
-  // 프로필 사진
   const profileImg = user[0]?.image
 
   const ClosetSearchClick = () => {
@@ -31,20 +28,11 @@ const MyPage: React.FC = () => {
 
   const LogoutClick = () => {
     startTransition(() => {
-      // 로그아웃 전, accessToken의 존재 여부 확인
-      // console.log('로그아웃 전 accessToken:', window.localStorage.getItem('accessToken'))
-
-      // accessToken 삭제로 로그아웃
       window.localStorage.removeItem('accessToken')
-
-      // 로그아웃 후, accessToken이 제거되었는지 확인
-      console.log('로그아웃 후 accessToken:', window.localStorage.getItem('accessToken'))
-
       navigate('/mobile/start')
     })
   }
 
-  /////////// 하단 내비게이션 바 선택 시 아이콘(컬러) 변경 //////////////
   const getIconSrc = (iconName: string) => {
     const path = location.pathname
     const iconPaths: { [key: string]: { [icon: string]: string } } = {
@@ -87,23 +75,79 @@ const MyPage: React.FC = () => {
       ? { fontFamily: 'Pretendard-Bold', color: '#9091FB', marginTop: '1px' }
       : {}
   }
-  ////////////////////////////////////////////////////////////////////
+
+  // const addCart = async (pk: number) => {
+  //   await cartItemAdd(pk).then(() => {
+  //     alert('장바구니에 추가되었습니다!')
+  //     const newCartCount = cartCount + 1
+  //     localStorage.setItem('cartCount', JSON.stringify(newCartCount))
+  //     setCartCount(newCartCount)
+  //   })
+  // }
+
+  useEffect(() => {
+    const storedCartCount = localStorage.getItem('cartCount')
+    if (storedCartCount) {
+      setCartCount(JSON.parse(storedCartCount))
+    }
+  }, [])
 
   return (
-    <div>
-      {/* 검색 아이콘으로 변경 필요 */}
-      <button onClick={ClosetSearchClick}>옷장 검색</button>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <div className={styles.headerInner}>
+          <div className={styles.headerInner1}>
+            <img className={styles.logo} src="/src/assets/mypage.png" alt="logo" />
+          </div>
 
-      <button onClick={ProfileChangeClick}>프로필 변경</button>
-      <button onClick={LogoutClick}>로그아웃</button>
-      <div>
-        <img src={profileImg} alt="프로필 이미지" />
-        <h3>{profileName}</h3>
+          <div className={styles.headerInner2}>
+            <img
+              className={styles.search}
+              src="/src/assets/search.svg"
+              alt="search"
+              onClick={ClosetSearchClick}
+            />
+          </div>
+
+          <div className={styles.headerInner3}>
+            <img
+              className={styles.cart}
+              src="/src/assets/shoppingbag.svg"
+              alt="cart"
+              onClick={() => {
+                startTransition(() => {
+                  navigate('/mobile/closet/wishlist')
+                })
+              }}
+            />
+            <span className={styles.cartAdd}>{cartCount}</span>
+          </div>
+        </div>
       </div>
-      <h1>MyPage Component</h1>
-      <div>
-        <h3>2D 가상 피팅 결과 사진 확인</h3>
-      </div>
+
+      <section className={styles.mypageMain}>
+        <div className={styles.profile}>
+          <img className={styles.profileImg} src={profileImg} alt="프로필 이미지" />
+          <p>{profileName}</p>
+        </div>
+
+        <div className={styles.bottons}>
+          <button className={styles.changeBtn} onClick={ProfileChangeClick}>
+            <img
+              className={styles.profileChange}
+              src="/src/assets/profileChange.svg"
+              alt="profileChange"
+            />
+            <span>프로필 변경</span>
+          </button>
+          <button className={styles.logoutBtn} onClick={LogoutClick}>
+            <img className={styles.logout} src="/src/assets/logout.svg" alt="logout" />
+            <span>로그아웃</span>
+          </button>
+        </div>
+
+        <div>{/* <h3>2D 가상 피팅 결과 사진 확인</h3> */}</div>
+      </section>
 
       <footer className={styles.bottomNav}>
         <div className={styles.bottomNavInner}>
@@ -139,7 +183,7 @@ const MyPage: React.FC = () => {
             </p>
           </label>
 
-          <label className={styles.bottomNavInnerBtn}>
+          <label className="{styles.bottomNavInnerBtn}">
             <img
               className={styles.recommendImg}
               src={getIconSrc('ask')}

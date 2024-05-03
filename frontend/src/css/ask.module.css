@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @font-face {
   font-family: "main-title";
   src: url("../assets/fonts/ANEK-BANGLA-EXPANDED-EXTRABOLD.TTF") format("truetype");
@@ -51,26 +50,6 @@
   font-family: "Pretendard-Medium";
   src: url("../assets/fonts/Pretendard-Medium.otf");
 }
-.wait {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.loading {
-  width: 20vw;
-}
-
-.loadingMessage {
-  font-family: "main-title";
-  color: #A48FFC;
-  opacity: 50%;
-  font-size: 1em;
-}
-
 .header {
   padding-top: 3%;
   display: flex;
@@ -82,6 +61,7 @@
   width: 100%;
   z-index: 1005;
   background-color: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .headerInner {
@@ -95,7 +75,6 @@
   display: flex;
   justify-content: center;
   margin-right: auto;
-  cursor: pointer;
 }
 
 .headerInner2, .headerInner3 {
@@ -110,8 +89,8 @@
 }
 
 .logo {
-  width: 30vw;
-  margin-left: -10px;
+  width: 34.3vw;
+  margin-left: 5vw;
 }
 
 .search {
@@ -140,173 +119,159 @@
   padding-bottom: 1px;
 }
 
-.closetMain {
+.askMain {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-color: white;
+  margin-top: 22%;
 }
 
-.mainCategory {
-  font-family: "Pretendard-Medium";
-  width: 100vw;
+.askMainInner {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  width: 90vw;
+  height: 74vh;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.infoText {
+  font-size: 0.9em;
+  opacity: 60%;
+  font-family: "Pretendard-SemiBold";
+}
+
+.sentPhoto {
+  max-width: 50vw;
+}
+
+.userNameRight {
+  text-align: right;
+  width: 100%;
   font-size: 0.8em;
-  padding-top: 2%;
-  height: 10px;
-  padding-bottom: 7%;
-  background-color: white;
-  color: rgb(179, 179, 179);
-  position: fixed;
-  top: 80px;
-  left: 0;
-  z-index: 1004;
-  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.slider {
-  margin-top: 13vh;
-}
-
-.slider {
-  position: relative;
-  overflow: hidden;
-  width: 100vw;
-  height: 25vh;
-}
-
-.slide {
-  position: absolute;
-  top: 0;
-  left: 0;
+.userNameLeft {
+  text-align: left;
   width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  animation: slider 7.5s infinite linear;
+  font-size: 0.8em;
 }
 
-.slide:nth-child(1) {
-  background-image: url("/src/assets/광고1.png");
-  animation-delay: 0;
-}
-
-.slide:nth-child(2) {
-  background-image: url("/src/assets/광고2.png");
-  animation-delay: -2.5s;
-}
-
-.slide:nth-child(3) {
-  background-image: url("/src/assets/광고3.png");
-  animation-delay: -5s;
-}
-
-@keyframes slider {
-  0% {
-    transform: translateX(0);
-  }
-  26% {
-    transform: translateX(0);
-  }
-  33% {
-    transform: translateX(-100%);
-    animation-timing-function: step-end;
-  }
-  93% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-.mainTitle {
-  display: flex;
-  align-items: center;
+.userMsg,
+.botMsg {
   width: 90vw;
-  height: 7vh;
-}
-
-.userName {
-  width: 100%;
-  font-family: "Pretendard-Bold";
-  font-size: 1.6em;
-  color: #3d3d3d;
-}
-
-.mainClothes {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.clothesContent {
-  width: 90vw;
-  margin-bottom: 20vh;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.clothesItem {
-  position: relative;
-  width: 29vw;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  font-family: "Pretendard-SemiBold";
+  margin-top: 2%;
+  align-items: flex-start;
 }
 
-.clothesImg {
-  width: 100%;
-  border-radius: 5px;
-  filter: drop-shadow(0px 0px 1px #c4c4c4);
+.userMessageText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Pretendard-SemiBold";
+  height: 5vh;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-top: 2%;
+  background-color: #BABFFF;
+  border-radius: 50px;
+  width: fit-content;
+  align-self: flex-end;
 }
 
-.clothesName {
-  margin: 0;
-  display: inline-block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100px;
-  padding-top: 10px;
-  font-size: 0.7em;
-  font-family: "Pretendard-Bold";
-  color: #3d3d3d;
+.botMessageText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+  font-family: "Pretendard-SemiBold";
+  height: 5vh;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: #E8E8E8;
+  border-radius: 50px;
+  width: fit-content;
+  align-self: flex-start;
 }
 
-.clothesPrice {
-  font-family: "Pretendard-Bold";
-  font-size: 0.7em;
-  margin: 0;
-  padding-top: 5px;
-  color: #3d3d3d;
-}
-
-.addCartBtn {
-  width: 5vw;
-  cursor: pointer;
+.loadingInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  bottom: 50px;
-  right: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -75%);
 }
 
-.deleteCartBtn {
-  width: 5vw;
+.loading {
+  width: 20vw;
+}
+
+.textSend {
+  position: fixed;
+  width: 100vw;
+  height: 6vh;
+  background-color: #F6F6F8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.textSendInner {
+  width: 95vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.addImg {
+  width: 10vw;
+  margin-left: -1vw;
+  margin-right: 1vw;
   cursor: pointer;
+  opacity: 70%;
+}
+
+.temporaryImage {
   position: absolute;
-  top: 2px;
-  right: 0px;
+  width: 50vw;
+  height: 30vh;
+  object-fit: cover;
+  top: -31vh;
+  box-shadow: 3px -2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.addCartBtnImg {
-  width: 5vw;
-  filter: drop-shadow(1px 1px 3px #000000);
+.deleteImg {
+  width: 7vw;
+  cursor: pointer;
+  opacity: 70%;
 }
 
-.deleteCartBtnImg {
-  width: 2vw;
+.textField {
+  margin-left: 3vw;
+  margin-right: 2vw;
+  padding-left: 5%;
+  padding-right: 5%;
+  width: 70vw;
+  height: 4vh;
+  border-radius: 50px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: #D9D9D9;
+}
+
+.sendImg {
+  width: 8vw;
+  cursor: pointer;
+  opacity: 70%;
 }
 
 .bottomNavInnerBtn {
@@ -334,17 +299,6 @@
   height: 4vh;
   border-radius: 100px;
   filter: drop-shadow(0px 0px 1.5px #000000);
-}
-
-.wearingBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  position: fixed;
-  bottom: 13%;
-  left: 0;
-  z-index: 1000;
 }
 
 .btn {
