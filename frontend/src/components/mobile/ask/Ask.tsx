@@ -21,7 +21,7 @@ const Ask: React.FC = () => {
   const { user } = userStore() as {
     user: { profilePk: number; image?: string; profileName: string }[];
   };
-  const userName = localStorage.getItem('id')
+  const userName= user[0]?.profileName  ?? 'Guest'
   
   const saveText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value)
@@ -163,45 +163,47 @@ const Ask: React.FC = () => {
               </div>
             </div>
 
-      <hr />
 
-      <div className={styles.askMain}>
-       <div >
-                 <p>* 페이지를 벗어나면 대화가 사라집니다.</p>
+      <section className={styles.askMain}>
+       <div className={styles.askMainInner}>
+          <p className={styles.infoText}>* 페이지를 벗어나면 대화가 사라집니다.</p>
           {messages.map((msg, index) => (
-            <p key={index} className={msg.sender === 'user' ? 'user-msg' : 'bot-msg'}>
-              {/* 여기서 className이 user면 왼쪽으로 bot이면 오른쪽으로 정렬  */}
-           {msg.sender === 'user' ? `${userName} 님: ` : 'S-Tailor: '}
-            <br />
-            
-            {msg.image && <img src={msg.image} alt="전송한 사진" 
-            style={{ maxWidth: '100px' }} />}
-            <br />
-           {msg.text}
-            </p>
+            <div key={index} className={msg.sender === 'user' ? styles.userMsg : styles.botMsg}>
+              <div className={msg.sender === 'user' ? styles.userNameRight : styles.userNameLeft}>
+                {msg.sender === 'user' ? `${userName} 님` : 'S-Tailor'}
+              </div>
+              {msg.image && <img className={styles.sentPhoto} src={msg.image} alt="전송한 사진" />}
+              <span className={msg.sender === 'user' ? styles.userMessageText : styles.botMessageText}>
+                {msg.text}
+              </span>
+            </div>
           ))}
         </div>
-
-          {isLoading &&
-          <img src="" alt="로딩중" />
-          }
+        
+      </section>
+      <div className={styles.loadingInner}>
+        {isLoading &&
+        <img className={styles.loading} src="/src/assets/loading.gif" alt="로딩중" />
+        }
+      </div>
         
     
 
 
 
    
-        <hr />
-        <img src="" alt="플러스버튼" onClick={()=>{fileInputRef.current?.click()}}/>
-        <input id="profileImg" type="file" style={{ display: 'none' }} onChange={changePic} ref={fileInputRef}  ></input>
-        {file && <img src={fileUrl} alt="Uploaded Image" style={{width:'100px'}}/>}
-        <img src="" alt="이미지삭제" onClick={() => { setFileUrl(''); setFile(null); }}/>
-        <input type="text" onChange={saveText} value={text}/>
-        <button>
-        <img src="" alt="삼각형의 전송버튼" onClick={sendInfo}/>
-        </button>
+        <section className={styles.textSend}>
+          <div className={styles.textSendInner}>
+            <img className={styles.addImg} src="/src/assets/add.svg" alt="플러스버튼" onClick={()=>{fileInputRef.current?.click()}}/>
+            <input id="profileImg" type="file" style={{ display: 'none' }} onChange={changePic} ref={fileInputRef}  ></input>
+            {file && <img className={styles.temporaryImage} src={fileUrl} alt="Uploaded Image"/>}
+            <img className={styles.deleteImg} src="/src/assets/delete.svg" alt="이미지삭제" onClick={() => { setFileUrl(''); setFile(null); }}/>
+            <input className={styles.textField} type="text" onChange={saveText} value={text} autoFocus/>
+            <img className={styles.sendImg} src="/src/assets/send.svg" alt="삼각형의 전송버튼" onClick={sendInfo}/>
+          </div>
+        </section>
+
     
-      </div>
       
         <footer className={styles.bottomNav}>
         <div className={styles.bottomNavInner}>

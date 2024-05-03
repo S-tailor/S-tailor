@@ -71,11 +71,160 @@
 
 .askMain {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-color: white;
-  margin-top: 50%;
+  margin-top: 22%;
 }
+
+.askMainInner {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  height: 74vh;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.infoText {
+  font-size: 0.9em;
+  opacity: 60%;
+  font-family: 'Pretendard-SemiBold';
+}
+
+.sentPhoto {
+  max-width: 50vw;
+}
+
+.userNameRight {
+  text-align: right;
+  width: 100%;
+  font-size: 0.8em;
+}
+
+.userNameLeft {
+  text-align: left;
+  width: 100%;
+  font-size: 0.8em;
+}
+
+.userMsg,
+.botMsg {
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Pretendard-SemiBold';
+  margin-top: 2%;
+  align-items: flex-start;
+}
+
+.userMessageText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Pretendard-SemiBold';
+  height: 5vh;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-top: 2%;
+  background-color: #BABFFF;
+  border-radius: 50px;
+  width: fit-content;
+  align-self: flex-end;
+}
+
+.botMessageText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+  font-family: 'Pretendard-SemiBold';
+  height: 5vh;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: #E8E8E8;
+  border-radius: 50px;
+  width: fit-content;
+  align-self: flex-start;
+}
+
+.loadingInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -75%);
+}
+
+.loading {
+  width : 20vw;
+}
+
+.textSend {
+  position: fixed;
+  width: 100vw;
+  height: 6vh;
+  background-color: #F6F6F8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.textSendInner {
+  width: 95vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.addImg {
+  width: 10vw;
+  margin-left: -1vw;
+  margin-right: 1vw;
+  cursor: pointer;
+  opacity: 70%;
+}
+
+.temporaryImage {
+  position: absolute;
+  width: 50vw;
+  height: 30vh;
+  object-fit: cover;
+  top: -31vh;
+  box-shadow: 3px -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.deleteImg {
+  width: 7vw;
+  cursor: pointer;
+  opacity: 70%;
+}
+
+.textField {
+  margin-left: 3vw;
+  margin-right: 2vw;
+  padding-left: 5%;
+  padding-right: 5%;
+  width: 70vw;
+  height: 4vh;
+  border-radius: 50px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: #D9D9D9;
+}
+
+.sendImg {
+  width: 8vw;
+  cursor: pointer;
+  opacity: 70%;
+}
+
+
 
 .bottomNavInnerBtn {
   cursor: pointer;
