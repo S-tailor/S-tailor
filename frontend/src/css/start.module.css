@@ -19,6 +19,18 @@
   src: url("../assets/fonts/NotoSansKR-ExtraBold.ttf") format("truetype");
 }
 @font-face {
+  font-family: "NotoSansKR-SemiBold";
+  src: url("../assets/fonts/NotoSansKR-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "NotoSansKR-Bold";
+  src: url("../assets/fonts/NotoSansKR-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "NotoSansKR-Medium";
+  src: url("../assets/fonts/NotoSansKR-Medium.ttf") format("truetype");
+}
+@font-face {
   font-family: "Pretendard-ExtraBold";
   src: url("../assets/fonts/Pretendard-ExtraBold.otf");
 }
@@ -30,12 +42,23 @@
   font-family: "Pretendard-SemiBold";
   src: url("../assets/fonts/Pretendard-SemiBold.otf");
 }
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("../assets/fonts/Pretendard-Regular.otf");
+}
+@font-face {
+  font-family: "Pretendard-Medium";
+  src: url("../assets/fonts/Pretendard-Medium.otf");
+}
 .container {
   width: 100vw;
   height: 100vh;
   background-image: url("/src/assets/background_light.gif");
   background-size: cover;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 header {
@@ -43,37 +66,48 @@ header {
   height: 10%;
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+
+.headerInner {
+  width: 80vw;
+  display: flex;
+  align-items: flex-start;
 }
 
 .closeBtn {
   width: 5vw;
-  margin-left: 10vw;
 }
 
 .topInfo {
-  width: 100vw;
+  width: 80vw;
   height: 27%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
 }
 
 .texts {
   font-family: "Pretendard-Bold";
+  width: 63vw;
   font-size: 2.5em;
-  margin-left: 10vw;
   padding-top: 0.7vh;
 }
 
 .middleInput {
-  width: 100vw;
+  width: 80vw;
   height: 39%;
-  padding-top: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .subtexts {
   font-family: "Pretendard-Bold";
-  margin-left: 10vw;
+  padding: 0;
+  margin: 0;
   color: #222222;
   opacity: 80%;
   font-size: 0.9em;
@@ -86,8 +120,8 @@ header {
   font-size: 1.4em;
   color: #222222;
   opacity: 50%;
-  margin-top: 1.5vh;
-  margin-left: 10vw;
+  margin-top: 4%;
+  width: 90vw;
   border: 0;
 }
 
@@ -96,7 +130,6 @@ header {
   width: 80vw;
   height: 3px;
   position: relative;
-  margin-left: 10vw;
 }
 .line:after {
   content: "";
@@ -123,7 +156,6 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
   height: 24%;
 }
 

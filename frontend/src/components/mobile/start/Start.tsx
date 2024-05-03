@@ -44,8 +44,7 @@ const Start: React.FC = () => {
       </header>
 
       <section className={styles.topInfo}>
-        <p className={styles.texts}>가상 옷장을</p>
-        <p className={styles.texts}>만들어 볼까요?</p>
+        <p className={styles.texts}>가상 옷장을 &nbsp; 만들어 볼까요?</p>
       </section>
 
       <section className={styles.middleInput}>

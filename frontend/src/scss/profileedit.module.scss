@@ -332,10 +332,6 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
 }
 
 .btn3 {
-  position: relative;
-  display: flex; 
-  justify-content: center;
-  align-items: center;
   width: 80vw;
   height: 7vh;
   border: 1px solid #222222;
@@ -350,14 +346,6 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
     background-color: #222222;
     color: white;
   }
-}
-
-.loading {
-  width: 24px;
-  height: 24px;
-  background-color: transparent;
-  border: none;
-  outline: none;
 }
 
 .toggleSwitch {

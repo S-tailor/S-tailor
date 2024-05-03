@@ -1,7 +1,8 @@
-import React,{startTransition, useMemo, useState, useRef} from 'react'
+import React,{startTransition, useMemo, useState, useRef, useEffect} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { chatbot } from '@/api/apiAsk'
 import userStore from '@/store/store'
+import { cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/ask.module.scss';
 
 const Ask: React.FC = () => {
@@ -14,12 +15,13 @@ const Ask: React.FC = () => {
   const location = useLocation();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const formData = new FormData()
+  const [cartCount, setCartCount] = useState<number>(0)
   // const {user} = userStore()
   const [isLoading, setIsLoading] = useState(false)
   const { user } = userStore() as {
     user: { profilePk: number; image?: string; profileName: string }[];
   };
-  const userName = localStorage.getItem('id')
+  const userName= user[0]?.profileName  ?? 'Guest'
   
   const saveText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value)
@@ -109,58 +111,98 @@ const Ask: React.FC = () => {
   }
   ////////////////////////////////////////////////////////////////////
 
+  const addCart = async (pk: number) => {
+    await cartItemAdd(pk)
+      .then(() => {
+        alert('장바구니에 추가되었습니다!')
+        const newCartCount = cartCount + 1
+        localStorage.setItem('cartCount', JSON.stringify(newCartCount))
+        setCartCount(newCartCount)
+      })
+  }
+
+  useEffect(() => {
+    const storedCartCount = localStorage.getItem('cartCount')
+    if (storedCartCount) {
+      setCartCount(JSON.parse(storedCartCount))
+    }
+  }, [])
   
     return (
-    <div>
-      <header>
-        <img src="" alt="search" onClick={()=>{
-          startTransition(()=>{
-            navigate('/mobile/closet/search')})}}
-            />
-             <img src="" alt="cart" onClick={()=>{
-               startTransition(()=>{
-                 navigate('/mobile/closet/wishlist')})}} 
-                 />
-                 <h1>스타일 추천</h1>
-                 <p>* 페이지를 벗어나면 대화가 사라집니다.</p>
-      </header>
-      <hr />
+    <div className={styles.container}>
 
-      <div>
-       <div >
+      <div className={styles.header}>
+              <div className={styles.headerInner}>
+              <div className={styles.headerInner1}>
+              <img className={styles.logo} src="/src/assets/styleReco.png" alt="logo" />
+              </div>
+          
+              <div className={styles.headerInner2}>
+                <img 
+                  className={styles.search}
+                  src="/src/assets/search.svg" 
+                  alt="search"
+                  onClick={()=>{
+                    startTransition(()=>{
+                      navigate('/mobile/closet/search')})}}  
+                />
+              </div>
+              
+              <div className={styles.headerInner3}>
+                <img 
+                  className={styles.cart}
+                  src="/src/assets/shoppingbag.svg" 
+                  alt="cart"
+                  onClick={()=>{
+                    startTransition(()=>{
+                      navigate('/mobile/closet/wishlist')})}} 
+                />
+                <span className={styles.cartAdd}>{cartCount}</span>
+              </div>
+
+              </div>
+            </div>
+
+
+      <section className={styles.askMain}>
+       <div className={styles.askMainInner}>
+          <p className={styles.infoText}>* 페이지를 벗어나면 대화가 사라집니다.</p>
           {messages.map((msg, index) => (
-            <p key={index} className={msg.sender === 'user' ? 'user-msg' : 'bot-msg'}>
-              {/* 여기서 className이 user면 왼쪽으로 bot이면 오른쪽으로 정렬  */}
-           {msg.sender === 'user' ? `${userName} 님: ` : 'S-Tailor: '}
-            <br />
-            
-            {msg.image && <img src={msg.image} alt="전송한 사진" 
-            style={{ maxWidth: '100px' }} />}
-            <br />
-           {msg.text}
-            </p>
+            <div key={index} className={msg.sender === 'user' ? styles.userMsg : styles.botMsg}>
+              <div className={msg.sender === 'user' ? styles.userNameRight : styles.userNameLeft}>
+                {msg.sender === 'user' ? `${userName} 님` : 'S-Tailor'}
+              </div>
+              {msg.image && <img className={styles.sentPhoto} src={msg.image} alt="전송한 사진" />}
+              <span className={msg.sender === 'user' ? styles.userMessageText : styles.botMessageText}>
+                {msg.text}
+              </span>
+            </div>
           ))}
         </div>
-
-          {isLoading &&
-          <img src="" alt="로딩중" />
-          }
+        
+      </section>
+      <div className={styles.loadingInner}>
+        {isLoading &&
+        <img className={styles.loading} src="/src/assets/loading.gif" alt="로딩중" />
+        }
+      </div>
         
     
 
 
 
-      </div>
    
-        <hr />
-        <img src="" alt="플러스버튼" onClick={()=>{fileInputRef.current?.click()}}/>
-        <input id="profileImg" type="file" style={{ display: 'none' }} onChange={changePic} ref={fileInputRef}  ></input>
-        {file && <img src={fileUrl} alt="Uploaded Image" style={{width:'100px'}}/>}
-        <img src="" alt="이미지삭제" onClick={() => { setFileUrl(''); setFile(null); }}/>
-        <input type="text" onChange={saveText} value={text}/>
-        <button>
-        <img src="" alt="삼각형의 전송버튼" onClick={sendInfo}/>
-        </button>
+        <section className={styles.textSend}>
+          <div className={styles.textSendInner}>
+            <img className={styles.addImg} src="/src/assets/add.svg" alt="플러스버튼" onClick={()=>{fileInputRef.current?.click()}}/>
+            <input id="profileImg" type="file" style={{ display: 'none' }} onChange={changePic} ref={fileInputRef}  ></input>
+            {file && <img className={styles.temporaryImage} src={fileUrl} alt="Uploaded Image"/>}
+            <img className={styles.deleteImg} src="/src/assets/delete.svg" alt="이미지삭제" onClick={() => { setFileUrl(''); setFile(null); }}/>
+            <input className={styles.textField} type="text" onChange={saveText} value={text} autoFocus/>
+            <img className={styles.sendImg} src="/src/assets/send.svg" alt="삼각형의 전송버튼" onClick={sendInfo}/>
+          </div>
+        </section>
+
     
       
         <footer className={styles.bottomNav}>
