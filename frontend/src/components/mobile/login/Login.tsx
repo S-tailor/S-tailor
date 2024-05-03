@@ -59,7 +59,7 @@ const Login: React.FC = () => {
           <source src='/src/assets/background_light.mp4' />
         </video>
       </div>
-      <header>
+      <div className={styles.header}>
         <div className={styles.headerInner1}>
           <img
             onClick={goEmail}
@@ -72,7 +72,7 @@ const Login: React.FC = () => {
           <p className={styles.login}>로그인</p>
         </div>
         <div className={styles.headerInner3}></div>
-      </header>
+      </div>
 
       <article className={styles.topArticle}>
         <section className={styles.firstInfo}>

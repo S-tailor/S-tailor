@@ -4,58 +4,35 @@
 }
 
 @font-face {
-  font-family: 'sub-title';
-  src: url('../assets/fonts/SAMSUNGSHARPSANS-BOLD.TTF') format('truetype');
-}
-
-@font-face {
-  font-family: 'samsung-one-400';
-  src: url('../assets/fonts/SAMSUNGONE-400.TTF') format('truetype');
-}
-
-@font-face {
-  font-family: 'samsung-one-700';
-  src: url('../assets/fonts/SAMSUNGONE-700.TTF') format('truetype');
-}
-
-@font-face {
-  font-family: 'NotoSansKR-ExtraBold';
-  src: url('../assets/fonts/NotoSansKR-ExtraBold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'NotoSansKR-SemiBold';
-  src: url('../assets/fonts/NotoSansKR-SemiBold.ttf') format('truetype');
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
 }
 @font-face {
-  font-family: 'NotoSansKR-Bold';
-  src: url('../assets/fonts/NotoSansKR-Bold.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'NotoSansKR-Medium';
-  src: url('../assets/fonts/NotoSansKR-Medium.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Pretendard-ExtraBold';
-  src: url('../assets/fonts/Pretendard-ExtraBold.otf');
-}
-
-@font-face {
-  font-family: 'Pretendard-Bold';
-  src: url('../assets/fonts/Pretendard-Bold.otf');
+  font-family: 'Pretendard-Medium';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
 }
 @font-face {
   font-family: 'Pretendard-SemiBold';
-  src: url('../assets/fonts/Pretendard-SemiBold.otf');
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Pretendard-Bold';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Pretendard-ExtraBold';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
 }
 
-@font-face {
-  font-family: 'Pretendard-Regular';
-  src: url('../assets/fonts/Pretendard-Regular.otf');
-}
 
-@font-face {
-  font-family: 'Pretendard-Medium';
-  src: url('../assets/fonts/Pretendard-Medium.otf');
-}
+
