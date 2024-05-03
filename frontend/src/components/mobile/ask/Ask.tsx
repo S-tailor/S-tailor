@@ -1,6 +1,6 @@
 import React,{startTransition, useMemo, useState, useRef, useEffect} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { chatbot } from '@/api/apiAsk'
+import { chatbot, reset } from '@/api/apiAsk'
 import userStore from '@/store/store'
 import { cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/ask.module.scss';

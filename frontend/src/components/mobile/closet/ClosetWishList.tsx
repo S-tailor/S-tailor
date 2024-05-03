@@ -1,6 +1,7 @@
 import React,{ startTransition, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { cartItemList, cartItemDelete } from '@/api/apiCart'
+import styles from '../../../scss/closetwishlist.module.scss'
 
 const ClosetWishList: React.FC = () => {
   interface cartInfo {
@@ -8,7 +9,8 @@ const ClosetWishList: React.FC = () => {
     price: string,
     image?: string,
     link: string,
-    closetPk: number
+    closetPk: number,
+    source: string,
   }
   const[cartList, setCartList] = useState<cartInfo[]>([])
   const[isLoading, setIsLoading] = useState<boolean>(true)
@@ -48,33 +50,68 @@ const ClosetWishList: React.FC = () => {
     })
   }
 
-  return (
-    <div>
-      <img src="" alt="back" onClick={()=>
-       startTransition(()=>{navigate('/mobile/closet')})} 
-     />
-          <h1>장바구니</h1>
-          <hr />
-          <h3>{isLoading? "장바구니 불러오는중...":""}</h3>
-          {cartList.length > 0 && (
-            <div>
-              장바구니에 {cartList.length}개의 상품이 있습니다.
-            </div>
-          )}
-      {cartList.map((item, idx) => (
-        <div key={idx}>
-          <div>
-            {item.image && <img src={item.image} alt='옷 사진'/>}
-            <b>{item.name}</b> 
-            <img src="" alt="delete-item" onClick={()=>deleteItem(item.closetPk)} />
-            <br />
-            {item.price} 원
-            <button onClick={()=> goShopping(item.link)}>구매하러가기</button>
-            <hr />
-          </div>
-        </div>
-      ))}
+  const goCloset = () => {
+    startTransition(() => {
+      navigate('/mobile/closet')
+    })
+  }
 
+  return (
+    <div className={styles.container}>
+
+      <div className={styles.header}>
+        <div className={styles.headerInner}>
+
+            <div className={styles.headerInner1}>
+              <img onClick={goCloset} className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
+            </div>
+        
+            <div className={styles.headerInner2}>
+              <p className={styles.title}>위시리스트</p>
+            </div>
+            
+            <div className={styles.headerInner3}>
+            </div>
+
+        </div>
+      </div>
+
+
+      {/* {isLoading? "장바구니 불러오는중...":""} */}
+    <div className={styles.main}>
+      {cartList.length > 0 && (
+        <p className={styles.length}>
+          장바구니에 {cartList.length}개의 상품이 있습니다.
+        </p>
+      )}
+      
+
+        {cartList.map((item, idx) => (
+    
+          <div className={styles.selected} key={idx}>
+
+              {item.image && <img className={styles.selectedImg} src={item.image} alt='옷 사진'/>}
+              
+              <div className={styles.seletedTexts}>
+                <p className={styles.selectedSource}>{item.source}</p>
+                <h4 className={styles.selectedTitle}>{item.name}</h4> 
+                <p className={styles.selectedPrice}>{item.price}원</p>
+                <div className={styles.selectedBtn}>
+                  <img 
+                    className={styles.selectedDeleteBtn}
+                    src="/src/assets/closeBtn.svg" 
+                    alt="delete-item" 
+                    onClick={()=>deleteItem(item.closetPk)} 
+                  />
+                  <button className={styles.selectedAddBtn} onClick={()=> goShopping(item.link)}>
+                  구매하러가기
+                  </button>
+              </div>
+            </div>
+          </div>
+
+        ))}
+      </div>
     </div>
   )
 }

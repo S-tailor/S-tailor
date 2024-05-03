@@ -8,4 +8,7 @@ async function chatbot(Info:any) {
     })
 }
 
-export {chatbot}
+async function reset(pk:string) {
+    return await api.post('/chatbot/clear', pk)
+}
+export {chatbot, reset}
