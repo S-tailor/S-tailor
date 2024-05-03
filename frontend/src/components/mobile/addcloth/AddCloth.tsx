@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, startTransition, useRef } from 'react'
+import React, { useState, useEffect, useMemo, startTransition, useRef, CSSProperties } from 'react'
 import userStore from '@/store/store'
 import { closetImgSearch, closetTextSearch, closetItemSave } from '@/api/apiCloset'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -17,9 +17,8 @@ interface SearchResultItem {
 interface SelectedClothItem extends SearchResultItem {}
 
 type CameraMode = 'user' | 'environment'
+
 const AddCloth: React.FC = () => {
-
-
   const location = useLocation()
   // const [isLoading, setIsLoading] = useState(true);
   const { user } = userStore() as {
@@ -36,6 +35,8 @@ const AddCloth: React.FC = () => {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null)
   const [cameraActive, setCameraActive] = useState(false)
   const [captureMode, setCaptureMode] = useState(false)
+  // const [showPicture, setShowPicture] = useState(true)
+  const [searchMode, setSearchMode] = useState<'text' | 'upload' | 'camera' | null>(null)
 
   // 카메라 켜기
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -69,17 +70,22 @@ const AddCloth: React.FC = () => {
 
       if (ctx) {
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
-        canvas.toBlob((blob) => {
+        canvas.toBlob(async (blob) => {
           if (blob) {
+            const file = new File([blob], 'captured-image.png', { type: 'image/png' })
             const url = URL.createObjectURL(blob)
             console.log(url) // 로그로 URL을 찍어 확인
 
-            const img = document.createElement('img')
-            img.onload = () => {
-              URL.revokeObjectURL(url)
-            }
-            img.src = url
-            document.body.appendChild(img)
+            setImagePath(url)
+            setUploadedFile(file)
+            setSearchMode('camera')
+
+            // const img = document.createElement('img')
+            // img.onload = () => {
+            //   URL.revokeObjectURL(url)
+            // }
+            // img.src = url
+            // document.body.appendChild(img)
           }
         })
       }
@@ -89,8 +95,10 @@ const AddCloth: React.FC = () => {
   const onCameraClick = () => {
     if (cameraActive && captureMode) {
       handleCapture()
+      setSearchMode('camera') // 사진 촬영 후 이미지 보여주기 위해 변경
     } else {
       CameraClick()
+      setSearchMode(null) // 카메라 실행할 때는 카메라를 보여줌
     }
   }
 
@@ -106,9 +114,33 @@ const AddCloth: React.FC = () => {
   }
 
   // 전면 카메라 사용시 거울 모드 적용
-  const videoStyle = {
+  const videoStyle: CSSProperties = {
     width: '100%',
+    height: '100%',
+    objectFit: 'cover', // 사각형을 가득 채우기
     transform: camera === 'user' ? 'scaleX(-1)' : 'none'
+  }
+
+  // 업로드된 이미지 또는 촬영된 이미지 렌더링
+  function RenderCameraImage() {
+    return (
+      <div className={styles.picture}>
+        <img
+          src={imagePath}
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          alt="Captured"
+        />
+      </div>
+    )
+  }
+
+  // 카메라 영상 렌더링
+  function RenderVideo() {
+    return (
+      <div className={styles.picture}>
+        <video ref={videoRef} autoPlay />
+      </div>
+    )
   }
 
   // 옷 선택
@@ -124,14 +156,14 @@ const AddCloth: React.FC = () => {
   }
 
   // const user = userStore((state) => state.user)
-  const profilePk = (sessionStorage.getItem('profilePk'))
+  const profilePk = sessionStorage.getItem('profilePk')
 
   // 옷 저장
   const handleSaveCloths = async () => {
     for (const cloth of selectedCloths) {
       // console.log(cloth)
       try {
-       await closetItemSave({
+        await closetItemSave({
           price: cloth.price,
           thumbNail: cloth.image,
           name: cloth.title,
@@ -139,7 +171,6 @@ const AddCloth: React.FC = () => {
           profilePk: profilePk,
           source: ''
         })
-
       } catch (error) {
         setMessage('저장에 실패했습니다.')
         console.error('저장 실패', error)
@@ -163,7 +194,7 @@ const AddCloth: React.FC = () => {
   // 텍스트 검색
   async function textSearch() {
     const response = await closetTextSearch(text)
-   
+
     updateResults(response.data.result)
   }
 
@@ -180,6 +211,7 @@ const AddCloth: React.FC = () => {
     reader.onload = () => {
       setImagePath(reader.result as string)
       setUploadedFile(file)
+      setSearchMode('upload')
     }
     reader.readAsDataURL(file)
   }
@@ -216,7 +248,7 @@ const AddCloth: React.FC = () => {
   }
 
   // 업로드 이미지 띄우기
-  function RenderImage() {
+  function RenderUploadedImage() {
     return (
       <div>
         <img src={imagePath}></img>
@@ -236,9 +268,9 @@ const AddCloth: React.FC = () => {
               onClick={() => handleSelectCloth(item)}
               style={{ width: '100px', height: '100px' }}
             />
-            <p>{item.title}</p>
-            <p>{item.price}</p>
-            <p>{item.source}</p>
+            <p className={styles.clothesName}>{item.title}</p>
+            <p className={styles.clothesPrice}>{item.price}</p>
+            <p className={styles.clothesSource}>{item.source}</p>
           </div>
         ))}
       </div>
@@ -323,10 +355,20 @@ const AddCloth: React.FC = () => {
           />
         </div>
 
-        <div className={styles.picture}>{showResults ? <RenderResult /> : <RenderImage />}</div>
+        <div className={styles.picture}>
+          {showResults ? (
+            <RenderResult />
+          ) : searchMode === 'camera' ? (
+            <RenderCameraImage />
+          ) : searchMode === 'upload' ? (
+            <RenderUploadedImage />
+          ) : (
+            <RenderVideo />
+          )}
+        </div>
 
         <div className={styles.pictureButtons}>
-          {showResults ? ( 
+          {showResults ? (
             selectedCloths.map((cloth) => (
               <div className={styles.selected} key={cloth.link}>
                 <img className={styles.selectedImg} src={cloth.image} alt={cloth.title} />
@@ -360,13 +402,7 @@ const AddCloth: React.FC = () => {
                 alt={captureMode ? 'capture' : 'camera'}
                 onClick={onCameraClick}
               />
-              {cameraActive && (
-                <video
-                  ref={videoRef}
-                  style={videoStyle} // 여기에 스타일을 적용합니다.
-                  autoPlay
-                ></video>
-              )}
+              {cameraActive && <video ref={videoRef} style={videoStyle} autoPlay />}
               <img
                 className={styles.switch}
                 src="/src/assets/switch.png"
