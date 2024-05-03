@@ -231,7 +231,7 @@ const Closet: React.FC = () => {
                 className={styles.btn}
                 onClick={() => {
                   startTransition(() => {
-                    navigate('/mobile/closet/code/input')
+                    navigate('/mobile/closet/code/input/test')
                   })
                 }}
               >

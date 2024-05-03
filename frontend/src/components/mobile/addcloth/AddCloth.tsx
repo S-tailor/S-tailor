@@ -16,10 +16,10 @@ interface SearchResultItem {
 // 선택한 옷들의 항목
 interface SelectedClothItem extends SearchResultItem {}
 
-// 카메라
 type CameraMode = 'user' | 'environment'
-
 const AddCloth: React.FC = () => {
+
+
   const location = useLocation()
   // const [isLoading, setIsLoading] = useState(true);
   const { user } = userStore() as {
@@ -124,14 +124,14 @@ const AddCloth: React.FC = () => {
   }
 
   // const user = userStore((state) => state.user)
-  const profilePk = sessionStorage.getItem('profilePk')
+  const profilePk = (sessionStorage.getItem('profilePk'))
 
   // 옷 저장
   const handleSaveCloths = async () => {
     for (const cloth of selectedCloths) {
       // console.log(cloth)
       try {
-        await closetItemSave({
+       await closetItemSave({
           price: cloth.price,
           thumbNail: cloth.image,
           name: cloth.title,
@@ -139,6 +139,7 @@ const AddCloth: React.FC = () => {
           profilePk: profilePk,
           source: ''
         })
+
       } catch (error) {
         setMessage('저장에 실패했습니다.')
         console.error('저장 실패', error)
@@ -162,9 +163,8 @@ const AddCloth: React.FC = () => {
   // 텍스트 검색
   async function textSearch() {
     const response = await closetTextSearch(text)
-
+   
     updateResults(response.data.result)
-    setShowResults(true)
   }
 
   // 업로드 이미지 저장
@@ -227,18 +227,18 @@ const AddCloth: React.FC = () => {
   // 검색 결과 렌더링
   function RenderResult() {
     return (
-      <div className={styles.searchClothes}>
+      <div>
         {results.map((item: SearchResultItem, index: number) => (
-          <div key={index} className={styles.resultItem}>
+          <div key={index}>
             <img
-              className={styles.resultItemImg}
               src={item.image}
               alt={item.title}
               onClick={() => handleSelectCloth(item)}
+              style={{ width: '100px', height: '100px' }}
             />
-            <p className={styles.clothesSource}>{item.source}</p>
-            <p className={styles.clothesName}>{item.title}</p>
-            <p className={styles.clothesPrice}>{item.price}</p>
+            <p>{item.title}</p>
+            <p>{item.price}</p>
+            <p>{item.source}</p>
           </div>
         ))}
       </div>
