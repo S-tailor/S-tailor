@@ -179,7 +179,7 @@ const ProfileAdd: React.FC = () => {
         
         {page1 && (
           <>
-            <header>
+            <div className={styles.header}>
               <div className={styles.headerInner1}>
                 <img
                   onClick={goSelect}
@@ -192,7 +192,7 @@ const ProfileAdd: React.FC = () => {
                 <p className={styles.profileadd}>프로필 추가</p>
               </div>
               <div className={styles.headerInner3}></div>
-            </header>
+            </div>
 
             <section className={styles.create}>
               <div className={styles.profileImg}>
@@ -233,7 +233,7 @@ const ProfileAdd: React.FC = () => {
 
         {page2 && (
           <>
-            <header>
+            <div className={styles.header}>
               <div className={styles.headerInner1}>
                 <img
                   className={styles.backBtn}
@@ -246,7 +246,7 @@ const ProfileAdd: React.FC = () => {
                 <p className={styles.profileadd}>프로필 추가</p>
               </div>
               <div className={styles.headerInner3}></div>
-            </header>
+            </div>
 
             <section className={styles.create2}>
               <div className={styles.topInfo}>
@@ -285,7 +285,7 @@ const ProfileAdd: React.FC = () => {
 
         {page3 && (
           <>
-            <header>
+            <div className={styles.header}>
               <div className={styles.headerInner1}>
                 <img
                   className={styles.backBtn}
@@ -298,7 +298,7 @@ const ProfileAdd: React.FC = () => {
                 <p className={styles.profileadd}>프로필 추가</p>
               </div>
               <div className={styles.headerInner3}></div>
-            </header>
+            </div>
 
             <section className={styles.create3}>
               <div className={styles.topInfo}>
@@ -334,7 +334,7 @@ const ProfileAdd: React.FC = () => {
 
         {page4 && (
           <>
-            <header>
+            <div className={styles.header}>
               <div className={styles.headerInner1}>
                 <img
                   className={styles.backBtn}
@@ -347,7 +347,7 @@ const ProfileAdd: React.FC = () => {
                 <p className={styles.profileadd}>프로필 추가</p>
               </div>
               <div className={styles.headerInner3}></div>
-            </header>
+            </div>
 
             <section className={styles.create3}>
               <div className={styles.topInfo}>

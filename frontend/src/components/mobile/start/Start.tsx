@@ -1,5 +1,5 @@
 import React, { startTransition, useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { userCheck } from '../../../api/apiUser'
 import styles from '../../../scss/start.module.scss';
 
@@ -32,6 +32,13 @@ const Start: React.FC = () => {
       console.error('DB 오류', error)
     }
   }
+
+  const goHome = () => {
+    startTransition(() => {
+      navigate('/')
+    })
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.bgVideo}>
@@ -40,13 +47,11 @@ const Start: React.FC = () => {
         </video>
 			</div>
 
-      <header>
+      <div className={styles.header}>
         <div className={styles.headerInner}>
-          <Link to={'/'}>
-            <img className={styles.closeBtn} src="/src/assets/closeBtn.svg" alt="closeBtn" />
-          </Link>
+          <img onClick={goHome} className={styles.closeBtn} src="/src/assets/closeBtn.svg" alt="closeBtn" />
         </div>
-      </header>
+      </div>
 
       <section className={styles.topInfo}>
         <p className={styles.texts}>가상 옷장을 &nbsp; 만들어 볼까요?</p>
