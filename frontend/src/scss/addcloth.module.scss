@@ -1,4 +1,4 @@
-@import "fonts";
+@import 'fonts';
 
 header {
   padding-top: 3%;
@@ -28,7 +28,7 @@ header {
   cursor: pointer;
 }
 
-.logo{
+.logo {
   width: 30vw;
   margin-left: -10px;
 }
@@ -55,7 +55,7 @@ header {
   height: 4vh;
   padding: 5%;
   outline: none;
-  background-color: #E2E2E2;
+  background-color: #e2e2e2;
   border-radius: 50px;
   font-family: 'Pretendard-SemiBold';
   color: #222222;
@@ -96,7 +96,7 @@ header {
   padding-top: 7px;
   font-size: 0.7em;
   font-family: 'Pretendard-Regular';
-  color :#3d3d3d;
+  color: #3d3d3d;
 }
 
 .clothesName {
@@ -109,7 +109,7 @@ header {
   width: 100px;
   font-size: 0.7em;
   font-family: 'Pretendard-Bold';
-  color :#3d3d3d;
+  color: #3d3d3d;
 }
 
 .clothesPrice {
@@ -117,20 +117,19 @@ header {
   font-size: 0.7em;
   margin: 0;
   padding-top: 5px;
-  color :#3d3d3d;
+  color: #3d3d3d;
 }
-
 
 .picture {
   width: 100vw;
-  height: 53vh; 
-  overflow: auto; 
+  height: 53vh;
+  overflow: auto;
   background-color: #ebebeb;
   margin-top: 4vh;
   margin-bottom: auto;
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
 }
 
 .searchClothes {
@@ -150,7 +149,7 @@ header {
   width: 90vw;
   display: flex;
   justify-content: space-between;
-  overflow: auto; 
+  overflow: auto;
 }
 
 .selected {
@@ -183,7 +182,7 @@ header {
   padding-top: 7px;
   font-size: 0.7em;
   font-family: 'Pretendard-Regular';
-  color :#3d3d3d;
+  color: #3d3d3d;
 }
 
 .selectedTitle {
@@ -196,7 +195,7 @@ header {
   width: 250px;
   font-size: 0.7em;
   font-family: 'Pretendard-Bold';
-  color :#3d3d3d;
+  color: #3d3d3d;
 }
 
 .selectedPrice {
@@ -204,7 +203,7 @@ header {
   font-size: 0.7em;
   margin: 0;
   padding-top: 5px;
-  color :#3d3d3d;
+  color: #3d3d3d;
 }
 
 .selectedBtn {
@@ -212,15 +211,16 @@ header {
   flex-direction: column;
 }
 
-.selectedDeleteBtn, .selectedAddBtn {
-  background: inherit; 
+.selectedDeleteBtn,
+.selectedAddBtn {
+  background: inherit;
   font-family: 'Pretendard-Bold';
-  border:none; 
-  box-shadow:none; 
-  border-radius:0; 
-  padding:0; 
-  overflow:visible;
-  cursor:pointer
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
 }
 
 .selectedDeleteBtn {
@@ -255,7 +255,7 @@ header {
   cursor: pointer;
 }
 
-input[type="file"] {
+input[type='file'] {
   display: none;
 }
 
@@ -314,7 +314,7 @@ input[type="file"] {
   }
 }
 
-.bottomNav{
+.bottomNav {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -336,7 +336,10 @@ input[type="file"] {
   margin-top: 1vh;
 }
 
-.bottomNavLabel1, .bottomNavLabel2, .bottomNavLabel3, .bottomNavLabel4 {
+.bottomNavLabel1,
+.bottomNavLabel2,
+.bottomNavLabel3,
+.bottomNavLabel4 {
   font-family: 'Pretendard-Regular';
   font-size: 0.55em;
   text-align: center;
