@@ -1,18 +1,28 @@
 @import "fonts";
 
-* {
-  // border: 1px solid red;
-}
-
 .container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100vw;
   height: 100vh;
-  background-image: url("/src/assets/background_light.gif");
-  background-size: cover;
-  background-color: white;
+}
+
+.bgVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.bgVideoContent {
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
 }
 
 header {
@@ -61,7 +71,7 @@ header {
 
 .create2 {
   width: 100vw;
-  height: 26%;
+  height: 18%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,6 +96,7 @@ header {
   position: relative;
   object-fit: cover;
   width: 20vw;
+  height: 20vw;
   // border: 1px solid #afafaf;
   border-radius: 100%;
   margin-bottom: 1vh;
@@ -139,6 +150,8 @@ input[type="file"] {
   display: inline-block;
   width: 80vw; 
   height: 3px; 
+  padding: 0;
+  margin: 0;
   position: relative;
 
   &:after {
@@ -190,6 +203,7 @@ input[type="file"] {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .middleInfo {
@@ -198,15 +212,20 @@ input[type="file"] {
 }
 
 .texts {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   font-family: 'Pretendard-Bold';
   font-size: 2.5em;
-  margin-left: 10vw;
   width: 80vw;
+  margin: 0;
 }
 
 .subtexts {
   font-family: 'Pretendard-Bold';
-  margin-left: 10vw;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   width: 80vw;
   color: #222222;
   opacity: 80%;
@@ -327,6 +346,10 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
 }
 
 .btn3 {
+  position: relative;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
   width: 80vw;
   height: 7vh;
   border: 1px solid #222222;
@@ -341,6 +364,14 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
     background-color: #222222;
     color: white;
   }
+}
+
+.loading {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
 
 .toggleSwitch {

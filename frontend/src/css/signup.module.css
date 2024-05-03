@@ -19,6 +19,18 @@
   src: url("../assets/fonts/NotoSansKR-ExtraBold.ttf") format("truetype");
 }
 @font-face {
+  font-family: "NotoSansKR-SemiBold";
+  src: url("../assets/fonts/NotoSansKR-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "NotoSansKR-Bold";
+  src: url("../assets/fonts/NotoSansKR-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "NotoSansKR-Medium";
+  src: url("../assets/fonts/NotoSansKR-Medium.ttf") format("truetype");
+}
+@font-face {
   font-family: "Pretendard-ExtraBold";
   src: url("../assets/fonts/Pretendard-ExtraBold.otf");
 }
@@ -30,15 +42,37 @@
   font-family: "Pretendard-SemiBold";
   src: url("../assets/fonts/Pretendard-SemiBold.otf");
 }
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("../assets/fonts/Pretendard-Regular.otf");
+}
+@font-face {
+  font-family: "Pretendard-Medium";
+  src: url("../assets/fonts/Pretendard-Medium.otf");
+}
 .container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100vw;
   height: 100vh;
-  background-image: url("/src/assets/background_light.gif");
-  background-size: cover;
-  background-color: white;
+}
+
+.bgVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.bgVideoContent {
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
 }
 
 header {
@@ -86,14 +120,16 @@ header {
   font-family: "Pretendard-Bold";
   font-size: 2.5em;
   margin-left: 10vw;
-  padding-top: 8vh;
+  margin-bottom: 1vh;
+  padding-top: 2vh;
 }
 
 .title2 {
   font-family: "Pretendard-Bold";
   font-size: 2.5em;
   margin-left: 10vw;
-  padding-top: 8vh;
+  padding-top: 2vh;
+  margin-bottom: 1vh;
   opacity: 25%;
 }
 .title2.active {
@@ -101,6 +137,7 @@ header {
 }
 
 .passwordInput {
+  width: 80vw;
   outline: none;
   background-color: transparent;
   font-family: "Pretendard-SemiBold";

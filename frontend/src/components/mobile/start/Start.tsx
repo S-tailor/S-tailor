@@ -34,6 +34,11 @@ const Start: React.FC = () => {
   }
   return (
     <div className={styles.container}>
+      <div className={styles.bgVideo}>
+        <video className={styles.bgVideoContent} autoPlay muted loop>
+          <source src='/src/assets/background_light.mp4' />
+        </video>
+			</div>
 
       <header>
         <div className={styles.headerInner}>
@@ -44,8 +49,7 @@ const Start: React.FC = () => {
       </header>
 
       <section className={styles.topInfo}>
-        <p className={styles.texts}>가상 옷장을</p>
-        <p className={styles.texts}>만들어 볼까요?</p>
+        <p className={styles.texts}>가상 옷장을 &nbsp; 만들어 볼까요?</p>
       </section>
 
       <section className={styles.middleInput}>

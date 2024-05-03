@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "main-title";
   src: url("../assets/fonts/ANEK-BANGLA-EXPANDED-EXTRABOLD.TTF") format("truetype");
@@ -19,6 +20,18 @@
   src: url("../assets/fonts/NotoSansKR-ExtraBold.ttf") format("truetype");
 }
 @font-face {
+  font-family: "NotoSansKR-SemiBold";
+  src: url("../assets/fonts/NotoSansKR-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "NotoSansKR-Bold";
+  src: url("../assets/fonts/NotoSansKR-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "NotoSansKR-Medium";
+  src: url("../assets/fonts/NotoSansKR-Medium.ttf") format("truetype");
+}
+@font-face {
   font-family: "Pretendard-ExtraBold";
   src: url("../assets/fonts/Pretendard-ExtraBold.otf");
 }
@@ -30,12 +43,45 @@
   font-family: "Pretendard-SemiBold";
   src: url("../assets/fonts/Pretendard-SemiBold.otf");
 }
-header {
-  margin-top: 3%;
-  margin-bottom: 3%;
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("../assets/fonts/Pretendard-Regular.otf");
+}
+@font-face {
+  font-family: "Pretendard-Medium";
+  src: url("../assets/fonts/Pretendard-Medium.otf");
+}
+.wait {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading {
+  width: 20vw;
+}
+
+.loadingMessage {
+  font-family: "main-title";
+  color: #A48FFC;
+  opacity: 50%;
+  font-size: 1em;
+}
+
+.header {
+  padding-top: 3%;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1005;
+  background-color: white;
 }
 
 .headerInner {
@@ -49,55 +95,143 @@ header {
   display: flex;
   justify-content: center;
   margin-right: auto;
+  cursor: pointer;
 }
 
 .headerInner2, .headerInner3 {
   width: 12vw;
   display: flex;
   justify-content: center;
+  cursor: pointer;
+}
+
+.headerInner3 {
+  position: relative;
 }
 
 .logo {
   width: 30vw;
+  margin-left: -10px;
 }
 
 .search {
-  width: 10vw;
+  width: 7vw;
 }
 
 .cart {
-  width: 7.5vw;
+  width: 5vw;
+}
+
+.cartAdd {
+  width: 15px;
+  height: 15px;
+  background-color: #D99AFC;
+  border-radius: 100px;
+  position: absolute;
+  bottom: 16px;
+  right: 6px;
+  color: white;
+  font-family: "Pretendard-SemiBold";
+  font-size: 0.7em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1px;
+  padding-bottom: 1px;
 }
 
 .closetMain {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: white;
 }
 
 .mainCategory {
-  font-family: "Pretendard-Bold";
+  font-family: "Pretendard-Medium";
   width: 100vw;
   display: flex;
   justify-content: space-evenly;
-  font-size: 0.7em;
-  margin-bottom: 3%;
+  font-size: 0.8em;
+  padding-top: 2%;
+  height: 10px;
+  padding-bottom: 7%;
+  background-color: white;
+  color: rgb(179, 179, 179);
+  position: fixed;
+  top: 80px;
+  left: 0;
+  z-index: 1004;
+  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.mainSlider {
+.slider {
+  margin-top: 13vh;
+}
+
+.slider {
+  position: relative;
+  overflow: hidden;
   width: 100vw;
   height: 25vh;
-  background-color: rgb(179, 179, 179);
 }
 
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  animation: slider 7.5s infinite linear;
+}
+
+.slide:nth-child(1) {
+  background-image: url("/src/assets/광고1.png");
+  animation-delay: 0;
+}
+
+.slide:nth-child(2) {
+  background-image: url("/src/assets/광고2.png");
+  animation-delay: -2.5s;
+}
+
+.slide:nth-child(3) {
+  background-image: url("/src/assets/광고3.png");
+  animation-delay: -5s;
+}
+
+@keyframes slider {
+  0% {
+    transform: translateX(0);
+  }
+  26% {
+    transform: translateX(0);
+  }
+  33% {
+    transform: translateX(-100%);
+    animation-timing-function: step-end;
+  }
+  93% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 .mainTitle {
+  display: flex;
+  align-items: center;
   width: 90vw;
+  height: 7vh;
 }
 
 .userName {
   width: 100%;
   font-family: "Pretendard-Bold";
-  font-size: 1.7em;
+  font-size: 1.6em;
+  color: #3d3d3d;
 }
 
 .mainClothes {
@@ -108,15 +242,16 @@ header {
 
 .clothesContent {
   width: 90vw;
+  margin-bottom: 20vh;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 5px;
 }
 
 .clothesItem {
   position: relative;
-  width: 25vw;
+  width: 29vw;
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
@@ -136,15 +271,17 @@ header {
   white-space: nowrap;
   width: 100px;
   padding-top: 10px;
-  font-size: 0.8em;
+  font-size: 0.7em;
   font-family: "Pretendard-Bold";
+  color: #3d3d3d;
 }
 
 .clothesPrice {
   font-family: "Pretendard-Bold";
-  font-size: 0.8em;
+  font-size: 0.7em;
   margin: 0;
   padding-top: 5px;
+  color: #3d3d3d;
 }
 
 .addCartBtn {
@@ -153,7 +290,14 @@ header {
   position: absolute;
   bottom: 50px;
   right: 10px;
+}
+
+.deleteCartBtn {
+  width: 5vw;
   cursor: pointer;
+  position: absolute;
+  top: 2px;
+  right: 0px;
 }
 
 .addCartBtnImg {
@@ -161,32 +305,33 @@ header {
   filter: drop-shadow(1px 1px 3px #000000);
 }
 
+.deleteCartBtnImg {
+  width: 2vw;
+}
+
 .bottomNavInnerBtn {
   cursor: pointer;
 }
 
 .closetImg {
-  width: 30px;
-  height: 30px;
+  width: 7.5vw;
+  height: 4vh;
+  margin-left: 1px;
 }
 
 .addClothesImg {
-  margin-left: 2px;
-  width: 30px;
-  height: 30px;
+  width: 7.5vw;
+  height: 4vh;
 }
 
 .recommendImg {
-  width: 35px;
-  height: 30px;
+  width: 9vw;
+  height: 4vh;
 }
 
 .mypageImg {
-  width: 30px;
-  height: 30px;
-}
-
-.mypageImg {
+  width: 8.5vw;
+  height: 4vh;
   border-radius: 100px;
   filter: drop-shadow(0px 0px 1.5px #000000);
 }
@@ -209,7 +354,7 @@ header {
   background-color: rgba(255, 255, 255, 0.9);
   color: #222222;
   border-radius: 50px;
-  font-family: "Pretendard-Bold";
+  font-family: "NotoSansKR-Medium";
   font-weight: 600;
   font-size: 0.9em;
   letter-spacing: 2px;
@@ -237,11 +382,14 @@ header {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 80vw;
+  text-align: center;
+  width: 100vw;
+  margin-top: 1vh;
 }
 
-.bottomNavLabel {
-  font-family: "Pretendard-Bold";
-  font-size: 0.5em;
+.bottomNavLabel1, .bottomNavLabel2, .bottomNavLabel3, .bottomNavLabel4 {
+  font-family: "Pretendard-Regular";
+  font-size: 0.55em;
   text-align: center;
+  margin-top: 4px;
 }

@@ -1,7 +1,7 @@
 import React,{useState, useRef, useEffect, startTransition} from "react"
 import userStore from "@/store/store"
 import { useNavigate } from "react-router-dom"
-import styles from '../../../scss/profileadd.module.scss';
+import styles from '../../../scss/profileedit.module.scss';
 import { profileEdit, profileSelect } from "@/api/apiProfile";
 
 const profileEditor: React.FC = () => {
@@ -198,155 +198,189 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
 
     return (
         <div className={styles.container}>
-        { page1 && <>
-            <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" onClick={goSelect} />
-        <img src={fileUrl} alt="프로필" />
-        <input id="profileImg" type="file" style={{ display: 'none' }} onChange={changePic} ref={fileInputRef}></input>
-        <img src="" alt="사진변경" onClick={()=>{fileInputRef.current?.click()}}/>
-        <input type="text" placeholder={name} onChange={handleNameChange}/>
-        
-        <p className={styles.line}></p>
-          <br />
-          <p className={`${styles.message} ${message ? styles.showMessage : ''}`}>
-            {message}
-          </p>
-        <section className={styles.bottomButton}>
-          <button className={styles.btn} onClick={toGender}>다음</button>
-        </section>
-        </>}
-
-        {page2 && <>
+          <div className={styles.bgVideo}>
+            <video className={styles.bgVideoContent} autoPlay muted loop>
+              <source src='/src/assets/background_light.mp4' />
+            </video>
+          </div>
+          
+          {page1 && 
+          <>
             <header>
-          <div className={styles.headerInner1}>
-            <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" onClick={goName} />
-          </div>
-          <div className={styles.headerInner2}>
-            <p className={styles.profileadd}>프로필 추가</p>
-          </div>
-          <div className={styles.headerInner3}>
-          </div>
-        </header>
-            <section className={styles.create2}>
-        <div className={styles.topInfo}>
-          <p className={styles.texts}>성별 선택</p>
-        </div>
+              <div className={styles.headerInner1}>
+                  <img
+                    onClick={goSelect}
+                    className={styles.backBtn}
+                    src="/src/assets/backBtn.svg"
+                    alt="backBtn"
+                  />
+                </div>
+                <div className={styles.headerInner2}>
+                  <p className={styles.profileadd}>프로필 수정</p>
+                </div>
+                <div className={styles.headerInner3}></div>
+            </header>
 
-        <div className={styles.toggleSwitch}>
-          <button
-            className={styles.toggleButton}
-            onClick={handleGenderChange}
-            onBlur={handleGenderBlur}
-          >
-           남성
-          </button>
-          <button
+            <section className={styles.create}>
+              <div className={styles.profileImg}>
+                <img className={styles.uploadedImg} src={fileUrl} alt="Uploaded Profile" />
+                <label htmlFor="profileImg" onClick={()=>{fileInputRef.current?.click()}}>
+                  <img className={styles.labelImg} src="/src/assets/edit.svg" alt="edit" />
+                  <input id="profileImg" type="file" style={{ display: 'none' }} onChange={changePic} ref={fileInputRef}></input>
+                </label>
+              </div>
+              <input
+                className={styles.profileNameInput}
+                type="text"
+                placeholder={name}
+                onChange={handleNameChange}
+                autoFocus
+              />
+              <p className={styles.line}></p>
+              <br />
+              <p className={`${styles.message} ${message ? styles.showMessage : ''}`}>{message}</p>
+            </section>
+            
+            <section className={styles.bottomButton}>
+              <button className={styles.btn} onClick={toGender}>다음</button>
+            </section>
+          </>
+          }
+
+          {page2 && <>
+              <header>
+            <div className={styles.headerInner1}>
+              <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" onClick={goName} />
+            </div>
+            <div className={styles.headerInner2}>
+              <p className={styles.profileadd}>프로필 수정</p>
+            </div>
+            <div className={styles.headerInner3}>
+            </div>
+          </header>
+              <section className={styles.create2}>
+          <div className={styles.topInfo}>
+            <p className={styles.texts}>성별 선택</p>
+          </div>
+
+          <div className={styles.toggleSwitch}>
+            <button
               className={styles.toggleButton}
               onClick={handleGenderChange}
               onBlur={handleGenderBlur}
             >
-            여성
-          </button>
-        </div>
-        <br />
-        <p className={`${styles.message} ${message ? styles.showMessage : ''}`}>
+            남성
+            </button>
+            <button
+                className={styles.toggleButton}
+                onClick={handleGenderChange}
+                onBlur={handleGenderBlur}
+              >
+              여성
+            </button>
+          </div>
+          <br />
+          <p className={`${styles.message} ${message ? styles.showMessage : ''}`}>
+              {message}
+          </p>
+        </section>
+
+        <section className={styles.empty}>
+        </section>
+
+        <section className={styles.bottomButton2}>
+          <button className={styles.btn2} onClick={toHeight}>다음</button>
+        </section>
+              </>}
+              {page3 &&
+      (<>
+        <header>
+          <div className={styles.headerInner1}>
+            <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" onClick={goGender} />
+          </div>
+          <div className={styles.headerInner2}>
+            <p className={styles.profileadd}>프로필 수정</p>
+          </div>
+          <div className={styles.headerInner3}>
+          </div>
+        </header>
+
+        <section className={styles.create3}>
+          <div className={styles.topInfo}>
+            <p className={styles.texts}>키 입력</p>
+            <p className={styles.subtexts}>가상 피팅 시 맞춤 사이즈 추천에 필요해요!</p>
+          </div>
+
+          <div className={styles.middleInfo}>
+            <input 
+                className={styles.profileNameInput2}
+                type="text" 
+                placeholder={height}
+                value={height}
+                onChange={handleHeightChange}
+                autoFocus
+              />
+              <label className={styles.cm} htmlFor="">cm</label>
+              <p className={styles.line2}></p>
+          </div>
+
+        </section>
+
+        
+        <section className={styles.bottomButton3}>
+          <p className={styles.subtexts2}>다음이 마지막 단계입니다!</p>
+          <p className={`${styles.message} ${message ? styles.showMessage : ''}`}>
             {message}
-        </p>
-      </section>
+          </p>
+          <button className={styles.btn3} onClick={toWeight}>다음</button>
+        </section>
+      </>
+    )}
 
-      <section className={styles.empty}>
-      </section>
+  {page4 &&
+      (<>
+        <header>
+          <div className={styles.headerInner1}>
+            <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" onClick={goHeight} />
+          </div>
+          <div className={styles.headerInner2}>
+            <p className={styles.profileadd}>프로필 수정</p>
+          </div>
+          <div className={styles.headerInner3}>
+          </div>
+        </header>
 
-      <section className={styles.bottomButton2}>
-        <button className={styles.btn2} onClick={toHeight}>다음</button>
-      </section>
-            </>}
-            {page3 &&
-    (<>
-      <header>
-        <div className={styles.headerInner1}>
-          <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" onClick={goGender} />
-        </div>
-        <div className={styles.headerInner2}>
-          <p className={styles.profileadd}>프로필 추가</p>
-        </div>
-        <div className={styles.headerInner3}>
-        </div>
-      </header>
+        <section className={styles.create3}>
+          <div className={styles.topInfo}>
+            <p className={styles.texts}>몸무게 입력</p>
+            <p className={styles.subtexts}>가상 피팅 시 맞춤 사이즈 추천에 필요해요!</p>
+          </div>
 
-      <section className={styles.create3}>
-        <div className={styles.topInfo}>
-          <p className={styles.texts}>키 입력</p>
-        </div>
+          <div className={styles.middleInfo}>
+            <input 
+                className={styles.profileNameInput2}
+                type="text" 
+                placeholder={weight} 
+                value={weight}
+                onChange={handleWeightChange}
+                autoFocus
+              />
+              <label className={styles.cm} htmlFor="">kg</label>
+              <p className={styles.line2}></p>
+          </div>
 
-        <div className={styles.middleInfo}>
-          <input 
-              className={styles.profileNameInput2}
-              type="text" 
-              placeholder={height}
-              value={height}
-              onChange={handleHeightChange}
-              autoFocus
-            />
-            <label className={styles.cm} htmlFor="">cm</label>
-            <p className={styles.line2}></p>
-        </div>
+        </section>
 
-      </section>
-
-      
-      <section className={styles.bottomButton3}>
-        <p className={styles.subtexts2}>다음이 마지막 단계입니다!</p>
-        <p className={`${styles.message} ${message ? styles.showMessage : ''}`}>
-          {message}
-        </p>
-        <button className={styles.btn3} onClick={toWeight}>다음</button>
-      </section>
-    </>
-  )}
-
-{page4 &&
-    (<>
-      <header>
-        <div className={styles.headerInner1}>
-          <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" onClick={goHeight} />
-        </div>
-        <div className={styles.headerInner2}>
-          <p className={styles.profileadd}>프로필 추가</p>
-        </div>
-        <div className={styles.headerInner3}>
-        </div>
-      </header>
-
-      <section className={styles.create3}>
-        <div className={styles.topInfo}>
-          <p className={styles.texts}>몸무게 입력</p>
-        </div>
-
-        <div className={styles.middleInfo}>
-          <input 
-              className={styles.profileNameInput2}
-              type="text" 
-              placeholder={weight} 
-              value={weight}
-              onChange={handleWeightChange}
-              autoFocus
-            />
-            <label className={styles.cm} htmlFor="">kg</label>
-            <p className={styles.line2}></p>
-        </div>
-
-      </section>
-
-      
-      <section className={styles.bottomButton3}>
-        <p className={styles.subtexts2}>이제 마지막입니다!</p>
-        <p className={`${styles.message} ${message ? styles.showMessage : ''}`}>
-          {message}
-        </p>
-        <button className={styles.btn3} onClick={complete}>완료</button>
-      </section>
-    </>
-  )}
+        
+        <section className={styles.bottomButton3}>
+          <p className={styles.subtexts2}>이제 마지막입니다!</p>
+          <p className={`${styles.message} ${message ? styles.showMessage : ''}`}>
+            {message}
+          </p>
+          <button className={styles.btn3} onClick={complete}>완료</button>
+        </section>
+      </>
+    )}
 </div>
     )
 

@@ -8,7 +8,6 @@ async function chatbot(Info:any) {
     })
 }
 
-
 async function reset(pk:string) {
     return await api.post('/chatbot/clear', pk)
 }

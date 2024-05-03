@@ -170,6 +170,12 @@ const ProfileAdd: React.FC = () => {
   return (
     <>
       <div className={styles.container}>
+      <div className={styles.bgVideo}>
+        <video className={styles.bgVideoContent} autoPlay muted loop>
+          <source src='/src/assets/background_light.mp4' />
+        </video>
+			</div>
+        
         {page1 && (
           <>
             <header>
@@ -368,7 +374,11 @@ const ProfileAdd: React.FC = () => {
               <p className={styles.subtexts2}>이제 마지막입니다!</p>
               <p className={`${styles.message} ${message ? styles.showMessage : ''}`}>{message}</p>
               <button className={styles.btn3} onClick={complete} disabled={isSubmitting}>
-                완료
+                {isSubmitting ? (
+                  <img className={styles.loading} src="/src/assets/loading.gif" alt="로딩 중" />
+                ) : (
+                  "완료"
+                )}
               </button>
             </section>
           </>

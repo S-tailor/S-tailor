@@ -1,5 +1,155 @@
 @import "fonts";
 
+.header {
+  padding-top: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1005;
+  background-color: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.headerInner {
+  width: 90vw;
+  display: flex;
+  justify-content: center;
+}
+
+.headerInner1 {
+  width: 30vw;
+  display: flex;
+  justify-content: center;
+  margin-right: auto;
+}
+
+.headerInner2, .headerInner3 {
+  width: 12vw;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.headerInner3 {
+  position: relative;
+}
+
+.logo{
+  width: 30vw;
+  margin-left: -10px;
+}
+
+.search {
+  width: 7vw;
+}
+
+.cart {
+  width: 5vw;
+}
+
+.cartAdd {
+  width: 15px;
+  height: 15px;
+  background-color: #D99AFC;
+  border-radius: 100px;
+  position: absolute;
+  bottom: 16px;
+  right: 6px;
+  color: white;
+  font-family: 'Pretendard-SemiBold';
+  font-size: 0.7em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1px;
+  padding-bottom: 1px;
+}
+
+
+.mypageMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  margin-top: 30%;
+}
+
+.profile {
+  text-align: center;
+  font-family: 'Pretendard-SemiBold';
+  padding: 0;
+  margin: 0;
+}
+
+.profile > p {
+  text-align: center;
+  font-family: 'Pretendard-SemiBold';
+  padding-top: 5%;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+.profileImg {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+}
+
+.bottons {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+  width: 30vw;
+}
+
+.profileChange, .logout {
+  width: 5vw;
+  height: 3vh;
+  margin-right: auto;
+}
+
+.changeBtn {
+  background: inherit; 
+  font-family: 'Pretendard-Bold';
+  border:none; 
+  box-shadow:none; 
+  background-color: #EBEBEB;
+  border-radius: 50px;
+  width: 32vw;
+  height: 4vh;
+  padding-left: 15%;
+  padding-right: 15%; 
+  margin-top: 7%;
+  overflow:visible;
+  cursor:pointer;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.logoutBtn {
+  background: inherit; 
+  font-family: 'Pretendard-Bold';
+  border:none; 
+  box-shadow:none; 
+  background-color: #EBEBEB;
+  border-radius: 50px;
+  width: 32vw;
+  height: 4vh;
+  padding-left: 15%;
+  padding-right: 23%; 
+  margin-top: 10%;
+  overflow:visible;
+  cursor:pointer;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .bottomNavInnerBtn {
   cursor: pointer;
 }
