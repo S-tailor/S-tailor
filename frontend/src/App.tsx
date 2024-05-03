@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom'
-import RenderRoutes from './routes'
+import RenderRoutes from './routes';
 
 import { startTransition, useEffect } from 'react'
 
