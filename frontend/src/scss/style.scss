@@ -1,5 +1,22 @@
 // import Local SCSS files
-@import "variables", "fonts", "reset", "start", "signup", "responsive-flip", "profileadd", "profile", "main", "login";
+@import 
+"addcloth", 
+"ask",
+"closet",
+"closetsearch",
+"closetwishlist",
+"fonts", 
+"login",
+"main",
+"mypage",
+"profile",
+"profileadd",
+"profileedit",
+"reset", 
+"responsive-flip", 
+"signup", 
+"start", 
+"variables";
 
 html, body, #root {
   margin: 0;
