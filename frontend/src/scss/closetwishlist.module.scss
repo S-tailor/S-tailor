@@ -1,0 +1,174 @@
+@import "fonts";
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 9vh;
+  z-index: 1005;
+  background-color: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.headerInner {
+  width: 80vw;
+  display: flex;
+  justify-content: center;
+}
+
+.headerInner1 {
+  width: 15vw;
+  display: flex;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.headerInner2 {
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.headerInner3 {
+  width: 15vw;
+}
+
+.title {
+  font-family: 'Pretendard-Bold';
+  font-size: 1.2em;
+}
+
+.backBtn {
+  width: 5vw;
+  cursor: pointer;
+  display: flex;
+}
+
+.main {
+  width: 90vw;
+  height: 100vh;
+  margin-top: 9vh;
+  margin-bottom: 5vh;
+}
+
+.length {
+  font-family: 'Pretendard-SemiBold';
+  opacity: 50%;
+  margin-bottom: 7%;
+  margin-top: 7%;
+}
+
+.selected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-bottom: 7%;
+  margin-bottom: 7%;
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.selectedImg {
+  width: 23vw;
+  height: 11vh;
+  border-radius: 5px;
+}
+
+.seletedTexts {
+  width: 100%;
+  height: 80%;
+  margin-left: 4vw;
+  margin-bottom: 2.5vh;
+}
+
+.selectedSource {
+  margin: 0;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 250px;
+  padding-top: 7px;
+  font-size: 0.7em;
+  font-family: 'Pretendard-Regular';
+  color :#3d3d3d;
+}
+
+.selectedTitle {
+  margin: 0;
+  padding-top: 3px;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 220px;
+  font-size: 0.8em;
+  font-family: 'Pretendard-Bold';
+  color :#3d3d3d;
+}
+
+.selectedPrice {
+  font-family: 'Pretendard-Bold';
+  font-size: 0.7em;
+  margin: 0;
+  padding-top: 5px;
+  color :#3d3d3d;
+}
+
+.selectedBtn {
+  display: flex;
+  flex-direction: column;
+}
+
+.selectedDeleteBtn, .selectedAddBtn {
+  background: inherit; 
+  font-family: 'Pretendard-Bold';
+  border:none; 
+  box-shadow:none; 
+  border-radius:0; 
+  padding:0; 
+  overflow:visible;
+  cursor:pointer
+}
+
+.selectedDeleteBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3.5vw;
+}
+
+.selectedAddBtn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #222222;
+  color: white;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  margin-bottom: 5%;
+  border-radius: 50px;
+  font-size: 0.7em;
+  &:hover {
+    color: #222222;
+    background-color: transparent;
+    border: 1px solid #222222;
+    border-radius: 50px;
+  }
+}

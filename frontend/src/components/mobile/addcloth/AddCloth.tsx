@@ -326,7 +326,7 @@ const AddCloth: React.FC = () => {
         <div className={styles.picture}>{showResults ? <RenderResult /> : <RenderImage />}</div>
 
         <div className={styles.pictureButtons}>
-          {showResults ? (
+          {showResults ? ( 
             selectedCloths.map((cloth) => (
               <div className={styles.selected} key={cloth.link}>
                 <img className={styles.selectedImg} src={cloth.image} alt={cloth.title} />

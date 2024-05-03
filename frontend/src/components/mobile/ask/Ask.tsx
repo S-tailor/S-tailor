@@ -1,6 +1,6 @@
 import React, { startTransition, useMemo, useState, useRef, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { chatbot } from '@/api/apiAsk'
+import { chatbot, reset } from '@/api/apiAsk'
 import userStore from '@/store/store'
 // import { cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/ask.module.scss'
@@ -21,10 +21,18 @@ const Ask: React.FC = () => {
     user: { profilePk: number; image?: string; profileName: string }[]
   }
   const userName = user[0]?.profileName ?? 'Guest'
-
+  
+  const profilePk = String(sessionStorage.getItem('profilePk'))
   const saveText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value)
   }
+
+  const resetConversation = async() => {
+    await reset(profilePk)
+    .then((response)=>{console.log(response)})
+    .catch(()=>{console.error})
+  }
+
 
   const sendInfo = async () => {
     setText('')
@@ -35,7 +43,6 @@ const Ask: React.FC = () => {
     setMessages([...messages, newMessage])
 
     setIsLoading(true)
-    const profilePk = String(sessionStorage.getItem('profilePk'))
     formData.append('profile', profilePk)
     formData.append('text', text)
     if (file) {
@@ -45,11 +52,11 @@ const Ask: React.FC = () => {
     await chatbot(formData)
       .then((response) => {
         const botResponse = { sender: 'bot', text: response.data.body, image: fileUrl }
-        setMessages((prev) => [...prev, botResponse])
+        setMessages(prev => [...prev, botResponse])
       })
       .catch(() => {
         const errorMessage = { sender: 'bot', text: '오류가 발생했습니다.', image: fileUrl }
-        setMessages((prev) => [...prev, errorMessage])
+        setMessages(prev => [...prev, errorMessage])
       })
     setIsLoading(false)
   }
@@ -70,28 +77,28 @@ const Ask: React.FC = () => {
     const path = location.pathname
     const iconPaths: { [key: string]: { [icon: string]: string } } = {
       '/mobile/closet': {
-        closet: '/src/assets/closetFill.png',
+        'closet': '/src/assets/closetFill.png',
         'add-cloth': '/src/assets/upload.png',
-        ask: '/src/assets/shirt.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        'ask': '/src/assets/shirt.png',
+        'mypage': user[0]?.image || '/src/assets/avatar.PNG'
       },
       '/mobile/add-cloth': {
-        closet: '/src/assets/closet.png',
+        'closet': '/src/assets/closet.png',
         'add-cloth': '/src/assets/uploadFill.png',
-        ask: '/src/assets/shirt.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        'ask': '/src/assets/shirt.png',
+        'mypage': user[0]?.image || '/src/assets/avatar.PNG'
       },
       '/mobile/ask': {
-        closet: '/src/assets/closet.png',
+        'closet': '/src/assets/closet.png',
         'add-cloth': '/src/assets/upload.png',
-        ask: '/src/assets/shirtFill.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        'ask': '/src/assets/shirtFill.png',
+        'mypage': user[0]?.image || '/src/assets/avatar.PNG'
       },
       '/mobile/mypage': {
-        closet: '/src/assets/closet.png',
+        'closet': '/src/assets/closet.png',
         'add-cloth': '/src/assets/upload.png',
-        ask: '/src/assets/shirt.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        'ask': '/src/assets/shirt.png',
+        'mypage': user[0]?.image || '/src/assets/avatar.PNG'
       }
     }
     return iconPaths[path][iconName] || '/src/assets/' + iconName + '.png'
@@ -142,6 +149,7 @@ const Ask: React.FC = () => {
               alt="search"
               onClick={() => {
                 startTransition(() => {
+                  resetConversation()
                   navigate('/mobile/closet/search')
                 })
               }}
@@ -155,6 +163,7 @@ const Ask: React.FC = () => {
               alt="cart"
               onClick={() => {
                 startTransition(() => {
+                  resetConversation()
                   navigate('/mobile/closet/wishlist')
                 })
               }}
@@ -166,18 +175,18 @@ const Ask: React.FC = () => {
 
       <section className={styles.askMain}>
         <div className={styles.askMainInner}>
-          <p className={styles.infoText}>* 페이지를 벗어나면 대화가 사라집니다.</p>
+          <p className={styles.infoText}>* 페이지를 벗어나면 대화가 사라집니다!</p>
           {messages.map((msg, index) => (
             <div key={index} className={msg.sender === 'user' ? styles.userMsg : styles.botMsg}>
               <div className={msg.sender === 'user' ? styles.userNameRight : styles.userNameLeft}>
-                {msg.sender === 'user' ? `${userName} 님` : 'S-Tailor'}
+                {msg.sender === 'user' ? `${userName}님` : 'S-Tailor'}
               </div>
               {msg.image && <img className={styles.sentPhoto} src={msg.image} alt="전송한 사진" />}
               <span
                 className={msg.sender === 'user' ? styles.userMessageText : styles.botMessageText}
               >
                 {msg.text}
-              </span>
+              </span >
             </div>
           ))}
         </div>
