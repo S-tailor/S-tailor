@@ -108,7 +108,7 @@ const Closet: React.FC = () => {
 
   const addCart = async (pk: number) => {
     await cartItemAdd(pk).then(() => {
-      alert('옷장에 추가되었습니다!')
+      alert('장바구니에 추가되었습니다!')
       const newCartCount = cartCount + 1
       localStorage.setItem('cartCount', JSON.stringify(newCartCount))
       setCartCount(newCartCount)
