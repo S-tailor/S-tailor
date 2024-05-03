@@ -192,7 +192,7 @@ const Closet: React.FC = () => {
             </div>
             <div className={styles.slider}>
               <div className={styles.slide}></div>
-              <div class는 className={styles.slide}></div>
+              <div className={styles.slide}></div>
               <div className={styles.slide}></div>
             </div>
             <div className={styles.mainTitle}>
