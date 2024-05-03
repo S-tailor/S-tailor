@@ -13,7 +13,7 @@ const ClosetWishList: React.FC = () => {
     source: string,
   }
   const[cartList, setCartList] = useState<cartInfo[]>([])
-  const[isLoading, setIsLoading] = useState<boolean>(true)
+  const[, setIsLoading] = useState<boolean>(true)
   const navigate = useNavigate()
 
 
