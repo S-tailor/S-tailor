@@ -1,7 +1,8 @@
-import React,{startTransition, useState, useRef} from 'react'
-import { useNavigate } from 'react-router-dom'
+import React,{startTransition, useMemo, useState, useRef} from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { chatbot, reset } from '@/api/apiAsk'
-
+import userStore from '@/store/store'
+import styles from '../../../scss/ask.module.scss';
 
 const Ask: React.FC = () => {
   
@@ -10,10 +11,14 @@ const Ask: React.FC = () => {
   const [text, setText] = useState<string>('');
   const [messages, setMessages] = useState<{ sender: string, text: string, image:string }[]>([]);
   const navigate = useNavigate()
+  const location = useLocation();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const formData = new FormData()
   // const {user} = userStore()
   const [isLoading, setIsLoading] = useState(false)
+  const { user } = userStore() as {
+    user: { profilePk: number; image?: string; profileName: string }[];
+  };
   const userName = localStorage.getItem('id')
   
   const profilePk = String(sessionStorage.getItem('profilePk'))
@@ -73,6 +78,47 @@ const Ask: React.FC = () => {
   }
   }
 
+  /////////// 하단 내비게이션 바 선택 시 아이콘(컬러) 변경 //////////////
+  const getIconSrc = (iconName: string) => {
+    const path = location.pathname
+    const iconPaths: { [key: string]: { [icon: string]: string } } = {
+      '/mobile/closet': {
+        'closet': '/src/assets/closetFill.png',
+        'add-cloth': '/src/assets/upload.png',
+        'ask': '/src/assets/shirt.png',
+        'mypage': user[0]?.image || "/src/assets/avatar.PNG"
+      },
+      '/mobile/add-cloth': {
+        'closet': '/src/assets/closet.png',
+        'add-cloth': '/src/assets/uploadFill.png',
+        'ask': '/src/assets/shirt.png',
+        'mypage': user[0]?.image || "/src/assets/avatar.PNG"
+      },
+      '/mobile/ask': {
+        'closet': '/src/assets/closet.png',
+        'add-cloth': '/src/assets/upload.png',
+        'ask': '/src/assets/shirtFill.png',
+        'mypage': user[0]?.image || "/src/assets/avatar.PNG"
+      },
+      '/mobile/mypage': {
+        'closet': '/src/assets/closet.png',
+        'add-cloth': '/src/assets/upload.png',
+        'ask': '/src/assets/shirt.png',
+        'mypage': user[0]?.image || "/src/assets/avatar.PNG"
+      }
+    }
+    return iconPaths[path][iconName] || '/src/assets/' + iconName + '.png';
+  }
+
+  const getMypageImgStyle = useMemo(() => {
+    return location.pathname === '/mobile/mypage' ? { border: '2px solid #9091FB', width: '9.5vw', height: '4.5vh', marginTop: '-2px'} : { filter: 'drop-shadow(0px 0px 1.5px #000000)' };
+  }, [location.pathname])
+
+  const getActiveStyle = (path: string) => {
+    return location.pathname === path ? { fontFamily: 'Pretendard-Bold', color: '#9091FB', marginTop: '1px' } : {}
+  }
+  ////////////////////////////////////////////////////////////////////
+
   
     return (
     <div>
@@ -129,31 +175,62 @@ const Ask: React.FC = () => {
         </button>
     
       
-      <footer>
-        <img src="" alt="closet-home" onClick={()=>{
-        startTransition(()=>{
-          resetConversation()
-          navigate('/mobile/closet')})} 
-        }
-        />
-        <img src="" alt="clothes-add" onClick={()=>{
-        startTransition(()=>{
-          resetConversation()
-          navigate('/mobile/add-cloth')})} 
-        }
-        />
-        <img src="" alt="style-recomm" onClick={()=>{
-        startTransition(()=>{
-          resetConversation()
-          navigate('/mobile/ask')})} 
-        }
-        />
-        <img src="" alt="myPage" onClick={()=>{
-        startTransition(()=>{
-          resetConversation()
-          navigate('/mobile/mypage')})} 
-        }
-        />
+        <footer className={styles.bottomNav}>
+        <div className={styles.bottomNavInner}>
+            <label className={styles.bottomNavInnerBtn}>
+              <img 
+                className={styles.closetImg}
+                src={getIconSrc('closet')}
+                alt="closet-home" 
+                onClick={()=>{
+                startTransition(()=>{
+                  navigate('/mobile/closet')})} 
+                }
+              />
+              <p className={styles.bottomNavLabel1} style={getActiveStyle('/mobile/closet')}>옷장 홈</p>
+            </label>
+           
+            <label className={styles.bottomNavInnerBtn}>
+              <img 
+                className={styles.addClothesImg}
+                src={getIconSrc('add-cloth')} 
+                alt="clothes-add" 
+                onClick={()=>{
+                startTransition(()=>{
+                  navigate('/mobile/add-cloth')})} 
+                }
+              />
+              <p className={styles.bottomNavLabel2} style={getActiveStyle('/mobile/add-cloth')}>옷 추가하기</p>
+            </label>
+
+            <label className={styles.bottomNavInnerBtn}>
+              <img 
+                className={styles.recommendImg}
+                src={getIconSrc('ask')} 
+                alt="style-recomm" 
+                onClick={()=>{
+                startTransition(()=>{
+                  navigate('/mobile/ask')})} 
+                }
+              />
+              <p className={styles.bottomNavLabel3} style={getActiveStyle('/mobile/ask')}>스타일추천</p>
+            </label>
+
+            <label className={styles.bottomNavInnerBtn}>
+              <img 
+                className={styles.mypageImg}
+                src={getIconSrc('mypage')}
+                alt="myPage" 
+                style={getMypageImgStyle}
+                onClick={() => {
+                  startTransition(() => {
+                    navigate('/mobile/mypage')
+                  })
+                }}
+              />
+              <p className={styles.bottomNavLabel4} style={getActiveStyle('/mobile/mypage')}>마이페이지</p>
+            </label>
+        </div>
       </footer>
     </div>
 )

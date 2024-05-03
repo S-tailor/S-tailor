@@ -1,44 +1,53 @@
-import React, { startTransition, useEffect, useState } from 'react'
+import React, { startTransition, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { QrReader } from 'react-qr-reader'
 
+// const BASE_URL = 'https://ourtrip.store/api/tryon'
 const BASE_URL = 'http://localhost:5000/api/tryon'
+const [camera, setCamera] = useState(true)
+
 
 const ClosetCodeInput: React.FC = () => {
+  
   const navigate = useNavigate()
-  const [sessionId, setSessionId] = useState('')
-  useEffect(() => {
-    sessionStorage.setItem('profilePk', '2')
-    sessionStorage.setItem('id', 'test1')
-    sessionStorage.setItem(
-      'token',
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MSIsImlzcyI6InNzYWZ5LmNvbSIsImV4cCI6MTcxNTg3OTg5MywiaWF0IjoxNzE0NTgzODkzfQ.NT19ttDYOhbs0ejrdwooVLz4c2MsbC0_zqLqkJ4it_cqIp50TeMsnCUqxP9C75jlUtkq4scQxUHrz1PftIEv0A'
-    )
-  }, [])
+  const [data, setData] = useState("");
+  const [message, setMessage] = useState('코드 인식이 완료되었습니다. 확인버튼을 눌러주세요.')
 
-  const handleVerify = async (event: React.SyntheticEvent) => {
-    event.preventDefault()
-    const params = {
-      profilePk: sessionStorage.getItem('profilePk'),
-      id: sessionStorage.getItem('id'),
-      token: sessionStorage.getItem('token'),
-      sessionId: sessionId
-    }
-    console.log(params)
 
-    await axios
+  const handleVerify = async (event:React.SyntheticEvent) => {
+    event.preventDefault();
+    if (data) {
+      const result = data.replace(/"/g, "");
+    
+      const params = {
+        profilePk: sessionStorage.getItem('profilePk'),
+        id: localStorage.getItem('id'),
+        token: localStorage.getItem('accessToken'),
+        sessionId: result
+      }
+     
+      await axios
       .post(`${BASE_URL}/verify`, params)
       .then(function (response) {
         if (response.data == 'success') {
-          //alert('로그인 성공!')
+          setCamera(false)
           navigate('/mobile/closet/tryon/wait')
+          
+         
         }
-        console.log('handleVerify', response)
+        
       })
       .catch(function (error) {
+        setMessage('다시 시도해주세요.')
         console.log('error', error)
       })
+    }
+    setMessage('')
   }
+
+
+
   return (
     <div>
       <img
@@ -54,29 +63,42 @@ const ClosetCodeInput: React.FC = () => {
         <h3>옷 입어보기</h3>
       </header>
 
-      <h1>인증코드 입력</h1>
-      <p>기기에 표시된 6자리 번호를 입력해주세요.</p>
+      <h1>QR코드 인증</h1>
+      <p>기기에 표시된 QR코드를 촬영해주세요.</p>
+      <div>
+        { camera &&
+      <QrReader
+        constraints={{ facingMode: 'environment' }}
+        onResult={(result: any | null, error) => {
+          if (result) {
+            setData(result.text);
+          }
+          if (error) {
+            console.info(error);
+          }
+        }}
+        />
+      }</div>
 
-      <form onSubmit={handleVerify}>
+
+
+      {data &&
+        <div>
+          
+          {message}
+        </div>}
+        
+      <button onClick={handleVerify}>확인</button>
+        <form onSubmit={handleVerify}>
         <input
           type="text"
-          value={sessionId}
+          value={data}
           onChange={(event) => {
-            setSessionId(event.target.value)
+            setData(event.target.value)
           }}
         ></input>
         <button type="submit">sessionId 보내기</button>
       </form>
-
-      <button
-        onClick={() => {
-          startTransition(() => {
-            navigate('/mobile/closet/tryon/wait')
-          })
-        }}
-      >
-        완료
-      </button>
     </div>
   )
 }
