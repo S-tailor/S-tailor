@@ -33,7 +33,7 @@ const ClosetWishList: React.FC = () => {
     const response = await cartItemDelete(pk);
     if (response.status === 200) { 
       setCartList(currentList => currentList.filter(item => item.closetPk !== pk));
-      alert('장바구니에서 삭제되었습니다!')
+      alert('위시리스트에서 삭제되었습니다!')
     } else {
       console.error('Failed to delete', pk);
     }
@@ -77,11 +77,11 @@ const ClosetWishList: React.FC = () => {
       </div>
 
 
-      {/* {isLoading? "장바구니 불러오는중...":""} */}
+      {/* {isLoading? "위시리스트 불러오는중...":""} */}
     <div className={styles.main}>
       {cartList.length > 0 && (
         <p className={styles.length}>
-          장바구니에 {cartList.length}개의 상품이 있습니다.
+          위시리스트에 {cartList.length}개의 상품이 있습니다.
         </p>
       )}
       

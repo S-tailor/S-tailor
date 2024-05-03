@@ -98,7 +98,8 @@
 .infoText {
   font-size: 0.9em;
   height: 1px;
-  margin: 5%;
+  margin-top: 3%;
+  margin-bottom: 5%;
   opacity: 60%;
   font-family: 'Pretendard-SemiBold';
 }
@@ -125,7 +126,7 @@
   display: flex;
   flex-direction: column;
   font-family: 'Pretendard-SemiBold';
-  margin-top: 2%;
+  margin-top: 5%;
   align-items: flex-start;
 }
 
@@ -134,12 +135,14 @@
   justify-content: center;
   align-items: center;
   font-family: 'Pretendard-SemiBold';
-  height: 5vh;
+  height: fit-content;
+  padding-top: 4%;
+  padding-bottom: 4%;
   padding-left: 5%;
   padding-right: 5%;
   margin-top: 2%;
   background-color: #BABFFF;
-  border-radius: 50px;
+  border-radius: 30px;
   width: fit-content;
   align-self: flex-end;
 }
@@ -150,11 +153,13 @@
   align-items: center;
   margin-top: 2%;
   font-family: 'Pretendard-SemiBold';
-  height: 5vh;
+  height: fit-content;
+  padding-top: 4%;
+  padding-bottom: 4%;
   padding-left: 5%;
   padding-right: 5%;
   background-color: #E8E8E8;
-  border-radius: 50px;
+  border-radius: 20px;
   width: fit-content;
   align-self: flex-start;
 }
@@ -273,7 +278,7 @@
   background-color: rgba(255, 255, 255, 0.9);
   color: #222222;
   border-radius: 50px;
-  font-family: 'NotoSansKR-Medium';
+  font-family: 'Pretendard-Medium';
   font-weight: 600;
   font-size: 0.9em;
   letter-spacing: 2px;

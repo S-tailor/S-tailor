@@ -1,22 +1,22 @@
 // import Local SCSS files
 @import 
-"addcloth", 
-"ask",
-"closet",
-"closetsearch",
-"closetwishlist",
-"fonts", 
-"login",
-"main",
-"mypage",
-"profile",
-"profileadd",
-"profileedit",
-"reset", 
-"responsive-flip", 
-"signup", 
-"start", 
-"variables";
+"addcloth.module.scss", 
+"ask.module.scss",
+"closet.module.scss",
+"closetsearch.module.scss",
+"closetwishlist.module.scss",
+"fonts.scss", 
+"login.module.scss",
+"main.module.scss",
+"mypage.module.scss",
+"profile.module.scss",
+"profileadd.module.scss",
+"profileedit.module.scss",
+"reset.scss", 
+"responsive-flip.scss", 
+"signup.module.scss", 
+"start.module.scss", 
+"variables.scss";
 
 html, body, #root {
   margin: 0;
