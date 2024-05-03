@@ -11,12 +11,9 @@
   },
   "dependencies": {
     "axios": "^1.6.8",
-<<<<<<< HEAD
     "qr-scanner": "^1.4.2",
     "qrcode.react": "^3.1.0",
-=======
     "node-sass": "^9.0.0",
->>>>>>> 430227a7e49e909c42f80eeb4cc0e8cc10b2adbd
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-js-pagination": "^3.0.3",

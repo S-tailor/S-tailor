@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import QRCode from 'qrcode.react'
-const BASE_URL = 'http://localhost:5000'
+// const BASE_URL = 'http://localhost:5000'
+const BASE_URL = 'https://ourtrip.store'
 const TIME = {
   ONE_SECOND: 1000,
   ONE_MINUTE: 60

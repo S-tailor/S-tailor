@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { QrReader } from 'react-qr-reader'
 
-// const BASE_URL = 'https://ourtrip.store/api/tryon'
-const BASE_URL = 'http://localhost:5000/api/tryon'
+const BASE_URL = 'https://ourtrip.store/api/tryon'
+// const BASE_URL = 'http://localhost:5000/api/tryon'
 const [camera, setCamera] = useState(true)
 
 
