@@ -49,8 +49,6 @@ const AddCloth: React.FC = () => {
       if (video) {
         video.srcObject = stream
         await video.play()
-        // setCameraActive(true)
-        // setCaptureMode(true) // 촬영 모드로 전환
       }
     } catch (error) {
       console.error('카메라 접근 오류:', error)
@@ -117,15 +115,6 @@ const AddCloth: React.FC = () => {
     transform: camera === 'user' ? 'scaleX(-1)' : 'none'
   }
 
-  // 카메라 영상 렌더링
-  function RenderVideo() {
-    return (
-      <div className={styles.picture}>
-        {cameraActive ? <video ref={videoRef} style={videoStyle} autoPlay playsInline /> : null}
-      </div>
-    )
-  }
-
   // 옷 선택
   const handleSelectCloth = (cloth: SearchResultItem) => {
     setSelectedCloths((prev) => {
@@ -138,13 +127,11 @@ const AddCloth: React.FC = () => {
     })
   }
 
-  // const user = userStore((state) => state.user)
   const profilePk = sessionStorage.getItem('profilePk')
 
   // 옷 저장
   const handleSaveCloths = async () => {
     for (const cloth of selectedCloths) {
-      // console.log(cloth)
       try {
         await closetItemSave({
           price: cloth.price,
@@ -352,9 +339,7 @@ const AddCloth: React.FC = () => {
             <video ref={videoRef} style={videoStyle} autoPlay />
           ) : searchMode === 'upload' ? (
             <RenderUploadedImage />
-          ) : (
-            <RenderVideo />
-          )}
+          ) : null}
         </div>
 
         <div className={styles.pictureButtons}>
