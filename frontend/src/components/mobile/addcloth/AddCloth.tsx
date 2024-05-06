@@ -166,6 +166,7 @@ const AddCloth: React.FC = () => {
     const response = await closetTextSearch(text)
 
     updateResults(response.data.result)
+    setShowResults(true)
   }
 
   // 업로드 이미지 저장
