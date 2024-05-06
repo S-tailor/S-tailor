@@ -16,7 +16,7 @@ const ClosetWishList: React.FC = () => {
   const[cartList, setCartList] = useState<cartInfo[]>([])
   // const[, setIsLoading] = useState<boolean>(true)
   const navigate = useNavigate()
-  const {cartCount, setCartCounts, removeFromCart } = userStore()
+  const {cartCount } = userStore()
 
   const goShopping = (link:string) => {
    

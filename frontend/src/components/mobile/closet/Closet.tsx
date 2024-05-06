@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { closetItemList, closetItemDelete } from '@/api/apiCloset'
 import { cartItemList, cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/closet.module.scss'
-import { reset } from '@/api/apiAsk';
 
 const Closet: React.FC = () => {
   interface clothInfo {
