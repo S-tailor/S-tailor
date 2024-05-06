@@ -111,24 +111,10 @@ const AddCloth: React.FC = () => {
 
   // 전면 카메라 사용시 거울 모드 적용
   const videoStyle: CSSProperties = {
-    width: '100%',
-    height: '100%',
+    width: '100vw',
+    height: '53vh',
     objectFit: 'cover', // 사각형을 가득 채우기
     transform: camera === 'user' ? 'scaleX(-1)' : 'none'
-  }
-
-  // 촬영된 이미지 렌더링
-  function RenderCameraImage() {
-    console.log('Rendering captured image:', imagePath)
-    return (
-      <div className={styles.picture}>
-        <img
-          src={imagePath}
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          alt="Captured"
-        />
-      </div>
-    )
   }
 
   // 카메라 영상 렌더링
@@ -255,7 +241,7 @@ const AddCloth: React.FC = () => {
   function RenderUploadedImage() {
     return (
       <div>
-        <img src={imagePath}></img>
+        <img src={imagePath} style={videoStyle}></img>
       </div>
     )
   }
@@ -364,8 +350,6 @@ const AddCloth: React.FC = () => {
             <RenderResult />
           ) : searchMode === 'camera' && cameraActive ? (
             <video ref={videoRef} style={videoStyle} autoPlay />
-          ) : searchMode === 'camera' ? (
-            <RenderCameraImage />
           ) : searchMode === 'upload' ? (
             <RenderUploadedImage />
           ) : (
