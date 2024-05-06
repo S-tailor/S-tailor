@@ -173,7 +173,7 @@ const ProfileAdd: React.FC = () => {
       <div className={styles.container}>
       <div className={styles.bgVideo}>
         <video className={styles.bgVideoContent} autoPlay muted loop>
-          <source src='/src/assets/background_light.mp4' />
+          <source src='/assets/background_light.mp4' />
         </video>
 			</div>
         
@@ -184,7 +184,7 @@ const ProfileAdd: React.FC = () => {
                 <img
                   onClick={goSelect}
                   className={styles.backBtn}
-                  src="/src/assets/backBtn.svg"
+                  src="/assets/backBtn.svg"
                   alt="backBtn"
                 />
               </div>
@@ -201,12 +201,12 @@ const ProfileAdd: React.FC = () => {
                 ) : (
                   <img
                     className={styles.uploadedImg}
-                    src="/src/assets/avatar.png"
+                    src="/assets/avatar.PNG"
                     alt="Uploaded Profile"
                   />
                 )}
                 <label htmlFor="exfile">
-                  <img className={styles.labelImg} src="/src/assets/edit.svg" alt="edit" />
+                  <img className={styles.labelImg} src="/assets/edit.svg" alt="edit" />
                   <input id="exfile" type="file" onChange={changePic}></input>
                 </label>
               </div>
@@ -237,7 +237,7 @@ const ProfileAdd: React.FC = () => {
               <div className={styles.headerInner1}>
                 <img
                   className={styles.backBtn}
-                  src="/src/assets/backBtn.svg"
+                  src="/assets/backBtn.svg"
                   alt="backBtn"
                   onClick={goName}
                 />
@@ -289,7 +289,7 @@ const ProfileAdd: React.FC = () => {
               <div className={styles.headerInner1}>
                 <img
                   className={styles.backBtn}
-                  src="/src/assets/backBtn.svg"
+                  src="/assets/backBtn.svg"
                   alt="backBtn"
                   onClick={goGender}
                 />
@@ -338,7 +338,7 @@ const ProfileAdd: React.FC = () => {
               <div className={styles.headerInner1}>
                 <img
                   className={styles.backBtn}
-                  src="/src/assets/backBtn.svg"
+                  src="/assets/backBtn.svg"
                   alt="backBtn"
                   onClick={goHeight}
                 />
@@ -376,7 +376,7 @@ const ProfileAdd: React.FC = () => {
               <p className={`${styles.message} ${message ? styles.showMessage : ''}`}>{message}</p>
               <button className={styles.btn3} onClick={complete} disabled={isSubmitting}>
                 {isSubmitting ? (
-                  <img className={styles.loading} src="/src/assets/loading.gif" alt="로딩 중" />
+                  <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
                 ) : (
                   "완료"
                 )}

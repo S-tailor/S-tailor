@@ -2,7 +2,7 @@ import React, { useEffect, startTransition, useState, useMemo } from 'react'
 import userStore from '@/store/store'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { closetItemList, closetItemDelete } from '@/api/apiCloset'
-import { cartItemAdd } from '@/api/apiCart'
+import { cartItemList, cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/closet.module.scss'
 
 const Closet: React.FC = () => {
@@ -23,7 +23,7 @@ const Closet: React.FC = () => {
   const navigate = useNavigate()
   const userName = user[0]?.profileName ?? 'Guest'
   const [isLoading, setIsLoading] = useState(true)
-  const [cartCount, setCartCount] = useState<number>(0)
+  const { cartCount,  setCartCounts, addToCart } = userStore()
   const [selectedCategory, setSelectedCategory] = useState('전체')
 
   const categories = ['전체', '아우터', '상의', '하의', '원피스', '기타']
@@ -67,31 +67,31 @@ const Closet: React.FC = () => {
     const path = location.pathname
     const iconPaths: { [key: string]: { [icon: string]: string } } = {
       '/mobile/closet': {
-        closet: '/src/assets/closetFill.png',
-        'add-cloth': '/src/assets/upload.png',
-        ask: '/src/assets/shirt.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        closet: '/assets/closetFill.png',
+        'add-cloth': '/assets/upload.png',
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/add-cloth': {
-        closet: '/src/assets/closet.png',
-        'add-cloth': '/src/assets/uploadFill.png',
-        ask: '/src/assets/shirt.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        closet: '/assets/closet.png',
+        'add-cloth': '/assets/uploadFill.png',
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/ask': {
-        closet: '/src/assets/closet.png',
-        'add-cloth': '/src/assets/upload.png',
-        ask: '/src/assets/shirtFill.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        closet: '/assets/closet.png',
+        'add-cloth': '/assets/upload.png',
+        ask: '/assets/shirtFill.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/mypage': {
-        closet: '/src/assets/closet.png',
-        'add-cloth': '/src/assets/upload.png',
-        ask: '/src/assets/shirt.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        closet: '/assets/closet.png',
+        'add-cloth': '/assets/upload.png',
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       }
     }
-    return iconPaths[path][iconName] || '/src/assets/' + iconName + '.png'
+    return iconPaths[path][iconName] || '/assets/' + iconName + '.png'
   }
 
   const getMypageImgStyle = useMemo(() => {
@@ -107,19 +107,35 @@ const Closet: React.FC = () => {
   }
 
   const addCart = async (pk: number) => {
-    await cartItemAdd(pk).then(() => {
-      alert('위시리스트에 추가되었습니다!')
-      const newCartCount = cartCount + 1
-      localStorage.setItem('cartCount', JSON.stringify(newCartCount))
-      setCartCount(newCartCount)
-    })
+    const response = await cartItemAdd(pk)
+    if (response.status === 200) {
+      console.log('123131',clothList,pk)
+        addToCart(clothList[pk])
+        alert('위시리스트에 추가되었습니다!')
+    }
+}
+
+
+  // useEffect(() => {
+  //   const storedCartCount = localStorage.getItem('cartCount')
+  //   if (storedCartCount) {
+  //     setCartCount(JSON.parse(storedCartCount))
+  //   }
+  // }, [])
+
+  const fetchCart = async () => {
+    const profilePk = Number(sessionStorage.getItem('profilePk'))
+    const response = await cartItemList(profilePk)
+    if (response.status === 200) {
+
+      console.log('마킹',response.data.result, profilePk)
+      setCartCounts(response.data.result)
+    }
   }
 
   useEffect(() => {
-    const storedCartCount = localStorage.getItem('cartCount')
-    if (storedCartCount) {
-      setCartCount(JSON.parse(storedCartCount))
-    }
+
+    fetchCart()
   }, [])
 
   const goCloset = () => {
@@ -132,7 +148,7 @@ const Closet: React.FC = () => {
     <div className={styles.container}>
       {isLoading ? (
         <div className={styles.wait}>
-          <img className={styles.loading} src="/src/assets/loading.gif" alt="로딩 중" />
+          <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
           <p className={styles.loadingMessage}>MY CLOSET OPENING...</p>
         </div>
       ) : (
@@ -143,7 +159,7 @@ const Closet: React.FC = () => {
                 <img
                   onClick={goCloset}
                   className={styles.logo}
-                  src="/src/assets/logo.png"
+                  src="/assets/logo.png"
                   alt="logo"
                 />
               </div>
@@ -151,7 +167,7 @@ const Closet: React.FC = () => {
               <div className={styles.headerInner2}>
                 <img
                   className={styles.search}
-                  src="/src/assets/search.svg"
+                  src="/assets/search.svg"
                   alt="search"
                   onClick={() => {
                     startTransition(() => {
@@ -164,7 +180,7 @@ const Closet: React.FC = () => {
               <div className={styles.headerInner3}>
                 <img
                   className={styles.cart}
-                  src="/src/assets/shoppingbag.svg"
+                  src="/assets/shoppingbag.svg"
                   alt="cart"
                   onClick={() => {
                     startTransition(() => {
@@ -206,7 +222,7 @@ const Closet: React.FC = () => {
                     <div className={styles.addCartBtn} onClick={() => addCart(cloth.closetPk)}>
                       <img
                         className={styles.addCartBtnImg}
-                        src="/src/assets/shoppingbagW.png"
+                        src="/assets/shoppingbagW.png"
                         alt="cart에 담기"
                       />
                     </div>
@@ -216,7 +232,7 @@ const Closet: React.FC = () => {
                     >
                       <img
                         className={styles.deleteCartBtnImg}
-                        src="/src/assets/closeBtn.svg"
+                        src="/assets/closeBtn.svg"
                         alt="deleteBtn"
                       />
                     </div>

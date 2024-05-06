@@ -136,15 +136,15 @@
 }
 
 .slide:nth-child(1) {
-  background-image: url("/src/assets/광고1.png");
+  background-image: url("/assets/광고1.png");
   animation-delay: 0;
 }
 .slide:nth-child(2) {
-  background-image: url("/src/assets/광고2.png");
+  background-image: url("/assets/광고2.png");
   animation-delay: -2.5s;
 }
 .slide:nth-child(3) {
-  background-image: url("/src/assets/광고3.png");
+  background-image: url("/assets/광고3.png");
   animation-delay: -5s;
 }
 
@@ -305,7 +305,7 @@
   color: #222222;
   border-radius: 50px;
   font-family: 'Pretendard-Medium';
-  font-weight: 600;
+
   font-size: 0.9em;
   letter-spacing: 2px;
   box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);

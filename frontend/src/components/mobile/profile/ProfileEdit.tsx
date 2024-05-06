@@ -200,18 +200,18 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
         <div className={styles.container}>
           <div className={styles.bgVideo}>
             <video className={styles.bgVideoContent} autoPlay muted loop>
-              <source src='/src/assets/background_light.mp4' />
+              <source src='/assets/background_light.mp4' />
             </video>
           </div>
           
           {page1 && 
           <>
-            <header>
+            <div className={styles.header}>
               <div className={styles.headerInner1}>
                   <img
                     onClick={goSelect}
                     className={styles.backBtn}
-                    src="/src/assets/backBtn.svg"
+                    src="/assets/backBtn.svg"
                     alt="backBtn"
                   />
                 </div>
@@ -219,13 +219,13 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
                   <p className={styles.profileadd}>프로필 수정</p>
                 </div>
                 <div className={styles.headerInner3}></div>
-            </header>
+            </div>
 
             <section className={styles.create}>
               <div className={styles.profileImg}>
                 <img className={styles.uploadedImg} src={fileUrl} alt="Uploaded Profile" />
                 <label htmlFor="profileImg" onClick={()=>{fileInputRef.current?.click()}}>
-                  <img className={styles.labelImg} src="/src/assets/edit.svg" alt="edit" />
+                  <img className={styles.labelImg} src="/assets/edit.svg" alt="edit" />
                   <input id="profileImg" type="file" style={{ display: 'none' }} onChange={changePic} ref={fileInputRef}></input>
                 </label>
               </div>
@@ -248,16 +248,16 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
           }
 
           {page2 && <>
-              <header>
+            <div className={styles.header}>
             <div className={styles.headerInner1}>
-              <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" onClick={goName} />
+              <img className={styles.backBtn} src="/assets/backBtn.svg" alt="backBtn" onClick={goName} />
             </div>
             <div className={styles.headerInner2}>
               <p className={styles.profileadd}>프로필 수정</p>
             </div>
             <div className={styles.headerInner3}>
             </div>
-          </header>
+          </div>
               <section className={styles.create2}>
           <div className={styles.topInfo}>
             <p className={styles.texts}>성별 선택</p>
@@ -294,16 +294,16 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
               </>}
               {page3 &&
       (<>
-        <header>
+        <div className={styles.header}>
           <div className={styles.headerInner1}>
-            <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" onClick={goGender} />
+            <img className={styles.backBtn} src="/assets/backBtn.svg" alt="backBtn" onClick={goGender} />
           </div>
           <div className={styles.headerInner2}>
             <p className={styles.profileadd}>프로필 수정</p>
           </div>
           <div className={styles.headerInner3}>
           </div>
-        </header>
+        </div>
 
         <section className={styles.create3}>
           <div className={styles.topInfo}>
@@ -339,16 +339,16 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
 
   {page4 &&
       (<>
-        <header>
+        <div className={styles.header}>
           <div className={styles.headerInner1}>
-            <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" onClick={goHeight} />
+            <img className={styles.backBtn} src="/assets/backBtn.svg" alt="backBtn" onClick={goHeight} />
           </div>
           <div className={styles.headerInner2}>
             <p className={styles.profileadd}>프로필 수정</p>
           </div>
           <div className={styles.headerInner3}>
           </div>
-        </header>
+        </div>
 
         <section className={styles.create3}>
           <div className={styles.topInfo}>

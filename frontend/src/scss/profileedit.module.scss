@@ -23,7 +23,7 @@
   width: 100vw;
   object-fit: cover;
 }
-header {
+.header {
   width: 100vw;
   height: 10%;
   display: flex;
@@ -308,8 +308,8 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
   background-color: transparent;
   color: #222222;
   border-radius: 50px;
-  font-family: 'samsung-one-700';
-  font-weight: 600;
+  font-family: 'Pretendard-Bold';
+
   font-size: 0.9em;
   letter-spacing: 1px;
   &:hover {
@@ -325,8 +325,8 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
   background-color: transparent;
   color: #222222;
   border-radius: 50px;
-  font-family: 'samsung-one-700';
-  font-weight: 600;
+  font-family: 'Pretendard-Bold';
+
   font-size: 0.9em;
   letter-spacing: 1px;
   &:hover {
@@ -350,8 +350,8 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
   background-color: transparent;
   color: #222222;
   border-radius: 50px;
-  font-family: 'samsung-one-700';
-  font-weight: 600;
+  font-family: 'Pretendard-Bold';
+
   font-size: 0.9em;
   letter-spacing: 1px;
   &:hover {

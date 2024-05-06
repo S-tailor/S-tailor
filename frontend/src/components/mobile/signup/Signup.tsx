@@ -63,16 +63,16 @@ const Signup: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.bgVideo}>
         <video className={styles.bgVideoContent} autoPlay muted loop>
-          <source src='/src/assets/background_light.mp4' />
+          <source src='/assets/background_light.mp4' />
         </video>
 			</div>
 
-      <header>
+      <div className={styles.header}>
         <div className={styles.headerInner1}>
           <img
             onClick={goEmail}
             className={styles.backBtn}
-            src="/src/assets/backBtn.svg"
+            src="/assets/backBtn.svg"
             alt="backBtn"
           />
         </div>
@@ -80,7 +80,7 @@ const Signup: React.FC = () => {
           <p className={styles.signup}>회원가입</p>
         </div>
         <div className={styles.headerInner3}></div>
-      </header>
+      </div>
 
       <article className={styles.topArticle}>
         <section className={styles.firstInfo}>

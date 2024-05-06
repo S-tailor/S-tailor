@@ -1,4 +1,5 @@
 import React,{ startTransition, useEffect, useState } from 'react'
+import userStore from '@/store/store'
 import { useNavigate } from 'react-router-dom'
 import { cartItemList, cartItemDelete } from '@/api/apiCart'
 import styles from '../../../scss/closetwishlist.module.scss'
@@ -13,21 +14,25 @@ const ClosetWishList: React.FC = () => {
     source: string,
   }
   const[cartList, setCartList] = useState<cartInfo[]>([])
-  const[, setIsLoading] = useState<boolean>(true)
+  // const[, setIsLoading] = useState<boolean>(true)
   const navigate = useNavigate()
-
-
-
+  const {cartCount } = userStore()
 
   const goShopping = (link:string) => {
    
     window.open(link, '_blank');
   }
   
-  const profilePk = Number(sessionStorage.getItem('profilePk'))
-  useEffect(()=>{
-      fetchCart(profilePk)
-  },[])
+  // const fetchCart = async () => {
+    //   const response = await cartItemList(profilePk)
+    //   if (response.status === 200) {
+      //     setCartCounts(response.data.result)
+      //   }
+      // }
+      useEffect(() => {
+    const profilePk = Number(sessionStorage.getItem('profilePk'))
+    fetchCart(profilePk)
+  }, [])
 
   const deleteItem = async (pk: number) => {
     const response = await cartItemDelete(pk);
@@ -45,7 +50,7 @@ const ClosetWishList: React.FC = () => {
     .then((response) => {
       setTimeout(() => {
         setCartList(response.data.result)
-        setIsLoading(false)
+        // setIsLoading(false)
       },500)
     })
   }
@@ -63,7 +68,7 @@ const ClosetWishList: React.FC = () => {
         <div className={styles.headerInner}>
 
             <div className={styles.headerInner1}>
-              <img onClick={goCloset} className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
+              <img onClick={goCloset} className={styles.backBtn} src="/assets/backBtn.svg" alt="backBtn" />
             </div>
         
             <div className={styles.headerInner2}>
@@ -79,11 +84,9 @@ const ClosetWishList: React.FC = () => {
 
       {/* {isLoading? "위시리스트 불러오는중...":""} */}
     <div className={styles.main}>
-      {cartList.length > 0 && (
         <p className={styles.length}>
-          위시리스트에 {cartList.length}개의 상품이 있습니다.
+          위시리스트에 {cartCount}개의 상품이 있습니다.
         </p>
-      )}
       
 
         {cartList.map((item, idx) => (
@@ -99,7 +102,7 @@ const ClosetWishList: React.FC = () => {
                 <div className={styles.selectedBtn}>
                   <img 
                     className={styles.selectedDeleteBtn}
-                    src="/src/assets/closeBtn.svg" 
+                    src="/assets/closeBtn.svg" 
                     alt="delete-item" 
                     onClick={()=>deleteItem(item.closetPk)} 
                   />
