@@ -43,7 +43,7 @@ const ClosetSearch: React.FC = () => {
       <div className={styles.header}>
         <div className={styles.headerInner}>
 
-          <img onClick={goCloset} className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
+          <img onClick={goCloset} className={styles.backBtn} src="/assets/backBtn.svg" alt="backBtn" />
           
           <div className={styles.searchbar}>
             <input
@@ -56,7 +56,7 @@ const ClosetSearch: React.FC = () => {
             />
             <img
               className={styles.search}
-              src="/src/assets/search.svg"
+              src="/assets/search.svg"
               alt="search"
               onClick={handleSearch}
             />

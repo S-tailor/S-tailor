@@ -67,31 +67,31 @@ const Closet: React.FC = () => {
     const path = location.pathname
     const iconPaths: { [key: string]: { [icon: string]: string } } = {
       '/mobile/closet': {
-        closet: '/src/assets/closetFill.png',
-        'add-cloth': '/src/assets/upload.png',
-        ask: '/src/assets/shirt.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        closet: '/assets/closetFill.png',
+        'add-cloth': '/assets/upload.png',
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/add-cloth': {
-        closet: '/src/assets/closet.png',
-        'add-cloth': '/src/assets/uploadFill.png',
-        ask: '/src/assets/shirt.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        closet: '/assets/closet.png',
+        'add-cloth': '/assets/uploadFill.png',
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/ask': {
-        closet: '/src/assets/closet.png',
-        'add-cloth': '/src/assets/upload.png',
-        ask: '/src/assets/shirtFill.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        closet: '/assets/closet.png',
+        'add-cloth': '/assets/upload.png',
+        ask: '/assets/shirtFill.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/mypage': {
-        closet: '/src/assets/closet.png',
-        'add-cloth': '/src/assets/upload.png',
-        ask: '/src/assets/shirt.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        closet: '/assets/closet.png',
+        'add-cloth': '/assets/upload.png',
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       }
     }
-    return iconPaths[path][iconName] || '/src/assets/' + iconName + '.png'
+    return iconPaths[path][iconName] || '/assets/' + iconName + '.png'
   }
 
   const getMypageImgStyle = useMemo(() => {
@@ -132,7 +132,7 @@ const Closet: React.FC = () => {
     <div className={styles.container}>
       {isLoading ? (
         <div className={styles.wait}>
-          <img className={styles.loading} src="/src/assets/loading.gif" alt="로딩 중" />
+          <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
           <p className={styles.loadingMessage}>MY CLOSET OPENING...</p>
         </div>
       ) : (
@@ -143,7 +143,7 @@ const Closet: React.FC = () => {
                 <img
                   onClick={goCloset}
                   className={styles.logo}
-                  src="/src/assets/logo.png"
+                  src="/assets/logo.png"
                   alt="logo"
                 />
               </div>
@@ -151,7 +151,7 @@ const Closet: React.FC = () => {
               <div className={styles.headerInner2}>
                 <img
                   className={styles.search}
-                  src="/src/assets/search.svg"
+                  src="/assets/search.svg"
                   alt="search"
                   onClick={() => {
                     startTransition(() => {
@@ -164,7 +164,7 @@ const Closet: React.FC = () => {
               <div className={styles.headerInner3}>
                 <img
                   className={styles.cart}
-                  src="/src/assets/shoppingbag.svg"
+                  src="/assets/shoppingbag.svg"
                   alt="cart"
                   onClick={() => {
                     startTransition(() => {
@@ -206,7 +206,7 @@ const Closet: React.FC = () => {
                     <div className={styles.addCartBtn} onClick={() => addCart(cloth.closetPk)}>
                       <img
                         className={styles.addCartBtnImg}
-                        src="/src/assets/shoppingbagW.png"
+                        src="/assets/shoppingbagW.png"
                         alt="cart에 담기"
                       />
                     </div>
@@ -216,7 +216,7 @@ const Closet: React.FC = () => {
                     >
                       <img
                         className={styles.deleteCartBtnImg}
-                        src="/src/assets/closeBtn.svg"
+                        src="/assets/closeBtn.svg"
                         alt="deleteBtn"
                       />
                     </div>

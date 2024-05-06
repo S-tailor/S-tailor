@@ -200,7 +200,7 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
         <div className={styles.container}>
           <div className={styles.bgVideo}>
             <video className={styles.bgVideoContent} autoPlay muted loop>
-              <source src='/src/assets/background_light.mp4' />
+              <source src='/assets/background_light.mp4' />
             </video>
           </div>
           
@@ -211,7 +211,7 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
                   <img
                     onClick={goSelect}
                     className={styles.backBtn}
-                    src="/src/assets/backBtn.svg"
+                    src="/assets/backBtn.svg"
                     alt="backBtn"
                   />
                 </div>
@@ -225,7 +225,7 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
               <div className={styles.profileImg}>
                 <img className={styles.uploadedImg} src={fileUrl} alt="Uploaded Profile" />
                 <label htmlFor="profileImg" onClick={()=>{fileInputRef.current?.click()}}>
-                  <img className={styles.labelImg} src="/src/assets/edit.svg" alt="edit" />
+                  <img className={styles.labelImg} src="/assets/edit.svg" alt="edit" />
                   <input id="profileImg" type="file" style={{ display: 'none' }} onChange={changePic} ref={fileInputRef}></input>
                 </label>
               </div>
@@ -250,7 +250,7 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
           {page2 && <>
               <header>
             <div className={styles.headerInner1}>
-              <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" onClick={goName} />
+              <img className={styles.backBtn} src="/assets/backBtn.svg" alt="backBtn" onClick={goName} />
             </div>
             <div className={styles.headerInner2}>
               <p className={styles.profileadd}>프로필 수정</p>
@@ -296,7 +296,7 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
       (<>
         <header>
           <div className={styles.headerInner1}>
-            <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" onClick={goGender} />
+            <img className={styles.backBtn} src="/assets/backBtn.svg" alt="backBtn" onClick={goGender} />
           </div>
           <div className={styles.headerInner2}>
             <p className={styles.profileadd}>프로필 수정</p>
@@ -341,7 +341,7 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
       (<>
         <header>
           <div className={styles.headerInner1}>
-            <img className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" onClick={goHeight} />
+            <img className={styles.backBtn} src="/assets/backBtn.svg" alt="backBtn" onClick={goHeight} />
           </div>
           <div className={styles.headerInner2}>
             <p className={styles.profileadd}>프로필 수정</p>

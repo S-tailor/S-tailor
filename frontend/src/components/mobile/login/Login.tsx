@@ -56,7 +56,7 @@ const Login: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.bgVideo}>
         <video className={styles.bgVideoContent} autoPlay muted loop>
-          <source src='/src/assets/background_light.mp4' />
+          <source src='/assets/background_light.mp4' />
         </video>
       </div>
       <div className={styles.header}>
@@ -64,7 +64,7 @@ const Login: React.FC = () => {
           <img
             onClick={goEmail}
             className={styles.backBtn}
-            src="/src/assets/backBtn.svg"
+            src="/assets/backBtn.svg"
             alt="backBtn"
           />
         </div>

@@ -77,31 +77,31 @@ const Ask: React.FC = () => {
     const path = location.pathname
     const iconPaths: { [key: string]: { [icon: string]: string } } = {
       '/mobile/closet': {
-        'closet': '/src/assets/closetFill.png',
-        'add-cloth': '/src/assets/upload.png',
-        'ask': '/src/assets/shirt.png',
-        'mypage': user[0]?.image || '/src/assets/avatar.PNG'
+        'closet': '/assets/closetFill.png',
+        'add-cloth': '/assets/upload.png',
+        'ask': '/assets/shirt.png',
+        'mypage': user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/add-cloth': {
-        'closet': '/src/assets/closet.png',
-        'add-cloth': '/src/assets/uploadFill.png',
-        'ask': '/src/assets/shirt.png',
-        'mypage': user[0]?.image || '/src/assets/avatar.PNG'
+        'closet': '/assets/closet.png',
+        'add-cloth': '/assets/uploadFill.png',
+        'ask': '/assets/shirt.png',
+        'mypage': user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/ask': {
-        'closet': '/src/assets/closet.png',
-        'add-cloth': '/src/assets/upload.png',
-        'ask': '/src/assets/shirtFill.png',
-        'mypage': user[0]?.image || '/src/assets/avatar.PNG'
+        'closet': '/assets/closet.png',
+        'add-cloth': '/assets/upload.png',
+        'ask': '/assets/shirtFill.png',
+        'mypage': user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/mypage': {
-        'closet': '/src/assets/closet.png',
-        'add-cloth': '/src/assets/upload.png',
-        'ask': '/src/assets/shirt.png',
-        'mypage': user[0]?.image || '/src/assets/avatar.PNG'
+        'closet': '/assets/closet.png',
+        'add-cloth': '/assets/upload.png',
+        'ask': '/assets/shirt.png',
+        'mypage': user[0]?.image || '/assets/avatar.PNG'
       }
     }
-    return iconPaths[path][iconName] || '/src/assets/' + iconName + '.png'
+    return iconPaths[path][iconName] || '/assets/' + iconName + '.png'
   }
 
   const getMypageImgStyle = useMemo(() => {
@@ -139,13 +139,13 @@ const Ask: React.FC = () => {
       <div className={styles.header}>
         <div className={styles.headerInner}>
           <div className={styles.headerInner1}>
-            <img className={styles.logo} src="/src/assets/styleReco.png" alt="logo" />
+            <img className={styles.logo} src="/assets/styleReco.png" alt="logo" />
           </div>
 
           <div className={styles.headerInner2}>
             <img
               className={styles.search}
-              src="/src/assets/search.svg"
+              src="/assets/search.svg"
               alt="search"
               onClick={() => {
                 startTransition(() => {
@@ -159,7 +159,7 @@ const Ask: React.FC = () => {
           <div className={styles.headerInner3}>
             <img
               className={styles.cart}
-              src="/src/assets/shoppingbag.svg"
+              src="/assets/shoppingbag.svg"
               alt="cart"
               onClick={() => {
                 startTransition(() => {
@@ -192,14 +192,14 @@ const Ask: React.FC = () => {
         </div>
       </section>
       <div className={styles.loadingInner}>
-        {isLoading && <img className={styles.loading} src="/src/assets/loading.gif" alt="로딩중" />}
+        {isLoading && <img className={styles.loading} src="/assets/loading.gif" alt="로딩중" />}
       </div>
 
       <section className={styles.textSend}>
         <div className={styles.textSendInner}>
           <img
             className={styles.addImg}
-            src="/src/assets/add.svg"
+            src="/assets/add.svg"
             alt="플러스버튼"
             onClick={() => {
               fileInputRef.current?.click()
@@ -215,7 +215,7 @@ const Ask: React.FC = () => {
           {file && <img className={styles.temporaryImage} src={fileUrl} alt="Uploaded Image" />}
           <img
             className={styles.deleteImg}
-            src="/src/assets/delete.svg"
+            src="/assets/delete.svg"
             alt="이미지삭제"
             onClick={() => {
               setFileUrl('')
@@ -231,7 +231,7 @@ const Ask: React.FC = () => {
           />
           <img
             className={styles.sendImg}
-            src="/src/assets/send.svg"
+            src="/assets/send.svg"
             alt="삼각형의 전송버튼"
             onClick={sendInfo}
           />

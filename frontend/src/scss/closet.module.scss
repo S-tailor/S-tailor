@@ -136,15 +136,15 @@
 }
 
 .slide:nth-child(1) {
-  background-image: url("/src/assets/광고1.png");
+  background-image: url("/assets/광고1.png");
   animation-delay: 0;
 }
 .slide:nth-child(2) {
-  background-image: url("/src/assets/광고2.png");
+  background-image: url("/assets/광고2.png");
   animation-delay: -2.5s;
 }
 .slide:nth-child(3) {
-  background-image: url("/src/assets/광고3.png");
+  background-image: url("/assets/광고3.png");
   animation-delay: -5s;
 }
 

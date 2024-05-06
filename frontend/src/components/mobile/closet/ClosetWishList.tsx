@@ -63,7 +63,7 @@ const ClosetWishList: React.FC = () => {
         <div className={styles.headerInner}>
 
             <div className={styles.headerInner1}>
-              <img onClick={goCloset} className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
+              <img onClick={goCloset} className={styles.backBtn} src="/assets/backBtn.svg" alt="backBtn" />
             </div>
         
             <div className={styles.headerInner2}>
@@ -99,7 +99,7 @@ const ClosetWishList: React.FC = () => {
                 <div className={styles.selectedBtn}>
                   <img 
                     className={styles.selectedDeleteBtn}
-                    src="/src/assets/closeBtn.svg" 
+                    src="/assets/closeBtn.svg" 
                     alt="delete-item" 
                     onClick={()=>deleteItem(item.closetPk)} 
                   />
