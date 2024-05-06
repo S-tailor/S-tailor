@@ -2,8 +2,9 @@ import React, { useEffect, startTransition, useState, useMemo } from 'react'
 import userStore from '@/store/store'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { closetItemList, closetItemDelete } from '@/api/apiCloset'
-import { cartItemAdd } from '@/api/apiCart'
+import { cartItemList, cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/closet.module.scss'
+import { reset } from '@/api/apiAsk';
 
 const Closet: React.FC = () => {
   interface clothInfo {
@@ -23,7 +24,7 @@ const Closet: React.FC = () => {
   const navigate = useNavigate()
   const userName = user[0]?.profileName ?? 'Guest'
   const [isLoading, setIsLoading] = useState(true)
-  const [cartCount, setCartCount] = useState<number>(0)
+  const { cartCount,  setCartCounts, addToCart } = userStore()
   const [selectedCategory, setSelectedCategory] = useState('전체')
 
   const categories = ['전체', '아우터', '상의', '하의', '원피스', '기타']
@@ -107,19 +108,35 @@ const Closet: React.FC = () => {
   }
 
   const addCart = async (pk: number) => {
-    await cartItemAdd(pk).then(() => {
-      alert('위시리스트에 추가되었습니다!')
-      const newCartCount = cartCount + 1
-      localStorage.setItem('cartCount', JSON.stringify(newCartCount))
-      setCartCount(newCartCount)
-    })
+    const response = await cartItemAdd(pk)
+    if (response.status === 200) {
+      console.log('123131',clothList,pk)
+        addToCart(clothList[pk])
+        alert('위시리스트에 추가되었습니다!')
+    }
+}
+
+
+  // useEffect(() => {
+  //   const storedCartCount = localStorage.getItem('cartCount')
+  //   if (storedCartCount) {
+  //     setCartCount(JSON.parse(storedCartCount))
+  //   }
+  // }, [])
+
+  const fetchCart = async () => {
+    const profilePk = Number(sessionStorage.getItem('profilePk'))
+    const response = await cartItemList(profilePk)
+    if (response.status === 200) {
+
+      console.log('마킹',response.data.result, profilePk)
+      setCartCounts(response.data.result)
+    }
   }
 
   useEffect(() => {
-    const storedCartCount = localStorage.getItem('cartCount')
-    if (storedCartCount) {
-      setCartCount(JSON.parse(storedCartCount))
-    }
+
+    fetchCart()
   }, [])
 
   const goCloset = () => {

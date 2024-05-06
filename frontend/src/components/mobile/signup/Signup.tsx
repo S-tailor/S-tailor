@@ -67,7 +67,7 @@ const Signup: React.FC = () => {
         </video>
 			</div>
 
-      <header>
+      <div className={styles.header}>
         <div className={styles.headerInner1}>
           <img
             onClick={goEmail}
@@ -80,7 +80,7 @@ const Signup: React.FC = () => {
           <p className={styles.signup}>회원가입</p>
         </div>
         <div className={styles.headerInner3}></div>
-      </header>
+      </div>
 
       <article className={styles.topArticle}>
         <section className={styles.firstInfo}>

@@ -201,7 +201,7 @@ const ProfileAdd: React.FC = () => {
                 ) : (
                   <img
                     className={styles.uploadedImg}
-                    src="/assets/avatar.png"
+                    src="/assets/avatar.PNG"
                     alt="Uploaded Profile"
                   />
                 )}

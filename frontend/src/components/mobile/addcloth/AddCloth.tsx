@@ -334,13 +334,13 @@ const AddCloth: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <header>
+      <div className={styles.header}>
         <div className={styles.headerInner}>
           <div className={styles.headerInner1}>
             <img onClick={goCloset} className={styles.logo} src="/assets/logo.png" alt="logo" />
           </div>
         </div>
-      </header>
+      </div>
 
       <section className={styles.addClothMain}>
         <div className={styles.searchbar}>
@@ -404,7 +404,7 @@ const AddCloth: React.FC = () => {
               </label>
               <img
                 className={styles.camera}
-                src={captureMode ? '/assets/avatar.png' : '/assets/camera.png'}
+                src={captureMode ? '/assets/avatar.PNG' : '/assets/camera.png'}
                 alt={captureMode ? 'capture' : 'camera'}
                 onClick={onCameraClick}
               />
