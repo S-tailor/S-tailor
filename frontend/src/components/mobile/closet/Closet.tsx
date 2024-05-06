@@ -33,7 +33,7 @@ const Closet: React.FC = () => {
   }
 
   useEffect(() => {
-    const profilePk = Number(sessionStorage.getItem('profilePk'))
+    const profilePk = Number(user[0]?.profilePk)
     if (profilePk) {
       fetchItem(profilePk)
     }

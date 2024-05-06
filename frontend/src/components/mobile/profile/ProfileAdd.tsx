@@ -86,6 +86,7 @@ const ProfileAdd: React.FC = () => {
             image: fileUrl
           };
           setUser(userProfileData)
+          setIsSubmitting(false)
           startTransition(() => {
             navigate('/mobile/closet')
           })

@@ -20,12 +20,10 @@ type CameraMode = 'user' | 'environment'
 
 const AddCloth: React.FC = () => {
   const location = useLocation()
-  // const [isLoading, setIsLoading] = useState(true);
   const { user } = userStore() as {
     user: { profilePk: number; image?: string; profileName: string }[]
   }
   const navigate = useNavigate()
-  const [, setImage] = useState(null)
   const [text, setText] = useState('')
   const [results, setResults] = useState<SearchResultItem[]>([])
   const [, setMessage] = useState('')
@@ -35,8 +33,8 @@ const AddCloth: React.FC = () => {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null)
   const [cameraActive, setCameraActive] = useState(false)
   const [captureMode, setCaptureMode] = useState(false)
-  // const [showPicture, setShowPicture] = useState(true)
   const [searchMode, setSearchMode] = useState<'text' | 'upload' | 'camera' | null>(null)
+  const [, setImageReady] = useState(false)
 
   // 카메라 켜기
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -50,15 +48,16 @@ const AddCloth: React.FC = () => {
 
       if (video) {
         video.srcObject = stream
-        setCameraActive(true)
-        setCaptureMode(true) // 촬영 모드로 전환
+        await video.play()
+        // setCameraActive(true)
+        // setCaptureMode(true) // 촬영 모드로 전환
       }
     } catch (error) {
       console.error('카메라 접근 오류:', error)
     }
   }
   // 사진 촬영
-  const handleCapture = () => {
+  const handleCapture = async () => {
     const canvas = document.createElement('canvas')
     const video = videoRef.current
 
@@ -70,35 +69,32 @@ const AddCloth: React.FC = () => {
 
       if (ctx) {
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
-        canvas.toBlob(async (blob) => {
-          if (blob) {
-            const file = new File([blob], 'captured-image.png', { type: 'image/png' })
-            const url = URL.createObjectURL(blob)
-            console.log(url) // 로그로 URL을 찍어 확인
-
-            setImagePath(url)
-            setUploadedFile(file)
-            setSearchMode('camera')
-
-            // const img = document.createElement('img')
-            // img.onload = () => {
-            //   URL.revokeObjectURL(url)
-            // }
-            // img.src = url
-            // document.body.appendChild(img)
-          }
+        const blob = await new Promise<Blob | null>((resolve) => {
+          canvas.toBlob(resolve, 'image/png')
         })
+        if (blob) {
+          const file = new File([blob], 'captured-image.png', { type: 'image/png' })
+          const url = URL.createObjectURL(blob)
+          console.log('Capture successful:', url)
+          saveImage(file)
+        }
       }
     }
   }
 
-  const onCameraClick = () => {
+  const onCameraClick = async () => {
     if (cameraActive && captureMode) {
-      handleCapture()
-      setSearchMode('camera') // 사진 촬영 후 이미지 보여주기 위해 변경
+      await handleCapture()
+      setCaptureMode(false) // 사진 촬영 후 이미지 보여주기 위해 변경
     } else {
-      CameraClick()
-      setSearchMode(null) // 카메라 실행할 때는 카메라를 보여줌
+      try {
+        setCameraActive(true)
+        setCaptureMode(true)
+        setSearchMode('camera')
+        await CameraClick()
+      } catch (error) {
+        console.error('Camera failed to start:', error)
+      }
     }
   }
 
@@ -121,8 +117,9 @@ const AddCloth: React.FC = () => {
     transform: camera === 'user' ? 'scaleX(-1)' : 'none'
   }
 
-  // 업로드된 이미지 또는 촬영된 이미지 렌더링
+  // 촬영된 이미지 렌더링
   function RenderCameraImage() {
+    console.log('Rendering captured image:', imagePath)
     return (
       <div className={styles.picture}>
         <img
@@ -138,7 +135,7 @@ const AddCloth: React.FC = () => {
   function RenderVideo() {
     return (
       <div className={styles.picture}>
-        <video ref={videoRef} autoPlay />
+        {cameraActive ? <video ref={videoRef} style={videoStyle} autoPlay playsInline /> : null}
       </div>
     )
   }
@@ -199,21 +196,27 @@ const AddCloth: React.FC = () => {
   }
 
   // 업로드 이미지 저장
-  function saveImage(event: any) {
-    const file = event.target.files[0]
-
-    if (event.target.files) {
-      setImage(file)
+  function saveImage(input: any) {
+    let file: any
+    if (input instanceof File) {
+      // 직접 File 객체가 입력된 경우
+      file = input
+    } else if (input.target.files && input.target.files[0]) {
+      // 이벤트를 통해 파일이 입력된 경우
+      file = input.target.files[0]
     }
-    console.log(event)
 
-    const reader = new FileReader()
-    reader.onload = () => {
-      setImagePath(reader.result as string)
-      setUploadedFile(file)
-      setSearchMode('upload')
+    // 파일이 존재하는 경우 처리
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = () => {
+        setImagePath(reader.result as string)
+        setUploadedFile(file)
+        setImageReady(true)
+        setSearchMode('upload')
+      }
+      reader.readAsDataURL(file)
     }
-    reader.readAsDataURL(file)
   }
 
   useEffect(() => {
@@ -224,6 +227,7 @@ const AddCloth: React.FC = () => {
           imageSearch(uploadedFile) // 이미지 검색 함수 실행
         }
         setUploadedFile(null) // 중복 실행 방지
+        setImageReady(false) // 상태 초기화
       }, 100)
     }
   }, [uploadedFile])
@@ -358,6 +362,8 @@ const AddCloth: React.FC = () => {
         <div className={styles.picture}>
           {showResults ? (
             <RenderResult />
+          ) : searchMode === 'camera' && cameraActive ? (
+            <video ref={videoRef} style={videoStyle} autoPlay />
           ) : searchMode === 'camera' ? (
             <RenderCameraImage />
           ) : searchMode === 'upload' ? (
@@ -402,7 +408,6 @@ const AddCloth: React.FC = () => {
                 alt={captureMode ? 'capture' : 'camera'}
                 onClick={onCameraClick}
               />
-              {cameraActive && <video ref={videoRef} style={videoStyle} autoPlay />}
               <img
                 className={styles.switch}
                 src="/src/assets/switch.png"
