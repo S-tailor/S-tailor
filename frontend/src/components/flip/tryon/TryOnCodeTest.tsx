@@ -78,7 +78,7 @@ const TryOn: React.FC = () => {
       </section>
       
       <section className={styles.bottomText}>
-         <p className={styles.bottomTextInner}>* QR코드가 나타난 후 1분 이내 인증을 완료해주세요.</p>
+         <p className={styles.bottomTextInner}>* QR코드가 나타난 후 1분 이내 인증을 완료해주세요. *</p>
       </section>
 
       <section className={styles.qrcode}>
