@@ -127,8 +127,6 @@ const Closet: React.FC = () => {
     const profilePk = Number(sessionStorage.getItem('profilePk'))
     const response = await cartItemList(profilePk)
     if (response.status === 200) {
-
-      console.log('마킹',response.data.result, profilePk)
       setCartCounts(response.data.result)
     }
   }
