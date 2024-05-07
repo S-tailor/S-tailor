@@ -23,7 +23,7 @@ const Closet: React.FC = () => {
   const navigate = useNavigate()
   const userName = user[0]?.profileName ?? 'Guest'
   const [isLoading, setIsLoading] = useState(true)
-  const { cartCount,  setCartCounts, addToCart } = userStore()
+  const { cartCount, setCartCounts, addToCart } = userStore()
   const [selectedCategory, setSelectedCategory] = useState('전체')
 
   const categories = ['전체', '아우터', '상의', '하의', '원피스', '기타']
@@ -42,9 +42,9 @@ const Closet: React.FC = () => {
   const fetchItem = async (profilePk: number) => {
     await closetItemList(profilePk).then((response) => {
       setClothList(response.data.result)
-      setTimeout(() => {
+     
         setIsLoading(!isLoading)
-      }, 500)
+   
       setIsLoading(!isLoading)
     })
   }
@@ -109,33 +109,30 @@ const Closet: React.FC = () => {
   const addCart = async (pk: number) => {
     const response = await cartItemAdd(pk)
     if (response.status === 200) {
-      console.log('123131',clothList,pk)
-        addToCart(clothList[pk])
-        alert('위시리스트에 추가되었습니다!')
+      console.log('123131', clothList, pk)
+      addToCart(clothList[pk])
+      alert('위시리스트에 추가되었습니다!')
     }
-}
-
-
-  // useEffect(() => {
-  //   const storedCartCount = localStorage.getItem('cartCount')
-  //   if (storedCartCount) {
-  //     setCartCount(JSON.parse(storedCartCount))
-  //   }
-  // }, [])
+  }
 
   const fetchCart = async () => {
     const profilePk = Number(sessionStorage.getItem('profilePk'))
     const response = await cartItemList(profilePk)
     if (response.status === 200) {
+      console.log('마킹', response.data.result, profilePk)
       setCartCounts(response.data.result)
     }
   }
 
   useEffect(() => {
-
     fetchCart()
   }, [])
 
+  const goCloset = () => {
+    startTransition(() => {
+      navigate('/mobile/closet')
+    })
+  }
 
   return (
     <div className={styles.container}>
@@ -149,13 +146,7 @@ const Closet: React.FC = () => {
           <div className={styles.header}>
             <div className={styles.headerInner}>
               <div className={styles.headerInner1}>
-                <img
-                  onClick={()=>{startTransition(()=>{
-                    navigate('/mobile/closet')})}}
-                  className={styles.logo}
-                  src="/assets/logo.png"
-                  alt="logo"
-                />
+                <img onClick={goCloset} className={styles.logo} src="/assets/logo.png" alt="logo" />
               </div>
 
               <div className={styles.headerInner2}>
@@ -194,7 +185,8 @@ const Closet: React.FC = () => {
                   key={category}
                   href="#"
                   onClick={() => handleCategoryClick(category)}
-                  style={getCategoryStyle(category)}>
+                  style={getCategoryStyle(category)}
+                >
                   {category}
                 </a>
               ))}
@@ -216,15 +208,18 @@ const Closet: React.FC = () => {
                       <img
                         className={styles.addCartBtnImg}
                         src="/assets/shoppingbagW.png"
-                        alt="cart에 담기"/>
+                        alt="cart에 담기"
+                      />
                     </div>
                     <div
                       className={styles.deleteCartBtn}
-                      onClick={() => deleteCloth(cloth.closetPk)}>
+                      onClick={() => deleteCloth(cloth.closetPk)}
+                    >
                       <img
                         className={styles.deleteCartBtnImg}
                         src="/assets/closeBtn.svg"
-                        alt="deleteBtn"/>
+                        alt="deleteBtn"
+                      />
                     </div>
                     <p className={styles.clothesName}>{cloth.name}</p>
                     <p className={styles.clothesPrice}>{cloth.price.substring(1)}원</p>
