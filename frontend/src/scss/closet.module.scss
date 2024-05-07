@@ -208,7 +208,9 @@
 
 
 .clothesImg {
-  width: 100%;
+  width: 29vw;
+  height: 14vh;
+  object-fit: cover;
   border-radius: 5px;
   filter: drop-shadow(0px 0px 1px #c4c4c4);
 }
@@ -251,12 +253,13 @@
 }
 
 .addCartBtnImg {
-  width: 5vw;
+  width: 20px;
   filter: drop-shadow(1px 1px 3px #000000);
 }
 
 .deleteCartBtnImg {
-  width: 2vw;
+  width: 7px;
+  filter: drop-shadow(2px 2px 1px #ffffff);
 }
 
 .bottomNavInnerBtn {
@@ -264,24 +267,24 @@
 }
 
 .closetImg {
-  width: 7.5vw;
-  height: 4vh;
+  width: 30px;
+  height: 35px;
   margin-left: 1px;
 }
 
 .addClothesImg {
-  width: 7.5vw;
-  height: 4vh;
+  width: 30px;
+  height: 35px;
 }
 
 .recommendImg {
-  width: 9vw;
-  height: 4vh;
+  width: 35px;
+  height: 35px;
 }
 
 .mypageImg {
-  width: 8.5vw;
-  height: 4vh;
+  width: 35px;
+  height: 35px;
   border-radius: 100px;
   filter: drop-shadow(0px 0px 1.5px #000000);
 }
