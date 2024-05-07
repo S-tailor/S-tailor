@@ -1,0 +1,50 @@
+commit 59f941e38cc9d95de26a433483199fc43bc70bf0
+tree 68705f65619179cbbcc5ddc2129573ecde5e7234
+parent 85468a09891b0eba8d5d71ea0cfe966636656a1a
+author Hana Na <gksk3185@gmail.com> 2024-05-03 14:48:01 +0900
+committer Hana Na <gksk3185@gmail.com> 2024-05-03 14:48:01 +0900
+
+    fix: bulid
+
+
+:100644 100644 86ac8e6ebd6c3b6bdae4a88015c085b38c930117 38003c76746a95aa3bd2aa1434a3f9cb3345af22 M	frontend/src/components/mobile/closet/ClosetWishList.tsx
+commit 85468a09891b0eba8d5d71ea0cfe966636656a1a
+tree fe2fd85252ce5a1a01f9c6dd71cb29d2ddaf7d45
+parent f6c312047003d730c66a9594797b9e4779d96eec
+author Hana Na <gksk3185@gmail.com> 2024-05-03 14:44:52 +0900
+committer Hana Na <gksk3185@gmail.com> 2024-05-03 14:44:52 +0900
+
+    fix: inging
+
+
+:100644 100644 ea30f7969702b3b214a09d3c2187c056682f7898 0dbc3234f27d44d64d6eeced264e547dc8058d05 M	frontend/src/components/mobile/ask/Ask.tsx
+commit f6c312047003d730c66a9594797b9e4779d96eec
+tree 7aa4ff7a0cb2ffbe77eaf1c4641916e8cd8e79a6
+parent 4feee38155e7fad0cd2922184e883496fafabb0a
+author Hana Na <gksk3185@gmail.com> 2024-05-03 14:42:50 +0900
+committer Hana Na <gksk3185@gmail.com> 2024-05-03 14:42:50 +0900
+
+    fix: ing
+
+
+:100644 100644 2cb375ac6ca5e0eed83cb62267340d3bd54313bb ea30f7969702b3b214a09d3c2187c056682f7898 M	frontend/src/components/mobile/ask/Ask.tsx
+commit 10a1940deae62a4d58a54e74d7ff4b34e2f60ba9
+tree 6ee28974f6f54d9d474ac0538bd207f2f5624ab7
+parent 9352f59d3b56de6553e734f71f3cd57fb8fe87d3
+author Hana Na <gksk3185@gmail.com> 2024-05-03 14:23:52 +0900
+committer Hana Na <gksk3185@gmail.com> 2024-05-03 14:23:52 +0900
+
+    feat: withlist
+
+
+:100644 100644 3ce28107af69165ccfb6639f6deb8ffd5b745352 e4f4de1d591f0f17bb6eb0cb7d3c31c441d91a9c M	frontend/src/api/apiAsk.tsx
+:100644 100644 ede94dcc1268d639c756bded535136fa0d3d7b70 1ab799d9fd6cf72edc36317aee3b2fcb5e9edb98 M	frontend/src/components/mobile/addcloth/AddCloth.tsx
+:100644 100644 0ef2f4c6d0cbf5a36e83d36268975241dd94e71f 2d00d348c260e6db90069f35c0ef3c6c47c3452a M	frontend/src/components/mobile/ask/Ask.tsx
+:100644 100644 4751e03f9f8493c27feb048f60275de9c724f1ce 96898f830ab1040c2673e223b744b1e86355e133 M	frontend/src/components/mobile/closet/ClosetSearch.tsx
+:100644 100644 3400015bc73175f128b9dc4bf5272354c34d43dc 86ac8e6ebd6c3b6bdae4a88015c085b38c930117 M	frontend/src/components/mobile/closet/ClosetWishList.tsx
+:100644 100644 2db6b19e04405f9025b21c857d4942bb3e0327eb cc9d7ac44071b91510df37dedab3cf64a89e25f7 M	frontend/src/css/ask.module.css
+:000000 100644 0000000000000000000000000000000000000000 cee15d6151c6a329aff0d1c4b80d8ad1ebeab0f2 A	frontend/src/css/closetsearch.module.css
+:000000 100644 0000000000000000000000000000000000000000 a1184a847adb3e163d5c5b41321fffc7314a4c3d A	frontend/src/css/closetwishlist.module.css
+:100644 100644 cd64dd311bd6dde079e749d951579abe2b7864f1 8f66247504d047dbefc5c8f39cef782826e9c2bb M	frontend/src/scss/ask.module.scss
+:000000 100644 0000000000000000000000000000000000000000 bbc339451ca5b8fd248966c0d387afffc84df8f9 A	frontend/src/scss/closetsearch.module.scss
+:000000 100644 0000000000000000000000000000000000000000 3d6972911517a3587433686bbf4403583de02db7 A	frontend/src/scss/closetwishlist.module.scss

@@ -1,0 +1,47 @@
+commit 01b8e22376d6a313139da6fbfdf9f3eff70b28fc
+tree 4fed30c2b1c84f7d8126528fdc7afc1e0859e862
+parent 98575485129a25141a608d595114d7afe2820d7e
+author JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-05-01 16:08:53 +0900
+committer JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-05-01 16:08:53 +0900
+
+    'fix-whishList-error,modifying-profile'
+
+
+:100644 100644 05510ee370223952699c8828f56f6b14bbace8ef ad20489030691da6941e74f994053f13cb9b91da M	frontend/package.json
+:100644 100644 3c853084e982e12b65e18845570831b4d9c40b50 c554501a00f802df1fe76640c4dcf7485e588548 M	frontend/src/api/apiProfile.tsx
+:100644 100644 0f7e8a3ae176b215acb073f50aafdde6abdbf492 7ebf4ee85c5f3953df23f7d6ee72a1c2e9d16dbf M	frontend/src/components/mobile/closet/Closet.tsx
+:100644 100644 42315f5187fec65197ce676cd2c04241a44a5416 d802f3c04e9ed7d0a32d52f9f4299676bed54956 M	frontend/src/components/mobile/profile/Profile.tsx
+:100644 100644 debe4245914459ead586ad2b1d824554660074d1 a27bcc786678e209eadc44e77e119f8ec39521a3 M	frontend/src/components/mobile/profile/ProfileAdd.tsx
+:000000 100644 0000000000000000000000000000000000000000 421bd11f35db945edf09214e378231a1812a64de A	frontend/src/components/mobile/profile/ProfileEdit.tsx
+:100644 100644 0adc7ab6ca23b2263be0cf5d25fdf13d5db19400 093d2e4dad82d7e16080c7f439ce875b7587e5c0 M	frontend/src/routes.tsx
+:100644 100644 49bc4128bc94360e47e78bb6cd1ad880ab81df7d 93282f3690cf5b7f043ea2fbf7d112d8539f60d1 M	frontend/src/store/store.tsx
+:100644 100644 f85771ac9403c55d81e427719cb75464abdd37cb cb6a7abf43724972925fbb53686ecf1396bffead M	frontend/yarn.lock
+commit 98575485129a25141a608d595114d7afe2820d7e
+tree f92aa3e8b2be95c1b8ff41d1bd2a96644d33c380
+parent 91021bc7f87eb636c8b168b27b37775e375f74f3
+author JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-04-30 12:43:41 +0900
+committer JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-04-30 12:43:41 +0900
+
+    merge
+
+
+:100644 100644 ccc08e1c747b1844112ae6606e336319b1b0b7ff 010cd50975f4bfec28b168c9c075eac047709e7b M	frontend/src/components/mobile/login/Login.tsx
+:100644 100644 adce32099b15357ccc66431c40c52aac7c429c5a 6d83a8789c2e2d6959db418998c7f432492799ee M	frontend/src/components/mobile/signup/Signup.tsx
+commit f325ff1b0754e923e54fe77314732f164d885956
+tree 38dc3cbcf46f7e588ada154cb67803a407ea7177
+parent 912573ed5281678a208d7090f107a3b9da9bebde
+author JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-04-30 12:40:35 +0900
+committer JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-04-30 12:40:35 +0900
+
+    chatbot-form-complete
+
+
+:100644 100644 f3709cdb7ce92a8e3da55a9d02f71276382ba1a2 3ce28107af69165ccfb6639f6deb8ffd5b745352 M	frontend/src/api/apiAsk.tsx
+:100644 100644 b7a97307ec990f4b2ab80b9f3ae29930187deac2 5055c608fa331242ec912c3b976b86908afd1332 M	frontend/src/components/mobile/addcloth/AddCloth.tsx
+:100644 100644 db24675885487f30ccb626817d0b272ba8ab0a23 4780eca3e2a868d5a6eb553c8473573c73049ce6 M	frontend/src/components/mobile/ask/Ask.tsx
+:100644 100644 4a642dabdd077c3161001a72947c3fe00d31bddd 0f7e8a3ae176b215acb073f50aafdde6abdbf492 M	frontend/src/components/mobile/closet/Closet.tsx
+:100644 100644 1dca6f0a0c903f33753066ad41485f2236370e68 e94da057dd588bd9b544ac7c7a29437bd0f850b6 M	frontend/src/components/mobile/closet/ClosetWishList.tsx
+:100644 100644 366303acfde877997bb9e466e84d1b43532683e0 f6e3629a2095fe6923e5be4fcfcbb1b68f65fabe M	frontend/src/components/mobile/login/Login.tsx
+:100644 100644 b2007c205964d4c6043c7c30a3f6c871afd7ceaf b5452fc860bb76d5656788edb7c9fe33d115ed1e M	frontend/src/components/mobile/signup/Signup.tsx
+:100644 100644 e1dd5a172db67ee809ff7c99becb14effab5b125 3f1f415f45b71e40b30aec795478415c25161d4a M	frontend/src/components/mobile/start/Start.tsx
+:100644 100644 961262e77b68efc74d140adba4a57449b32605a4 49bc4128bc94360e47e78bb6cd1ad880ab81df7d M	frontend/src/store/store.tsx

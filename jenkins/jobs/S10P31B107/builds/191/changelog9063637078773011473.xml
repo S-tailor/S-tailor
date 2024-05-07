@@ -1,0 +1,11 @@
+commit 1da3b5a33f442d09f8f36d3fc8c7fcf66236efdf
+tree 0757bc7c14885b02e2b0dd93b859f0230d2d1ef7
+parent b59f6803648cbed381d370e5d7491ac30cf2c91f
+author JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-05-03 17:35:35 +0900
+committer JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-05-03 17:35:35 +0900
+
+    'fix:profild-add-error'
+
+
+:100644 100644 ba22c4c43a3b3d72412d53f94bc438e2f13163f7 67fbb66d829279aa88f59aa06ad72e7f0814265b M	frontend/src/components/mobile/closet/Closet.tsx
+:100644 100644 31636d42d8ea5ee62b2351d22bc85b23db7326be 81a135ac433a23e5bc4e150faa0c2dc4d6678e9a M	frontend/src/components/mobile/profile/ProfileAdd.tsx

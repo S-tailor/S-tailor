@@ -1,0 +1,35 @@
+commit 7ab4fb97b6f466e9ed64c1249dd6e32fd909fa46
+tree 9955d7bad53441ae9db34985450cbae21f5b9748
+parent 28f26eca85aa1660c13c9faf37dc20cf39f01cf1
+author Sun Woong Chang <38126462+govltjsdnd24@users.noreply.github.com> 2024-05-01 18:03:00 +0900
+committer Sun Woong Chang <38126462+govltjsdnd24@users.noreply.github.com> 2024-05-01 18:03:00 +0900
+
+    S10P31B107-276-Chatbot-correct-image-upload-error
+
+
+:100644 100644 e5fea55124084a3700f41d3f98be81fc7f160ef7 573c3c143e7734c05afbe59312d884bd86e08e3c M	backend/src/main/java/com/ssafy/api/controller/ChatbotController.java
+:100644 100644 59eea88573dac3e0aba7a91d4ed1f12e04132a44 c25b420a8487d0780617251fdc75c2003e617492 M	backend/src/main/java/com/ssafy/api/service/ChatbotServiceImpl.java
+commit 28f26eca85aa1660c13c9faf37dc20cf39f01cf1
+tree 02e66fc222f2d8e760472f878ec9c19b0fde0086
+parent 7f9733a58c92afa9d5b6e3cd3cb04e7af92efad9
+author Sun Woong Chang <38126462+govltjsdnd24@users.noreply.github.com> 2024-05-01 17:55:55 +0900
+committer Sun Woong Chang <38126462+govltjsdnd24@users.noreply.github.com> 2024-05-01 17:55:55 +0900
+
+    S10P31B107-276-Chatbot-NoSQL-create
+
+
+:100644 100644 eef7fa7a38b5858da7af7cd1fc9ae0909e9827ce 59eea88573dac3e0aba7a91d4ed1f12e04132a44 M	backend/src/main/java/com/ssafy/api/service/ChatbotServiceImpl.java
+:100644 100644 b9f0170ec6ec29c2b4a9a4de4917d0e6f7aa7e60 698a97049f5135a73d1fc03f6ac513e6bbeb39f0 M	backend/src/main/java/com/ssafy/api/service/ProfileServiceImpl.java
+:100644 100644 3b4017392bc98b18d25bccdeb103c800d029e401 99b3dba887aebd7c5553768afa9cbec45b86636e M	backend/src/main/resources/application.properties
+commit 7f9733a58c92afa9d5b6e3cd3cb04e7af92efad9
+tree 885a6733679eea0c17c7c28d9fc95d854dc74bc1
+parent f22d034ec5a7fe10234d693927a9939db178051b
+author Sun Woong Chang <38126462+govltjsdnd24@users.noreply.github.com> 2024-05-01 17:19:24 +0900
+committer Sun Woong Chang <38126462+govltjsdnd24@users.noreply.github.com> 2024-05-01 17:19:24 +0900
+
+    S10P31B107-276-Chatbot-NoSQL-create
+
+
+:100644 100644 f05a88658bca287f3f2d4be182c9af44cb0abaae b9f0170ec6ec29c2b4a9a4de4917d0e6f7aa7e60 M	backend/src/main/java/com/ssafy/api/service/ProfileServiceImpl.java
+:100644 100644 1725952adb5aa4fe4bce258b81c37a668ec99352 ca788f9f6c9062705334a631a833e70d4cfd3dc0 M	backend/src/main/java/com/ssafy/api/service/UserServiceImpl.java
+:100644 100644 a391c0e754392c1c9f8dd62081283367f3f82063 3b4017392bc98b18d25bccdeb103c800d029e401 M	backend/src/main/resources/application.properties

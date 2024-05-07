@@ -1,0 +1,23 @@
+commit 97e49233ee4fdbe0d1a9398e818138f47a82176f
+tree 2133ede0ba6b3a036de756a13ec5d04cd9e4b7a1
+parent 37bc32bc14c46539ca17c449b1558df261ef090b
+author 이수형 <sky500ro@gmail.com> 2024-05-02 15:38:48 +0900
+committer 이수형 <sky500ro@gmail.com> 2024-05-02 15:38:48 +0900
+
+    S10P31B107-216-feat-token-verify-first
+
+
+:100644 100644 284e6d4b125df1ae69c7d73b4518f8d99b83d033 2efe2410bbdba662760ec380191c29501e40e731 M	backend/src/main/java/com/ssafy/api/controller/TryOnController.java
+commit 37bc32bc14c46539ca17c449b1558df261ef090b
+tree 71bc768598d7c306f98c03d38155ea8e23bf5aa5
+parent 409475659603da62a8e282083606a762b09b9b5f
+author JaeMin_Kim <jamsince1994@naver.com> 2024-05-02 15:29:15 +0900
+committer JaeMin_Kim <jamsince1994@naver.com> 2024-05-02 15:29:15 +0900
+
+    S10P31B107-216-be-feat-verify-token:is-your-token?
+
+
+:100644 100644 466c4ac5a023c28175b1caefeec80e239d6ab5d5 284e6d4b125df1ae69c7d73b4518f8d99b83d033 M	backend/src/main/java/com/ssafy/api/controller/TryOnController.java
+:100644 100644 6d9eac2d421b2ee08d4ef4d2519461eb7b6bdcee 501341b34d294d4432fc4a0b908674a767106057 M	backend/src/main/java/com/ssafy/api/service/TryOnService.java
+:100644 100644 aa9b025667d6431045380edabeeb098b23fed63d e5e712c3cbacea52b240d6aef03904d92eebb296 M	backend/src/main/java/com/ssafy/api/service/TryOnServiceImpl.java
+:100644 100644 c22cdb884ec7d77b437d77170c2059769e6d3734 c082e850be8a0bd0979209c8cc36a4e826b17c04 M	backend/src/main/java/com/ssafy/common/util/JwtTokenUtil.java

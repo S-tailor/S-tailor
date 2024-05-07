@@ -1,0 +1,131 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1400.v7fd111b_ec82f">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2198.v41dd8ef6dd56"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2198.v41dd8ef6dd56">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options>
+        <string>skipDefaultCheckout</string>
+      </options>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.dabsquared.gitlabjenkins.connection.GitLabConnectionProperty plugin="gitlab-plugin@1.8.0">
+      <gitLabConnection>ssafygitlab</gitLabConnection>
+      <jobCredentialId></jobCredentialId>
+      <useAlternativeCredential>false</useAlternativeCredential>
+    </com.dabsquared.gitlabjenkins.connection.GitLabConnectionProperty>
+    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+      <triggers>
+        <com.dabsquared.gitlabjenkins.GitLabPushTrigger plugin="gitlab-plugin@1.8.0">
+          <spec></spec>
+          <triggerOnPush>true</triggerOnPush>
+          <triggerToBranchDeleteRequest>false</triggerToBranchDeleteRequest>
+          <triggerOnMergeRequest>true</triggerOnMergeRequest>
+          <triggerOnlyIfNewCommitsPushed>false</triggerOnlyIfNewCommitsPushed>
+          <triggerOnPipelineEvent>false</triggerOnPipelineEvent>
+          <triggerOnAcceptedMergeRequest>false</triggerOnAcceptedMergeRequest>
+          <triggerOnClosedMergeRequest>false</triggerOnClosedMergeRequest>
+          <triggerOnApprovedMergeRequest>true</triggerOnApprovedMergeRequest>
+          <triggerOpenMergeRequestOnPush>never</triggerOpenMergeRequestOnPush>
+          <triggerOnNoteRequest>true</triggerOnNoteRequest>
+          <noteRegex>Jenkins please retry a build</noteRegex>
+          <ciSkip>true</ciSkip>
+          <skipWorkInProgressMergeRequest>true</skipWorkInProgressMergeRequest>
+          <labelsThatForcesBuildIfAdded></labelsThatForcesBuildIfAdded>
+          <setBuildDescription>true</setBuildDescription>
+          <branchFilterType>All</branchFilterType>
+          <includeBranchesSpec>dev</includeBranchesSpec>
+          <excludeBranchesSpec></excludeBranchesSpec>
+          <sourceBranchRegex></sourceBranchRegex>
+          <targetBranchRegex></targetBranchRegex>
+          <secretToken>{AQAAABAAAAAwAIh+xwAkJ50l3rJmBIwlliXDmaY5uDlWGK0Zzd6RB3n0VY0tJN0Y/XuPWqg35eSFGmDRb/nTm5LdGRy8crmvFw==}</secretToken>
+          <pendingBuildName></pendingBuildName>
+          <cancelPendingBuildsOnUpdate>false</cancelPendingBuildsOnUpdate>
+        </com.dabsquared.gitlabjenkins.GitLabPushTrigger>
+      </triggers>
+    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@3894.vd0f0248b_a_fc4">
+    <script>pipeline {
+	agent none
+	options { skipDefaultCheckout(false) }
+	stages {
+		stage(&apos;Git pull&apos;) {
+			agent any
+			steps {
+			    git credentialsId: &apos;jamsince1994&apos;, url: &apos;https://lab.ssafy.com/s10-final/S10P31B107.git&apos;, branch: &apos;dev&apos;
+			}
+		}
+		stage(&apos;FE build&apos;) {
+			agent any
+			steps {
+				script {
+  				try {
+						sh &apos;docker-compose build --no-cache frontend-compose&apos;
+					}catch(e) {
+          				mattermostSend (
+          					color: &quot;danger&quot;, 
+          					message: &quot;FE Build FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (&lt;${env.BUILD_URL}/pipeline-console|Link to Jamkins&gt; | &lt;https://lab.ssafy.com/s10-final/S10P31B107/-/merge_requests?scope=all&amp;state=merged|Link to Gitlab&gt;)&quot;
+          		// 			message: &quot;FE Build FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (&lt;${env.BUILD_URL}/pipeline-console|Link to Jamkins&gt; | &lt;https://lab.ssafy.com/s10-final/S10P31B107/-/merge_requests?scope=all&amp;state=merged|Link to Gitlab&gt;) @nice6122 @jin34099 @gksk3185&quot;
+          				)
+    				} 
+				}
+			}
+		}
+		
+		stage(&apos;BE build&apos;) {
+			agent any
+			steps {
+				script {
+  				try {
+						sh &apos;docker-compose build --no-cache backend-compose&apos;
+					}catch(e) {
+          				mattermostSend (
+          					color: &quot;danger&quot;, 
+          					message: &quot;BE Build FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (&lt;${env.BUILD_URL}/pipeline-console|Link to Jamkins&gt; | &lt;https://lab.ssafy.com/s10-final/S10P31B107/-/merge_requests?scope=all&amp;state=merged|Link to Gitlab&gt;) @jam @gragasolaf @sky500ro&quot;
+          				)
+    				} 
+				}
+			}
+		}
+		
+		stage(&apos;Docker run&apos;) {
+			agent any
+			steps {
+				script {
+    				try {
+          				    sh &apos;docker-compose down frontend-compose&apos;
+          				    sh &apos;docker-compose down backend-compose&apos;
+          				    sh &apos;docker-compose up -d frontend-compose&apos;
+							sh &apos;docker-compose up -d backend-compose&apos;
+					}catch(e) {
+							currentBuild.result = &quot;FAILURE&quot;
+                    } finally {
+							if(currentBuild.result == &quot;FAILURE&quot;){
+								mattermostSend (
+	        						color: &quot;danger&quot;, 
+	        						message: &quot;FE BE RESTART FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (&lt;${env.BUILD_URL}/pipeline-console|Link to Jamkins&gt;)&quot;
+	        					)
+							}
+							else{
+						        mattermostSend (
+	        						color: &quot;good&quot;, 
+	        						message: &quot;FE BE RESTART SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER} (&lt;${env.BUILD_URL}/pipeline-console|Link to Jamkins&gt; | &lt;https://lab.ssafy.com/s10-final/S10P31B107/-/merge_requests?scope=all&amp;state=merged|Link to Gitlab&gt; | &lt;https://ourtrip.store|Link to Service&gt;)&quot;
+    					        )
+							}
+					}
+				}
+			}
+		}
+	}
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>

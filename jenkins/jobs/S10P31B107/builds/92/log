@@ -1,0 +1,219 @@
+Started by GitLab push by 조상민
+[8mha:////4EHwQ8sB1myzlPb17ed//TRVJfdqnsJ83HKItYxZ1o3LAAAAoh+LCAAAAAAAAP9tjTEOwjAQBM8BClpKHuFItIiK1krDC0x8GCfWnbEdkooX8TX+gCESFVvtrLSa5wtWKcKBo5UdUu8otU4GP9jS5Mixv3geZcdn2TIl9igbHBs2eJyx4YwwR1SwULBGaj0nRzbDRnX6rmuvydanHMu2V1A5c4MHCFXMWcf8hSnC9jqYxPTz/BXAFEIGsfuclm8zQVqFvQAAAA==[0m[Pipeline] Start of Pipeline
+[8mha:////4D8IMZVfBecsbdpdJU7G4pl3Ex4Tm46Lmd+WfVZtzBi2AAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycohUghExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jduZBmjwAAAAA==[0m[Pipeline] stage
+[8mha:////4JC5rCEDcun+jSYTD+ly9aVjUIBVmBWk8MtRE5S52si9AAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gA0xsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfoP95RwAAAAA==[0m[Pipeline] { (git pull)
+[8mha:////4ImMZLGCYmgUjuw9ndn0tdiI15fHzkqahG+lwCbc/CKnAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gQkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jc09154wAAAAA==[0m[Pipeline] node
+Running on [8mha:////4KV7QiRrGb7YeIl+n4+090vOh1nSfg4HqpHJaU+fO/i6AAAAoR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZR/eT83ILSktQifY2k0sycEt3MPE19AHHxbH3KAAAA[0mJenkins in /var/jenkins_home/workspace/S10P31B107
+[8mha:////4ELESQXTlqJL4fa1AZtl6pkuSQJQpyoJB8UNWpxQGpESAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0ggUxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jek7ggRwAAAAA==[0m[Pipeline] {
+[8mha:////4E+1jKg3AHBMXMnsN8phBGnEHEZYMwl+Uvdz3g4tDzFxAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbaWGsbAmNJ0AWEZb8zwLrbuWJvJp3kLiJlZNMMm+a93rDOic4UbLcG+wdZu14DKOti0+U+lugiXu6ck2YKRguzSSpM+cFJRUDS1gDKwEbgzpQdmgLbIVXD9UGhba9lFS/o4DGdQM8gYlqLiqVL8wJdvexy4Q/z18BzLEA29ce4gfg7KmOvAAAAA==[0m[Pipeline] git
+The recommended git tool is: NONE
+using credential jamsince1994
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/S10P31B107/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://lab.ssafy.com/s10-final/S10P31B107.git # timeout=10
+Fetching upstream changes from https://lab.ssafy.com/s10-final/S10P31B107.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.2'
+using GIT_ASKPASS to set credentials 
+ > git fetch --tags --force --progress -- https://lab.ssafy.com/s10-final/S10P31B107.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+skipping resolution of commit remotes/origin/dev, since it originates from another repository
+ > git rev-parse refs/remotes/origin/dev^{commit} # timeout=10
+Checking out Revision 2345278b87abab79426f2323850830347f302a45 (refs/remotes/origin/dev)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 2345278b87abab79426f2323850830347f302a45 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D dev # timeout=10
+ > git checkout -b dev 2345278b87abab79426f2323850830347f302a45 # timeout=10
+Commit message: "'api폴더구조생성'"
+ > git rev-list --no-walk b14a420180306174f96c3130117a6e587395b1bc # timeout=10
+[8mha:////4OxyowUDl8kifHS9rNAxjmCrm1O9vea5I4IXIMWRRdhEAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbGRNjZUtoPAGyiLDkfxZYdytP5NW8g8RNrJxkknnTvNcb1jnBiZLl3mDvMGvHYxhtXXyi1N8CTdzTlWvCTMFwaSZJnTkvKKkYWMIaWAnYGNSBskNbYCu8eqg2KLTtpaT6HQU0rhvgCUxUc1GpfGFOsLuPXSb8ef4KYI6xADvU7j9Dg2gqvAAAAA==[0m[Pipeline] }
+[8mha:////4IlQv62KoXC/gaSzETl0MRUNwJlsyLSNsK5WswWjT4jCAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQRbWRhjZUtoPAGyiLDkfxZYdytP5NW8g8RNrJxkknnTvNcb1jnBiZLl3mDvMGvHYxhtXXyi1N8CTdzTlWvCTMFwaSZJnTkvKKkYWMIaWAnYGNSBskNbYCu8eqg2KLTtpaT6HQU0rhvgCUxUc1GpfGFOsLuPXSb8ef4KYI6xADvU7j9J+wGOvAAAAA==[0m[Pipeline] // node
+[8mha:////4Ad/3Tt+60mbxylCYFS/i6dmIY4/DTnNTFugmrQ75qC+AAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIBiQ5R0VppeIFJjHFi3QX7QlLxIr7GH4iIRMVWO9PM641lijhydKqx1HpKlVdd6N301MCxvQYeVMMXVTElDlaVdii5tqcZSxaLeVmOhcbKUhU4eXKCtW7MwxTBkCvOEid30Mh9fccTmZ7KYqJ8YYzY3Po6Mf06fwMYu06Q77aCbP8BhStF0r0AAAA=[0m[Pipeline] }
+[8mha:////4KwMSMuUDeQqnXIWUM7lgul/EsgwIEifHQ/gnuIGWZ1jAAAAoh+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6KEOBon14bFL6hQa6F5D9uHMPlF/pr/IJHEyTvdc5bzemOdIo4cnWotdZ5S7VUfBjc/NXLsroFH1fJF1UyJg1WVHStu7GnBisViWZZjpbGxVAdOnpxgq1vzMEUw5IqzxNkdNHLf3PFEpueymChfmCJ2t6FJTL/O3wCmvhfkZSnI9h+Wl0FxvQAAAA==[0m[Pipeline] // stage
+[8mha:////4I5PG4Iou0WLtsWbea72vdJirkunuqMj6ZVW3cykB4zZAAAApR+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYQj0iIqWssNLzCJMU6su2BfSCpexNf4A4ZIVGy1s9Jqni8oU4QDRSc7i73H1Hg5hNHlJieK/SXQJDs6y4YwUbBS20lTa48LamILS0QBKwVri02g5NExbFRn7qYKBl114pi3vYLCtzd4gFDZzCbyF+YI2+vYJsKf568A5oFB1AzFrv4cyzf+j1f0wQAAAA==[0m[Pipeline] stage
+[8mha:////4KX2iWmjPumlpmXau+yGNnAC9fdPeiCU+x19F4evpmY3AAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUwIiYukZZOEFoQkgb/V9+UtqJE3E17kBLJSY8WLYl673eUESGE7ETjcXWY6y96ELvpiQG4vYaaBANXURNGClYoeygyNhqqYqShUVZDisJa4t1oOjRJdjIRj90GTS68px42o4Scm/u8IRMTuSkOX3LyLC99SYS/jh/ATB2CfLdfrbD/Cw+y7kUycIAAAA=[0m[Pipeline] { (Docker build)
+[8mha:////4LGDFaYlZDXnehH/HliwFa7focgDM9cBknn8DPun7IKmAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUCDbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5Dv9rMd5mfxAbNWnxXCAAAA[0m[Pipeline] node
+Running on [8mha:////4KV7QiRrGb7YeIl+n4+090vOh1nSfg4HqpHJaU+fO/i6AAAAoR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZR/eT83ILSktQifY2k0sycEt3MPE19AHHxbH3KAAAA[0mJenkins in /var/jenkins_home/workspace/S10P31B107
+[8mha:////4K5hj263SI/Iz42TltHGkXadplc2SF1mRGrrYWToG7jGAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUSDAhpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD5WQ+PfCAAAA[0m[Pipeline] {
+[8mha:////4IkA0pjHTH0CM8FZAzslMQZg85AwF0iff8saPlpvPeYPAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUDLAgpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD/s94rDCAAAA[0m[Pipeline] script
+[8mha:////4Dmf8BmIZJ+5IMdpa1H39rkm/pE1s6jm7ZVCZNTcnFaMAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohULDAgpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD1+IXOLCAAAA[0m[Pipeline] {
+[8mha:////4BGeAPBTNiiZbN7UhJRnGMuBs6CsnBlTFeVFGrDk42VJAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiKpAQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHNxXfVKy+AAAA[0m[Pipeline] sh
++ docker-compose build frontend-compose backend-compose
+#0 building with "default" instance using docker driver
+
+#1 [backend-compose internal] load build definition from Dockerfile
+#1 transferring dockerfile: 325B done
+#1 DONE 0.1s
+
+#2 [frontend-compose internal] load build definition from Dockerfile
+#2 transferring dockerfile: 327B 0.1s done
+#2 DONE 0.2s
+
+#3 [backend-compose internal] load metadata for docker.io/library/openjdk:17-jdk-slim
+#3 ...
+
+#4 [frontend-compose internal] load metadata for docker.io/library/nginx:stable-alpine
+#4 DONE 0.7s
+
+#5 [frontend-compose internal] load metadata for docker.io/library/node:20.11.1-alpine
+#5 DONE 0.7s
+
+#3 [backend-compose internal] load metadata for docker.io/library/openjdk:17-jdk-slim
+#3 DONE 0.8s
+
+#6 [backend-compose internal] load .dockerignore
+#6 transferring context: 2B done
+#6 DONE 0.0s
+
+#7 [frontend-compose internal] load .dockerignore
+#7 transferring context: 2B done
+#7 DONE 0.0s
+
+#8 [backend-compose builder 1/5] FROM docker.io/library/openjdk:17-jdk-slim@sha256:aaa3b3cb27e3e520b8f116863d0580c438ed55ecfa0bc126b41f68c3f62f9774
+#8 DONE 0.0s
+
+#9 [frontend-compose builder 1/6] FROM docker.io/library/node:20.11.1-alpine@sha256:bf77dc26e48ea95fca9d1aceb5acfa69d2e546b765ec2abfb502975f1a2d4def
+#9 DONE 0.0s
+
+#10 [frontend-compose runner 1/3] FROM docker.io/library/nginx:stable-alpine@sha256:ca16009a8c25f52193506d4c90c98efbad4b6cbe73372e2a27972f05c5e02f15
+#10 DONE 0.0s
+
+#11 [backend-compose internal] load build context
+#11 transferring context: 5.35kB done
+#11 DONE 0.1s
+
+#12 [frontend-compose internal] load build context
+#12 transferring context: 5.25kB 0.0s done
+#12 DONE 0.1s
+
+#13 [frontend-compose builder 3/6] COPY package.json .
+#13 CACHED
+
+#14 [frontend-compose builder 2/6] WORKDIR /app
+#14 CACHED
+
+#15 [frontend-compose builder 4/6] RUN yarn
+#15 CACHED
+
+#16 [frontend-compose builder 5/6] COPY . .
+#16 ...
+
+#17 [backend-compose builder 4/5] RUN chmod +x ./gradlew
+#17 CACHED
+
+#18 [backend-compose builder 5/5] RUN ./gradlew clean build
+#18 CACHED
+
+#19 [backend-compose builder 2/5] WORKDIR /app
+#19 CACHED
+
+#20 [backend-compose builder 3/5] COPY . .
+#20 CACHED
+
+#21 [backend-compose runner 2/2] COPY --from=builder /app/build/libs/S-Tailor-1.0-SNAPSHOT.jar ./app.jar
+#21 CACHED
+
+#22 [backend-compose] exporting to image
+#22 exporting layers done
+#22 writing image sha256:efe0beb375a5a3660615184dc22f1e3be633aded135c6be1556ea7db4d4fc929 done
+#22 naming to docker.io/library/s10p31b107-backend-compose done
+#22 DONE 0.0s
+
+#16 [frontend-compose builder 5/6] COPY . .
+#16 DONE 0.3s
+
+#23 [frontend-compose builder 6/6] RUN yarn build
+#23 2.154 yarn run v1.22.19
+#23 2.208 $ tsc && vite build
+#23 7.084 src/api/api.tsx(1,19): error TS2307: Cannot find module 'axios' or its corresponding type declarations.
+#23 7.085 src/api/api.tsx(11,22): error TS7006: Parameter 'config' implicitly has an 'any' type.
+#23 7.085 src/api/api.tsx(25,25): error TS7006: Parameter 'error' implicitly has an 'any' type.
+#23 7.085 src/api/apiUser.tsx(3,27): error TS7006: Parameter 'userInfo' implicitly has an 'any' type.
+#23 7.085 src/api/apiUser.tsx(7,22): error TS2304: Cannot find name 'userLogin'.
+#23 7.085 src/api/apiUser.tsx(7,33): error TS2304: Cannot find name 'userAccountCheck'.
+#23 7.139 error Command failed with exit code 2.
+#23 7.140 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+#23 ERROR: process "/bin/sh -c yarn build" did not complete successfully: exit code: 2
+------
+ > [frontend-compose builder 6/6] RUN yarn build:
+2.154 yarn run v1.22.19
+2.208 $ tsc && vite build
+7.084 src/api/api.tsx(1,19): error TS2307: Cannot find module 'axios' or its corresponding type declarations.
+7.085 src/api/api.tsx(11,22): error TS7006: Parameter 'config' implicitly has an 'any' type.
+7.085 src/api/api.tsx(25,25): error TS7006: Parameter 'error' implicitly has an 'any' type.
+7.085 src/api/apiUser.tsx(3,27): error TS7006: Parameter 'userInfo' implicitly has an 'any' type.
+7.085 src/api/apiUser.tsx(7,22): error TS2304: Cannot find name 'userLogin'.
+7.085 src/api/apiUser.tsx(7,33): error TS2304: Cannot find name 'userAccountCheck'.
+7.139 error Command failed with exit code 2.
+7.140 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+------
+failed to solve: process "/bin/sh -c yarn build" did not complete successfully: exit code: 2
+[8mha:////4MLG1jo3elCIkm6zfzPQsLGRJK+W7GrEjUxuNZlwZ5U8AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiKoQQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHN1TuT7W+AAAA[0m[Pipeline] mattermostSend
+Mattermost Send Pipeline step configured values from global config - connector: true, icon: true, channel: true, color: false[8mha:////4LKl4D6exRuX3QjgTXc5OnNiugG5yeYmoEdiG1/CMWp6AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOICNBQoFa3lhheYxBgn1l2wHZyKF/E1/oBFJCq2WO1sM683LIOHmr3BTlNvKTQWBzeavDCx76+OE3Z8wYYpsNModZLc6tOMkqOGOUUJCwErTY3jYMlEWItOPVTlFJnqHH3+jgJK297hCYXI5qh8/MLkYXMb28D08/wVwDQMEcr9Ntfu8AGHKGa5vgAAAA==[0m[Pipeline] }
+[8mha:////4O075wSCrzeolX7gO6F+DCxNeRlR0S3tazqmZLprnjZKAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOKiUNAgqrRWGl5gYmOcWHfGdkgqXsTX+AMWkajYYrWzzbzesI4BThwM9poGS7Gz6N1o8sKJw3B1PGHPF+yYIjuNrZ5aVrpZsOWkYUlRwkrARlPnOFoyCbailw9ZOUmmOqeQv6OA0qo7PKEQ2ZxkSF+YA+xuo4pMP89fAczeJyj3da768AG0yz0FvgAAAA==[0m[Pipeline] // script
+[8mha:////4HMDMoKA+63nA3t2DHb+OeMon3HqN1lTZB5h/9Yy95loAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPMIRkagQVVorDS8w8WGcWHfGdkgqXsTX+AMWkajYYrWzzbzesI4BThyM6JEGS7GzwrvR5CUmDsPV8SR6voiOKbJD0eLUssZmwZYTwpKihJWEDVLnOFoyCbayVw9VOUWmOqeQv6OE0uo7PKGQ2ZxUSF+YA+xuo45MP89fAczeJyjrOtf+8AGg6KAavgAAAA==[0m[Pipeline] }
+[8mha:////4FfmdwasMGsYYB2i3eEu0PIHK4I88DKe2IBoRCuw9i8NAAAApR+LCAAAAAAAAP9tjTsOwjAQRDdBFLSUHGIjPh1KRWu54QQmMcaJtRtsB6fiRFyNO2ARiYopRvOmea83LIOHmr3BTlNvKTQWBzeavDCx76+OE3Z8wYYpsNModZLc6tOMkqOGOUUJCwErTY3jYMlEWItOPVTlFJnqHH3+jgJK297hCYXI5qh8/MLkYXMb28D08/wVwDQMEcrdPtf28AGTC/umvgAAAA==[0m[Pipeline] // node
+[8mha:////4FoC5vV2/wKVmvAAW5rpGF1s3Buxj/6Kg+1NfLeLoI1zAAAApR+LCAAAAAAAAP9tjTsOwjAQRDdBFLSUHGIjPh1KRWu54QQmMcaJtRtsB6fiRFyNO2ARiYopRvOmea83LIOHmr3BTlNvKTQWBzeavDCx76+OE3Z8wYYpsNModZLc6tOMkqOGOUUJCwErTY3jYMlEWItOPVTlFJnqHH3+jgJK297hCYXI5qh8/MLkYXMb28D08/wVwDQMEcrdIdd2/wGIrpolvgAAAA==[0m[Pipeline] }
+[8mha:////4I4s04o1ghDliCByHh7CDvfDzMJJ4djznRkfV1ODlZyjAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPMIRkagQVVorDS8w8WGcWHfGdkgqXsTX+AMWkajYYrWzzbzesI4BThyM6JEGS7GzwrvR5CUmDsPV8SR6voiOKbJD0eLUssZmwZYTwpKihJWEDVLnOFoyCbayVw9VOUWmOqeQv6OE0uo7PKGQ2ZxUSF+YA+xuo45MP89fAczeJyjrQ659/QG7TcGZvgAAAA==[0m[Pipeline] // stage
+[8mha:////4BCn89dpogMoszhArn3ghBpPi/ecAFTEL+vLBwFWgtttAAAAph+LCAAAAAAAAP9tjTEOwjAQBC9BKWgpeYQjpaBBVLSWG15gYmOcWHfBvpBUvIiv8QcMkajYamel1TxfUKUIB4pOdBZ7j6n1Ygijy01MFPtLoEl0dBYtYaJghbKTImOPCypiC0uKElYS1hbbQMmjY9jITt91HTS6+sQxb3sJpTc3eEAhs5l15C/MEbbX0STCn+evAOaBoWgYymb3OVZvddcuXsEAAAA=[0m[Pipeline] stage
+[8mha:////4Kyb785ZECT4Qn6F2tvSB+VwS+K+PLSZ1MrC5QWOVIqhAAAAqB+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUYoABMXWNsnCC0ISQNvq//KS0EyfiatyBlkpMeLBsS9Z7vaGIDCdiJxqLrcdYe9GF3k1JDMTtNdAgGrqImjBSsELZQZGx1VIVJQuLshxWEtYW60DRo0uwkY1+6DJodOU58bQdJeTe3OEJmZzISXP6lpFhe+tNJPxx/gJg7BLku/1sh/lZfAAyQCqkwgAAAA==[0m[Pipeline] { (Docker run)
+[8mha:////4JfUGwnOtR1Lue2Dmu0O5VYIfrKJ72LfA/lP45jecG0dAAAAqB+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUYgEJMXWNsnCC0ISQNvq//KS0EyfiatyBlkpMeLBsS9Z7vaGIDCdiJxqLrcdYe9GF3k1JDMTtNdAgGrqImjBSsELZQZGx1VIVJQuLshxWEtYW60DRo0uwkY1+6DJodOU58bQdJeTe3OEJmZzISXP6lpFhe+tNJPxx/gJg7BLku/1sh/lZfAAnLfKUwgAAAA==[0m[Pipeline] node
+Running on [8mha:////4KV7QiRrGb7YeIl+n4+090vOh1nSfg4HqpHJaU+fO/i6AAAAoR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZR/eT83ILSktQifY2k0sycEt3MPE19AHHxbH3KAAAA[0mJenkins in /var/jenkins_home/workspace/S10P31B107
+[8mha:////4POFvXbsrDa2z8TVENOa8GERA5qZWYeg8Q7uWDSw/GPbAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUYgIhpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD0QKVszCAAAA[0m[Pipeline] {
+[8mha:////4LsUo5CC2tP/7raOqdti7IziSwlSTS6a8rbd+LS1yPO+AAAAqB+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUwYRQJ9aoCycITQhJo/9LkpJOnIircQcClZjwYNmWrPd8QRU8NOQ1swp7g6EzbHCjzokl8v3FUWKWzqwjDOQUa1VqSarjXFuKCmYVJSw4LBV2joJBHWHFrbiL2gnU9Sn6vB04lEbe4AEFz+QofPyWycP6OspA+OP8BcA0RCi3+2y7zedZvQH4j6CMwgAAAA==[0m[Pipeline] script
+[8mha:////4EYVvZtFvoQo8c+CVr3w/j9imPLe+P6hFwMWbo6khtJoAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUxIiYukZZOEFoQkgb/V9+UtqJE3E17kBLJSY8WLYl673eUESGE7ETjcXWY6y96ELvpiQG4vYaaBANXURNGClYoeygyNhqqYqShUVZDisJa4t1oOjRJdjIRj90GTS68px42o4Scm/u8IRMTuSkOX3LyLC99SYS/jh/ATB2CfLDbrb9/Cw+ty4Up8IAAAA=[0m[Pipeline] {
+[8mha:////4Mukes+DGVhpu2Y1p+qjT2jY3j4YHmxyKuioLgvhgrnrAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIioERUaS03vMDExjix7oztkFS8iK/xBwKRqNhitbPNPF+wTBGOHC22hjpHqXEYfG+nhQPH7uJ5wJbP2DAl9galGSRrU88oORuYU5SwELAy1HhOjmyGtWjVXVVeka1OOU7fQUDp9A0eUIjJnFXMXxgjbK69Tkw/z18BjCFDud9+ahfettHKdL4AAAA=[0m[Pipeline] sh
++ docker-compose down frontend-compose backend-compose
+ Container s10p31b107-backend-compose-1  Stopping
+ Container s10p31b107-frontend-compose-1  Stopping
+ Container s10p31b107-backend-compose-1  Stopped
+ Container s10p31b107-backend-compose-1  Removing
+ Container s10p31b107-backend-compose-1  Removed
+ Container s10p31b107-frontend-compose-1  Stopped
+ Container s10p31b107-frontend-compose-1  Removing
+ Container s10p31b107-frontend-compose-1  Removed
+ Network s10p31b107_service-connection  Removing
+ Network s10p31b107_default  Removing
+ Network s10p31b107_service-connection  Resource is still in use
+ Network s10p31b107_default  Resource is still in use
+[8mha:////4AMcVjmtsjl0NPLW3Me8La3XaixetsqCsOf4xwdaOI0aAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIilBJR0VppeIFJjLFj3Tm2g1PxIr7GHwhEomKL1c4283zBOgY4ctBoFfWGYmvQu1HPCzOH/uo4o+ULtkyRncJG5YY7dVqw4aRgSVHCSsBGUes4GtIJtsLKu6ycJF2dU5i/g4DSdAM8oBCzOcmQvjAF2N3GLjL9PH8FMPkEZb3/VO3f9+DRbb4AAAA=[0m[Pipeline] sh
++ docker-compose up -d frontend-compose backend-compose
+time="2024-04-26T14:12:21+09:00" level=warning msg="Found orphan containers ([s10p31b107-ai-compose-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container s10p31b107-frontend-compose-1  Creating
+ Container s10p31b107-backend-compose-1  Creating
+ Container s10p31b107-frontend-compose-1  Created
+ Container s10p31b107-backend-compose-1  Created
+ Container s10p31b107-frontend-compose-1  Starting
+ Container s10p31b107-backend-compose-1  Starting
+ Container s10p31b107-backend-compose-1  Started
+ Container s10p31b107-frontend-compose-1  Started
+[8mha:////4EEOX5Qwfizzr0krf9kqz3zXlrDVtLZesAm8gs6HaVKgAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiBB2iSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwZyt32U/vwBjB2kCK+AAAA[0m[Pipeline] sh
++ pwd
+/var/jenkins_home/workspace/S10P31B107
+[8mha:////4PH+h94dmmKRoEZaRvIpaMlJmlqcTqR0XboqCRbEsUCoAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIihKgQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUO62n9qHN3FHizu+AAAA[0m[Pipeline] sh
++ ls -al
+total 60
+drwxr-xr-x  9 root root 4096 Apr 26 10:12 .
+drwxr-xr-x 10 root root 4096 Apr 26 10:28 ..
+drwxr-xr-x  8 root root 4096 Apr 26 14:12 .git
+-rw-r--r--  1 root root  524 Apr 26 09:43 .gitignore
+-rw-r--r--  1 root root   38 Apr 26 09:43 .prettierignore
+drwxr-xr-x  2 root root 4096 Apr 26 09:43 .vscode
+-rw-r--r--  1 root root 1075 Apr 26 10:12 README.md
+drwxr-xr-x  2 root root 4096 Apr 26 09:43 ai
+drwxr-xr-x  4 root root 4096 Apr 26 11:09 backend
+-rw-r--r--  1 root root 2513 Apr 26 10:12 docker-compose.yml
+drwxr-xr-x  6 root root 4096 Apr 26 12:48 frontend
+-rw-r--r--  1 root root 1816 Apr 26 09:43 gitmessage.txt
+-rwxr-xr-x  1 root root 2494 Apr 26 09:43 init-letsencrypt.sh
+drwxr-xr-x  2 root root 4096 Apr 26 09:43 nginx
+drwxr-xr-x  2 root root 4096 Apr 26 09:39 testjam2
+[8mha:////4Boi7oxrPHVoNtOsy4J3ptMRDD9hqZKbzAO6n/dS+QEhAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIihESDqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDhnK3/dQ+vAGyFKYQvgAAAA==[0m[Pipeline] mattermostSend
+Mattermost Send Pipeline step configured values from global config - connector: true, icon: true, channel: true, color: false[8mha:////4GOQROhtEHvvPn1UyBcG+dkwZD5l6QtPu6WbV/v1zsBNAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiREGBqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFDu9p/avgE81EHZvgAAAA==[0m[Pipeline] }
+[8mha:////4NP5WaQy3QmU+Pd9/vTT3s7xKBxuNv/HHv15C+zpu+SkAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOKCRIOEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFDu9p/avgF/VhBfvgAAAA==[0m[Pipeline] // script
+[8mha:////4MEr7HI9Fqev97YRdzMmfe078/r5oLnMWWO8YWFmABsPAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiQRUhqrRWGl5gYmOcWHfGdkgqXsTX+AMWkajYYrWzzbzesI4BThwM9poGS7Gz6N1o8sKJw3B1PGHPF+yYIjuNrZ5aVrpZsOWkYUlRwkrARlPnOFoyCbailw9ZOUmmOqeQv6OA0qo7PKEQ2ZxkSF+YA+xuo4pMP89fAczeJygPda59/QE/DIv0vgAAAA==[0m[Pipeline] }
+[8mha:////4MX9p3sS5emLDK4hHhKi9AiOfVmJnqm2Fskchi+4wc3/AAAAph+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOKCEAUSSkVrueEFJjHGiXUXbAen4kV8jT9gEYmKLVY728zrDcvgoWZvsNPUWwqNxcGNJi9M7Pur44QdX7BhCuw0Sp0kt/o0o+SoYU5RwkLASlPjOFgyEdaiUw9VOUWmOkefv6OA0rZ3eEIhsjkqH78wedjcxjYw/Tx/BTANQ4Ryv821O3wA71MkYb4AAAA=[0m[Pipeline] // node
+[8mha:////4BezGvXYgKkDiikgqdhBquRaW9hltcpkAd44T0BoyvAyAAAAph+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiEBIFSkVrueEFJjHGiXUXbAen4kV8jT9gEYmKLVY728zrDcvgoWZvsNPUWwqNxcGNJi9M7Pur44QdX7BhCuw0Sp0kt/o0o+SoYU5RwkLASlPjOFgyEdaiUw9VOUWmOkefv6OA0rZ3eEIhsjkqH78wedjcxjYw/Tx/BTANQ4Ryv821O3wA253HOr4AAAA=[0m[Pipeline] }
+[8mha:////4MTe/0NNNIQ/3fdvWbhy2qi97TFC9O3peJR6njDIVuxLAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiRYgGUaW10vACExvjxLoztkNS8SK+xh+wiETFFqudbeb1hnUMcOJgsNc0WIqdRe9GkxdOHIar4wl7vmDHFNlpbPXUstLNgi0nDUuKElYCNpo6x9GSSbAVvXzIykky1TmF/B0FlFbd4QmFyOYkQ/rCHGB3G1Vk+nn+CmD2PkG5r3PVhw/j31TLvgAAAA==[0m[Pipeline] // stage
+[8mha:////4AJZgU8zZ1a8SEwdSOwLciZceE3L2e2cvKxYwQhJLOGEAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKRgA5R0VppeIFJjHFi3QX7QlLxIr7GH4iIRMVWO9PM641lijhydKqx1HpKlVdd6N301MCxvQYeVMMXVTElDlaVdii5tqcZSxaLeVmOhcbKUhU4eXKCtW7MwxTBkCvOEid30Mh9fccTmZ7KYqJ8YYzY3Po6Mf06fwMYu06Q73eCbPsB02VLLL0AAAA=[0m[Pipeline] End of Pipeline
+Finished: SUCCESS

@@ -1,0 +1,10 @@
+commit 7cff82c4904463906f4afa78313be6a042ab641c
+tree 88b780fbfab0c8bf54916c8d5bff52dc35c4ad13
+parent b73062e9704eb502c2f188b832c2db8516ab9648
+author JIEUN LEE <jin3409975@gmail.com> 2024-05-01 16:54:45 +0900
+committer JIEUN LEE <jin3409975@gmail.com> 2024-05-01 16:54:45 +0900
+
+    S10P31B107-234-fe-fix: 중복 코드 삭제
+
+
+:100644 100644 b823393ed5e9997a902224602e154f2e640a8caf df7cc3e5fb6ee42253a3a55db986b0dffe12e110 M	frontend/src/components/mobile/closet/Closet.tsx
