@@ -33,13 +33,13 @@ export default defineConfig({
             src: 'favicon-512x512.png',
             type: 'image/png',
             sizes: '512x512',
-            purpose: 'any'
+            purpose: 'any',
           },
           {
             src: 'favicon-maskable-512x512.png',
             type: 'image/png',
             sizes: '512x512',
-            purpose: 'maskable'
+            purpose: 'maskable',
           }
         ]
       }
