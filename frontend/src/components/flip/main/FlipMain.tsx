@@ -6,7 +6,7 @@ const FlipMain: React.FC = () => {
   const [message, setMessage] = useState('')
   const navigate = useNavigate()
   const function1 = (event: any) => {
-    if (event) setMessage('Welcome! 이제 S-Tailor와 함께할 시간!')
+    if (event) setMessage('Welcome! 이제 S-Tailor와 함께 할 시간!')
     setTimeout(() => {
       startTransition(() => {
         navigate('/flip/tryon/test')
