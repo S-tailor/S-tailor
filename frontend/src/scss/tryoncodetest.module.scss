@@ -1,0 +1,74 @@
+@import "fonts";
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.bgVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.bgVideoContent {
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.topTitle {
+  width: 80vw;
+}
+
+.topText {
+  font-family: 'Pretendard-Bold';
+  font-size: 3.5em;
+  margin-bottom: 6vh;
+}
+
+.subText1, .subText2, .subText3 {
+  font-family: 'Pretendard-Bold';
+  font-size: 1.65em;
+  margin-top: 1vh;
+}
+
+.btn {
+  width: 80vw;
+  height: 7vh;
+  background-color: #222222;
+  color: white;
+  border-radius: 50px;
+  margin-top: 3vh;
+  margin-bottom: 2vh;
+  font-size: 1.65em;
+  letter-spacing: 1px;
+  outline: none;
+}
+
+.remainTime, .qrcodeInnerText1, .qrcodeInnerText2, .bottomTextInner {
+  font-family: 'Pretendard-Regular';
+  font-size: 1.6em;
+}
+
+.bottomTextInner {
+  color: rgb(163, 1, 1);
+}
+
+.qrcode {
+  margin-top: 10vh;
+}
