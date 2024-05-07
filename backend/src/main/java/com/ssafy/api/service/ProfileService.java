@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ProfileService {
-    boolean profileCreate(ProfileCreateReq info) throws IOException;
+    Profile profileCreate(ProfileCreateReq info) throws IOException;
 
     Profile profileSelect(int profilePk);
 

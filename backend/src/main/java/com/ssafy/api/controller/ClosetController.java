@@ -6,6 +6,7 @@ import com.ssafy.api.response.ClosetListRes;
 import com.ssafy.api.service.ClosetService;
 import com.ssafy.common.model.response.BaseResponseBody;
 import com.ssafy.db.entity.Closet;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class ClosetController {
     ClosetService closetService;
 
     @PostMapping("/save")
-    public ResponseEntity<? extends BaseResponseBody> closetSave(@RequestBody ClosetSaveReq info) {
+    public ResponseEntity<? extends BaseResponseBody> closetSave(@RequestBody ClosetSaveReq info) throws ParseException {
         if(closetService.closetSave(info)) {
             return ResponseEntity.ok(BaseResponseBody.of(200,"Success"));
         } else {
@@ -31,6 +32,16 @@ public class ClosetController {
     @GetMapping("/list")
     public ResponseEntity<? extends BaseResponseBody> closetList(int profilePk) {
         List<Closet> data = closetService.closetList(profilePk);
+        if(data != null) {
+            return ResponseEntity.ok(ClosetListRes.of(200,"Success",data));
+        } else {
+            return ResponseEntity.ok(BaseResponseBody.of(400, "Fail"));
+        }
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<? extends BaseResponseBody> closetFilter(int profilePk,String category) {
+        List<Closet> data = closetService.closetFilter(profilePk,category);
         if(data != null) {
             return ResponseEntity.ok(ClosetListRes.of(200,"Success",data));
         } else {
