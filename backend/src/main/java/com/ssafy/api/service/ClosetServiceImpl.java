@@ -128,6 +128,15 @@ public class ClosetServiceImpl implements ClosetService{
     }
 
     @Override
+    public List<Closet> closetFilter(int profilePk, String category) {
+        try {
+            return closetRepository.findAllByProfilePkAndCategoryAndIsDelete(profilePk, category,false);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
     public boolean closetDelete(int closetPk) {
         try {
             if(closetRepository.closetDelete(closetPk) == 1) {

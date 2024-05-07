@@ -39,6 +39,16 @@ public class ClosetController {
         }
     }
 
+    @GetMapping("/filter")
+    public ResponseEntity<? extends BaseResponseBody> closetFilter(int profilePk,String category) {
+        List<Closet> data = closetService.closetFilter(profilePk,category);
+        if(data != null) {
+            return ResponseEntity.ok(ClosetListRes.of(200,"Success",data));
+        } else {
+            return ResponseEntity.ok(BaseResponseBody.of(400, "Fail"));
+        }
+    }
+
     @DeleteMapping("/delete")
     public ResponseEntity<? extends BaseResponseBody> closetDelete(int closetPk) {
         if(closetService.closetDelete(closetPk)) {

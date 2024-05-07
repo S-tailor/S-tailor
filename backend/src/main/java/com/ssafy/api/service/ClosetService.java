@@ -11,6 +11,7 @@ public interface ClosetService {
     boolean closetSave(ClosetSaveReq info) throws ParseException;
 
     List<Closet> closetList(int profilePk);
+    List<Closet> closetFilter(int profilePk, String category);
 
     boolean closetDelete(int closetPk);
 
