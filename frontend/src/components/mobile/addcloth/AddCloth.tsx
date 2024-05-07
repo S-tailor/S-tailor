@@ -71,9 +71,8 @@ const AddCloth: React.FC = () => {
           canvas.toBlob(resolve, 'image/png')
         })
         if (blob) {
-          const file = new File([blob], 'captured-image.png', { type: 'image/png' })
-          const url = URL.createObjectURL(blob)
-          console.log('Capture successful:', url)
+          const url = URL.createObjectURL(blob).split('/')
+          const file = new File([blob], `${url[url.length - 1]}.png`, { type: 'image/png' })
           saveImage(file)
         }
       }
@@ -210,9 +209,6 @@ const AddCloth: React.FC = () => {
   async function imageSearch(file: any) {
     const formdata = new FormData()
     formdata.append('image', file)
-    // if (image) {
-    //   formdata.append('image', file)
-    // }
 
     try {
       const response = await closetImgSearch(formdata)
@@ -221,8 +217,6 @@ const AddCloth: React.FC = () => {
     } catch (error) {
       console.log('이미지 검색 실패:', error)
     }
-
-    // setCount(response.data.result.length)
   }
 
   // 업로드 이미지 띄우기
