@@ -24,9 +24,9 @@ export default defineConfig({
         description: 'A virtual cloth app.',
         icons: [
           {
-            src: 'favicon-196x196.png',
+            src: 'favicon-192x192.png',
             type: 'image/png',
-            sizes: '196x196',
+            sizes: '192x192',
             purpose: 'any'
           },
           {
