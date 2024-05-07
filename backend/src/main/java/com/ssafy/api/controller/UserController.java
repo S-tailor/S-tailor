@@ -3,10 +3,7 @@ package com.ssafy.api.controller;
 import com.ssafy.api.request.ProfileCreateReq;
 import com.ssafy.api.request.UserLoginPostReq;
 import com.ssafy.api.request.UserRegisterPostReq;
-import com.ssafy.api.response.ProfileListRes;
-import com.ssafy.api.response.ProfileSelectRes;
-import com.ssafy.api.response.UserIdCheckRes;
-import com.ssafy.api.response.UserLoginPostRes;
+import com.ssafy.api.response.*;
 import com.ssafy.api.service.ProfileService;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.model.response.BaseResponseBody;
@@ -71,8 +68,9 @@ public class UserController {
     @PostMapping("/profile/create")
     public ResponseEntity<? extends BaseResponseBody> profileCreate(@ModelAttribute ProfileCreateReq info) {
         try {
-            if(profileService.profileCreate(info)) {
-                return ResponseEntity.ok(BaseResponseBody.of(200,"Success"));
+            Profile result = profileService.profileCreate(info);
+            if(result != null) {
+                return ResponseEntity.ok(ProfileCreateRes.of(200,"Success",result.getProfilePk()));
             } else {
                 return ResponseEntity.ok(BaseResponseBody.of(400,"Fail"));
             }
