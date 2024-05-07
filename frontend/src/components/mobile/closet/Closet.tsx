@@ -136,11 +136,6 @@ const Closet: React.FC = () => {
     fetchCart()
   }, [])
 
-  const goCloset = () => {
-    startTransition(() => {
-      navigate('/mobile/closet')
-    })
-  }
 
   return (
     <div className={styles.container}>
@@ -155,7 +150,8 @@ const Closet: React.FC = () => {
             <div className={styles.headerInner}>
               <div className={styles.headerInner1}>
                 <img
-                  onClick={goCloset}
+                  onClick={()=>{startTransition(()=>{
+                    navigate('/mobile/closet')})}}
                   className={styles.logo}
                   src="/assets/logo.png"
                   alt="logo"
@@ -198,8 +194,7 @@ const Closet: React.FC = () => {
                   key={category}
                   href="#"
                   onClick={() => handleCategoryClick(category)}
-                  style={getCategoryStyle(category)}
-                >
+                  style={getCategoryStyle(category)}>
                   {category}
                 </a>
               ))}
@@ -221,18 +216,15 @@ const Closet: React.FC = () => {
                       <img
                         className={styles.addCartBtnImg}
                         src="/assets/shoppingbagW.png"
-                        alt="cart에 담기"
-                      />
+                        alt="cart에 담기"/>
                     </div>
                     <div
                       className={styles.deleteCartBtn}
-                      onClick={() => deleteCloth(cloth.closetPk)}
-                    >
+                      onClick={() => deleteCloth(cloth.closetPk)}>
                       <img
                         className={styles.deleteCartBtnImg}
                         src="/assets/closeBtn.svg"
-                        alt="deleteBtn"
-                      />
+                        alt="deleteBtn"/>
                     </div>
                     <p className={styles.clothesName}>{cloth.name}</p>
                     <p className={styles.clothesPrice}>{cloth.price.substring(1)}원</p>
