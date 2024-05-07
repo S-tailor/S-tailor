@@ -1,26 +1,40 @@
-import { useState } from 'react'
-import React from 'react'
+import React, { useState, startTransition } from 'react'
 import { useNavigate } from 'react-router-dom'
+import styles from '../../../scss/flipmain.module.scss'
 
 const FlipMain: React.FC = () => {
   const [message, setMessage] = useState('')
   const navigate = useNavigate()
-  const function1 = (event:any) => {
-    if (event)
-      setMessage('환영합니다! 이제 S-Tailor와 함께할 시간')
-      setTimeout(()=>{
+  const function1 = (event: any) => {
+    if (event) setMessage('환영합니다! 이제 S-Tailor와 함께할 시간')
+    setTimeout(() => {
+      startTransition(() => {
         navigate('/flip/tryon/test')
-  },3000)
-}
+      })
+    }, 3000)
+  }
   return (
-    <div onTouchStart={function1}>
-      <h1>FlipMain Component</h1>
-      <br />
-      {!message ?
-      <h2>터치로 시작하기</h2>
-      :
-      <h2>{message}</h2>
-      }
+    <div className={styles.container} onTouchStart={function1}>
+      <div className={styles.bgVideo}>
+        <video className={styles.bgVideoContent} autoPlay muted loop>
+          <source src="/assets/background.mp4" />
+        </video>
+      </div>
+      <section className={styles.topTitle}>
+        <div className={styles.topTitleInner}>
+          <p className={styles.texts}>FASHION IS</p>
+          <p className={styles.texts}>INSTANT</p>
+          <p className={styles.texts}>LANGUAGE</p>
+        </div>
+      </section>
+      <section className={styles.touchtext}>
+        {!message ? <p>터치로 시작하기</p> : <p>{message}</p>}
+      </section>
+      <section className={styles.middleTitle}>
+        <div className={styles.middleTitleInner}>
+          <p className={styles.texts}>S-TAILOR</p>
+        </div>
+      </section>
     </div>
   )
 }
