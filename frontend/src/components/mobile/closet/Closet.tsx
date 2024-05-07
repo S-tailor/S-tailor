@@ -23,7 +23,7 @@ const Closet: React.FC = () => {
   const navigate = useNavigate()
   const userName = user[0]?.profileName ?? 'Guest'
   const [isLoading, setIsLoading] = useState(true)
-  const { cartCount, setCartCounts, addToCart } = userStore()
+  const { cartCount, updateCartList, addToCart } = userStore()
   const [selectedCategory, setSelectedCategory] = useState('전체')
 
   const categories = ['전체', '아우터', '상의', '하의', '원피스', '기타']
@@ -109,9 +109,22 @@ const Closet: React.FC = () => {
   const addCart = async (pk: number) => {
     const response = await cartItemAdd(pk)
     if (response.status === 200) {
-      console.log('123131', clothList, pk)
-      addToCart(clothList[pk])
-      alert('위시리스트에 추가되었습니다!')
+      const newItem = clothList.find((item) => item.closetPk === pk)
+      if (newItem) {
+        addToCart(newItem)
+        updateCartCount()
+        alert('위시리스트에 추가되었습니다!')
+      }
+    }
+  }
+
+  const updateCartCount = async () => {
+    const profilePk = Number(sessionStorage.getItem('profilePk'))
+    const response = await cartItemList(profilePk)
+    if (response.status === 200) {
+      const cartList = response.data.result
+      updateCartList(cartList)
+      userStore.getState().setCartCount(cartList.length)
     }
   }
 
@@ -119,8 +132,10 @@ const Closet: React.FC = () => {
     const profilePk = Number(sessionStorage.getItem('profilePk'))
     const response = await cartItemList(profilePk)
     if (response.status === 200) {
-      console.log('마킹', response.data.result, profilePk)
-      setCartCounts(response.data.result)
+      // console.log('마킹', response.data.result, profilePk)
+      const cartList = response.data.result
+      updateCartList(cartList)
+      userStore.getState().setCartCount(cartList.length)
     }
   }
 
