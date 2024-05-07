@@ -1,0 +1,27 @@
+commit b2747813504d9d8244da5f00662a6c1ecac9213d
+tree a0df579a08fc163b70f2cb316c788ebddd1a4de7
+parent 5f5779589af8b3ac96dc0256a28b027e19da963e
+author Sun Woong Chang <38126462+govltjsdnd24@users.noreply.github.com> 2024-04-29 16:18:40 +0900
+committer Sun Woong Chang <38126462+govltjsdnd24@users.noreply.github.com> 2024-04-29 16:18:40 +0900
+
+    S10P31B107-266-chatbot-function-supplemented
+
+
+:100644 100644 615faaf819c6cbdddac74a2de91e04458cc3cb46 d7f4569bfb8927eeca9bbd23859cf077423cfab2 M	backend/src/main/java/com/ssafy/api/service/ChatbotServiceImpl.java
+:100644 100644 9d7984f106dcd585d96d1752707ce0f39d8b8630 a391c0e754392c1c9f8dd62081283367f3f82063 M	backend/src/main/resources/application.properties
+commit 5f5779589af8b3ac96dc0256a28b027e19da963e
+tree 6932b985d8d2405b1af0cbc9c7c602f7d7a05224
+parent 31690956085d21f0dbaac29af4365828057c090a
+author Sun Woong Chang <38126462+govltjsdnd24@users.noreply.github.com> 2024-04-29 16:01:41 +0900
+committer Sun Woong Chang <38126462+govltjsdnd24@users.noreply.github.com> 2024-04-29 16:01:41 +0900
+
+    S10P31B107-266-chatbot-function-added
+
+
+:000000 100644 0000000000000000000000000000000000000000 7a86aced383cf6ebfd65c53dc3880e4cf470410a A	backend/src/main/java/com/ssafy/api/controller/ChatbotController.java
+:000000 100644 0000000000000000000000000000000000000000 13da7b713d4f7285f698810cc92e179ddf63e30c A	backend/src/main/java/com/ssafy/api/request/ChatSendReq.java
+:000000 100644 0000000000000000000000000000000000000000 79dc5b21859be55ea4b9db76908e0a43d457f871 A	backend/src/main/java/com/ssafy/api/response/ChatImageRes.java
+:000000 100644 0000000000000000000000000000000000000000 0c4838343f5053f2a86c58895ce9675fc85748f0 A	backend/src/main/java/com/ssafy/api/response/ChatRes.java
+:000000 100644 0000000000000000000000000000000000000000 5978f6e0b89f14856ba3de095553fd647776984e A	backend/src/main/java/com/ssafy/api/response/ChatResultDTO.java
+:000000 100644 0000000000000000000000000000000000000000 7ec4790a52f63bfaca89917d075a432a9c1fd35e A	backend/src/main/java/com/ssafy/api/service/ChatbotService.java
+:000000 100644 0000000000000000000000000000000000000000 615faaf819c6cbdddac74a2de91e04458cc3cb46 A	backend/src/main/java/com/ssafy/api/service/ChatbotServiceImpl.java

@@ -1,0 +1,11 @@
+commit 837ca565b408353d7a5de60e62f3960b83f3b16d
+tree 2999ba850729600785b4d25cdca2f808e6db1bca
+parent 7a22e77db60e0f434c69382edef38c7431352815
+author 이수형 <sky500ro@gmail.com> 2024-05-01 16:08:11 +0900
+committer 이수형 <sky500ro@gmail.com> 2024-05-01 16:08:11 +0900
+
+    S10P31B107-
+
+
+:100644 100644 f05a88658bca287f3f2d4be182c9af44cb0abaae 40d5ba5a70b170996208d9fcff3441c560024f8b M	backend/src/main/java/com/ssafy/api/service/ProfileServiceImpl.java
+:100644 100644 ea275d2c9eb5dc54516992a5c6860053946b24b8 1c23e300707881f551ef448daeb67767a5c8123b M	backend/src/main/java/com/ssafy/db/repository/ProfileRepository.java

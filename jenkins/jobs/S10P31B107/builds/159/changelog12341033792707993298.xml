@@ -1,0 +1,40 @@
+commit da8cb50a05d763e6e6e9f74134f7d07dd3b65275
+tree bb1f3b146bbf4c9d2d9ff32c9d5b89e9ea847803
+parent ff9a6d2930c585644ce4c1dc64809c53fa6b2f77
+author JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-05-02 13:42:09 +0900
+committer JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-05-02 13:42:09 +0900
+
+    'function:chat-bot'
+
+
+:100644 100644 4780eca3e2a868d5a6eb553c8473573c73049ce6 f8a3314eae6e32125e2e394bc704dae37f31a28f M	frontend/src/components/mobile/ask/Ask.tsx
+:100644 100644 bf71e4411612071ad9946dce9b4d3b6011142a9a 284cd89347a8be999b49d1cedddcc19841ca5875 M	frontend/src/components/mobile/closet/Closet.tsx
+:100644 100644 0857b432ed574228d2383ad2bede0343eb894946 13b62b68efc2f1be4ec7147b60b4151ab6330ad2 M	frontend/src/components/mobile/closet/ClosetWishList.tsx
+:100644 100644 d70ac048e1a7c36a872f003453fee543971e2edc 6132537249afeb0a1d4ec797d1b7675e36af45a5 M	frontend/src/components/mobile/profile/ProfileAdd.tsx
+commit ff9a6d2930c585644ce4c1dc64809c53fa6b2f77
+tree f75d0074ba26849366a09b21db499aaa1a2d7c0c
+parent 8df6a600938461cf2c878e7c4c61dafae56ad51b
+author JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-05-02 09:46:35 +0900
+committer JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-05-02 09:46:35 +0900
+
+    'fix:build-error'
+
+
+:100644 100644 c5b6e9efb339117c6b31d29e04ec1402ab7a6d3f 9a06f2756c541682b6478035ab45e8356b4a3a6b M	frontend/src/api/apiCloset.tsx
+:100644 100644 8b05711b5eeb844cc11c5ab8330ddaea8a9af76c 3a3c07165fafc65248b8b6ae4062b7312222d1b3 M	frontend/src/components/mobile/addcloth/AddCloth.tsx
+:100644 100644 fed13cb2706e66e99423e0a690b4b44996106901 b4cd86974eea21eedfc028b3fc5a2935881b54fe M	frontend/src/components/mobile/closet/ClosetCodeInput.tsx
+commit 2c0f150b0c3b7b992c161963c8ec76ba22483962
+tree 3df0325eb279bc5a36c515606e2b083c852aa829
+parent 2633000388cf62b271f79dde10efffb870618d03
+author JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-05-02 09:41:05 +0900
+committer JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-05-02 09:41:05 +0900
+
+    'add-function-auto-weight,height'
+
+
+:100644 100644 a6f3631a456857c3dfe67182410e3989d35ad599 d3e4bca906b4bd43f1d8bff558dc0537c6e13ae8 M	frontend/src/api/apiCloset.tsx
+:000000 100644 0000000000000000000000000000000000000000 9c7254cf41671623dfd0e2ba3e9f2a721b47227c A	frontend/src/assets/qrCode.png
+:100644 100644 fd2b33c49b969aff2d7039733e8212d163a19009 5e006c9774b4c0886c1eb7dca185588f30f5b252 M	frontend/src/components/flip/tryon/TryOnCode.tsx
+:100644 100644 cb4c97dced1188aebf2ef70fabf6486b51871bbc fed13cb2706e66e99423e0a690b4b44996106901 M	frontend/src/components/mobile/closet/ClosetCodeInput.tsx
+:100644 100644 d521c1f788a21382f482e47ff6000687a3157593 698df7e9ea8aec7293fad3d4eabc6ae955e6a0d4 M	frontend/src/components/mobile/login/Login.tsx
+:100644 100644 421bd11f35db945edf09214e378231a1812a64de 6e8b8ba729bf02866ac3e80ac6b96184f65ebfef M	frontend/src/components/mobile/profile/ProfileEdit.tsx

@@ -1,0 +1,10 @@
+commit 719d3ac3f93238d9898c7f8dcf8bc5e2cacccfeb
+tree 87b5438f4bdf479dd13569b92e4969ee2719e115
+parent ec92b07dd05581ad1049c51f7660f8f0b5395d47
+author JIEUN LEE <jin3409975@gmail.com> 2024-04-30 15:41:22 +0900
+committer JIEUN LEE <jin3409975@gmail.com> 2024-04-30 15:41:22 +0900
+
+    fix: Front Build Error Fix
+
+
+:100644 100644 fdc291e7aeb13b7b9582064c00b88d4f681e47fa 6578642b734f9a887f359379dfc090b4e3974e68 M	frontend/src/components/mobile/profile/ProfileAdd.tsx
