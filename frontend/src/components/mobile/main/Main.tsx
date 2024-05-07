@@ -15,7 +15,7 @@ const Main: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.bgVideo}>
         <video className={styles.bgVideoContent} autoPlay muted loop>
-          <source src='/src/assets/background.mp4' />
+          <source src='/assets/background.mp4' />
         </video>
       </div>
       <section className={styles.topTitle}>

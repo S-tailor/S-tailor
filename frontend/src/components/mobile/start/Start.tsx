@@ -43,18 +43,19 @@ const Start: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.bgVideo}>
         <video className={styles.bgVideoContent} autoPlay muted loop>
-          <source src='/src/assets/background_light.mp4' />
+          <source src='/assets/background_light.mp4' />
         </video>
 			</div>
 
       <div className={styles.header}>
         <div className={styles.headerInner}>
-          <img onClick={goHome} className={styles.closeBtn} src="/src/assets/closeBtn.svg" alt="closeBtn" />
+          <img onClick={goHome} className={styles.closeBtn} src="/assets/closeBtn.svg" alt="closeBtn" />
         </div>
       </div>
 
       <section className={styles.topInfo}>
-        <p className={styles.texts}>가상 옷장을 &nbsp; 만들어 볼까요?</p>
+        <p className={styles.texts}>가상 옷장을</p>
+        <p className={styles.texts}>만들어 볼까요?</p>
       </section>
 
       <section className={styles.middleInput}>

@@ -49,8 +49,6 @@ const AddCloth: React.FC = () => {
       if (video) {
         video.srcObject = stream
         await video.play()
-        // setCameraActive(true)
-        // setCaptureMode(true) // 촬영 모드로 전환
       }
     } catch (error) {
       console.error('카메라 접근 오류:', error)
@@ -117,15 +115,6 @@ const AddCloth: React.FC = () => {
     transform: camera === 'user' ? 'scaleX(-1)' : 'none'
   }
 
-  // 카메라 영상 렌더링
-  function RenderVideo() {
-    return (
-      <div className={styles.picture}>
-        {cameraActive ? <video ref={videoRef} style={videoStyle} autoPlay playsInline /> : null}
-      </div>
-    )
-  }
-
   // 옷 선택
   const handleSelectCloth = (cloth: SearchResultItem) => {
     setSelectedCloths((prev) => {
@@ -138,13 +127,11 @@ const AddCloth: React.FC = () => {
     })
   }
 
-  // const user = userStore((state) => state.user)
   const profilePk = sessionStorage.getItem('profilePk')
 
   // 옷 저장
   const handleSaveCloths = async () => {
     for (const cloth of selectedCloths) {
-      // console.log(cloth)
       try {
         await closetItemSave({
           price: cloth.price,
@@ -179,6 +166,7 @@ const AddCloth: React.FC = () => {
     const response = await closetTextSearch(text)
 
     updateResults(response.data.result)
+    setShowResults(true)
   }
 
   // 업로드 이미지 저장
@@ -272,31 +260,31 @@ const AddCloth: React.FC = () => {
     const path = location.pathname
     const iconPaths: { [key: string]: { [icon: string]: string } } = {
       '/mobile/closet': {
-        closet: '/src/assets/closetFill.png',
-        'add-cloth': '/src/assets/upload.png',
-        ask: '/src/assets/shirt.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        closet: '/assets/closetFill.png',
+        'add-cloth': '/assets/upload.png',
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/add-cloth': {
-        closet: '/src/assets/closet.png',
-        'add-cloth': '/src/assets/uploadFill.png',
-        ask: '/src/assets/shirt.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        closet: '/assets/closet.png',
+        'add-cloth': '/assets/uploadFill.png',
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/ask': {
-        closet: '/src/assets/closet.png',
-        'add-cloth': '/src/assets/upload.png',
-        ask: '/src/assets/shirtFill.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        closet: '/assets/closet.png',
+        'add-cloth': '/assets/upload.png',
+        ask: '/assets/shirtFill.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/mypage': {
-        closet: '/src/assets/closet.png',
-        'add-cloth': '/src/assets/upload.png',
-        ask: '/src/assets/shirt.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        closet: '/assets/closet.png',
+        'add-cloth': '/assets/upload.png',
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       }
     }
-    return iconPaths[path][iconName] || '/src/assets/' + iconName + '.png'
+    return iconPaths[path][iconName] || '/assets/' + iconName + '.png'
   }
 
   const getMypageImgStyle = useMemo(() => {
@@ -320,13 +308,13 @@ const AddCloth: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <header>
+      <div className={styles.header}>
         <div className={styles.headerInner}>
           <div className={styles.headerInner1}>
-            <img onClick={goCloset} className={styles.logo} src="/src/assets/logo.png" alt="logo" />
+            <img onClick={goCloset} className={styles.logo} src="/assets/logo.png" alt="logo" />
           </div>
         </div>
-      </header>
+      </div>
 
       <section className={styles.addClothMain}>
         <div className={styles.searchbar}>
@@ -339,7 +327,7 @@ const AddCloth: React.FC = () => {
           />
           <img
             className={styles.search}
-            src="/src/assets/search.svg"
+            src="/assets/search.svg"
             alt="search"
             onClick={() => textSearch()}
           />
@@ -352,9 +340,7 @@ const AddCloth: React.FC = () => {
             <video ref={videoRef} style={videoStyle} autoPlay />
           ) : searchMode === 'upload' ? (
             <RenderUploadedImage />
-          ) : (
-            <RenderVideo />
-          )}
+          ) : null}
         </div>
 
         <div className={styles.pictureButtons}>
@@ -370,7 +356,7 @@ const AddCloth: React.FC = () => {
                     <img
                       className={styles.selectedDeleteBtn}
                       onClick={() => handleSelectCloth(cloth)}
-                      src="/src/assets/closeBtn.svg"
+                      src="/assets/closeBtn.svg"
                       alt="close"
                     />
                     <button className={styles.selectedAddBtn} onClick={handleSaveCloths}>
@@ -383,18 +369,18 @@ const AddCloth: React.FC = () => {
           ) : (
             <>
               <label htmlFor="gallery">
-                <img className={styles.gallery} src="/src/assets/gallery.png" alt="gallery" />
+                <img className={styles.gallery} src="/assets/gallery.png" alt="gallery" />
                 <input id="gallery" type="file" onChange={saveImage}></input>
               </label>
               <img
                 className={styles.camera}
-                src={captureMode ? '/src/assets/avatar.png' : '/src/assets/camera.png'}
+                src={captureMode ? '/assets/avatar.PNG' : '/assets/camera.png'}
                 alt={captureMode ? 'capture' : 'camera'}
                 onClick={onCameraClick}
               />
               <img
                 className={styles.switch}
-                src="/src/assets/switch.png"
+                src="/assets/switch.png"
                 alt="switch"
                 onClick={toggleCamera}
               />

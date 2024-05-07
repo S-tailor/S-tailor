@@ -71,12 +71,12 @@ const Profile: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.bgVideo}>
         <video className={styles.bgVideoContent} autoPlay muted loop>
-          <source src='/src/assets/background_light.mp4' />
+          <source src='/assets/background_light.mp4' />
         </video>
 			</div>
       <div className={styles.header}>
         <div className={styles.headerInner}>
-          <img onClick={goHome} className={styles.backBtn} src="/src/assets/backBtn.svg" alt="backBtn" />
+          <img onClick={goHome} className={styles.backBtn} src="/assets/backBtn.svg" alt="backBtn" />
           <button className={styles.editBtn} onClick={profileModify}>{modify ? '취소' : '수정'}</button>
         </div>
       </div>
@@ -88,7 +88,7 @@ const Profile: React.FC = () => {
 
       {isLoading ? (
         <div className={styles.wait}>
-            <img className={styles.loading} src="/src/assets/loading.gif" alt="로딩 중" />
+            <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
         </div>
       ) : (
         <section className={styles.select}>
@@ -106,15 +106,15 @@ const Profile: React.FC = () => {
                   </p>
                   {modify &&(
                     <img className={styles.editImg}
-                    src="/src/assets/edit.svg" alt='수정' onClick={()=>profileModify2(userList[0].profilePk)}/>
+                    src="/assets/edit.svg" alt='수정' onClick={()=>profileModify2(userList[0].profilePk)}/>
                   )}
                 </div>
               ) : (
-                <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
+                <img className={styles.addIcon} src="/assets/add.svg" alt="user-add" onClick={()=>{
                   startTransition(()=>{navigate('/mobile/profile/add')})}} />
               )}
             </div>
-          ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
+          ) : <img className={styles.addIcon} src="/assets/add.svg" alt="user-add" onClick={()=>{
             startTransition(()=>{navigate('/mobile/profile/add')})}} />}
 
           {userList.length > 1 ? (
@@ -129,14 +129,14 @@ const Profile: React.FC = () => {
                     </span>
                   </p>
                   {modify && (<img className={styles.editImg}
-                    src="/src/assets/edit.svg" alt='수정하기' onClick={()=>profileModify2(userList[1].profilePk)}/>)}
+                    src="/assets/edit.svg" alt='수정하기' onClick={()=>profileModify2(userList[1].profilePk)}/>)}
                 </div>
               ) : (
-                <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
+                <img className={styles.addIcon} src="/assets/add.svg" alt="user-add" onClick={()=>{
                   startTransition(()=>{navigate('/mobile/profile/add')})}} />
               )}
             </div>
-          ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
+          ) : <img className={styles.addIcon} src="/assets/add.svg" alt="user-add" onClick={()=>{
             startTransition(()=>{navigate('/mobile/profile/add')})}} />}
 
           {userList.length > 2 ? (
@@ -153,14 +153,14 @@ const Profile: React.FC = () => {
                   </p>
                   {modify &&
                   ( <img className={styles.editImg}
-                    src="/src/assets/edit.svg" alt='수정하기' onClick={()=>profileModify2(userList[2].profilePk)}/>)}
+                    src="/assets/edit.svg" alt='수정하기' onClick={()=>profileModify2(userList[2].profilePk)}/>)}
                 </div>
               ) : (
-                <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
+                <img className={styles.addIcon} src="/assets/add.svg" alt="user-add" onClick={()=>{
                   startTransition(()=>{navigate('/mobile/profile/add')})}} />
               )}
             </div>
-          ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
+          ) : <img className={styles.addIcon} src="/assets/add.svg" alt="user-add" onClick={()=>{
             startTransition(()=>{navigate('/mobile/profile/add')})}} />}
 
           {userList.length > 3 ? (
@@ -175,14 +175,14 @@ const Profile: React.FC = () => {
                     </span>
                   </p>
                   {modify &&( <img className={styles.editImg}
-                    src="/src/assets/edit.svg" alt='수정하기' onClick={()=>profileModify2(userList[3].profilePk)}/>)}
+                    src="/assets/edit.svg" alt='수정하기' onClick={()=>profileModify2(userList[3].profilePk)}/>)}
                 </div>
               ) : (
-                <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
+                <img className={styles.addIcon} src="/assets/add.svg" alt="user-add" onClick={()=>{
                   startTransition(()=>{navigate('/mobile/profile/add')})}} />
               )}
             </div>
-          ) : <img className={styles.addIcon} src="/src/assets/add.svg" alt="user-add" onClick={()=>{
+          ) : <img className={styles.addIcon} src="/assets/add.svg" alt="user-add" onClick={()=>{
             startTransition(()=>{navigate('/mobile/profile/add')})}} />}
         </div>
       </section>

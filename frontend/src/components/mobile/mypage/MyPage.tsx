@@ -37,31 +37,31 @@ const MyPage: React.FC = () => {
     const path = location.pathname
     const iconPaths: { [key: string]: { [icon: string]: string } } = {
       '/mobile/closet': {
-        closet: '/src/assets/closetFill.png',
-        'add-cloth': '/src/assets/upload.png',
-        ask: '/src/assets/shirt.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        closet: '/assets/closetFill.png',
+        'add-cloth': '/assets/upload.png',
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/add-cloth': {
-        closet: '/src/assets/closet.png',
-        'add-cloth': '/src/assets/uploadFill.png',
-        ask: '/src/assets/shirt.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        closet: '/assets/closet.png',
+        'add-cloth': '/assets/uploadFill.png',
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/ask': {
-        closet: '/src/assets/closet.png',
-        'add-cloth': '/src/assets/upload.png',
-        ask: '/src/assets/shirtFill.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        closet: '/assets/closet.png',
+        'add-cloth': '/assets/upload.png',
+        ask: '/assets/shirtFill.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/mypage': {
-        closet: '/src/assets/closet.png',
-        'add-cloth': '/src/assets/upload.png',
-        ask: '/src/assets/shirt.png',
-        mypage: user[0]?.image || '/src/assets/avatar.PNG'
+        closet: '/assets/closet.png',
+        'add-cloth': '/assets/upload.png',
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       }
     }
-    return iconPaths[path][iconName] || '/src/assets/' + iconName + '.png'
+    return iconPaths[path][iconName] || '/assets/' + iconName + '.png'
   }
 
   const getMypageImgStyle = useMemo(() => {
@@ -97,13 +97,13 @@ const MyPage: React.FC = () => {
       <div className={styles.header}>
         <div className={styles.headerInner}>
           <div className={styles.headerInner1}>
-            <img className={styles.logo} src="/src/assets/mypage.png" alt="logo" />
+            <img className={styles.logo} src="/assets/mypage.png" alt="logo" />
           </div>
 
           <div className={styles.headerInner2}>
             <img
               className={styles.search}
-              src="/src/assets/search.svg"
+              src="/assets/search.svg"
               alt="search"
               onClick={ClosetSearchClick}
             />
@@ -112,7 +112,7 @@ const MyPage: React.FC = () => {
           <div className={styles.headerInner3}>
             <img
               className={styles.cart}
-              src="/src/assets/shoppingbag.svg"
+              src="/assets/shoppingbag.svg"
               alt="cart"
               onClick={() => {
                 startTransition(() => {
@@ -135,13 +135,13 @@ const MyPage: React.FC = () => {
           <button className={styles.changeBtn} onClick={ProfileChangeClick}>
             <img
               className={styles.profileChange}
-              src="/src/assets/profileChange.svg"
+              src="/assets/profileChange.svg"
               alt="profileChange"
             />
             <span>프로필 변경</span>
           </button>
           <button className={styles.logoutBtn} onClick={LogoutClick}>
-            <img className={styles.logout} src="/src/assets/logout.svg" alt="logout" />
+            <img className={styles.logout} src="/assets/logout.svg" alt="logout" />
             <span>로그아웃</span>
           </button>
         </div>

@@ -185,8 +185,7 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
   background-color: transparent;
   color: #222222;
   border-radius: 50px;
-  font-family: 'samsung-one-700';
-  font-weight: 600;
+
   font-size: 0.9em;
   letter-spacing: 1px;
   &:hover {
