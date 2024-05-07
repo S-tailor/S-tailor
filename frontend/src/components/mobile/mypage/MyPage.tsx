@@ -66,13 +66,13 @@ const MyPage: React.FC = () => {
 
   const getMypageImgStyle = useMemo(() => {
     return location.pathname === '/mobile/mypage'
-      ? { border: '2px solid #9091FB', width: '9.5vw', height: '4.5vh', marginTop: '-2px' }
+      ? { border: '2px solid #9091FB', width: '35px', height: '35px', marginTop: '-2px' }
       : { filter: 'drop-shadow(0px 0px 1.5px #000000)' }
   }, [location.pathname])
 
   const getActiveStyle = (path: string) => {
     return location.pathname === path
-      ? { fontFamily: 'Pretendard-Bold', color: '#9091FB', marginTop: '1px' }
+      ? { fontFamily: 'Pretendard-Bold', color: '#9091FB', marginTop: '3px' }
       : {}
   }
 

@@ -231,18 +231,18 @@ const AddCloth: React.FC = () => {
   // 검색 결과 렌더링
   function RenderResult() {
     return (
-      <div>
+      <div className={styles.searchClothes}>
         {results.map((item: SearchResultItem, index: number) => (
-          <div key={index}>
+          <div key={index} className={styles.resultItem}>
             <img
+              className={styles.resultItemImg}
               src={item.image}
               alt={item.title}
               onClick={() => handleSelectCloth(item)}
-              style={{ width: '100px', height: '100px' }}
             />
+            <p className={styles.clothesSource}>{item.source}</p>
             <p className={styles.clothesName}>{item.title}</p>
             <p className={styles.clothesPrice}>{item.price}</p>
-            <p className={styles.clothesSource}>{item.source}</p>
           </div>
         ))}
       </div>
@@ -325,6 +325,22 @@ const AddCloth: React.FC = () => {
             alt="search"
             onClick={() => textSearch()}
           />
+        </div>
+
+        <div className={styles.infomation}>
+          <p className={styles.infomationText}>
+            <u>
+              <a 
+              onClick={() => {
+                startTransition(() => {
+                  navigate('/mobile/closet/code/input/test')
+                })
+              }}
+              >
+              옷 입어보기
+              </a>
+            </u> 기능의 최상의 결과를 위해 <b>'깔끔한 배경'</b>, <b>'1장'</b>인 옷을 선택해주세요.
+          </p>
         </div>
 
         <div className={styles.picture}>
