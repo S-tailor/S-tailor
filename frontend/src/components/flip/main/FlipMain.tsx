@@ -14,7 +14,7 @@ const FlipMain: React.FC = () => {
     }, 3000)
   }
   return (
-    <div className={styles.container} onClick={function1}>
+    <div className={styles.container} onTouchStart={function1}>
       <div className={styles.bgVideo}>
         <video className={styles.bgVideoContent} autoPlay muted loop>
           <source src="/assets/background.mp4" />
