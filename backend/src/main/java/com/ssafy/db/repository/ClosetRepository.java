@@ -25,4 +25,6 @@ public interface ClosetRepository extends JpaRepository<Closet, Long> {
     List<Closet> closetSearch(String content, int profilePk);
 
     List<Closet> findAllByProfilePkAndSourceContainingOrNameContaining(int profilePk, String source, String name);
+
+    List<Closet> findAllByProfilePkAndCategoryAndIsDelete(int profilePk, String category, boolean b);
 }

@@ -16,7 +16,7 @@ const ProfileAdd: React.FC = () => {
   const [height, setHeight] = useState<string>('')
   const [weight, setWeight] = useState<string>('')
   const [fileUrl, setFileUrl] = useState<string>('')
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const { setUser } = userStore()
   interface userProfile {
     profileName: string
@@ -75,16 +75,16 @@ const ProfileAdd: React.FC = () => {
       setmessage('')
 
       const response = await profileCreate(formData)
-
+      console.log(response)
       if (response.status == 200) {
         const userName = formData.get('name')
-        const profilePk = Number(userPk);
+        const profilePk = Number(userPk)
         if (typeof userName === 'string' && !isNaN(profilePk)) {
           const userProfileData: userProfile = {
             profileName: userName,
             profilePk: profilePk,
             image: fileUrl
-          };
+          }
           setUser(userProfileData)
           setIsSubmitting(false)
           startTransition(() => {
@@ -171,12 +171,12 @@ const ProfileAdd: React.FC = () => {
   return (
     <>
       <div className={styles.container}>
-      <div className={styles.bgVideo}>
-        <video className={styles.bgVideoContent} autoPlay muted loop>
-          <source src='/assets/background_light.mp4' />
-        </video>
-			</div>
-        
+        <div className={styles.bgVideo}>
+          <video className={styles.bgVideoContent} autoPlay muted loop>
+            <source src="/assets/background_light.mp4" />
+          </video>
+        </div>
+
         {page1 && (
           <>
             <div className={styles.header}>
@@ -378,7 +378,7 @@ const ProfileAdd: React.FC = () => {
                 {isSubmitting ? (
                   <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
                 ) : (
-                  "완료"
+                  '완료'
                 )}
               </button>
             </section>
