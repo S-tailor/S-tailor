@@ -1,0 +1,12 @@
+commit f3f082a869ebdeed51bdae724d19de9ed67f85f3
+tree b5312826290fbdfa8c5fe90d4631e6b64c2419d6
+parent c5d29a9636b6c5893ecc64a86ce6d9b1d50523e3
+author JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-04-26 12:27:05 +0900
+committer JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-04-26 12:27:05 +0900
+
+    '2'
+
+
+:100644 100644 ad0bd96de0d721379d1b4b774ac88f70d9c22c6e 2f14a2837ee755ba674b313a5b9ec31bac322378 M	frontend/src/components/mobile/main/Main.tsx
+:100644 100644 ae86b2a5ee0948ccff3547f31278ac30645ba1c6 d229dab0689a9a95da18f63d56518bf9f85ca052 M	frontend/src/pages/mobile/main/index.tsx
+:100644 100644 72571a424b37feed507179c4840cee17a4cf1046 4e5467bea4024ae156235d711f2b26b3ae045d04 M	frontend/yarn.lock

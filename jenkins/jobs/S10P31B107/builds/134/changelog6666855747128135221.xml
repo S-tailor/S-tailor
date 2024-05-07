@@ -1,0 +1,10 @@
+commit 2471ead53cc68842e8d46931d8e30f76816c9d91
+tree 3a61c823b0454472f177512f26ebe423bafdcdce
+parent bc0240c7ce0713ddacce9c281bb9bbf39193f5db
+author JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-04-29 17:35:10 +0900
+committer JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-04-29 17:35:10 +0900
+
+    trouble-shooting
+
+
+:100644 100644 667aaaf179f307a06d0277bfbee3e04cd92fdc86 aef2a7ce562d45511897560afb1197f80e7c973a M	frontend/src/components/mobile/addcloth/AddCloth.tsx

@@ -1,0 +1,13 @@
+commit e38b786ef6046e776a83ae811c48cc73be96d7ab
+tree a00b26fe604ac6c00eb71847a642af737d0f5ca0
+parent ac59c2ac11e4001cd854478a956a1f0700356a7e
+author Sun Woong Chang <38126462+govltjsdnd24@users.noreply.github.com> 2024-05-02 17:47:52 +0900
+committer Sun Woong Chang <38126462+govltjsdnd24@users.noreply.github.com> 2024-05-02 17:47:52 +0900
+
+    S10P31B107-276-Chatbot-final-correction
+
+
+:100644 100644 683b4e9515903f138e58c4c30444294cd7d68fc1 5bf8b2d2351e16c06c372bab867e474e00114a90 M	backend/src/main/java/com/ssafy/api/controller/ChatbotController.java
+:000000 100644 0000000000000000000000000000000000000000 7c0eb528a0a11c8857721231dbdb488cfbaf82ed A	backend/src/main/java/com/ssafy/api/request/ChatClearReq.java
+:100644 100644 cc0c364a72fe12af10a722088a0d6e56327d5326 3586dbe087232acd096d2a43f72661e90a268269 M	backend/src/main/java/com/ssafy/api/service/ChatbotServiceImpl.java
+:100644 100644 99b3dba887aebd7c5553768afa9cbec45b86636e d0cb30d8e9ad69395fc554b1f3c2b7caa631f73b M	backend/src/main/resources/application.properties

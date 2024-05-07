@@ -1,0 +1,229 @@
+Started by GitLab push by 이지은
+[8mha:////4EHwQ8sB1myzlPb17ed//TRVJfdqnsJ83HKItYxZ1o3LAAAAoh+LCAAAAAAAAP9tjTEOwjAQBM8BClpKHuFItIiK1krDC0x8GCfWnbEdkooX8TX+gCESFVvtrLSa5wtWKcKBo5UdUu8otU4GP9jS5Mixv3geZcdn2TIl9igbHBs2eJyx4YwwR1SwULBGaj0nRzbDRnX6rmuvydanHMu2V1A5c4MHCFXMWcf8hSnC9jqYxPTz/BXAFEIGsfuclm8zQVqFvQAAAA==[0m[Pipeline] Start of Pipeline
+[8mha:////4D8IMZVfBecsbdpdJU7G4pl3Ex4Tm46Lmd+WfVZtzBi2AAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycohUghExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jduZBmjwAAAAA==[0m[Pipeline] stage
+[8mha:////4JC5rCEDcun+jSYTD+ly9aVjUIBVmBWk8MtRE5S52si9AAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gA0xsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfoP95RwAAAAA==[0m[Pipeline] { (Git pull)
+[8mha:////4ImMZLGCYmgUjuw9ndn0tdiI15fHzkqahG+lwCbc/CKnAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gQkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jc09154wAAAAA==[0m[Pipeline] node
+Running on [8mha:////4KV7QiRrGb7YeIl+n4+090vOh1nSfg4HqpHJaU+fO/i6AAAAoR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZR/eT83ILSktQifY2k0sycEt3MPE19AHHxbH3KAAAA[0mJenkins in /var/jenkins_home/workspace/S10P31B107
+[8mha:////4ELESQXTlqJL4fa1AZtl6pkuSQJQpyoJB8UNWpxQGpESAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0ggUxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jek7ggRwAAAAA==[0m[Pipeline] {
+[8mha:////4E+1jKg3AHBMXMnsN8phBGnEHEZYMwl+Uvdz3g4tDzFxAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbaWGsbAmNJ0AWEZb8zwLrbuWJvJp3kLiJlZNMMm+a93rDOic4UbLcG+wdZu14DKOti0+U+lugiXu6ck2YKRguzSSpM+cFJRUDS1gDKwEbgzpQdmgLbIVXD9UGhba9lFS/o4DGdQM8gYlqLiqVL8wJdvexy4Q/z18BzLEA29ce4gfg7KmOvAAAAA==[0m[Pipeline] git
+The recommended git tool is: NONE
+using credential jamsince1994
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/S10P31B107/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://lab.ssafy.com/s10-final/S10P31B107.git # timeout=10
+Fetching upstream changes from https://lab.ssafy.com/s10-final/S10P31B107.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.2'
+using GIT_ASKPASS to set credentials 
+ > git fetch --tags --force --progress -- https://lab.ssafy.com/s10-final/S10P31B107.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+skipping resolution of commit remotes/origin/dev, since it originates from another repository
+ > git rev-parse refs/remotes/origin/dev^{commit} # timeout=10
+Checking out Revision 6086815f534554a1f6acc9624d4d6405052a2655 (refs/remotes/origin/dev)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 6086815f534554a1f6acc9624d4d6405052a2655 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D dev # timeout=10
+ > git checkout -b dev 6086815f534554a1f6acc9624d4d6405052a2655 # timeout=10
+Commit message: "Merge branch 'S10P31B107-148-mobile_layout' into 'dev'"
+ > git rev-list --no-walk 233d0bc7f20616ab6500ec57e45eadf4b866de81 # timeout=10
+[8mha:////4OxyowUDl8kifHS9rNAxjmCrm1O9vea5I4IXIMWRRdhEAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbGRNjZUtoPAGyiLDkfxZYdytP5NW8g8RNrJxkknnTvNcb1jnBiZLl3mDvMGvHYxhtXXyi1N8CTdzTlWvCTMFwaSZJnTkvKKkYWMIaWAnYGNSBskNbYCu8eqg2KLTtpaT6HQU0rhvgCUxUc1GpfGFOsLuPXSb8ef4KYI6xADvU7j9Dg2gqvAAAAA==[0m[Pipeline] }
+[8mha:////4IlQv62KoXC/gaSzETl0MRUNwJlsyLSNsK5WswWjT4jCAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQRbWRhjZUtoPAGyiLDkfxZYdytP5NW8g8RNrJxkknnTvNcb1jnBiZLl3mDvMGvHYxhtXXyi1N8CTdzTlWvCTMFwaSZJnTkvKKkYWMIaWAnYGNSBskNbYCu8eqg2KLTtpaT6HQU0rhvgCUxUc1GpfGFOsLuPXSb8ef4KYI6xADvU7j9J+wGOvAAAAA==[0m[Pipeline] // node
+[8mha:////4Ad/3Tt+60mbxylCYFS/i6dmIY4/DTnNTFugmrQ75qC+AAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIBiQ5R0VppeIFJjHFi3QX7QlLxIr7GH4iIRMVWO9PM641lijhydKqx1HpKlVdd6N301MCxvQYeVMMXVTElDlaVdii5tqcZSxaLeVmOhcbKUhU4eXKCtW7MwxTBkCvOEid30Mh9fccTmZ7KYqJ8YYzY3Po6Mf06fwMYu06Q77aCbP8BhStF0r0AAAA=[0m[Pipeline] }
+[8mha:////4KwMSMuUDeQqnXIWUM7lgul/EsgwIEifHQ/gnuIGWZ1jAAAAoh+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6KEOBon14bFL6hQa6F5D9uHMPlF/pr/IJHEyTvdc5bzemOdIo4cnWotdZ5S7VUfBjc/NXLsroFH1fJF1UyJg1WVHStu7GnBisViWZZjpbGxVAdOnpxgq1vzMEUw5IqzxNkdNHLf3PFEpueymChfmCJ2t6FJTL/O3wCmvhfkZSnI9h+Wl0FxvQAAAA==[0m[Pipeline] // stage
+[8mha:////4I5PG4Iou0WLtsWbea72vdJirkunuqMj6ZVW3cykB4zZAAAApR+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYQj0iIqWssNLzCJMU6su2BfSCpexNf4A4ZIVGy1s9Jqni8oU4QDRSc7i73H1Hg5hNHlJieK/SXQJDs6y4YwUbBS20lTa48LamILS0QBKwVri02g5NExbFRn7qYKBl114pi3vYLCtzd4gFDZzCbyF+YI2+vYJsKf568A5oFB1AzFrv4cyzf+j1f0wQAAAA==[0m[Pipeline] stage
+[8mha:////4KX2iWmjPumlpmXau+yGNnAC9fdPeiCU+x19F4evpmY3AAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUwIiYukZZOEFoQkgb/V9+UtqJE3E17kBLJSY8WLYl673eUESGE7ETjcXWY6y96ELvpiQG4vYaaBANXURNGClYoeygyNhqqYqShUVZDisJa4t1oOjRJdjIRj90GTS68px42o4Scm/u8IRMTuSkOX3LyLC99SYS/jh/ATB2CfLdfrbD/Cw+y7kUycIAAAA=[0m[Pipeline] { (FE build)
+[8mha:////4LGDFaYlZDXnehH/HliwFa7focgDM9cBknn8DPun7IKmAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUCDbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5Dv9rMd5mfxAbNWnxXCAAAA[0m[Pipeline] node
+Running on [8mha:////4KV7QiRrGb7YeIl+n4+090vOh1nSfg4HqpHJaU+fO/i6AAAAoR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZR/eT83ILSktQifY2k0sycEt3MPE19AHHxbH3KAAAA[0mJenkins in /var/jenkins_home/workspace/S10P31B107
+[8mha:////4K5hj263SI/Iz42TltHGkXadplc2SF1mRGrrYWToG7jGAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUSDAhpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD5WQ+PfCAAAA[0m[Pipeline] {
+[8mha:////4IkA0pjHTH0CM8FZAzslMQZg85AwF0iff8saPlpvPeYPAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUDLAgpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD/s94rDCAAAA[0m[Pipeline] script
+[8mha:////4Dmf8BmIZJ+5IMdpa1H39rkm/pE1s6jm7ZVCZNTcnFaMAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohULDAgpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD1+IXOLCAAAA[0m[Pipeline] {
+[8mha:////4BGeAPBTNiiZbN7UhJRnGMuBs6CsnBlTFeVFGrDk42VJAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiKpAQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHNxXfVKy+AAAA[0m[Pipeline] sh
++ docker-compose build frontend-compose
+#0 building with "default" instance using docker driver
+
+#1 [frontend-compose internal] load build definition from Dockerfile
+#1 transferring dockerfile: 327B 0.0s done
+#1 DONE 0.1s
+
+#2 [frontend-compose internal] load metadata for docker.io/library/node:20.11.1-alpine
+#2 DONE 0.6s
+
+#3 [frontend-compose internal] load metadata for docker.io/library/nginx:stable-alpine
+#3 DONE 0.9s
+
+#4 [frontend-compose internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.1s
+
+#5 [frontend-compose builder 1/6] FROM docker.io/library/node:20.11.1-alpine@sha256:bf77dc26e48ea95fca9d1aceb5acfa69d2e546b765ec2abfb502975f1a2d4def
+#5 DONE 0.0s
+
+#6 [frontend-compose runner 1/3] FROM docker.io/library/nginx:stable-alpine@sha256:ca16009a8c25f52193506d4c90c98efbad4b6cbe73372e2a27972f05c5e02f15
+#6 DONE 0.0s
+
+#7 [frontend-compose internal] load build context
+#7 transferring context: 14.09kB done
+#7 DONE 0.1s
+
+#8 [frontend-compose builder 2/6] WORKDIR /app
+#8 CACHED
+
+#9 [frontend-compose builder 3/6] COPY package.json .
+#9 CACHED
+
+#10 [frontend-compose builder 4/6] RUN yarn
+#10 CACHED
+
+#11 [frontend-compose builder 5/6] COPY . .
+#11 DONE 0.3s
+
+#12 [frontend-compose builder 6/6] RUN yarn build
+#12 2.026 yarn run v1.22.19
+#12 2.183 $ tsc && vite build
+#12 7.705 src/components/mobile/profile/Profile.tsx(48,19): error TS2339: Property 'image' does not exist on type 'never'.
+#12 7.705 src/components/mobile/profile/Profile.tsx(48,43): error TS2339: Property 'image' does not exist on type 'never'.
+#12 7.705 src/components/mobile/profile/Profile.tsx(50,21): error TS2339: Property 'profileName' does not exist on type 'never'.
+#12 7.705 src/components/mobile/profile/ProfileAdd.tsx(1,33): error TS6133: 'useEffect' is declared but its value is never read.
+#12 7.706 src/components/mobile/profile/ProfileAdd.tsx(77,32): error TS2769: No overload matches this call.
+#12 7.706   Overload 1 of 3, '(name: string, value: string | Blob): void', gave the following error.
+#12 7.706     Argument of type 'File | undefined' is not assignable to parameter of type 'string | Blob'.
+#12 7.706       Type 'undefined' is not assignable to type 'string | Blob'.
+#12 7.706   Overload 2 of 3, '(name: string, value: string): void', gave the following error.
+#12 7.706     Argument of type 'File | undefined' is not assignable to parameter of type 'string'.
+#12 7.706       Type 'undefined' is not assignable to type 'string'.
+#12 7.706   Overload 3 of 3, '(name: string, blobValue: Blob, filename?: string | undefined): void', gave the following error.
+#12 7.706     Argument of type 'File | undefined' is not assignable to parameter of type 'Blob'.
+#12 7.706       Type 'undefined' is not assignable to type 'Blob'.
+#12 7.706 src/components/mobile/profile/ProfileAdd.tsx(121,11): error TS6133: 'target' is declared but its value is never read.
+#12 7.706 src/components/mobile/profile/ProfileAdd.tsx(125,41): error TS2345: Argument of type 'File | undefined' is not assignable to parameter of type 'Blob | MediaSource'.
+#12 7.706   Type 'undefined' is not assignable to type 'Blob | MediaSource'.
+#12 7.706 src/state/ProfileSelectors.tsx(9,28): error TS2554: Expected 1 arguments, but got 0.
+#12 7.768 error Command failed with exit code 2.
+#12 7.769 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+#12 ERROR: process "/bin/sh -c yarn build" did not complete successfully: exit code: 2
+------
+ > [frontend-compose builder 6/6] RUN yarn build:
+7.706       Type 'undefined' is not assignable to type 'string'.
+7.706   Overload 3 of 3, '(name: string, blobValue: Blob, filename?: string | undefined): void', gave the following error.
+7.706     Argument of type 'File | undefined' is not assignable to parameter of type 'Blob'.
+7.706       Type 'undefined' is not assignable to type 'Blob'.
+7.706 src/components/mobile/profile/ProfileAdd.tsx(121,11): error TS6133: 'target' is declared but its value is never read.
+7.706 src/components/mobile/profile/ProfileAdd.tsx(125,41): error TS2345: Argument of type 'File | undefined' is not assignable to parameter of type 'Blob | MediaSource'.
+7.706   Type 'undefined' is not assignable to type 'Blob | MediaSource'.
+7.706 src/state/ProfileSelectors.tsx(9,28): error TS2554: Expected 1 arguments, but got 0.
+7.768 error Command failed with exit code 2.
+7.769 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+------
+failed to solve: process "/bin/sh -c yarn build" did not complete successfully: exit code: 2
+[8mha:////4MLG1jo3elCIkm6zfzPQsLGRJK+W7GrEjUxuNZlwZ5U8AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiKoQQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHN1TuT7W+AAAA[0m[Pipeline] mattermostSend
+Mattermost Send Pipeline step configured values from global config - connector: true, icon: true, channel: true, color: false[8mha:////4LKl4D6exRuX3QjgTXc5OnNiugG5yeYmoEdiG1/CMWp6AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOICNBQoFa3lhheYxBgn1l2wHZyKF/E1/oBFJCq2WO1sM683LIOHmr3BTlNvKTQWBzeavDCx76+OE3Z8wYYpsNModZLc6tOMkqOGOUUJCwErTY3jYMlEWItOPVTlFJnqHH3+jgJK297hCYXI5qh8/MLkYXMb28D08/wVwDQMEcr9Ntfu8AGHKGa5vgAAAA==[0m[Pipeline] }
+[8mha:////4O075wSCrzeolX7gO6F+DCxNeRlR0S3tazqmZLprnjZKAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOKiUNAgqrRWGl5gYmOcWHfGdkgqXsTX+AMWkajYYrWzzbzesI4BThwM9poGS7Gz6N1o8sKJw3B1PGHPF+yYIjuNrZ5aVrpZsOWkYUlRwkrARlPnOFoyCbailw9ZOUmmOqeQv6OA0qo7PKEQ2ZxkSF+YA+xuo4pMP89fAczeJyj3da768AG0yz0FvgAAAA==[0m[Pipeline] // script
+[8mha:////4HMDMoKA+63nA3t2DHb+OeMon3HqN1lTZB5h/9Yy95loAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPMIRkagQVVorDS8w8WGcWHfGdkgqXsTX+AMWkajYYrWzzbzesI4BThyM6JEGS7GzwrvR5CUmDsPV8SR6voiOKbJD0eLUssZmwZYTwpKihJWEDVLnOFoyCbayVw9VOUWmOqeQv6OE0uo7PKGQ2ZxUSF+YA+xuo45MP89fAczeJyjrOtf+8AGg6KAavgAAAA==[0m[Pipeline] }
+[8mha:////4FfmdwasMGsYYB2i3eEu0PIHK4I88DKe2IBoRCuw9i8NAAAApR+LCAAAAAAAAP9tjTsOwjAQRDdBFLSUHGIjPh1KRWu54QQmMcaJtRtsB6fiRFyNO2ARiYopRvOmea83LIOHmr3BTlNvKTQWBzeavDCx76+OE3Z8wYYpsNModZLc6tOMkqOGOUUJCwErTY3jYMlEWItOPVTlFJnqHH3+jgJK297hCYXI5qh8/MLkYXMb28D08/wVwDQMEcrdPtf28AGTC/umvgAAAA==[0m[Pipeline] // node
+[8mha:////4FoC5vV2/wKVmvAAW5rpGF1s3Buxj/6Kg+1NfLeLoI1zAAAApR+LCAAAAAAAAP9tjTsOwjAQRDdBFLSUHGIjPh1KRWu54QQmMcaJtRtsB6fiRFyNO2ARiYopRvOmea83LIOHmr3BTlNvKTQWBzeavDCx76+OE3Z8wYYpsNModZLc6tOMkqOGOUUJCwErTY3jYMlEWItOPVTlFJnqHH3+jgJK297hCYXI5qh8/MLkYXMb28D08/wVwDQMEcrdIdd2/wGIrpolvgAAAA==[0m[Pipeline] }
+[8mha:////4I4s04o1ghDliCByHh7CDvfDzMJJ4djznRkfV1ODlZyjAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPMIRkagQVVorDS8w8WGcWHfGdkgqXsTX+AMWkajYYrWzzbzesI4BThyM6JEGS7GzwrvR5CUmDsPV8SR6voiOKbJD0eLUssZmwZYTwpKihJWEDVLnOFoyCbayVw9VOUWmOqeQv6OE0uo7PKGQ2ZxUSF+YA+xuo45MP89fAczeJyjrQ659/QG7TcGZvgAAAA==[0m[Pipeline] // stage
+[8mha:////4BCn89dpogMoszhArn3ghBpPi/ecAFTEL+vLBwFWgtttAAAAph+LCAAAAAAAAP9tjTEOwjAQBC9BKWgpeYQjpaBBVLSWG15gYmOcWHfBvpBUvIiv8QcMkajYamel1TxfUKUIB4pOdBZ7j6n1Ygijy01MFPtLoEl0dBYtYaJghbKTImOPCypiC0uKElYS1hbbQMmjY9jITt91HTS6+sQxb3sJpTc3eEAhs5l15C/MEbbX0STCn+evAOaBoWgYymb3OVZvddcuXsEAAAA=[0m[Pipeline] stage
+[8mha:////4Kyb785ZECT4Qn6F2tvSB+VwS+K+PLSZ1MrC5QWOVIqhAAAAqB+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUYoABMXWNsnCC0ISQNvq//KS0EyfiatyBlkpMeLBsS9Z7vaGIDCdiJxqLrcdYe9GF3k1JDMTtNdAgGrqImjBSsELZQZGx1VIVJQuLshxWEtYW60DRo0uwkY1+6DJodOU58bQdJeTe3OEJmZzISXP6lpFhe+tNJPxx/gJg7BLku/1sh/lZfAAyQCqkwgAAAA==[0m[Pipeline] { (BE build)
+[8mha:////4JfUGwnOtR1Lue2Dmu0O5VYIfrKJ72LfA/lP45jecG0dAAAAqB+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUYgEJMXWNsnCC0ISQNvq//KS0EyfiatyBlkpMeLBsS9Z7vaGIDCdiJxqLrcdYe9GF3k1JDMTtNdAgGrqImjBSsELZQZGx1VIVJQuLshxWEtYW60DRo0uwkY1+6DJodOU58bQdJeTe3OEJmZzISXP6lpFhe+tNJPxx/gJg7BLku/1sh/lZfAAnLfKUwgAAAA==[0m[Pipeline] node
+Running on [8mha:////4KV7QiRrGb7YeIl+n4+090vOh1nSfg4HqpHJaU+fO/i6AAAAoR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZR/eT83ILSktQifY2k0sycEt3MPE19AHHxbH3KAAAA[0mJenkins in /var/jenkins_home/workspace/S10P31B107
+[8mha:////4POFvXbsrDa2z8TVENOa8GERA5qZWYeg8Q7uWDSw/GPbAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUYgIhpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD0QKVszCAAAA[0m[Pipeline] {
+[8mha:////4LsUo5CC2tP/7raOqdti7IziSwlSTS6a8rbd+LS1yPO+AAAAqB+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUwYRQJ9aoCycITQhJo/9LkpJOnIircQcClZjwYNmWrPd8QRU8NOQ1swp7g6EzbHCjzokl8v3FUWKWzqwjDOQUa1VqSarjXFuKCmYVJSw4LBV2joJBHWHFrbiL2gnU9Sn6vB04lEbe4AEFz+QofPyWycP6OspA+OP8BcA0RCi3+2y7zedZvQH4j6CMwgAAAA==[0m[Pipeline] script
+[8mha:////4EYVvZtFvoQo8c+CVr3w/j9imPLe+P6hFwMWbo6khtJoAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUxIiYukZZOEFoQkgb/V9+UtqJE3E17kBLJSY8WLYl673eUESGE7ETjcXWY6y96ELvpiQG4vYaaBANXURNGClYoeygyNhqqYqShUVZDisJa4t1oOjRJdjIRj90GTS68px42o4Scm/u8IRMTuSkOX3LyLC99SYS/jh/ATB2CfLDbrb9/Cw+ty4Up8IAAAA=[0m[Pipeline] {
+[8mha:////4Mukes+DGVhpu2Y1p+qjT2jY3j4YHmxyKuioLgvhgrnrAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIioERUaS03vMDExjix7oztkFS8iK/xBwKRqNhitbPNPF+wTBGOHC22hjpHqXEYfG+nhQPH7uJ5wJbP2DAl9galGSRrU88oORuYU5SwELAy1HhOjmyGtWjVXVVeka1OOU7fQUDp9A0eUIjJnFXMXxgjbK69Tkw/z18BjCFDud9+ahfettHKdL4AAAA=[0m[Pipeline] sh
++ docker-compose build backend-compose
+#0 building with "default" instance using docker driver
+
+#1 [backend-compose internal] load build definition from Dockerfile
+#1 transferring dockerfile: 325B done
+#1 DONE 0.0s
+
+#2 [backend-compose internal] load metadata for docker.io/library/openjdk:17-jdk-slim
+#2 DONE 0.6s
+
+#3 [backend-compose internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [backend-compose runner 1/2] FROM docker.io/library/openjdk:17-jdk-slim@sha256:aaa3b3cb27e3e520b8f116863d0580c438ed55ecfa0bc126b41f68c3f62f9774
+#4 DONE 0.0s
+
+#5 [backend-compose internal] load build context
+#5 transferring context: 5.80kB done
+#5 DONE 0.0s
+
+#6 [backend-compose builder 4/5] RUN chmod +x ./gradlew
+#6 CACHED
+
+#7 [backend-compose builder 5/5] RUN ./gradlew clean build
+#7 CACHED
+
+#8 [backend-compose builder 2/5] WORKDIR /app
+#8 CACHED
+
+#9 [backend-compose builder 3/5] COPY . .
+#9 CACHED
+
+#10 [backend-compose runner 2/2] COPY --from=builder /app/build/libs/S-Tailor-1.0-SNAPSHOT.jar ./app.jar
+#10 CACHED
+
+#11 [backend-compose] exporting to image
+#11 exporting layers done
+#11 writing image sha256:6c5e8cc4289f51ba528c562d772ed17800dcffb8a7117cacf625c8ffb7280115 done
+#11 naming to docker.io/library/s10p31b107-backend-compose done
+#11 DONE 0.0s
+[8mha:////4OhE2ibVPptd+fDiubIniMBkBDTIJLc393Uo/ue+jM3rAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIilBJR0VppeIFJjLFj3Tm2g1PxIr7GHwhEomKL1c4283zBOgY4ctBoFfWGYmvQu1HPCzOH/uo4o+ULtkyRncJG5YY7dVqw4aRgSVHCSsBGUes4GtIJtsLKu6ycJF2dU5i/g4DSdAM8oBCzOcmQvjAF2N3GLjL9PH8FMHmfoKzrT+3fKpbQQr4AAAA=[0m[Pipeline] }
+[8mha:////4I9mt3tpdmuNFkkdscbIuIwIMcKYLpOUq6Pb63TFWi0LAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOKCBB2iSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwhQ7nbf2r7BgSW0ii+AAAA[0m[Pipeline] // script
+[8mha:////4K6EZFqKvWU8F+XeO+rXMog2l4RPXiNlygzD7gxoFcCUAAAAph+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIigSgQSkVrueEFJjHGiXUXbAen4kV8jT9gEYmKLVY728zrDcvgoWZvsNPUWwqNxcGNJi9M7Pur44QdX7BhCuw0Sp0kt/o0o+SoYU5RwkLASlPjOFgyEdaiUw9VOUWmOkefv6OA0rZ3eEIhsjkqH78wedjcxjYw/Tx/BTANQ4Ryt8+1PXwARMxJg74AAAA=[0m[Pipeline] }
+[8mha:////4DuU1ybnjvF1KN5VC0ugVKaxYoqRT/wow+jcTNS4ls+7AAAAph+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIigYSQUCpayw0vMIkxTqy7YDs4FS/ia/wBi0hUbLHa2WZeb1gGDzV7g52m3lJoLA5uNHlhYt9fHSfs+IINU2CnUeokudWnGSVHDXOKEhYCVpoax8GSibAWnXqoyiky1Tn6/B0FlLa9wxMKkc1R+fiFycPmNraB6ef5K4BpGCKUu32u7eEDfI7acr4AAAA=[0m[Pipeline] // node
+[8mha:////4Frwh319AFmHucW1z+BM84fI/wJD0AeTbx2x01uJWE3ZAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiQZECUaW10vACExvjxLoztkNS8SK+xh+wiETFFqudbeb1hnUMcOJgsNc0WIqdRe9GkxdOHIar4wl7vmDHFNlpbPXUstLNgi0nDUuKElYCNpo6x9GSSbAVvXzIykky1TmF/B0FlFbd4QmFyOYkQ/rCHGB3G1Vk+nn+CmD2PkF5qHPt6w9IQDkpvgAAAA==[0m[Pipeline] }
+[8mha:////4Feci0rw/+2xHxBF88UslbOwJT5fBKJrMOau7N/bz8IoAAAAph+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIigYSQUCpayw0vMIkxTqy7YDs4FS/ia/wBi0hUbLHa2WZeb1gGDzV7g52m3lJoLA5uNHlhYt9fHSfs+IINU2CnUeokudWnGSVHDXOKEhYCVpoax8GSibAWnXqoyiky1Tn6/B0FlLa9wxMKkc1R+fiFycPmNraB6ef5K4BpGCKUu0Ou7f4DC8Jor74AAAA=[0m[Pipeline] // stage
+[8mha:////4M4NNDKyxHmxBKGqfPZXK1FC5BBpr2et9ypzTWas1XtmAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYQjQYUQFa3lhheY2Bgn1l2wLyQVL+Jr/IFAJCq22llpNc8XlDnBgZKXjcM2YK6D7GLvpyYHSu0l0iAbOsuaMFN0UrtBk3XHGTWxgzmigIWCpcM6Ug7oGVaqMXdTRYO+OnGatr2CItgbPECoycwm8RfGBOtrbzPhz/NXAGPHIDYMxXb3OZZvFG4PCcEAAAA=[0m[Pipeline] stage
+[8mha:////4OFlF1n7lfC8txH+urdGaSW2a9p4b3n0KOSs0iTn3327AAAAqB+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUCRaEOrFGXThBaEJIGv1fkpR04kRcjTsQqMSEB8u2ZL3nC6rgoSGvmVXYGwydYYMbdU4ske8vjhKzdGYdYSCnWKtSS1Id59pSVDCrKGHBYamwcxQM6ggrbsVd1E6grk/R5+3AoTTyBg8oeCZH4eO3TB7W11EGwh/nLwCmIUK53WfbbT7P6g0Z/aLSwgAAAA==[0m[Pipeline] { (Docker run)
+[8mha:////4ARm8glah4ci/MDOYrnTx4lNYQwxNH3IUarPJmArbTnxAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUJDbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5AfdrPt52fxAbb5KxbCAAAA[0m[Pipeline] node
+Running on [8mha:////4KV7QiRrGb7YeIl+n4+090vOh1nSfg4HqpHJaU+fO/i6AAAAoR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZR/eT83ILSktQifY2k0sycEt3MPE19AHHxbH3KAAAA[0mJenkins in /var/jenkins_home/workspace/S10P31B107
+[8mha:////4M5GisD9zOnk+d2U7HngzUelTDNlH7En0TPeRa+CRiEHAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUIDbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5AfdrPt52fxAdhUMVHCAAAA[0m[Pipeline] {
+[8mha:////4DDy3gnhMJeLr3Jz2/ZmVyz7IEj9CFoS7vRElb9lt9vYAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUAjbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5AfdrPt52fxAXzhjwPCAAAA[0m[Pipeline] script
+[8mha:////4HmUzGdkhOi73qIltmavNPv1KSFkL0YqA34xinLDwnaWAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+DOrAycoh0oBtiYo26cILQhJA0+r9NUtKJE3E17kBLJSY8WLYl673eUMYAJwqGO42dxdha3vvRzIlnCt3NU+aOrrwljOQ1b3RuSOnzWhtKGlYVDDYCthpbT9GiSbATTj5k5SWa6pLCvB0FMKsGeEIhZnKSIX3LFGB/H1Uk/HH+AmDqE7D6sFi9PMsPBA4E38IAAAA=[0m[Pipeline] {
+[8mha:////4OVouZo80WTPwq3c7raOJWz9X6fKInE7L3mEFNpz97FrAAAAox+LCAAAAAAAAP9tjTESwiAURH/iWNhaegjSxMqxsmVoPAEmiBDmfwJEUnkir+YdRDNj5RY7+7Z5zxesY4AjBc2swsFg7AzzbtJlsUxhuDrKzNKFdYSRnGJCZUG9Oi0oKClYUtWw4rBR2DmKBnWCLbfyLhsnUTfnFMp34FCbfoQHVLyYkwzpC3OA3W3qI+HP81cAs09Qt+2n9v4NSnc5Zr4AAAA=[0m[Pipeline] sh
++ docker-compose down frontend-compose
+ Container s10p31b107-frontend-compose-1  Stopping
+ Container s10p31b107-frontend-compose-1  Stopped
+ Container s10p31b107-frontend-compose-1  Removing
+ Container s10p31b107-frontend-compose-1  Removed
+ Network s10p31b107_service-connection  Removing
+ Network s10p31b107_service-connection  Resource is still in use
+ Network s10p31b107_default  Removing
+ Network s10p31b107_default  Resource is still in use
+[8mha:////4B0CouNXQxjHigGEIX+nI3wUFjEM4Z1PSNZiGsEdjg+oAAAAox+LCAAAAAAAAP9tjTESwiAURH/iWNhaegjSZGwcK1uGxhNggghh/idAJJUn8mreQTQzVm6xs2+b93zBOgY4UtDMKhwMxs4w7yZdFssUhqujzCxdWEcYySkmVBbUq9OCgpKCJVUNKw4bhZ2jaFAn2HIr77JxEnVzTqF8Bw616Ud4QMWLOcmQvjAH2N2mPhL+PH8FMPsEddt+au/fiSQUTb4AAAA=[0m[Pipeline] sh
++ docker-compose down backend-compose
+ Container s10p31b107-backend-compose-1  Stopping
+ Container s10p31b107-backend-compose-1  Stopped
+ Container s10p31b107-backend-compose-1  Removing
+ Container s10p31b107-backend-compose-1  Removed
+ Network s10p31b107_service-connection  Removing
+ Network s10p31b107_default  Removing
+ Network s10p31b107_default  Resource is still in use
+ Network s10p31b107_service-connection  Resource is still in use
+[8mha:////4NQz/cpIDENuTf8QIZDVRJlpUdDBXSaI1TOQFWZhEbd1AAAApB+LCAAAAAAAAP9tjTESwiAURH/iWNhaegjSZMbCsbJlaDwBJogQ5n8CRFJ5Iq/mHUQzY+UWO/u2ec8XrGOAIwXNrMLBYOwM827SZbFMYbg6yszShXWEkZxiQmVBvTotKCgpWFLVsOKwUdg5igZ1gi238i4bJ1E35xTKd+BQm36EB1S8mJMM6QtzgN1t6iPhz/NXALNPULftp/b+DcgVD1S+AAAA[0m[Pipeline] sh
++ docker-compose up -d frontend-compose
+time="2024-04-28T15:46:40+09:00" level=warning msg="Found orphan containers ([s10p31b107-ai-compose-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container s10p31b107-frontend-compose-1  Creating
+ Container s10p31b107-frontend-compose-1  Created
+ Container s10p31b107-frontend-compose-1  Starting
+ Container s10p31b107-frontend-compose-1  Started
+[8mha:////4LUWsBtDdoWLcGURID2d1rE5SCctwDo4wIA9AK2sD9QmAAAApB+LCAAAAAAAAP9tjTESwiAURH/iWNhaegjSpHDGsbJlaDwBJogQ5n8CRFJ5Iq/mHUQzY+UWO/u2ec8XrGOAIwXNrMLBYOwM827SZbFMYbg6yszShXWEkZxiQmVBvTotKCgpWFLVsOKwUdg5igZ1gi238i4bJ1E35xTKd+BQm36EB1S8mJMM6QtzgN1t6iPhz/NXALNPULftp/b+DQcJl9O+AAAA[0m[Pipeline] sh
++ docker-compose up -d backend-compose
+time="2024-04-28T15:46:40+09:00" level=warning msg="Found orphan containers ([s10p31b107-ai-compose-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container s10p31b107-backend-compose-1  Creating
+ Container s10p31b107-backend-compose-1  Created
+ Container s10p31b107-backend-compose-1  Starting
+ Container s10p31b107-backend-compose-1  Started
+[8mha:////4H1Vu19rFzysAjGEbWQXT3n6bQMQhUdvN5io2l1naeo1AAAAox+LCAAAAAAAAP9tjTESwiAURH/iWNhaegjSpHEcK1uGxhNggghh/idAJJUn8mreQTQzVm6xs2+b93zBOgY4UtDMKhwMxs4w7yZdFssUhqujzCxdWEcYySkmVBbUq9OCgpKCJVUNKw4bhZ2jaFAn2HIr77JxEnVzTqF8Bw616Ud4QMWLOcmQvjAH2N2mPhL+PH8FMPsEddt+au/fRjiMyr4AAAA=[0m[Pipeline] mattermostSend
+Mattermost Send Pipeline step configured values from global config - connector: true, icon: true, channel: true, color: false[8mha:////4EBwJl5zSXrJaPLwGL52qpTCTP/Z9HNzvxASOTz/0TFHAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPMKhCBWiSmul4QUmPowT687YDknFi/gaf8AiEhVbrHa2mdcb1jHAiYMRPdJgKXZWeDeavMTEYbg6nkTPF9ExRXYoWpxa1tgs2HJCWFKUsJKwQeocR0smwVb26qEqp8hU5xTyd5RQWn2HJxQym5MK6QtzgN1t1JHp5/krgNn7BOVhn6uuP/azv5i+AAAA[0m[Pipeline] }
+[8mha:////4IQ0yVnRfZFMaTmWOCVPiQIGPuZRK4csmD80WfdWYrHJAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiBFQoFa3lhheYxBgn1l2wHZyKF/E1/oBFJCq2WO1sM683LIOHmr3BTlNvKTQWBzeavDCx76+OE3Z8wYYpsNModZLc6tOMkqOGOUUJCwErTY3jYMlEWItOPVTlFJnqHH3+jgJK297hCYXI5qh8/MLkYXMb28D08/wVwDQMEcrDNtd+9wHw9YfNvgAAAA==[0m[Pipeline] // script
+[8mha:////4GpwHHfQrsK+p6z7GAAXevEB9rrxn6xpOZHALGJ+kqB4AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiRVAhqrRWGl5gYmOcWHfGdkgqXsTX+AMWkajYYrWzzbzesI4BThwM9poGS7Gz6N1o8sKJw3B1PGHPF+yYIjuNrZ5aVrpZsOWkYUlRwkrARlPnOFoyCbailw9ZOUmmOqeQv6OA0qo7PKEQ2ZxkSF+YA+xuo4pMP89fAczeJygPda59/QHItxQ8vgAAAA==[0m[Pipeline] }
+[8mha:////4OSmJTe6LCjyQPDPp8UN0sMzkbkAjX1QmAHUqclMyAA3AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiBFQoFa3lhheYxBgn1l2wHZyKF/E1/oBFJCq2WO1sM683LIOHmr3BTlNvKTQWBzeavDCx76+OE3Z8wYYpsNModZLc6tOMkqOGOUUJCwErTY3jYMlEWItOPVTlFJnqHH3+jgJK297hCYXI5qh8/MLkYXMb28D08/wVwDQMEcrDLtd++wHXNUFuvgAAAA==[0m[Pipeline] // node
+[8mha:////4HXSnqqIxDzQQMSAqP8cuO15Wo0F+BXCfykfRe61jy/TAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPMKhCBWiSmul4QUmPowT687YDknFi/gaf8AiEhVbrHa2mdcb1jHAiYMRPdJgKXZWeDeavMTEYbg6nkTPF9ExRXYoWpxa1tgs2HJCWFKUsJKwQeocR0smwVb26qEqp8hU5xTyd5RQWn2HJxQym5MK6QtzgN1t1JHp5/krgNn7BOWhzlXvP/k1QwS+AAAA[0m[Pipeline] }
+[8mha:////4FJH4IHUsTFazlqp6tsk5ZeRZxz/ru2dcgjJoOfpQXYsAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPMIpUAqEqNJaaXiBiQ/jxLoztkNS8SK+xh+wiETFFqudbeb1hnUMcOJgRI80WIqdFd6NJi8xcRiujifR80V0TJEdihanljU2C7acEJYUJawkbJA6x9GSSbCVvXqoyiky1TmF/B0llFbf4QmFzOakQvrCHGB3G3Vk+nn+CmD2PkFZ17n2hw8/yIL5vgAAAA==[0m[Pipeline] // stage
+[8mha:////4ItYXFuyjlDsfjucpYJQQ6ZH3+9gMMLF0/Vkg0I8R4UTAAAApB+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKRkKBBVLRWGl5gEmOcWHfBvpBUvIiv8QciIlGx1c4083pjmSKOHJ1qLLWeUuVVF3o3PTVwbK+BB9XwRVVMiYNVpR1Kru1pxpLFYl6WY6GxslQFTp6cYK0b8zBFMOSKs8TJHTRyX9/xRKanspgoXxgjNre+Tky/zt8Axq4T5Lu9INt+AAY59y+9AAAA[0m[Pipeline] End of Pipeline
+Finished: SUCCESS

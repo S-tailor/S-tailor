@@ -1,0 +1,10 @@
+commit 7a22e77db60e0f434c69382edef38c7431352815
+tree 8161a0f2ca6b1c4d126c397cf5b2f5db90ec88a6
+parent a22608d0312f430ad78a9d42fcd00b9c2fcbf494
+author 이수형 <sky500ro@gmail.com> 2024-05-01 15:45:54 +0900
+committer 이수형 <sky500ro@gmail.com> 2024-05-01 15:45:54 +0900
+
+    S10P31B107-fix-ClosetSearch-API-Change get to post
+
+
+:100644 100644 dab04de00bb1d59ed5cd7abc5059904b11768cb7 d6519aa4a752a65cbc17981f222128cffc33d3ac M	backend/src/main/java/com/ssafy/api/controller/ClosetController.java

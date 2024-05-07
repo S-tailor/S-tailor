@@ -1,0 +1,25 @@
+commit b59f6803648cbed381d370e5d7491ac30cf2c91f
+tree e334bc6facf861c0faea6b42ee25b4d5ae6aa636
+parent 79055d9bfffcb5367146a0b9cef8af47e03b7688
+author JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-05-03 16:52:18 +0900
+committer JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-05-03 16:52:18 +0900
+
+    'fix:bug'
+
+
+:100644 100644 2a009cef540bb951ae86b6952d95ca96780d89b6 04cb16b66f6a14200a966e7954669bb7f1261261 M	frontend/package.json
+:100644 100644 e4f4de1d591f0f17bb6eb0cb7d3c31c441d91a9c 16d774ccde8fec464f18118ec3fb26a4f5f1e03c M	frontend/src/api/apiAsk.tsx
+:100644 100644 a95370224699a1d5639eda63cb482fd1bc4c7012 bccfe5e6e26b279737816fe3b5a6844f90b52345 M	frontend/src/components/flip/tryon/TryOnCodeTest.tsx
+:100644 100644 e51e9586e69027b6dc229c66d7a852d409ad5187 ba22c4c43a3b3d72412d53f94bc438e2f13163f7 M	frontend/src/components/mobile/closet/Closet.tsx
+:100644 100644 eed2d2d10b5bfea8daf1a084f8aeba411ccf556e 252348b5d3be058e08669fbf85d9ba6e85552e57 M	frontend/src/components/mobile/closet/ClosetCodeInputTest.tsx
+commit 80e81c25f759f04ac0c8ed18baa74da571321382
+tree 20a59d70cd5f7ebebb9b8ddde36594f0fd335d65
+parent 6824f50b50be08b583382625c6e6be12ffa5646a
+author JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-05-02 17:21:09 +0900
+committer JoSangmin <139518200+JOSANGMIN777@users.noreply.github.com> 2024-05-02 17:21:09 +0900
+
+    'merge'
+
+
+:100644 100644 3ce28107af69165ccfb6639f6deb8ffd5b745352 292993abed57af7017a76fe9f361c8649880b566 M	frontend/src/api/apiAsk.tsx
+:100644 100644 f8a3314eae6e32125e2e394bc704dae37f31a28f e3bb44b09069bac108773daeef01fd0848f3a294 M	frontend/src/components/mobile/ask/Ask.tsx

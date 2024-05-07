@@ -1,0 +1,136 @@
+commit 868a710f3092ff11f8b3e04ad4f46b188140399f
+tree 8abd18b56ecb1eb282236704c2e9fd52c6863fee
+parent 8cbe1378f41566b02e754b5bf83bd80bf223264a
+author 이수형 <sky500ro@gmail.com> 2024-05-02 14:37:09 +0900
+committer 이수형 <sky500ro@gmail.com> 2024-05-02 14:37:09 +0900
+
+    S10P31B107-215-feat-userinfo-to-JSON
+
+
+:100644 100644 c39afbe46ac55024e60a4b9cb60a39da33ed2802 466c4ac5a023c28175b1caefeec80e239d6ab5d5 M	backend/src/main/java/com/ssafy/api/controller/TryOnController.java
+:000000 100644 0000000000000000000000000000000000000000 2fb449e4d71fdf57a0f1268af19c6a2aaf0351ac A	backend/src/main/java/com/ssafy/api/request/TryOnVerifyReq.java
+:100644 100644 514eeb34a3642c5b30de31a4c571d1d356c6abd7 6d9eac2d421b2ee08d4ef4d2519461eb7b6bdcee M	backend/src/main/java/com/ssafy/api/service/TryOnService.java
+:100644 100644 e044c00a60c920dd60251465e1a3c5bfaab4cfa7 aa9b025667d6431045380edabeeb098b23fed63d M	backend/src/main/java/com/ssafy/api/service/TryOnServiceImpl.java
+:100644 100644 7c312fcbeea663573e0bf155406421228db134ea 715b940cfeaade375e3073e3e33f54c03195f6b2 M	frontend/src/components/flip/tryon/TryOnCodeTest.tsx
+:100644 100644 ef85db09bbbf02b751b9dcd1010dc744b190825c 76aa3c33059ec261ae64ce5e8439b6f65150b2f4 M	frontend/src/components/mobile/closet/ClosetCodeInputTest.tsx
+commit fce0a49dffde9f8769b55f25ef41d3c671692e4a
+tree bdf4d1bc37bdb14e8cf880112817f47c57aeb58a
+parent 8cbe1378f41566b02e754b5bf83bd80bf223264a
+author JaeMin_Kim <jamsince1994@naver.com> 2024-05-02 14:17:22 +0900
+committer JaeMin_Kim <jamsince1994@naver.com> 2024-05-02 14:17:22 +0900
+
+    S10P31B107-215-be-fix-typo
+
+
+:100644 100644 c39afbe46ac55024e60a4b9cb60a39da33ed2802 97e2f7dc8874db76164641faa4298b16ac7729b8 M	backend/src/main/java/com/ssafy/api/controller/TryOnController.java
+:100644 100644 514eeb34a3642c5b30de31a4c571d1d356c6abd7 9e1168085c94ff42583aa72cd22fe349febc4474 M	backend/src/main/java/com/ssafy/api/service/TryOnService.java
+:100644 100644 e044c00a60c920dd60251465e1a3c5bfaab4cfa7 ad986bfe6a202430431729555b97e615ea6fc7c3 M	backend/src/main/java/com/ssafy/api/service/TryOnServiceImpl.java
+commit 8cbe1378f41566b02e754b5bf83bd80bf223264a
+tree 1c611eb80228f59258d61781fa38ca13bc46429f
+parent 9047bb44820e80a2e800a48df9d6268255bef127
+author JaeMin_Kim <jamsince1994@naver.com> 2024-05-02 13:55:52 +0900
+committer JaeMin_Kim <jamsince1994@naver.com> 2024-05-02 13:55:52 +0900
+
+    S10P31B107-215-be-refactor-separate-controller-and-service
+
+
+:100644 100644 733a9f8dcaff855f7fea98105499497248738047 c39afbe46ac55024e60a4b9cb60a39da33ed2802 M	backend/src/main/java/com/ssafy/api/controller/TryOnController.java
+:000000 100644 0000000000000000000000000000000000000000 514eeb34a3642c5b30de31a4c571d1d356c6abd7 A	backend/src/main/java/com/ssafy/api/service/TryOnService.java
+:000000 100644 0000000000000000000000000000000000000000 e044c00a60c920dd60251465e1a3c5bfaab4cfa7 A	backend/src/main/java/com/ssafy/api/service/TryOnServiceImpl.java
+commit 9047bb44820e80a2e800a48df9d6268255bef127
+tree 4ac5217c0c421b8fb2fbc2576e33b8a75f766600
+parent 4105915805b3266aed4c95d3849370ccde9a2f49
+author 이수형 <sky500ro@gmail.com> 2024-05-02 10:57:55 +0900
+committer 이수형 <sky500ro@gmail.com> 2024-05-02 10:57:55 +0900
+
+    S10P31B107-215-feat-sse-complete
+
+
+:100644 100644 63ddb584fe82451983ba8d5b931abd43ab8f1194 733a9f8dcaff855f7fea98105499497248738047 M	backend/src/main/java/com/ssafy/api/controller/TryOnController.java
+:100644 100644 7f49a5d7bd0e1397871e2c6c1e004400ee363755 7c312fcbeea663573e0bf155406421228db134ea M	frontend/src/components/flip/tryon/TryOnCodeTest.tsx
+:100644 100644 f923bc222eff54713cfde69f16cc9e8fb2d8d385 ef85db09bbbf02b751b9dcd1010dc744b190825c M	frontend/src/components/mobile/closet/ClosetCodeInputTest.tsx
+:100644 100644 9499662d28fdb020bee09c95f47713833fec88b9 aa3cda8cc48c648a08fd7bab5ef7339ed1ce56ee M	frontend/vite.config.ts
+commit 4105915805b3266aed4c95d3849370ccde9a2f49
+tree 764a5ad67844d25d3e377b51c3e772d8021f61f8
+parent 8b92260a70c30b5e11e46a8ec0514d688f3611f3
+author cyberjam <jamsince1994@naver.com> 2024-05-02 06:20:08 +0900
+committer cyberjam <jamsince1994@naver.com> 2024-05-02 06:20:08 +0900
+
+    S10P31B107-215-fe-fix-timer
+
+
+:100644 100644 56758baaa8cdbfee6c143550abe40f8007105196 7f49a5d7bd0e1397871e2c6c1e004400ee363755 M	frontend/src/components/flip/tryon/TryOnCodeTest.tsx
+commit 8b92260a70c30b5e11e46a8ec0514d688f3611f3
+tree 879c90e4ee34bb485a80e05c91116c4e746f2a0e
+parent 880bef356417a8edd06b5ac6227ce0855feb3f9d
+author cyberjam <jamsince1994@naver.com> 2024-05-02 05:37:49 +0900
+committer cyberjam <jamsince1994@naver.com> 2024-05-02 05:37:49 +0900
+
+    S10P31B107-215-fe-feat-redirect-after-verify
+
+
+:100644 100644 e31bcbdf1e4e7c90a4588aceaa742f1b02f9da02 56758baaa8cdbfee6c143550abe40f8007105196 M	frontend/src/components/flip/tryon/TryOnCodeTest.tsx
+commit 880bef356417a8edd06b5ac6227ce0855feb3f9d
+tree a6772b3c7d2cc1057635ef80bfba80179ba6b4b2
+parent 2746784c51f78b7e3d852781d75e1e7c7a2e7eb9
+author cyberjam <jamsince1994@naver.com> 2024-05-02 05:21:33 +0900
+committer cyberjam <jamsince1994@naver.com> 2024-05-02 05:21:33 +0900
+
+    S10P31B107-215-fe-sse-verify-front-test-pages
+
+
+:100644 100644 60244a9fc9e61d5a347c16bd1c4d3565638026e7 e31bcbdf1e4e7c90a4588aceaa742f1b02f9da02 M	frontend/src/components/flip/tryon/TryOnCodeTest.tsx
+:000000 100644 0000000000000000000000000000000000000000 f923bc222eff54713cfde69f16cc9e8fb2d8d385 A	frontend/src/components/mobile/closet/ClosetCodeInputTest.tsx
+:100644 100644 bf4ab2ce027109e444265039a0fdc544531dff2e 6132c46d8a3ad0dd67f96375f75c8e57d7fc68b7 M	frontend/src/routes.tsx
+commit 2746784c51f78b7e3d852781d75e1e7c7a2e7eb9
+tree 0c273be406f4c7e748f8dabe031987c831688bab
+parent 93a03bea86f452fdafa93ce2d79bcfadcffd863c
+author cyberjam <jamsince1994@naver.com> 2024-05-02 05:17:54 +0900
+committer cyberjam <jamsince1994@naver.com> 2024-05-02 05:20:20 +0900
+
+    S10P31B107-215-be-feat-transfer-token-by-sse
+
+
+:100644 100644 884546094c33bb91ea116717da462afd495223e1 63ddb584fe82451983ba8d5b931abd43ab8f1194 M	backend/src/main/java/com/ssafy/api/controller/TryOnController.java
+commit 93a03bea86f452fdafa93ce2d79bcfadcffd863c
+tree b9f0b15539bc1a2c7017969baf38b0fee550e56a
+parent c1a7dea70e2543f3f2b8b9dbcca0cd1e928dfd7b
+author cyberjam <jamsince1994@naver.com> 2024-05-02 03:25:01 +0900
+committer cyberjam <jamsince1994@naver.com> 2024-05-02 03:25:01 +0900
+
+    S10P31B107-215-be-refactor-edit-controller-name
+
+
+:100644 100644 ef7a5404dab1302dcfd439733f98d31f4b261af1 884546094c33bb91ea116717da462afd495223e1 R094	backend/src/main/java/com/ssafy/api/controller/SseController.java	backend/src/main/java/com/ssafy/api/controller/TryOnController.java
+commit c1a7dea70e2543f3f2b8b9dbcca0cd1e928dfd7b
+tree ca21f1001a1e4d0526ccd2a6e57c9b3cadb23bf7
+parent 095ba3dedf5b4bc638892ff972bc08c118e0b109
+author cyberjam <jamsince1994@naver.com> 2024-05-02 03:24:15 +0900
+committer cyberjam <jamsince1994@naver.com> 2024-05-02 03:24:15 +0900
+
+    S10P31B107-215-be-sse-connet-front-test-page
+
+
+:000000 100644 0000000000000000000000000000000000000000 60244a9fc9e61d5a347c16bd1c4d3565638026e7 A	frontend/src/components/flip/tryon/TryOnCodeTest.tsx
+:100644 100644 0adc7ab6ca23b2263be0cf5d25fdf13d5db19400 bf4ab2ce027109e444265039a0fdc544531dff2e M	frontend/src/routes.tsx
+commit 095ba3dedf5b4bc638892ff972bc08c118e0b109
+tree 8d702a4f103908eed84a253a2399e8257807751e
+parent 3a0352b47231ad9778baa419d049f2d79bf6b5f4
+author cyberjam <jamsince1994@naver.com> 2024-05-02 02:24:45 +0900
+committer cyberjam <jamsince1994@naver.com> 2024-05-02 02:24:45 +0900
+
+    S10P31B107-215-be-chore-add-gitignore-filesystem-logs-for-macOS
+
+
+:100644 100644 4dd7b7061e78258aaa2fbba668c734db3d3dfac5 93c26330fba467d38115e26fdb546cd1b531409b M	backend/.gitignore
+commit 3a0352b47231ad9778baa419d049f2d79bf6b5f4
+tree bc694087462209baa09e70278b5912a7a40ab357
+parent bb03a862817926d9b07cd02c5c40e45e670d093f
+author cyberjam <jamsince1994@naver.com> 2024-05-02 02:22:12 +0900
+committer cyberjam <jamsince1994@naver.com> 2024-05-02 02:22:12 +0900
+
+    S10P31B107-215-be-feat-init-sse-connection-and-generate-sessionId
+
+
+:000000 100644 0000000000000000000000000000000000000000 1f35c07304d94a49b371d23dcaac4134eeb1cdd5 A	backend/.DS_Store
+:000000 100644 0000000000000000000000000000000000000000 ef7a5404dab1302dcfd439733f98d31f4b261af1 A	backend/src/main/java/com/ssafy/api/controller/SseController.java
