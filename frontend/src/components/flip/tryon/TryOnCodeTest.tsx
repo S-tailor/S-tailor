@@ -5,7 +5,7 @@ import QRCode from 'qrcode.react'
 const BASE_URL = 'https://ourtrip.store'
 const TIME = {
   ONE_SECOND: 1000,
-  ONE_MINUTE: 60
+  ONE_MINUTE: 60  
 }
 
 const TryOn: React.FC = () => {

@@ -49,7 +49,7 @@ const ClosetCodeInput: React.FC = () => {
           startTransition(() => {
             navigate('/mobile/closet')
           })
-        }
+        } 
       />
       <header>
         <h3>옷 입어보기</h3>

@@ -1,4 +1,4 @@
-import React, { startTransition, useState } from 'react'
+import React, { startTransition, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { profileCreate } from '@/api/apiProfile'
 import userStore from '@/store/store'
@@ -27,61 +27,59 @@ const ProfileAdd: React.FC = () => {
   const navigate = useNavigate()
 
   // 입력단계바꾸기
-  const toGender = () => {
+  const toGender = useCallback(() => {
     if (name.trim() !== '') {
       setmessage('')
       setPage1(false)
       setPage2(true)
+      formData.append('name', name)
+      if (file) {
+        formData.append('image', file)
+      }
     } else {
       setmessage('입력을 완료해주세요')
     }
-  }
+  },[name])
 
-  const toHeight = () => {
+  const toHeight = useCallback(() => {
     if (gender !== '') {
       setmessage('')
       setPage2(false)
       setPage3(true)
+      formData.append('gender', gender)
+      
     } else {
       setmessage('입력을 완료해주세요')
     }
-  }
+  },[gender])
 
-  const toWeight = () => {
+  const toWeight = useCallback(() => {
     if (height !== '') {
       setmessage('')
       setPage3(false)
       setPage4(true)
+      formData.append('height', height)
     } else {
       setmessage('입력을 완료해주세요')
     }
-  }
+  },[height])
 
-  const complete = async () => {
-    console.log('생성중')
+  // 최종제출
+  const complete = useCallback(async () => {
     setIsSubmitting(true)
     const userPk = String(localStorage.getItem('userPk'))
     if (weight !== '') {
-      formData.append('name', name)
-      formData.append('height', height)
       formData.append('weight', weight)
-      formData.append('gender', gender)
-      if (file) {
-        formData.append('image', file)
-      } else {
-        console.error('No file to append')
-      }
       formData.append('userPk', userPk)
       setmessage('')
-
+    }
       const response = await profileCreate(formData)
 
-      if (response.status == 200) {
-        const userName = formData.get('name')
+      if (response.status == 200) { 
         const profilePk = Number(userPk);
-        if (typeof userName === 'string' && !isNaN(profilePk)) {
+        if (typeof name === 'string' && profilePk) {
           const userProfileData: userProfile = {
-            profileName: userName,
+            profileName: name,
             profilePk: profilePk,
             image: fileUrl
           };
@@ -91,12 +89,12 @@ const ProfileAdd: React.FC = () => {
             navigate('/mobile/closet')
           })
         }
-      }
+      
     } else {
       setIsSubmitting(false)
       setmessage('입력을 완료해주세요')
     }
-  }
+  },[formData])
 
   // 뒤로가기
   const goSelect = () => {
@@ -120,7 +118,9 @@ const ProfileAdd: React.FC = () => {
     setPage3(true)
   }
 
-  const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+  // 데이터 입력
+  const changePic = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0]
     if (selectedFile) {
       const fileUrl = URL.createObjectURL(selectedFile)
@@ -129,18 +129,18 @@ const ProfileAdd: React.FC = () => {
     } else {
       console.error('No file selected')
     }
-  }
+  },[file])
 
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value)
-  }
+  },[name])
 
-  const handleGenderChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleGenderChange = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const selectedGender = e.currentTarget.innerText
     startTransition(() => {
       setGender(selectedGender)
     })
-  }
+  },[gender])
 
   const handleGenderBlur: React.FocusEventHandler<HTMLButtonElement> = (e) => {
     if (!e.relatedTarget) {
@@ -148,7 +148,7 @@ const ProfileAdd: React.FC = () => {
     }
   }
 
-  const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleHeightChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const inputHeight = e.target.value
     const numericHeight = parseInt(inputHeight, 10)
     if (!isNaN(numericHeight)) {
@@ -156,9 +156,9 @@ const ProfileAdd: React.FC = () => {
     } else {
       setHeight('')
     }
-  }
+  },[height])
 
-  const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleWeightChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const inputWeight = e.target.value
     const numericWeight = parseInt(inputWeight, 10)
     if (!isNaN(numericWeight)) {
@@ -166,7 +166,9 @@ const ProfileAdd: React.FC = () => {
     } else {
       setWeight('')
     }
-  }
+  },[weight])
+
+
 
   return (
     <>
