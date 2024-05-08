@@ -1,4 +1,4 @@
-import React, { startTransition, useMemo, useState, useRef } from 'react'
+import React, { startTransition, useMemo, useState, useRef, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { chatbot, reset } from '@/api/apiAsk'
 import userStore from '@/store/store'
@@ -15,7 +15,12 @@ const Ask: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const formData = new FormData()
   const { cartCount } = userStore()
+  // const {user} = userStore()
   const [isLoading, setIsLoading] = useState(false)
+
+  const inputRef = useRef<HTMLInputElement>(null)
+  const buttonRef = useRef<HTMLImageElement>(null)
+
   const { user } = userStore() as {
     user: { profilePk: number; image?: string; profileName: string }[]
   }
@@ -81,11 +86,25 @@ const Ask: React.FC = () => {
     setIsFocused(true)
   }
 
-  const handleBlur = (e: any) => {
-    if (e.relatedTarget && e.relatedTarget.className !== styles.textField) {
+  // const handleBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
+  //   console.log(e.type)
+  //   if (e.type == 'blur' && !buttonRef.current) {
+  //     setIsFocused(false)
+  //   }
+  // }
+
+  const handleClickOutside = (event: TouchEvent | any) => {
+    if (event.target.tagName !== 'IMG' && event.target.tagName !== 'input') {
       setIsFocused(false)
     }
   }
+
+  useEffect(() => {
+    document.addEventListener('touchstart', handleClickOutside)
+    return () => {
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
+  }, [inputRef, buttonRef])
 
   /////////// 하단 내비게이션 바 선택 시 아이콘(컬러) 변경 //////////////
   const getIconSrc = (iconName: string) => {
@@ -201,6 +220,7 @@ const Ask: React.FC = () => {
             onClick={() => {
               fileInputRef.current?.click()
             }}
+            ref={buttonRef}
           />
           <input
             id="profileImg"
@@ -218,6 +238,7 @@ const Ask: React.FC = () => {
               setFileUrl('')
               setFile(null)
             }}
+            ref={buttonRef}
           />
           <input
             className={styles.textField}
@@ -225,13 +246,15 @@ const Ask: React.FC = () => {
             onChange={saveText}
             value={text}
             onFocus={handleFocus}
-            onBlur={handleBlur}
+            // onBlur={handleBlur}
+            ref={inputRef}
           />
           <img
             className={styles.sendImg}
             src="/assets/send.svg"
             alt="삼각형의 전송버튼"
             onClick={sendInfo}
+            ref={buttonRef}
           />
         </div>
       </section>
