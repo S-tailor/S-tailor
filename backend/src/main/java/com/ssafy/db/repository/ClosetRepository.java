@@ -24,7 +24,13 @@ public interface ClosetRepository extends JpaRepository<Closet, Long> {
             " isdelete = false", nativeQuery = true)
     List<Closet> closetSearch(String content, int profilePk);
 
+
     List<Closet> findAllByProfilePkAndSourceContainingOrNameContaining(int profilePk, String source, String name);
 
     List<Closet> findAllByProfilePkAndCategoryAndIsDelete(int profilePk, String category, boolean b);
+    @Query(value = "select * from closet " +
+            "where profilePk = :profilePk and " +
+            "category NOT IN ('Outerwear', 'Top', 'Pants', 'Shorts', 'Skirt', 'Miniskirt', 'Dress') and " +
+            " isdelete = false", nativeQuery = true)
+    List<Closet>findRestByProfilePkAndIsDelete(int profilePk);
 }

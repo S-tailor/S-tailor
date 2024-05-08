@@ -374,7 +374,7 @@ const AddCloth: React.FC = () => {
               </label>
               <img
                 className={styles.camera}
-                src={captureMode ? '/assets/avatar.PNG' : '/assets/camera.png'}
+                src={captureMode ? '/assets/camerashot.png' : '/assets/camera.png'}
                 alt={captureMode ? 'capture' : 'camera'}
                 onClick={onCameraClick}
               />
