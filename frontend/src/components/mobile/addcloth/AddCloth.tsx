@@ -113,8 +113,8 @@ const AddCloth: React.FC = () => {
   const videoStyle: CSSProperties = {
     width: '100vw',
     height: '53vh',
-    objectFit: 'cover' // 사각형을 가득 채우기
-    // transform: camera === 'user' ? 'scaleX(-1)' : 'none'
+    objectFit: 'cover', // 사각형을 가득 채우기
+    transform: camera === 'user' ? 'scaleX(-1)' : 'scaleX(-1)'
   }
 
   // 옷 선택
