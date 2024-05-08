@@ -76,6 +76,11 @@ const ClosetWishList: React.FC = () => {
 
       <div className={styles.main}>
         <p className={styles.length}>위시리스트에 {cartCount}개의 상품이 있습니다.</p>
+        {isLoading &&
+          <div className={styles.loadingInner}>
+            <img className={styles.loading} src="/assets/loading.gif" alt="로딩중" />
+          </div>
+        }
 
         {cartList.map((item, idx) => (
           <div className={styles.selected} key={idx}>
