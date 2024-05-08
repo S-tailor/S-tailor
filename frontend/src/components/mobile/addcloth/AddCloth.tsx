@@ -71,8 +71,9 @@ const AddCloth: React.FC = () => {
           canvas.toBlob(resolve, 'image/png')
         })
         if (blob) {
-          const url = URL.createObjectURL(blob).split('/')
-          const file = new File([blob], `${url[url.length - 1]}.png`, { type: 'image/png' })
+          const file = new File([blob], 'captured-image.png', { type: 'image/png' })
+          const url = URL.createObjectURL(blob)
+          console.log('Capture successful:', url)
           saveImage(file)
         }
       }
@@ -209,6 +210,9 @@ const AddCloth: React.FC = () => {
   async function imageSearch(file: any) {
     const formdata = new FormData()
     formdata.append('image', file)
+    // if (image) {
+    //   formdata.append('image', file)
+    // }
 
     try {
       const response = await closetImgSearch(formdata)
@@ -217,6 +221,8 @@ const AddCloth: React.FC = () => {
     } catch (error) {
       console.log('이미지 검색 실패:', error)
     }
+
+    // setCount(response.data.result.length)
   }
 
   // 업로드 이미지 띄우기
@@ -231,18 +237,18 @@ const AddCloth: React.FC = () => {
   // 검색 결과 렌더링
   function RenderResult() {
     return (
-      <div className={styles.searchClothes}>
+      <div>
         {results.map((item: SearchResultItem, index: number) => (
-          <div key={index} className={styles.resultItem}>
+          <div key={index}>
             <img
-              className={styles.resultItemImg}
               src={item.image}
               alt={item.title}
               onClick={() => handleSelectCloth(item)}
+              style={{ width: '100px', height: '100px' }}
             />
-            <p className={styles.clothesSource}>{item.source}</p>
             <p className={styles.clothesName}>{item.title}</p>
             <p className={styles.clothesPrice}>{item.price}</p>
+            <p className={styles.clothesSource}>{item.source}</p>
           </div>
         ))}
       </div>
@@ -325,22 +331,6 @@ const AddCloth: React.FC = () => {
             alt="search"
             onClick={() => textSearch()}
           />
-        </div>
-
-        <div className={styles.infomation}>
-          <p className={styles.infomationText}>
-            <u>
-              <a 
-              onClick={() => {
-                startTransition(() => {
-                  navigate('/mobile/closet/code/input/test')
-                })
-              }}
-              >
-              옷 입어보기
-              </a>
-            </u> 기능의 최상의 결과를 위해 <b>'깔끔한 배경'</b>, <b>'1장'</b>인 옷을 선택해주세요.
-          </p>
         </div>
 
         <div className={styles.picture}>
