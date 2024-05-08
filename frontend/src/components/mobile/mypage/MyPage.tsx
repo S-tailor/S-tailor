@@ -1,13 +1,12 @@
-import React, { useState, useMemo, startTransition, useEffect } from 'react'
+import React, { useMemo, startTransition } from 'react'
 import userStore from '@/store/store'
 import { useLocation, useNavigate } from 'react-router-dom'
-// import { cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/mypage.module.scss'
 
 const MyPage: React.FC = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const [cartCount, setCartCount] = useState<number>(0)
+  const { cartCount } = userStore()
   const { user } = userStore() as {
     user: { profilePk: number; image?: string; profileName: string }[]
   }
@@ -75,22 +74,6 @@ const MyPage: React.FC = () => {
       ? { fontFamily: 'Pretendard-Bold', color: '#9091FB', marginTop: '3px' }
       : {}
   }
-
-  // const addCart = async (pk: number) => {
-  //   await cartItemAdd(pk).then(() => {
-  //     alert('위시리스트에 추가되었습니다!')
-  //     const newCartCount = cartCount + 1
-  //     localStorage.setItem('cartCount', JSON.stringify(newCartCount))
-  //     setCartCount(newCartCount)
-  //   })
-  // }
-
-  useEffect(() => {
-    const storedCartCount = localStorage.getItem('cartCount')
-    if (storedCartCount) {
-      setCartCount(JSON.parse(storedCartCount))
-    }
-  }, [])
 
   return (
     <div className={styles.container}>
