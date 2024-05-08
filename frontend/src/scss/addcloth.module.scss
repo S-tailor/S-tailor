@@ -1,3 +1,8 @@
+html {
+  min-height: calc(100% + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
 @import 'fonts';
 
 .header {
@@ -168,7 +173,7 @@
 
 .pictureButtons {
   position: fixed;
-  bottom: 11%;
+  bottom: 12%;
   margin-bottom: 4vh;
   width: 90vw;
   display: flex;

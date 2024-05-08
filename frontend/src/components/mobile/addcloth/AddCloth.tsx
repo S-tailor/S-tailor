@@ -237,23 +237,24 @@ const AddCloth: React.FC = () => {
   // 검색 결과 렌더링
   function RenderResult() {
     return (
-      <div>
+      <div className={styles.searchClothes}>
         {results.map((item: SearchResultItem, index: number) => (
-          <div key={index}>
+          <div key={index} className={styles.resultItem}>
             <img
+              className={styles.resultItemImg}
               src={item.image}
               alt={item.title}
               onClick={() => handleSelectCloth(item)}
-              style={{ width: '100px', height: '100px' }}
             />
+            <p className={styles.clothesSource}>{item.source}</p>
             <p className={styles.clothesName}>{item.title}</p>
             <p className={styles.clothesPrice}>{item.price}</p>
-            <p className={styles.clothesSource}>{item.source}</p>
           </div>
         ))}
       </div>
     )
   }
+
 
   /////////// 하단 내비게이션 바 선택 시 아이콘(컬러) 변경 //////////////
   const getIconSrc = (iconName: string) => {
