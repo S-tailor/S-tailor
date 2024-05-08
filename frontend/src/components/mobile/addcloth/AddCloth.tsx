@@ -36,6 +36,8 @@ const AddCloth: React.FC = () => {
   const [searchMode, setSearchMode] = useState<'text' | 'upload' | 'camera' | null>(null)
   const [, setImageReady] = useState(false)
 
+  const [isLoading, setIsLoading] = useState(false)
+
   // 카메라 켜기
   const videoRef = useRef<HTMLVideoElement>(null)
   const [camera, setCamera] = useState<CameraMode>('environment')
@@ -163,10 +165,12 @@ const AddCloth: React.FC = () => {
 
   // 텍스트 검색
   async function textSearch() {
+    setIsLoading(true)
     const response = await closetTextSearch(text)
 
     updateResults(response.data.result)
     setShowResults(true)
+    setIsLoading(false)
   }
 
   // 업로드 이미지 저장
@@ -199,6 +203,7 @@ const AddCloth: React.FC = () => {
       setTimeout(() => {
         if (confirm('해당 사진으로 검색하시겠습니까?')) {
           imageSearch(uploadedFile) // 이미지 검색 함수 실행
+          setIsLoading(true)
         }
         setUploadedFile(null) // 중복 실행 방지
         setImageReady(false) // 상태 초기화
@@ -221,7 +226,7 @@ const AddCloth: React.FC = () => {
     } catch (error) {
       console.log('이미지 검색 실패:', error)
     }
-
+    setIsLoading(false)
     // setCount(response.data.result.length)
   }
 
@@ -237,23 +242,24 @@ const AddCloth: React.FC = () => {
   // 검색 결과 렌더링
   function RenderResult() {
     return (
-      <div>
+      <div className={styles.searchClothes}>
         {results.map((item: SearchResultItem, index: number) => (
-          <div key={index}>
+          <div key={index} className={styles.resultItem}>
             <img
+              className={styles.resultItemImg}
               src={item.image}
               alt={item.title}
               onClick={() => handleSelectCloth(item)}
-              style={{ width: '100px', height: '100px' }}
             />
+            <p className={styles.clothesSource}>{item.source}</p>
             <p className={styles.clothesName}>{item.title}</p>
             <p className={styles.clothesPrice}>{item.price}</p>
-            <p className={styles.clothesSource}>{item.source}</p>
           </div>
         ))}
       </div>
     )
   }
+
 
   /////////// 하단 내비게이션 바 선택 시 아이콘(컬러) 변경 //////////////
   const getIconSrc = (iconName: string) => {
@@ -332,6 +338,12 @@ const AddCloth: React.FC = () => {
             onClick={() => textSearch()}
           />
         </div>
+
+        {isLoading &&
+          <div className={styles.loadingInner}>
+            <img className={styles.loading} src="/assets/loading.gif" alt="로딩중" />
+          </div>
+        }
 
         <div className={styles.picture}>
           {showResults ? (

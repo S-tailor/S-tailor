@@ -1,3 +1,8 @@
+html {
+  min-height: calc(100% + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
 @import "fonts";
 
 .wait {
@@ -136,15 +141,15 @@
 }
 
 .slide:nth-child(1) {
-  background-image: url("/assets/광고1.png");
+  background-image: url("/assets/ad1.png");
   animation-delay: 0;
 }
 .slide:nth-child(2) {
-  background-image: url("/assets/광고2.png");
+  background-image: url("/assets/ad2.png");
   animation-delay: -2.5s;
 }
 .slide:nth-child(3) {
-  background-image: url("/assets/광고3.png");
+  background-image: url("/assets/ad3.png");
   animation-delay: -5s;
 }
 

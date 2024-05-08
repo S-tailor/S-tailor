@@ -1,3 +1,8 @@
+html {
+  min-height: calc(100% + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
 @import 'fonts';
 
 .header {
@@ -70,6 +75,21 @@
   right: 9%;
   width: 7vw;
   cursor: pointer;
+}
+
+.loadingInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -75%);
+}
+
+.loading {
+  width : 20vw;
 }
 
 .infomation {
@@ -168,7 +188,7 @@
 
 .pictureButtons {
   position: fixed;
-  bottom: 11%;
+  bottom: 12%;
   margin-bottom: 4vh;
   width: 90vw;
   display: flex;
