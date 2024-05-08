@@ -1,7 +1,7 @@
 import React, { useEffect, startTransition, useState, useMemo } from 'react'
 import userStore from '@/store/store'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { closetItemList, closetItemDelete } from '@/api/apiCloset'
+import { closetItemList, closetItemDelete, closetCategory } from '@/api/apiCloset'
 import { cartItemList, cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/closet.module.scss'
 
@@ -25,30 +25,54 @@ const Closet: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true)
   const { cartCount, updateCartList, addToCart } = userStore()
   const [selectedCategory, setSelectedCategory] = useState('전체')
-
+  
   const categories = ['전체', '아우터', '상의', '하의', '원피스', '기타']
-
-  const handleCategoryClick = (category: string) => {
-    setSelectedCategory(category)
+  
+  const profilePk = Number(user[0]?.profilePk)
+  
+  interface CategoryDictionary {
+    [key: string]: string;
   }
 
+  const categoryDict: CategoryDictionary = {
+    '전체':'all',
+    '아우터':'Outerwear',
+    '상의':'Top',
+    '하의':'Pants'||'Shorts',
+    '원피스':'Dress',
+    '기타':'Etc'
+  }
+
+  const handleCategoryClick = async (category: string) => {
+    setSelectedCategory(category)
+      const selectCategory = categoryDict[category]
+      console.log(selectCategory)
+      if (selectCategory == 'all')
+        {fetchItem(profilePk)
+          return;
+        }
+      await closetCategory(Number(profilePk), selectCategory)
+      .then((response)=> {
+        const filteredClothes = response.data.result;
+      setClothList(filteredClothes);
+      })  
+  
+    }
+  
   useEffect(() => {
-    const profilePk = Number(user[0]?.profilePk)
     if (profilePk) {
       fetchItem(profilePk)
     }
   }, [])
-
+  
   const fetchItem = async (profilePk: number) => {
+    setIsLoading(true)
     await closetItemList(profilePk).then((response) => {
       setClothList(response.data.result)
-     
-        setIsLoading(!isLoading)
-   
-      setIsLoading(!isLoading)
     })
+    setIsLoading(false)
   }
-
+  
   const deleteCloth = async (pk: number) => {
     const response = await closetItemDelete(pk)
     if (response.status === 200) {
