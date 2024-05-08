@@ -6,6 +6,7 @@ import styles from '../../../scss/closetsearch.module.scss'
 const ClosetSearch: React.FC = () => {
   const [searchText, setSearchText] = useState<string>('')
   const [searchResults, setSearchResults] = useState<any[]>([])
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
   const profilePk = sessionStorage.getItem('profilePk')
 
@@ -14,6 +15,7 @@ const ClosetSearch: React.FC = () => {
   }
 
   const handleSearch = async () => {
+    setIsLoading(true)
     if (!searchText) {
       alert('검색어를 입력해주세요!')
       return
@@ -26,6 +28,7 @@ const ClosetSearch: React.FC = () => {
     } catch (error) {
       console.log('에러 발생:', error)
     }
+    setIsLoading(false)
   }
 
   const clearSearch = () => {
@@ -66,7 +69,6 @@ const ClosetSearch: React.FC = () => {
 
         </div>
       </div> 
- 
       <div className={styles.searchClothes}>
         {searchResults.map((item, index) => (
           <div key={index} className={styles.resultItem}>
@@ -76,6 +78,10 @@ const ClosetSearch: React.FC = () => {
             <p className={styles.clothesPrice}>가격: {item.price}</p>
           </div>
         ))}
+        {isLoading && (
+          <div className={styles.wait}>
+            <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
+          </div>)}
       </div>
     </div>
   )
