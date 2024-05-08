@@ -32,7 +32,7 @@ public class ProfileServiceImpl implements ProfileService{
     String url;
 
     @Override
-    public boolean profileCreate(ProfileCreateReq info) {
+    public Profile profileCreate(ProfileCreateReq info) {
         Profile profile = new Profile();
         profile.setProfileName(info.getName());
         profile.setHeight(info.getHeight());
@@ -51,14 +51,12 @@ public class ProfileServiceImpl implements ProfileService{
             profile.setImage(s3UpDownloadService.saveProfileImage(image,image.getOriginalFilename(),count+1));
             Profile savedProfile = profileRepository.save(profile);
 
+            return savedProfile;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
 
-
-
-        return true;
     }
 
     @Override
