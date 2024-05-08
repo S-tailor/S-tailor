@@ -42,9 +42,9 @@ const Closet: React.FC = () => {
   const fetchItem = async (profilePk: number) => {
     await closetItemList(profilePk).then((response) => {
       setClothList(response.data.result)
-      setTimeout(() => {
+     
         setIsLoading(!isLoading)
-      }, 500)
+   
       setIsLoading(!isLoading)
     })
   }
