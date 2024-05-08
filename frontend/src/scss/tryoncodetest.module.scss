@@ -1,3 +1,8 @@
+html {
+  min-height: calc(100% + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
 @import "fonts";
 
 .container {
@@ -61,9 +66,14 @@ p {
   font-family: 'Pretendard-SemiBold';
 }
 
-.remainTime, .qrcodeInnerText1, .qrcodeInnerText2, .bottomTextInner {
+.remainTime, .qrcodeInnerText1, .bottomTextInner {
   font-family: 'Pretendard-Regular';
   font-size: 1.6em;
+  text-align: center;
+}
+
+.qrcodeInnerText1 {
+  margin-top: 10vh;
 }
 
 .bottomTextInner {
@@ -71,5 +81,18 @@ p {
 }
 
 .qrcode {
-  margin-top: 10vh;
+  margin-top: 2vh;
+}
+
+.qrcodeImg {
+  width: 80vw;
+  margin-bottom: 2vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.remainTime {
+  text-align: center;
 }
