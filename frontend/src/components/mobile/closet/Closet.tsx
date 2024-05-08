@@ -26,7 +26,7 @@ const Closet: React.FC = () => {
   const { cartCount, updateCartList, addToCart } = userStore()
   const [selectedCategory, setSelectedCategory] = useState('전체')
   
-  const categories = ['전체', '아우터', '상의', '하의', '원피스', '기타']
+  const categories = ['전체', '아우터', '상의', '긴 하의', '짧은 하의','원피스', '기타']
   
   const profilePk = Number(user[0]?.profilePk)
   
@@ -38,7 +38,8 @@ const Closet: React.FC = () => {
     '전체':'all',
     '아우터':'Outerwear',
     '상의':'Top',
-    '하의':'Pants'||'Shorts',
+    '긴 하의':'Pants',
+    '짧은 하의':'Shorts',
     '원피스':'Dress',
     '기타':'Etc'
   }
@@ -46,11 +47,12 @@ const Closet: React.FC = () => {
   const handleCategoryClick = async (category: string) => {
     setSelectedCategory(category)
       const selectCategory = categoryDict[category]
-      console.log(selectCategory)
+     
       if (selectCategory == 'all')
         {fetchItem(profilePk)
           return;
         }
+      
       await closetCategory(Number(profilePk), selectCategory)
       .then((response)=> {
         const filteredClothes = response.data.result;
@@ -77,7 +79,7 @@ const Closet: React.FC = () => {
     const response = await closetItemDelete(pk)
     if (response.status === 200) {
       setClothList((currentList) => currentList.filter((item) => item.closetPk !== pk))
-      alert('옷장에서 삭제되었습니다!')
+      confirm('옷장에서 삭제되었습니다!')
     } else {
       console.error('Failed to delete', pk)
     }
@@ -156,7 +158,7 @@ const Closet: React.FC = () => {
     const profilePk = Number(sessionStorage.getItem('profilePk'))
     const response = await cartItemList(profilePk)
     if (response.status === 200) {
-      // console.log('마킹', response.data.result, profilePk)
+      
       const cartList = response.data.result
       updateCartList(cartList)
       userStore.getState().setCartCount(cartList.length)
