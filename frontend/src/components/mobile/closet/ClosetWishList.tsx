@@ -16,12 +16,13 @@ const ClosetWishList: React.FC = () => {
   const [cartList, setCartList] = useState<cartInfo[]>([])
   const navigate = useNavigate()
   const cartCount = cartList.length
-
+  const [isLoading, setIsLoading] = useState(false)
   const goShopping = (link: string) => {
     window.open(link, '_blank')
   }
 
   useEffect(() => {
+    setIsLoading(true)
     const profilePk = Number(sessionStorage.getItem('profilePk'))
     fetchCart(profilePk)
   }, [])
@@ -39,10 +40,11 @@ const ClosetWishList: React.FC = () => {
 
   const fetchCart = async (pk: number) => {
     await cartItemList(pk).then((response) => {
-      setTimeout(() => {
+    
         setCartList(response.data.result)
-      }, 500)
+
     })
+    setIsLoading(false)
   }
 
   const goCloset = () => {
