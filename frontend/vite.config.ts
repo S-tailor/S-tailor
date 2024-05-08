@@ -20,7 +20,7 @@ export default defineConfig({
         name: 'S-Tailor',
         short_name: 'S-Tailor',
         start_url: '/',
-        display: 'standalone',
+        display: 'fullscreen',
         description: 'A virtual cloth app.',
         icons: [
           {
