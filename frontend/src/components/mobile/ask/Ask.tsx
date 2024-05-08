@@ -15,6 +15,7 @@ const Ask: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const formData = new FormData()
   const { cartCount } = userStore()
+  // const {user} = userStore()
   const [isLoading, setIsLoading] = useState(false)
   const { user } = userStore() as {
     user: { profilePk: number; image?: string; profileName: string }[]
@@ -82,7 +83,8 @@ const Ask: React.FC = () => {
   }
 
   const handleBlur = (e: any) => {
-    if (e.relatedTarget && e.relatedTarget.className !== styles.textField) {
+    console.log(e.type)
+    if (e.type == 'blur') {
       setIsFocused(false)
     }
   }
@@ -208,6 +210,7 @@ const Ask: React.FC = () => {
             style={{ display: 'none' }}
             onChange={changePic}
             ref={fileInputRef}
+            onBlur={handleBlur}
           ></input>
           {file && <img className={styles.temporaryImage} src={fileUrl} alt="Uploaded Image" />}
           <img
