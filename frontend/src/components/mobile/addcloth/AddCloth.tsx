@@ -114,7 +114,7 @@ const AddCloth: React.FC = () => {
     width: '100vw',
     height: '53vh',
     objectFit: 'cover', // 사각형을 가득 채우기
-    transform: camera === 'user' ? 'scaleX(-1)' : 'none'
+    transform: camera === 'user' ? 'scaleX(-1)' : 'scaleX(1)'
   }
 
   // 옷 선택
@@ -260,7 +260,6 @@ const AddCloth: React.FC = () => {
     )
   }
 
-
   /////////// 하단 내비게이션 바 선택 시 아이콘(컬러) 변경 //////////////
   const getIconSrc = (iconName: string) => {
     const path = location.pathname
@@ -355,11 +354,11 @@ const AddCloth: React.FC = () => {
           </p>
         </div>
 
-        {isLoading &&
+        {isLoading &&(
           <div className={styles.loadingInner}>
             <img className={styles.loading} src="/assets/loading.gif" alt="로딩중" />
           </div>
-        }
+        )}
 
         <div className={styles.picture}>
           {showResults ? (
