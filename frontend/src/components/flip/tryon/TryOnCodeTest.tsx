@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import QRCode from 'qrcode.react'
 import styles from '../../../scss/tryoncodetest.module.scss'
 
-// const BASE_URL = 'http://localhost:5000'
-const BASE_URL = 'https://ourtrip.store'
+const BASE_URL = 'http://localhost:5000'
+// const BASE_URL = 'https://ourtrip.store'
 const TIME = {
   ONE_SECOND: 1000,
   ONE_MINUTE: 60  
@@ -68,7 +68,7 @@ const TryOn: React.FC = () => {
 
       <section className={styles.topTitle}>
         <p className={styles.topText}>가상 피팅</p>
-        <p className={styles.subText1}>1.&nbsp; 스마트폰으로 오른쪽 QR코드를 스캔해 S-Tailor 앱을 여십시오.</p>
+        <p className={styles.subText1}>1.&nbsp; 스마트폰으로 아래 QR코드를 스캔해 S-Tailor 앱을 여십시오.</p>
         <p className={styles.subText2}>2.&nbsp; 로그인 후 '옷 입어보기'를 선택하십시오.</p>
         <p className={styles.subText3}>3.&nbsp; 아래 버튼을 눌러 QR코드를 띄우십시오.</p>
       </section>
@@ -88,8 +88,7 @@ const TryOn: React.FC = () => {
             <p className={styles.remainTime}>{remainTime}초 남았습니다.</p>
           </> : 
           <div className={styles.qrcodeInner}>
-            <p className={styles.qrcodeInnerText1}>제한시간 내 다시 시도해주세요.</p>
-            <p className={styles.qrcodeInnerText2}>* QR코드 보기 버튼을 눌러주세요.</p>
+            <p className={styles.qrcodeInnerText1}>QR코드 보기 버튼을 다시 눌러주세요.</p>
           </div>
           }
       </section>
