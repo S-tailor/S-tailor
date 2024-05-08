@@ -260,7 +260,6 @@ const AddCloth: React.FC = () => {
     )
   }
 
-
   /////////// 하단 내비게이션 바 선택 시 아이콘(컬러) 변경 //////////////
   const getIconSrc = (iconName: string) => {
     const path = location.pathname
@@ -339,11 +338,11 @@ const AddCloth: React.FC = () => {
           />
         </div>
 
-        {isLoading &&
+        {isLoading && (
           <div className={styles.loadingInner}>
             <img className={styles.loading} src="/assets/loading.gif" alt="로딩중" />
           </div>
-        }
+        )}
 
         <div className={styles.picture}>
           {showResults ? (
