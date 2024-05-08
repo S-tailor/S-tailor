@@ -117,24 +117,6 @@ const Ask: React.FC = () => {
       ? { fontFamily: 'Pretendard-Bold', color: '#9091FB', marginTop: '1px' }
       : {}
   }
-  ////////////////////////////////////////////////////////////////////
-
-  // const addCart = async (pk: number) => {
-  //   await cartItemAdd(pk)
-  //     .then(() => {
-  //       alert('위시리스트에 추가되었습니다!')
-  //       const newCartCount = cartCount + 1
-  //       localStorage.setItem('cartCount', JSON.stringify(newCartCount))
-  //       setCartCount(newCartCount)
-  //     })
-  // }
-
-  // useEffect(() => {
-  //   const storedCartCount = localStorage.getItem('cartCount')
-  //   if (storedCartCount) {
-  //     setCartCount(JSON.parse(storedCartCount))
-  //   }
-  // }, [])
 
   return (
     <div className={styles.container}>
