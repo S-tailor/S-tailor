@@ -340,8 +340,8 @@ const AddCloth: React.FC = () => {
         </div>
 
         {isLoading &&
-          <div>
-            <img src="/assets/loading.gif" alt="로딩 중" />
+          <div className={styles.loadingInner}>
+            <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
           </div>
         }
 
