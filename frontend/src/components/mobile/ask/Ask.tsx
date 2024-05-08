@@ -5,7 +5,9 @@ import userStore from '@/store/store'
 // import { cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/ask.module.scss'
 
-const Ask: React.FC = () => {
+const Ask: React.FC = () => 
+{
+  const [isFocused, setIsFocused] = useState(false);
   const [fileUrl, setFileUrl] = useState<string>('')
   const [file, setFile] = useState<File | null>()
   const [text, setText] = useState<string>('')
@@ -71,6 +73,14 @@ const Ask: React.FC = () => {
       console.error('No file selected')
     }
   }
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
 
   /////////// 하단 내비게이션 바 선택 시 아이콘(컬러) 변경 //////////////
   const getIconSrc = (iconName: string) => {
@@ -227,7 +237,8 @@ const Ask: React.FC = () => {
             type="text"
             onChange={saveText}
             value={text}
-            autoFocus
+            onFocus={handleFocus}
+            onBlur={handleBlur}
           />
           <img
             className={styles.sendImg}
@@ -238,7 +249,7 @@ const Ask: React.FC = () => {
         </div>
       </section>
 
-      <footer className={styles.bottomNav}>
+      <footer className={styles.bottomNav} style={{ display: isFocused ? 'none' : 'flex' }}>
         <div className={styles.bottomNavInner}>
           <label className={styles.bottomNavInnerBtn}>
             <img
