@@ -28,7 +28,7 @@ p {
 
 .topTitle {
   width: 100vw;
-  height: 45%;
+  height: 40%;
   display: flex;
   align-items: flex-end;
 }
@@ -39,7 +39,7 @@ p {
 
 .middleTitle {
   width: 100vw;
-  height: 35%;
+  height: 50%;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
@@ -51,17 +51,55 @@ p {
 
 .texts {
   font-family: 'main-title';
-  font-size: 9.5em;
+  font-size: 7.5em;
   color: white;
-  margin-top: -6vh;
-  margin-left: -1vw;
+  margin-top: -7.5vh;
+  margin-left: 0vw;
 }
 
-.touchtext {
-  font-family: 'main-title';
-  font-size: 5.5em;
-  color: black;
+.touch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+}
+
+.touchImg {
+  position: absolute;
+  cursor: pointer;
+  top: 50%;
+  left: 45%;
+  width: 120px;
+  animation: ping 2.5s ease-in-out infinite both;
+}
+
+.touchText {
+  width: 90%;
+  position: fixed;
+  top: 52%;
+  font-size: 2em;
+  color: white;
+  font-family: 'Pretendard-SemiBold';
+  animation:tracking-in-expand-fwd .8s cubic-bezier(.215,.61,.355,1.000) both
+}
+
+@keyframes ping {
+  0% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+  20% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
 }
 
 @keyframes text-flicker-in-glow {
@@ -204,3 +242,5 @@ p {
     opacity: 1;
   }
 }
+
+@keyframes tracking-in-expand-fwd{0%{letter-spacing:-.5em;transform:translateZ(-700px);opacity:0}40%{opacity:.6}100%{transform:translateZ(0);opacity:1}}

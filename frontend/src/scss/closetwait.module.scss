@@ -37,6 +37,23 @@ p {
   animation:text-flicker-in-glow 1s linear both
 }
 
+.connectContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 42%;
+  width: 100%;
+  font-size: 0.9em;
+  font-family: 'Pretendard-Regular';
+  color: white;
+}
+
+.connetImg {
+  margin-bottom: 4vh;
+}
+
 
 .middleTitle{
   width: 100vw;
@@ -81,15 +98,4 @@ p {
   font-family: 'Pretendard-SemiBold';
   font-size: 0.9em;
   letter-spacing: 1px;
-  animation:fade-in 1.2s cubic-bezier(.39,.575,.565,1.000) 2s both
-}
-
-@keyframes fade-in{0%{opacity:0}100%{opacity:1}}
-
-.btnText::before {
-  content: '시작하기';
-}
-
-.btn:hover .btnText::before {
-  content: 'Go Go !';
 }

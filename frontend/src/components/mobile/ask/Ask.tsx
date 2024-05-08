@@ -1,8 +1,7 @@
-import React, { startTransition, useMemo, useState, useRef, useEffect } from 'react'
+import React, { startTransition, useMemo, useState, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { chatbot, reset } from '@/api/apiAsk'
 import userStore from '@/store/store'
-// import { cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/ask.module.scss'
 
 const Ask: React.FC = () => {
@@ -14,25 +13,28 @@ const Ask: React.FC = () => {
   const location = useLocation()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const formData = new FormData()
-  const [cartCount, setCartCount] = useState<number>(0)
+  const { cartCount } = userStore()
   // const {user} = userStore()
   const [isLoading, setIsLoading] = useState(false)
   const { user } = userStore() as {
     user: { profilePk: number; image?: string; profileName: string }[]
   }
   const userName = user[0]?.profileName ?? 'Guest'
-  
+
   const profilePk = String(sessionStorage.getItem('profilePk'))
   const saveText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value)
   }
 
-  const resetConversation = async() => {
+  const resetConversation = async () => {
     await reset(profilePk)
-    .then((response)=>{console.log(response)})
-    .catch(()=>{console.error})
+      .then((response) => {
+        console.log(response)
+      })
+      .catch(() => {
+        console.error
+      })
   }
-
 
   const sendInfo = async () => {
     setText('')
@@ -52,11 +54,11 @@ const Ask: React.FC = () => {
     await chatbot(formData)
       .then((response) => {
         const botResponse = { sender: 'bot', text: response.data.body, image: fileUrl }
-        setMessages(prev => [...prev, botResponse])
+        setMessages((prev) => [...prev, botResponse])
       })
       .catch(() => {
         const errorMessage = { sender: 'bot', text: '오류가 발생했습니다.', image: fileUrl }
-        setMessages(prev => [...prev, errorMessage])
+        setMessages((prev) => [...prev, errorMessage])
       })
     setIsLoading(false)
   }
@@ -77,28 +79,28 @@ const Ask: React.FC = () => {
     const path = location.pathname
     const iconPaths: { [key: string]: { [icon: string]: string } } = {
       '/mobile/closet': {
-        'closet': '/assets/closetFill.png',
+        closet: '/assets/closetFill.png',
         'add-cloth': '/assets/upload.png',
-        'ask': '/assets/shirt.png',
-        'mypage': user[0]?.image || '/assets/avatar.PNG'
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/add-cloth': {
-        'closet': '/assets/closet.png',
+        closet: '/assets/closet.png',
         'add-cloth': '/assets/uploadFill.png',
-        'ask': '/assets/shirt.png',
-        'mypage': user[0]?.image || '/assets/avatar.PNG'
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/ask': {
-        'closet': '/assets/closet.png',
+        closet: '/assets/closet.png',
         'add-cloth': '/assets/upload.png',
-        'ask': '/assets/shirtFill.png',
-        'mypage': user[0]?.image || '/assets/avatar.PNG'
+        ask: '/assets/shirtFill.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/mypage': {
-        'closet': '/assets/closet.png',
+        closet: '/assets/closet.png',
         'add-cloth': '/assets/upload.png',
-        'ask': '/assets/shirt.png',
-        'mypage': user[0]?.image || '/assets/avatar.PNG'
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       }
     }
     return iconPaths[path][iconName] || '/assets/' + iconName + '.png'
@@ -127,12 +129,12 @@ const Ask: React.FC = () => {
   //     })
   // }
 
-  useEffect(() => {
-    const storedCartCount = localStorage.getItem('cartCount')
-    if (storedCartCount) {
-      setCartCount(JSON.parse(storedCartCount))
-    }
-  }, [])
+  // useEffect(() => {
+  //   const storedCartCount = localStorage.getItem('cartCount')
+  //   if (storedCartCount) {
+  //     setCartCount(JSON.parse(storedCartCount))
+  //   }
+  // }, [])
 
   return (
     <div className={styles.container}>
@@ -186,7 +188,7 @@ const Ask: React.FC = () => {
                 className={msg.sender === 'user' ? styles.userMessageText : styles.botMessageText}
               >
                 {msg.text}
-              </span >
+              </span>
             </div>
           ))}
         </div>

@@ -2,6 +2,7 @@ import React, { startTransition, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { QrReader } from 'react-qr-reader'
+import styles from '../../../scss/closetcodeinputtest.module.scss'
 
 const BASE_URL = 'https://ourtrip.store/api/tryon'
 // const BASE_URL = 'http://localhost:5000/api/tryon'
@@ -41,51 +42,59 @@ const ClosetCodeInput: React.FC = () => {
   }
 
   return (
-    <div>
-      <img
-        src=""
-        alt="back"
-        onClick={() =>
-          startTransition(() => {
-            navigate('/mobile/closet')
-          })
-        }
-      />
-      <header>
-        <h3>옷 입어보기</h3>
-      </header>
-
-      <h1>QR코드 인증</h1>
-      <p>기기에 표시된 QR코드를 촬영해주세요.</p>
-      <div>
-        {camera && (
-          <QrReader
-            constraints={{ facingMode: 'environment' }}
-            onResult={(result: any | null, error) => {
-              if (result) {
-                setData(result.text)
+    <div className={styles.container}>
+      
+      <div className={styles.header}>
+        <div className={styles.headerInner}>
+            <div className={styles.headerInner1}>
+            <img 
+              onClick={() =>
+              startTransition(() => {
+                navigate('/mobile/closet')
+              })
               }
-              if (error) {
-                console.info(error)
-              }
-            }}
-          />
-        )}
+              className={styles.backBtn} 
+              src="/assets/backBtn.svg" 
+              alt="backBtn"
+            />
+            </div>
+        
+            <div className={styles.headerInner2}>
+              <p className={styles.title}>옷 입어보기</p>
+            </div>
+            <div className={styles.headerInner3}>
+            </div>
+        </div>
       </div>
 
-      {data && <div>{message}</div>}
+      <div className={styles.topTitle}>
+        <p className={styles.mainTitle}>QR코드 인증</p>
+        <p className={styles.subTitle}>기기에 표시된 QR코드를 촬영해주세요.</p>
+      </div>
 
-      <button onClick={handleVerify}>확인</button>
-      <form onSubmit={handleVerify}>
-        <input
-          type="text"
-          value={data}
-          onChange={(event) => {
-            setData(event.target.value)
-          }}
-        ></input>
-        <button type="submit">sessionId 보내기</button>
-      </form>
+      <div className={styles.main}>
+        <div className={styles.camera}>
+          {camera && (
+            <QrReader
+              className={styles.qrreder}
+              constraints={{ facingMode: 'environment' }}
+              onResult={(result: any | null, error) => {
+                if (result) {
+                  setData(result.text)
+                }
+                if (error) {
+                  console.info(error)
+                }
+              }}
+            />
+          )}
+        </div>
+
+        {data && <div className={styles.infoText}>{message}</div>}
+
+        <button className={styles.btn} onClick={handleVerify}>확인</button>
+      </div>
+
     </div>
   )
 }
