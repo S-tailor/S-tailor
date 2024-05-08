@@ -4,9 +4,9 @@ import { chatbot, reset } from '@/api/apiAsk'
 import userStore from '@/store/store'
 import styles from '../../../scss/ask.module.scss'
 
-const Ask: React.FC = () => 
-{
-  const [isFocused, setIsFocused] = useState(false);
+const Ask: React.FC = () => {
+  const [isFocused, setIsFocused] = useState(false)
+  const textSendRef = useRef(null)
   const [fileUrl, setFileUrl] = useState<string>('')
   const [file, setFile] = useState<File | null>()
   const [text, setText] = useState<string>('')
@@ -16,7 +16,6 @@ const Ask: React.FC = () =>
   const fileInputRef = useRef<HTMLInputElement>(null)
   const formData = new FormData()
   const { cartCount } = userStore()
-  // const {user} = userStore()
   const [isLoading, setIsLoading] = useState(false)
   const { user } = userStore() as {
     user: { profilePk: number; image?: string; profileName: string }[]
@@ -43,6 +42,7 @@ const Ask: React.FC = () =>
     setFileUrl('')
     setFile(null)
     if (!text) return // 텍스트가 비어있는 경우 전송하지 않음
+
     const newMessage = { sender: 'user', text: text, image: fileUrl }
     setMessages([...messages, newMessage])
 
@@ -62,7 +62,9 @@ const Ask: React.FC = () =>
         const errorMessage = { sender: 'bot', text: '오류가 발생했습니다.', image: fileUrl }
         setMessages((prev) => [...prev, errorMessage])
       })
+
     setIsLoading(false)
+    handleFocus()
   }
 
   const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,12 +79,14 @@ const Ask: React.FC = () =>
   }
 
   const handleFocus = () => {
-    setIsFocused(true);
-  };
+    setIsFocused(true)
+  }
 
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
+  const handleBlur = (e: any) => {
+    if (e.relatedTarget && e.relatedTarget.className !== styles.textField) {
+      setIsFocused(false)
+    }
+  }
 
   /////////// 하단 내비게이션 바 선택 시 아이콘(컬러) 변경 //////////////
   const getIconSrc = (iconName: string) => {
@@ -189,7 +193,7 @@ const Ask: React.FC = () =>
         {isLoading && <img className={styles.loading} src="/assets/loading.gif" alt="로딩중" />}
       </div>
 
-      <section className={styles.textSend}>
+      <section className={`${styles.textSend} ${isFocused ? styles.fixedInput : ''}`}>
         <div className={styles.textSendInner}>
           <img
             className={styles.addImg}

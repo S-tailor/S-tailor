@@ -37,7 +37,8 @@ html {
   margin-right: auto;
 }
 
-.headerInner2, .headerInner3 {
+.headerInner2,
+.headerInner3 {
   width: 12vw;
   display: flex;
   justify-content: center;
@@ -48,7 +49,7 @@ html {
   position: relative;
 }
 
-.logo{
+.logo {
   width: 34.3vw;
   margin-left: 5vw;
 }
@@ -64,7 +65,7 @@ html {
 .cartAdd {
   width: 15px;
   height: 15px;
-  background-color: #D99AFC;
+  background-color: #d99afc;
   border-radius: 100px;
   position: absolute;
   bottom: 16px;
@@ -147,7 +148,7 @@ html {
   padding-left: 5%;
   padding-right: 5%;
   margin-top: 2%;
-  background-color: #BABFFF;
+  background-color: #babfff;
   border-radius: 30px;
   width: fit-content;
   align-self: flex-end;
@@ -164,7 +165,7 @@ html {
   padding-bottom: 4%;
   padding-left: 5%;
   padding-right: 5%;
-  background-color: #E8E8E8;
+  background-color: #e8e8e8;
   border-radius: 20px;
   width: fit-content;
   align-self: flex-start;
@@ -182,7 +183,7 @@ html {
 }
 
 .loading {
-  width : 20vw;
+  width: 20vw;
 }
 
 .textSend {
@@ -190,7 +191,7 @@ html {
   bottom: 12%;
   width: 100vw;
   height: 6vh;
-  background-color: #F6F6F8;
+  background-color: #f6f6f8;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -203,6 +204,16 @@ html {
   align-items: center;
   justify-content: space-between;
   position: relative;
+}
+
+.fixedInput {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 10;
 }
 
 .addImg {
@@ -239,7 +250,7 @@ html {
   outline: none;
   border: none;
   cursor: pointer;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
 }
 
 .sendImg {
@@ -247,8 +258,6 @@ html {
   cursor: pointer;
   opacity: 70%;
 }
-
-
 
 .bottomNavInnerBtn {
   cursor: pointer;
@@ -294,7 +303,7 @@ html {
   }
 }
 
-.bottomNav{
+.bottomNav {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -315,7 +324,10 @@ html {
   margin-top: -2vh;
 }
 
-.bottomNavLabel1, .bottomNavLabel2, .bottomNavLabel3, .bottomNavLabel4 {
+.bottomNavLabel1,
+.bottomNavLabel2,
+.bottomNavLabel3,
+.bottomNavLabel4 {
   font-family: 'Pretendard-Regular';
   font-size: 0.55em;
   text-align: center;
