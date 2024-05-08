@@ -6,7 +6,6 @@ import styles from '../../../scss/ask.module.scss'
 
 const Ask: React.FC = () => {
   const [isFocused, setIsFocused] = useState(false)
-  const textSendRef = useRef(null)
   const [fileUrl, setFileUrl] = useState<string>('')
   const [file, setFile] = useState<File | null>()
   const [text, setText] = useState<string>('')
