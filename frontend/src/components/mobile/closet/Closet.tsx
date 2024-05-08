@@ -50,7 +50,7 @@ const Closet: React.FC = () => {
      
       if (selectCategory == 'all')
         {fetchItem(profilePk)
-          return;
+          return
         }
       
       await closetCategory(Number(profilePk), selectCategory)
@@ -71,6 +71,7 @@ const Closet: React.FC = () => {
     setIsLoading(true)
     await closetItemList(profilePk).then((response) => {
       setClothList(response.data.result)
+      console.log(response.data.result)
     })
     setIsLoading(false)
   }
@@ -262,8 +263,9 @@ const Closet: React.FC = () => {
                         alt="deleteBtn"
                       />
                     </div>
+                    <p className={styles.clothesSource}>{cloth.source}</p>
                     <p className={styles.clothesName}>{cloth.name}</p>
-                    <p className={styles.clothesPrice}>{cloth.price.substring(1)}원</p>
+                    <p className={styles.clothesPrice}>{cloth.price.substring(1).replace(/\*/g, '')}원</p>
                   </div>
                 ))}
               </div>

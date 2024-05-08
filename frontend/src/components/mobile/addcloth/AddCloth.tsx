@@ -141,7 +141,7 @@ const AddCloth: React.FC = () => {
           name: cloth.title,
           link: cloth.link,
           profilePk: profilePk,
-          source: ''
+          source: cloth.source
         })
       } catch (error) {
         setMessage('저장에 실패했습니다.')
@@ -253,7 +253,7 @@ const AddCloth: React.FC = () => {
             />
             <p className={styles.clothesSource}>{item.source}</p>
             <p className={styles.clothesName}>{item.title}</p>
-            <p className={styles.clothesPrice}>{item.price}</p>
+            <p className={styles.clothesPrice}>{item.price.substring(1).replace(/\*/g, '')}원</p>
           </div>
         ))}
       </div>
@@ -338,7 +338,23 @@ const AddCloth: React.FC = () => {
           />
         </div>
 
-        {isLoading && (
+        <div className={styles.infomation}>
+          <p className={styles.infomationText}>
+            <u>
+              <a 
+              onClick={() => {
+                startTransition(() => {
+                  navigate('/mobile/closet/code/input/test')
+                })
+              }}
+              >
+              옷 입어보기
+              </a>
+            </u> 기능의 최상의 결과를 위해 <b>'깔끔한 배경'</b>, <b>'1장'</b>인 옷을 선택해주세요.
+          </p>
+        </div>
+
+        {isLoading &&(
           <div className={styles.loadingInner}>
             <img className={styles.loading} src="/assets/loading.gif" alt="로딩중" />
           </div>
@@ -362,7 +378,7 @@ const AddCloth: React.FC = () => {
                 <div className={styles.seletedTexts}>
                   <p className={styles.selectedSource}>{cloth.source}</p>
                   <h4 className={styles.selectedTitle}>{cloth.title}</h4>
-                  <p className={styles.selectedPrice}>{cloth.price}</p>
+                  <p className={styles.selectedPrice}>{cloth.price.substring(1).replace(/\*/g, '')}원</p>
                   <div className={styles.selectedBtn}>
                     <img
                       className={styles.selectedDeleteBtn}

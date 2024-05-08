@@ -48,6 +48,7 @@ p {
   font-size: 0.9em;
   font-family: 'Pretendard-Regular';
   color: white;
+  animation:fade-in-fwd 1s cubic-bezier(.39,.575,.565,1.000) 1s both
 }
 
 .connetImg {
@@ -85,6 +86,7 @@ p {
   align-items: center;
   width: 100vw;
   height: 24%;
+  animation:fade-in-fwd 1s cubic-bezier(.39,.575,.565,1.000) 3s both
 }
 
 .btn {
@@ -98,4 +100,15 @@ p {
   font-family: 'Pretendard-SemiBold';
   font-size: 0.9em;
   letter-spacing: 1px;
+}
+
+@keyframes fade-in-fwd {
+  0%{
+    transform:translateZ(-80px);
+    opacity:0
+  }
+  100%{
+    transform:translateZ(0);
+    opacity:1
+  }
 }

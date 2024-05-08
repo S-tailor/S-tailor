@@ -197,10 +197,10 @@ const Ask: React.FC = () => {
               <div className={msg.sender === 'user' ? styles.userNameRight : styles.userNameLeft}>
                 {msg.sender === 'user' ? `${userName}님` : 'S-Tailor'}
               </div>
-              {msg.image && <img className={styles.sentPhoto} src={msg.image} alt="전송한 사진" />}
               <span
                 className={msg.sender === 'user' ? styles.userMessageText : styles.botMessageText}
-              >
+                >
+                {msg.image && <img className={styles.sentPhoto} src={msg.image} alt="전송한 사진" />}
                 {msg.text}
               </span>
             </div>

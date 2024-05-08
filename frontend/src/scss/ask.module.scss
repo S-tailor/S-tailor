@@ -108,6 +108,7 @@
 .sentPhoto {
   max-width: 50vw;
   margin-top: 1vh;
+  margin-bottom: 1.5vh;
 }
 
 .userNameRight {
@@ -134,6 +135,7 @@
 
 .userMessageText {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-family: 'Pretendard-SemiBold';
@@ -151,6 +153,7 @@
 
 .botMessageText {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 2%;

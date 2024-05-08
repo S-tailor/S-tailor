@@ -121,7 +121,7 @@
 
 .resultItemImg {
   width: 100%;
-  height: 15vh;
+  height: 120px;
   object-fit: cover;
   border-radius: 5px;
   filter: drop-shadow(0px 0px 1px #c4c4c4);
@@ -178,7 +178,7 @@
   margin-top: 3vh;
   margin-bottom: 10vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 5px;
 }
@@ -186,7 +186,7 @@
 .pictureButtons {
   position: fixed;
   bottom: 12%;
-  margin-bottom: 4vh;
+  margin-bottom: 2.5vh;
   width: 90vw;
   display: flex;
   justify-content: space-between;
@@ -294,7 +294,8 @@
 }
 
 .gallery {
-  width: 20vw;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
 }
 
@@ -303,12 +304,14 @@ input[type='file'] {
 }
 
 .camera {
-  width: 20vw;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
 }
 
 .switch {
-  width: 20vw;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
 }
 

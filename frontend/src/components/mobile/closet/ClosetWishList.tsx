@@ -89,7 +89,7 @@ const ClosetWishList: React.FC = () => {
             <div className={styles.seletedTexts}>
               <p className={styles.selectedSource}>{item.source}</p>
               <h4 className={styles.selectedTitle}>{item.name}</h4>
-              <p className={styles.selectedPrice}>{item.price}원</p>
+              <p className={styles.selectedPrice}>{item.price.substring(1).replace(/\*/g, '')}원</p>
               <div className={styles.selectedBtn}>
                 <img
                   className={styles.selectedDeleteBtn}
