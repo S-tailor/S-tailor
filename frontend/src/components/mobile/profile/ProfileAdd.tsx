@@ -75,13 +75,14 @@ const ProfileAdd: React.FC = () => {
       setmessage('')
 
       const response = await profileCreate(formData)
-      console.log(response)
       if (response.status == 200) {
-        const userName = formData.get('name')
-        const profilePk = Number(userPk)
-        if (typeof userName === 'string' && !isNaN(profilePk)) {
+        
+        const profilePk = response.data.profilePk
+        sessionStorage.setItem('profilePk', profilePk);
+
+        if (typeof name === 'string' && (profilePk)) {
           const userProfileData: userProfile = {
-            profileName: userName,
+            profileName: name,
             profilePk: profilePk,
             image: fileUrl
           }
