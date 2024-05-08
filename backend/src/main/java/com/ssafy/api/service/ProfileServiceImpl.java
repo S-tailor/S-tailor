@@ -51,12 +51,6 @@ public class ProfileServiceImpl implements ProfileService{
             profile.setImage(s3UpDownloadService.saveProfileImage(image,image.getOriginalFilename(),count+1));
             Profile savedProfile = profileRepository.save(profile);
 
-            RestTemplate restTemplate = new RestTemplate();
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("profile", savedProfile.getProfilePk());
-
-            ResponseEntity<String> response = restTemplate.postForEntity(url+"/connect", jsonObject, String.class);
-            System.out.println(response.getBody());
         } catch (Exception e) {
             e.printStackTrace();
             return false;
