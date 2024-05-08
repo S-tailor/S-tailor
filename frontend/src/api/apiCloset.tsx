@@ -5,7 +5,7 @@ interface SaveClothData {
   thumbNail: string
   name: string
   link: string
-  profilePk: string | null 
+  profilePk: string | null
   source: string
 }
 
@@ -38,11 +38,16 @@ async function closetItemDelete(pk: number): Promise<any> {
   return await api.delete(`/closet/delete?closetPk=${pk}`)
 }
 
+async function ClothCategory(profilePk: number, category: string) {
+  return await api.get(`/closet/filter?profilePk=${profilePk}&category=${category}`)
+}
+
 export {
   closetImgSearch,
   closetTextSearch,
   closetItemSave,
   closetItemList,
   closetSearch,
-  closetItemDelete
+  closetItemDelete,
+  ClothCategory
 }
