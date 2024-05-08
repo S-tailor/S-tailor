@@ -186,7 +186,7 @@
 .pictureButtons {
   position: fixed;
   bottom: 12%;
-  margin-bottom: 4vh;
+  margin-bottom: 2.5vh;
   width: 90vw;
   display: flex;
   justify-content: space-between;
@@ -294,7 +294,8 @@
 }
 
 .gallery {
-  width: 20vw;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
 }
 
@@ -303,12 +304,14 @@ input[type='file'] {
 }
 
 .camera {
-  width: 20vw;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
 }
 
 .switch {
-  width: 20vw;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
 }
 

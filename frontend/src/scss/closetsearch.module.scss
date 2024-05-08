@@ -132,3 +132,18 @@
   padding-top: 5px;
   color :#3d3d3d;
 }
+
+.loadingInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -75%);
+}
+
+.loading {
+  width: 20vw;
+}

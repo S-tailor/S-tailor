@@ -73,15 +73,16 @@ const ClosetSearch: React.FC = () => {
         {searchResults.map((item, index) => (
           <div key={index} className={styles.resultItem}>
             <img className={styles.resultItemImg} src={item.image} alt={item.name} />
-            <p className={styles.clothesSource}>판매처: {item.source}</p>
+            <p className={styles.clothesSource}>{item.source}</p>
             <p className={styles.clothesName}>{item.name}</p>
-            <p className={styles.clothesPrice}>가격: {item.price}</p>
+            <p className={styles.clothesPrice}>{item.price.substring(1).replace(/\*/g, '')}원</p>
           </div>
         ))}
         {isLoading && (
-          <div className={styles.wait}>
+          <div className={styles.loadingInner}>
             <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
-          </div>)}
+          </div>
+        )}
       </div>
     </div>
   )
