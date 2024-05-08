@@ -129,7 +129,7 @@ const MyPage: React.FC = () => {
           </button>
         </div>
 
-        <div>{/* <h3>2D 가상 피팅 결과 사진 확인</h3> */}</div>
+        <div></div>
       </section>
 
       <footer className={styles.bottomNav}>
