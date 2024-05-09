@@ -83,10 +83,10 @@ const TryOn: React.FC = () => {
 
       <section className={styles.qrcode}>
         {sessionId && remainTime > 0 ?
-          <>
+          <div className={styles.qrcodeCreate}>
             <QRCode className={styles.qrcodeImg} value={sessionId}/>
             <p className={styles.remainTime}>{remainTime}초 남았습니다.</p>
-          </> : 
+          </div> : 
           <div className={styles.qrcodeInner}>
             <p className={styles.qrcodeInnerText1}>QR코드 보기 버튼을 다시 눌러주세요.</p>
           </div>
