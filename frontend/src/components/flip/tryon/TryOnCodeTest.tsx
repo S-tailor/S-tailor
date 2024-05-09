@@ -61,7 +61,7 @@ const TryOn: React.FC = () => {
     <div className={styles.container}>
 
       <div className={styles.bgVideo}>
-        <video className={styles.bgVideoContent} autoPlay muted loop>
+        <video className={styles.bgVideoContent} autoPlay muted loop >
           <source src="/assets/background.mp4" />
         </video>
       </div>
