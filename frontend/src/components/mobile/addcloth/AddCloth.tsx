@@ -41,21 +41,35 @@ const AddCloth: React.FC = () => {
   // 카메라 켜기
   const videoRef = useRef<HTMLVideoElement>(null)
   const [camera, setCamera] = useState<CameraMode>('environment')
+  const [stream, setStream] = useState<MediaStream | null>(null)
 
-  const CameraClick = async () => {
-    const constraints = { video: { facingMode: camera } }
+  const CameraClick = async (newCamera: CameraMode = camera) => {
+    const constraints = { video: { facingMode: newCamera } }
     try {
-      const stream = await navigator.mediaDevices.getUserMedia(constraints)
+      const newStream = await navigator.mediaDevices.getUserMedia(constraints)
+      setStream(newStream)
       const video = videoRef.current
-
       if (video) {
-        video.srcObject = stream
-        await video.play()
+        video.srcObject = newStream
+        video.play().catch((error) => console.error('비디오 재생 오류:', error))
       }
     } catch (error) {
       console.error('카메라 접근 오류:', error)
     }
   }
+
+  // 비디오 요소 초기화 및 스트림 설정
+  useEffect(() => {
+    if (videoRef.current && stream) {
+      const video = videoRef.current
+      // 비디오 요소가 재생 중이지 않은 경우에만 재생
+      if (video.paused) {
+        video.srcObject = stream
+        video.play().catch((error) => console.error('비디오 재생 오류:', error))
+      }
+    }
+  }, [stream])
+
   // 사진 촬영
   const handleCapture = async () => {
     const canvas = document.createElement('canvas')
@@ -100,22 +114,31 @@ const AddCloth: React.FC = () => {
 
   // 카메라 전환
   const toggleCamera = () => {
-    setCamera((prevCamera) => (prevCamera === 'environment' ? 'user' : 'environment'))
-    const video = videoRef.current
-    if (video && video.srcObject) {
-      const tracks = (video.srcObject as MediaStream).getTracks()
-      tracks.forEach((track) => track.stop())
-    }
-    CameraClick()
+    setCamera((prevCamera) => {
+      const newCamera = prevCamera === 'environment' ? 'user' : 'environment'
+      const video = videoRef.current
+      if (video && stream) {
+        // 이전 스트림 중지
+        stream.getTracks().forEach((track) => track.stop())
+      }
+      CameraClick(newCamera) // CameraClick을 호출하여 새로운 camera 상태에 따라 재설정
+      if (video && video.srcObject && video.paused) {
+        video.play().catch((error) => console.error('비디오 재생 오류:', error))
+      }
+      return newCamera
+    })
   }
 
   // 전면 카메라 사용시 거울 모드 적용
-  const videoStyle: CSSProperties = {
-    width: '100vw',
-    height: '53vh',
-    objectFit: 'cover', // 사각형을 가득 채우기
-    transform: camera === 'user' ? 'scaleX(-1)' : 'scaleX(1)'
-  }
+  const videoStyle: CSSProperties = useMemo(
+    () => ({
+      width: '100vw',
+      height: '53vh',
+      objectFit: 'cover',
+      transform: camera === 'user' ? 'scaleX(-1)' : 'none' // 여기서 camera 상태에 따라 조건부 스타일 적용
+    }),
+    [camera]
+  ) // camera 상태가 변경될 때마다 videoStyle 업데이트
 
   // 옷 선택
   const handleSelectCloth = (cloth: SearchResultItem) => {
@@ -328,7 +351,7 @@ const AddCloth: React.FC = () => {
             type="text"
             onChange={(e) => saveText(e)}
             placeholder="텍스트로 상품을 검색해보세요."
-            autoFocus
+            // autoFocus
           />
           <img
             className={styles.search}
@@ -341,20 +364,21 @@ const AddCloth: React.FC = () => {
         <div className={styles.infomation}>
           <p className={styles.infomationText}>
             <u>
-              <a 
-              onClick={() => {
-                startTransition(() => {
-                  navigate('/mobile/closet/code/input/test')
-                })
-              }}
+              <a
+                onClick={() => {
+                  startTransition(() => {
+                    navigate('/mobile/closet/code/input/test')
+                  })
+                }}
               >
-              옷 입어보기
+                옷 입어보기
               </a>
-            </u> 기능의 최상의 결과를 위해 <b>'깔끔한 배경'</b>, <b>'1장'</b>인 옷을 선택해주세요.
+            </u>{' '}
+            기능의 최상의 결과를 위해 <b>'깔끔한 배경'</b>, <b>'1장'</b>인 옷을 선택해주세요.
           </p>
         </div>
 
-        {isLoading &&(
+        {isLoading && (
           <div className={styles.loadingInner}>
             <img className={styles.loading} src="/assets/loading.gif" alt="로딩중" />
           </div>
@@ -378,7 +402,9 @@ const AddCloth: React.FC = () => {
                 <div className={styles.seletedTexts}>
                   <p className={styles.selectedSource}>{cloth.source}</p>
                   <h4 className={styles.selectedTitle}>{cloth.title}</h4>
-                  <p className={styles.selectedPrice}>{cloth.price.substring(1).replace(/\*/g, '')}원</p>
+                  <p className={styles.selectedPrice}>
+                    {cloth.price.substring(1).replace(/\*/g, '')}원
+                  </p>
                   <div className={styles.selectedBtn}>
                     <img
                       className={styles.selectedDeleteBtn}
