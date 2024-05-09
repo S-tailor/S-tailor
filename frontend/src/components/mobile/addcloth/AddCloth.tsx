@@ -121,8 +121,10 @@ const AddCloth: React.FC = () => {
         // 이전 스트림 중지
         stream.getTracks().forEach((track) => track.stop())
       }
-      // 비디오 요소에 새로운 스트림 할당
       CameraClick(newCamera) // CameraClick을 호출하여 새로운 camera 상태에 따라 재설정
+      if (video && video.srcObject && video.paused) {
+        video.play().catch((error) => console.error('비디오 재생 오류:', error))
+      }
       return newCamera
     })
   }
