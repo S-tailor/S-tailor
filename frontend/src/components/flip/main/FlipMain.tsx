@@ -28,10 +28,11 @@ const FlipMain: React.FC = () => {
         </div>
       </section>
       <section className={styles.touch}>
-        {!message ? 
-        <img className={styles.touchImg} src='/assets/touch.svg'/>
-         : 
-         <p className={styles.touchText}>{message}</p>}
+        {!message ? (
+          <img className={styles.touchImg} src="/assets/touch.svg" />
+        ) : (
+          <p className={styles.touchText}>{message}</p>
+        )}
       </section>
       <section className={styles.middleTitle}>
         <div className={styles.middleTitleInner}>
