@@ -47,14 +47,6 @@ const AddCloth: React.FC = () => {
     const constraints = { video: { facingMode: newCamera } }
     try {
       const newStream = await navigator.mediaDevices.getUserMedia(constraints)
-      const video = videoRef.current
-      if (video) {
-        if (video.srcObject) {
-          ;(video.srcObject as MediaStream).getTracks().forEach((track) => track.stop())
-        }
-        video.srcObject = newStream // Set new stream
-        await video.play() // Attempt to play video
-      }
       setStream(newStream)
       const video = videoRef.current
       if (video) {
