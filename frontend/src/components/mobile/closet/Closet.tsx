@@ -71,7 +71,6 @@ const Closet: React.FC = () => {
     setIsLoading(true)
     await closetItemList(profilePk).then((response) => {
       setClothList(response.data.result)
-      console.log(response.data.result)
     })
     setIsLoading(false)
   }
@@ -239,7 +238,7 @@ const Closet: React.FC = () => {
               <div className={styles.slide}></div>
             </div>
             <div className={styles.mainTitle}>
-              <p className={styles.userName}>{userName} 님의 옷장</p>
+              <p className={styles.userName}>{userName}님의 옷장</p>
             </div>
             <div className={styles.mainClothes}>
               <div className={styles.clothesContent}>

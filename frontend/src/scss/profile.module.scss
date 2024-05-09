@@ -83,10 +83,14 @@
   font-size: 0.9em;
 }
 
+.member1 span, .member2 span, .member3 span, .member4 span {
+  width: 100px;
+  display: inline-block;
+}
+
 .member1Img, .member2Img, .member3Img, .member4Img {
   object-fit: cover;
   width: 20vw;
-  // border: 1px solid #afafaf;
   border-radius: 100%;
   margin-bottom: 1vh;
   cursor: pointer;

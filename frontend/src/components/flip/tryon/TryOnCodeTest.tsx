@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import QRCode from 'qrcode.react'
 import styles from '../../../scss/tryoncodetest.module.scss'
 
-const BASE_URL = 'http://localhost:5000'
-// const BASE_URL = 'https://ourtrip.store'
+// const BASE_URL = 'http://localhost:5000'
+const BASE_URL = 'https://ourtrip.store'
 const TIME = {
   ONE_SECOND: 1000,
   ONE_MINUTE: 60  
@@ -61,7 +61,7 @@ const TryOn: React.FC = () => {
     <div className={styles.container}>
 
       <div className={styles.bgVideo}>
-        <video className={styles.bgVideoContent} autoPlay muted loop>
+        <video className={styles.bgVideoContent} autoPlay muted loop >
           <source src="/assets/background.mp4" />
         </video>
       </div>
@@ -83,10 +83,10 @@ const TryOn: React.FC = () => {
 
       <section className={styles.qrcode}>
         {sessionId && remainTime > 0 ?
-          <>
+          <div className={styles.qrcodeCreate}>
             <QRCode className={styles.qrcodeImg} value={sessionId}/>
             <p className={styles.remainTime}>{remainTime}초 남았습니다.</p>
-          </> : 
+          </div> : 
           <div className={styles.qrcodeInner}>
             <p className={styles.qrcodeInnerText1}>QR코드 보기 버튼을 다시 눌러주세요.</p>
           </div>

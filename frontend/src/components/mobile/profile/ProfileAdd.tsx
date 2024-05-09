@@ -58,7 +58,6 @@ const ProfileAdd: React.FC = () => {
   }
 
   const complete = async () => {
-    console.log('생성중')
     setIsSubmitting(true)
     const userPk = String(localStorage.getItem('userPk'))
     if (weight !== '') {
@@ -172,7 +171,7 @@ const ProfileAdd: React.FC = () => {
     <>
       <div className={styles.container}>
       <div className={styles.bgVideo}>
-        <video className={styles.bgVideoContent} autoPlay muted loop>
+        <video className={styles.bgVideoContent} autoPlay muted loop >
           <source src='/src/assets/background_light.mp4' />
         </video>
 			</div>
