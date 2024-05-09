@@ -47,6 +47,14 @@ const AddCloth: React.FC = () => {
     const constraints = { video: { facingMode: newCamera } }
     try {
       const newStream = await navigator.mediaDevices.getUserMedia(constraints)
+      const video = videoRef.current
+      if (video) {
+        if (video.srcObject) {
+          ;(video.srcObject as MediaStream).getTracks().forEach((track) => track.stop())
+        }
+        video.srcObject = newStream // Set new stream
+        await video.play() // Attempt to play video
+      }
       setStream(newStream)
     } catch (error) {
       console.error('카메라 접근 오류:', error)
@@ -55,29 +63,9 @@ const AddCloth: React.FC = () => {
 
   // 비디오 요소 초기화 및 스트림 설정
   useEffect(() => {
-    const video = videoRef.current
-    if (video && stream) {
-      // 이전 스트림 중지 및 제거
-      if (video.srcObject) {
-        const oldStream = video.srcObject as MediaStream
-        oldStream.getTracks().forEach((track) => track.stop())
-      }
-
-      // 새 스트림 로드
-      video.srcObject = stream
-      video.load() // 새로운 스트림 로드 강제
-
-      const playVideo = () => {
-        if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
-          video.play().catch((error) => {
-            console.error('비디오 재생 오류:', error)
-            setTimeout(playVideo, 1000) // 1초 후 재시도
-          })
-        }
-      }
-
-      video.addEventListener('canplay', playVideo)
-      return () => video.removeEventListener('canplay', playVideo)
+    return () => {
+      // 컴포넌트 언마운트 시 모든 스트림 중지
+      stream?.getTracks().forEach((track) => track.stop())
     }
   }, [stream])
 
@@ -116,7 +104,7 @@ const AddCloth: React.FC = () => {
         setCameraActive(true)
         setCaptureMode(true)
         setSearchMode('camera')
-        await CameraClick(camera)
+        await CameraClick()
       } catch (error) {
         console.error('Camera failed to start:', error)
       }
@@ -124,12 +112,10 @@ const AddCloth: React.FC = () => {
   }
 
   // 카메라 전환
-  const toggleCamera = () => {
-    setCamera((prevCamera) => {
-      const newCamera = prevCamera === 'environment' ? 'user' : 'environment'
-      CameraClick(newCamera)
-      return newCamera
-    })
+  const toggleCamera = async () => {
+    const newCamera = camera === 'environment' ? 'user' : 'environment'
+    await CameraClick(newCamera)
+    setCamera(newCamera)
   }
 
   // 전면 카메라 사용시 거울 모드 적용
