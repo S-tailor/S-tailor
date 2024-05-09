@@ -22,8 +22,7 @@ const ClosetSearch: React.FC = () => {
     }
     try {
       const response = await closetSearch({ profilePk, content: searchText })
-      console.log(profilePk)
-      console.log(response.data)
+     
       setSearchResults(response.data.result)
     } catch (error) {
       console.log('에러 발생:', error)

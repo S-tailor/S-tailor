@@ -33,8 +33,7 @@ const Ask: React.FC = () => {
 
   const resetConversation = async () => {
     await reset(profilePk)
-      .then((response) => {
-        console.log(response)
+      .then(() => {
       })
       .catch(() => {
         console.error
@@ -85,13 +84,6 @@ const Ask: React.FC = () => {
   const handleFocus = () => {
     setIsFocused(true)
   }
-
-  // const handleBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
-  //   console.log(e.type)
-  //   if (e.type == 'blur' && !buttonRef.current) {
-  //     setIsFocused(false)
-  //   }
-  // }
 
   const handleClickOutside = (event: TouchEvent | any) => {
     if (event.target.tagName !== 'IMG' && event.target.tagName !== 'input') {

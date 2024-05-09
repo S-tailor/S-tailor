@@ -51,7 +51,7 @@ const AddCloth: React.FC = () => {
       const video = videoRef.current
       if (video) {
         video.srcObject = newStream
-        video.play().catch((error) => console.error('비디오 재생 오류:', error))
+        // video.play().catch((error) => console.error('비디오 재생 오류:', error))
       }
     } catch (error) {
       console.error('카메라 접근 오류:', error)
@@ -88,8 +88,8 @@ const AddCloth: React.FC = () => {
         })
         if (blob) {
           const file = new File([blob], 'captured-image.png', { type: 'image/png' })
-          const url = URL.createObjectURL(blob)
-          console.log('Capture successful:', url)
+          
+        
           saveImage(file)
         }
       }
@@ -117,14 +117,15 @@ const AddCloth: React.FC = () => {
     setCamera((prevCamera) => {
       const newCamera = prevCamera === 'environment' ? 'user' : 'environment'
       const video = videoRef.current
-      if (video && stream) {
+      if (video && video.srcObject) {
         // 이전 스트림 중지
-        stream.getTracks().forEach((track) => track.stop())
+        const tracks = (video.srcObject as MediaStream).getTracks()
+        tracks.forEach((track) => track.stop())
       }
       CameraClick(newCamera) // CameraClick을 호출하여 새로운 camera 상태에 따라 재설정
-      if (video && video.srcObject && video.paused) {
-        video.play().catch((error) => console.error('비디오 재생 오류:', error))
-      }
+      // if (video && video.srcObject && video.paused) {
+      //   video.play().catch((error) => console.error('비디오 재생 오류:', error))
+      // }
       return newCamera
     })
   }
