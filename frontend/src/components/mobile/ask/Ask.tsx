@@ -15,7 +15,6 @@ const Ask: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const formData = new FormData()
   const { cartCount } = userStore()
-  // const {user} = userStore()
   const [isLoading, setIsLoading] = useState(false)
 
   const inputRef = useRef<HTMLInputElement>(null)
@@ -84,6 +83,7 @@ const Ask: React.FC = () => {
   const handleFocus = () => {
     setIsFocused(true)
   }
+
 
   const handleClickOutside = (event: TouchEvent | any) => {
     if (event.target.tagName !== 'IMG' && event.target.tagName !== 'input') {
@@ -238,7 +238,6 @@ const Ask: React.FC = () => {
             onChange={saveText}
             value={text}
             onFocus={handleFocus}
-            // onBlur={handleBlur}
             ref={inputRef}
           />
           <img

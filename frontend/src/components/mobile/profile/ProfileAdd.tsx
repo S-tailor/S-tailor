@@ -58,7 +58,6 @@ const ProfileAdd: React.FC = () => {
   }
 
   const complete = async () => {
-   
     setIsSubmitting(true)
     const userPk = String(localStorage.getItem('userPk'))
     if (weight !== '') {

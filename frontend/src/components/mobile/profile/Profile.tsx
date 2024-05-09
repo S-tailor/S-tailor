@@ -31,7 +31,6 @@ const Profile: React.FC = () => {
     setUserList(response.data.result)
 
     setIsLoading(!isLoading)
-
     setIsLoading(!isLoading)
   }
 
