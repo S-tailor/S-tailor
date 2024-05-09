@@ -77,17 +77,28 @@ p {
 
 .qrcode {
   margin-top: 2vh;
-}
-
-.qrcodeImg {
-  width: 80vw;
-  margin-bottom: 2vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
+.qrcodeCreate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.qrcodeImg {
+  width: 1500px;
+  height: 1500px;
+  margin-bottom: 2vh;
+}
+
 .remainTime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
