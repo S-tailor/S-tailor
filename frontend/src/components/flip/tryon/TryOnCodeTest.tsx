@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import QRCode from 'qrcode.react'
 import styles from '../../../scss/tryoncodetest.module.scss'
 
-const BASE_URL = 'http://localhost:5000'
-// const BASE_URL = 'https://ourtrip.store'
+// const BASE_URL = 'http://localhost:5000'
+const BASE_URL = 'https://ourtrip.store'
 const TIME = {
   ONE_SECOND: 1000,
   ONE_MINUTE: 60  
