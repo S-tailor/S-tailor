@@ -239,7 +239,7 @@ const Closet: React.FC = () => {
               <div className={styles.slide}></div>
             </div>
             <div className={styles.mainTitle}>
-              <p className={styles.userName}>{userName} 님의 옷장</p>
+              <p className={styles.userName}>{userName}님의 옷장</p>
             </div>
             <div className={styles.mainClothes}>
               <div className={styles.clothesContent}>
