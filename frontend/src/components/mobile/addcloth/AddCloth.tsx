@@ -43,19 +43,16 @@ const AddCloth: React.FC = () => {
   const [camera, setCamera] = useState<CameraMode>('environment')
   const [stream, setStream] = useState<MediaStream | null>(null)
 
-  const CameraClick = async (newCamera: CameraMode) => {
+  const CameraClick = async (newCamera: CameraMode = camera) => {
     const constraints = { video: { facingMode: newCamera } }
     try {
       const newStream = await navigator.mediaDevices.getUserMedia(constraints)
+      setStream(newStream)
       const video = videoRef.current
       if (video) {
-        if (video.srcObject) {
-          ;(video.srcObject as MediaStream).getTracks().forEach((track) => track.stop())
-        }
-        video.srcObject = newStream // Set new stream
-        await video.play() // Attempt to play video
+        video.srcObject = newStream
+        video.play().catch((error) => console.error('비디오 재생 오류:', error))
       }
-      setStream(newStream)
     } catch (error) {
       console.error('카메라 접근 오류:', error)
     }
@@ -63,9 +60,13 @@ const AddCloth: React.FC = () => {
 
   // 비디오 요소 초기화 및 스트림 설정
   useEffect(() => {
-    return () => {
-      // 컴포넌트 언마운트 시 모든 스트림 중지
-      stream?.getTracks().forEach((track) => track.stop())
+    if (videoRef.current && stream) {
+      const video = videoRef.current
+      // 비디오 요소가 재생 중이지 않은 경우에만 재생
+      if (video.paused) {
+        video.srcObject = stream
+        video.play().catch((error) => console.error('비디오 재생 오류:', error))
+      }
     }
   }, [stream])
 
@@ -104,7 +105,7 @@ const AddCloth: React.FC = () => {
         setCameraActive(true)
         setCaptureMode(true)
         setSearchMode('camera')
-        await CameraClick(camera)
+        await CameraClick()
       } catch (error) {
         console.error('Camera failed to start:', error)
       }
@@ -112,10 +113,20 @@ const AddCloth: React.FC = () => {
   }
 
   // 카메라 전환
-  const toggleCamera = async () => {
-    const newCamera = camera === 'environment' ? 'user' : 'environment'
-    await CameraClick(newCamera)
-    setCamera(newCamera)
+  const toggleCamera = () => {
+    setCamera((prevCamera) => {
+      const newCamera = prevCamera === 'environment' ? 'user' : 'environment'
+      const video = videoRef.current
+      if (video && stream) {
+        // 이전 스트림 중지
+        stream.getTracks().forEach((track) => track.stop())
+      }
+      CameraClick(newCamera) // CameraClick을 호출하여 새로운 camera 상태에 따라 재설정
+      if (video && video.srcObject && video.paused) {
+        video.play().catch((error) => console.error('비디오 재생 오류:', error))
+      }
+      return newCamera
+    })
   }
 
   // 전면 카메라 사용시 거울 모드 적용
