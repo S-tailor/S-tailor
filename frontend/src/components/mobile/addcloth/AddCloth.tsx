@@ -104,7 +104,7 @@ const AddCloth: React.FC = () => {
         setCameraActive(true)
         setCaptureMode(true)
         setSearchMode('camera')
-        await CameraClick()
+        await CameraClick(camera)
       } catch (error) {
         console.error('Camera failed to start:', error)
       }
