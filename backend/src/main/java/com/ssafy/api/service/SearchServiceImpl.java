@@ -9,9 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +24,9 @@ public class SearchServiceImpl implements SearchService{
     @Value("${SerpAPI_Key}")
     private String SerpAPI_Key;
 
+    @Value("${Lambda_URL}")
+    private String Lambda_URL;
+
     @Autowired
     S3UpDownloadService s3UpDownloadService;
 
@@ -27,22 +34,18 @@ public class SearchServiceImpl implements SearchService{
     public List<SearchResultDTO> textSearch(String content) {
         RestTemplate restTemplate = new RestTemplate();
 
-        String url = "https://serpapi.com/search.json?" +
-                "engine=google_shopping" +
-                "&google_domain=google.co.kr" +
-                "&gl=kr" +
-                "&hl=ko" +
-                "&api_key=" + SerpAPI_Key +
-                "&q=" + content;
+        String url = Lambda_URL+"/search";
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("text", content);
 
-        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(url, jsonObject,String.class);
 
         List<SearchResultDTO> result = new ArrayList<>();
 
         try {
             JSONParser parser = new JSONParser();
             JSONObject responseJSON = (JSONObject) parser.parse(response.getBody());
-            JSONArray shoppingResults = (JSONArray) responseJSON.get("shopping_results");
+            JSONArray shoppingResults = (JSONArray) responseJSON.get("body");
             for (Object shoppingResult : shoppingResults) {
                 SearchResultDTO dto = new SearchResultDTO();
                 dto.setLink((String) ((JSONObject)shoppingResult).get("link"));
