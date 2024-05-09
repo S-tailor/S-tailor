@@ -26,12 +26,8 @@ const Profile: React.FC = () => {
   // 유저 프로필 리스트
   const fetchUser = async (id: string) => {
     const response = await profileList(id)
-    // console.log(response)
-
     setUserList(response.data.result)
-    // console.log(response.data.result)
     setIsLoading(!isLoading)
-
     setIsLoading(!isLoading)
   }
 
