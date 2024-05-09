@@ -28,14 +28,31 @@ p {
 
 .topTitle {
   width: 100vw;
-  height: 35%;
+  height: 38%;
   display: flex;
   align-items: flex-end;
 }
 
 .topTitleInner {
-  width: 100vw;
-  animation:text-flicker-in-glow 1s linear 1s both
+  animation:text-flicker-in-glow 1s linear both
+}
+
+.connectContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 42%;
+  width: 100%;
+  font-size: 0.9em;
+  font-family: 'Pretendard-Regular';
+  color: white;
+  animation:fade-in-fwd 1s cubic-bezier(.39,.575,.565,1.000) 1s both
+}
+
+.connetImg {
+  margin-bottom: 4vh;
 }
 
 
@@ -49,22 +66,15 @@ p {
 }
 
 .middleTitleInner{
-  animation:text-flicker-in-glow 1s linear 1.5s both
+  animation:text-flicker-in-glow 1s linear 0.5s both
 }
 
-.texts1 {
-  width: 100vw;
+.texts {
   font-family: 'main-title';
-  font-size: 14vw;
+  font-size: 3.5em;
   color: white;
-  line-height: 1;
-}
-
-.texts2 {
-  font-family: 'main-title';
-  font-size: 14vw;
-  color: white;
-  line-height: 1;
+  margin-top: -6vh;
+  margin-left: 0vw;
 }
 
 @keyframes text-flicker-in-glow{
@@ -76,6 +86,7 @@ p {
   align-items: center;
   width: 100vw;
   height: 24%;
+  animation:fade-in-fwd 1s cubic-bezier(.39,.575,.565,1.000) 3s both
 }
 
 .btn {
@@ -89,15 +100,15 @@ p {
   font-family: 'Pretendard-SemiBold';
   font-size: 0.9em;
   letter-spacing: 1px;
-  animation:fade-in 1.2s cubic-bezier(.39,.575,.565,1.000) 2.5s both
 }
 
-@keyframes fade-in{0%{opacity:0}100%{opacity:1}}
-
-.btnText::before {
-  content: '시작하기';
-}
-
-.btn:hover .btnText::before {
-  content: 'Go Go !';
+@keyframes fade-in-fwd {
+  0%{
+    transform:translateZ(-80px);
+    opacity:0
+  }
+  100%{
+    transform:translateZ(0);
+    opacity:1
+  }
 }

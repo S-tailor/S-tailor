@@ -55,9 +55,10 @@
 }
 
 .texts {
+  width: 100%;
   font-family: 'Pretendard-Bold';
   width: 63vw;
-  font-size: 2.5em;
+  font-size: 10vw;
   padding: 0;
   margin: 0;
 }
@@ -130,6 +131,7 @@
 }
 
 .btn {
+  position: relative;
   width: 80vw;
   height: 7vh;
   border: 1px solid #222222;
@@ -137,11 +139,19 @@
   color: #222222;
   border-radius: 50px;
   font-family: 'Pretendard-Bold';
-
   font-size: 0.9em;
   letter-spacing: 1px;
   &:hover {
     background-color: #222222;
     color: white;
   }
+}
+
+.loading {
+  position: absolute;
+  top: 20%;
+  left: 45%;
+  padding: 0;
+  margin: 0;
+  width: 35px;
 }

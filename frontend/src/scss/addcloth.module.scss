@@ -11,7 +11,6 @@
   width: 100%;
   z-index: 1005;
   background-color: white;
-  // box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .headerInner {
@@ -35,7 +34,7 @@
 
 .addClothMain {
   width: 100vw;
-  height: 79vh;
+  height: 77vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,6 +71,23 @@
   cursor: pointer;
 }
 
+.loadingInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -75%);
+  z-index: 3000;
+}
+
+.loading {
+  width : 20vw;
+  z-index: 3000;
+}
+
 .infomation {
   width: 90vw;
   display: flex;
@@ -104,7 +120,7 @@
 
 .resultItemImg {
   width: 100%;
-  height: 15vh;
+  height: 120px;
   object-fit: cover;
   border-radius: 5px;
   filter: drop-shadow(0px 0px 1px #c4c4c4);
@@ -161,15 +177,15 @@
   margin-top: 3vh;
   margin-bottom: 10vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 5px;
 }
 
 .pictureButtons {
   position: fixed;
-  bottom: 10%;
-  margin-bottom: 4vh;
+  bottom: 12%;
+  margin-bottom: 2.5vh;
   width: 90vw;
   display: flex;
   justify-content: space-between;
@@ -178,6 +194,7 @@
 
 .selected {
   width: 90vw;
+  margin-right: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -194,7 +211,7 @@
 .seletedTexts {
   width: 100%;
   height: 80%;
-  margin-left: 2vw;
+  margin-left: 4vw;
 }
 
 .selectedSource {
@@ -217,7 +234,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 250px;
+  width: 230px;
   font-size: 0.7em;
   font-family: 'Pretendard-Bold';
   color: #3d3d3d;
@@ -276,7 +293,8 @@
 }
 
 .gallery {
-  width: 20vw;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
 }
 
@@ -285,12 +303,14 @@ input[type='file'] {
 }
 
 .camera {
-  width: 20vw;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
 }
 
 .switch {
-  width: 20vw;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
 }
 
@@ -343,7 +363,7 @@ input[type='file'] {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 10%;
+  height: 12%;
   background-color: #ffffff;
   box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000;
@@ -357,7 +377,7 @@ input[type='file'] {
   align-items: center;
   text-align: center;
   width: 100vw;
-  margin-top: 1vh;
+  margin-top: -2vh;
 }
 
 .bottomNavLabel1,

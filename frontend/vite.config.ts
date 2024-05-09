@@ -17,8 +17,8 @@ export default defineConfig({
       },
       manifest: {
         theme_color: '#ffffff',
-        name: 'S-tailor',
-        short_name: 'S-tailor',
+        name: 'S-Tailor',
+        short_name: 'S-Tailor',
         start_url: '/',
         display: 'standalone',
         description: 'A virtual cloth app.',

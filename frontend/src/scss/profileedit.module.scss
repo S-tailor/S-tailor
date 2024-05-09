@@ -47,7 +47,7 @@
 }
 
 .backBtn {
-  width: 5vw;
+  width: 20px;
   margin-left: 10vw;
   cursor: pointer;
 }
@@ -95,7 +95,6 @@
   object-fit: cover;
   width: 20vw;
   height: 20vw;
-  // border: 1px solid #afafaf;
   border-radius: 100%;
   margin-bottom: 1vh;
 }
@@ -171,7 +170,6 @@ input[type="file"] {
   width: 80vw; 
   height: 3px; 
   position: relative;
-  // margin-left: 10vw;
 
   &:after {
     content: '';
@@ -303,7 +301,7 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
 
 .btn {
   width: 80vw;
-  height: 7vh;
+  height: 55px;
   border: 1px solid #222222;
   background-color: transparent;
   color: #222222;
@@ -320,7 +318,7 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
 
 .btn2 {
   width: 80vw;
-  height: 7vh;
+  height: 55px;
   border: 1px solid #222222;
   background-color: transparent;
   color: #222222;
@@ -345,7 +343,7 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
 
 .btn3 {
   width: 80vw;
-  height: 7vh;
+  height: 55px;
   border: 1px solid #222222;
   background-color: transparent;
   color: #222222;

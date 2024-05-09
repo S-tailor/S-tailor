@@ -16,12 +16,13 @@ const ClosetWishList: React.FC = () => {
   const [cartList, setCartList] = useState<cartInfo[]>([])
   const navigate = useNavigate()
   const cartCount = cartList.length
-
+  const [isLoading, setIsLoading] = useState(false)
   const goShopping = (link: string) => {
     window.open(link, '_blank')
   }
 
   useEffect(() => {
+    setIsLoading(true)
     const profilePk = Number(sessionStorage.getItem('profilePk'))
     fetchCart(profilePk)
   }, [])
@@ -39,10 +40,11 @@ const ClosetWishList: React.FC = () => {
 
   const fetchCart = async (pk: number) => {
     await cartItemList(pk).then((response) => {
-      setTimeout(() => {
+    
         setCartList(response.data.result)
-      }, 500)
+
     })
+    setIsLoading(false)
   }
 
   const goCloset = () => {
@@ -74,6 +76,11 @@ const ClosetWishList: React.FC = () => {
 
       <div className={styles.main}>
         <p className={styles.length}>위시리스트에 {cartCount}개의 상품이 있습니다.</p>
+        {isLoading &&
+          <div className={styles.loadingInner}>
+            <img className={styles.loading} src="/assets/loading.gif" alt="로딩중" />
+          </div>
+        }
 
         {cartList.map((item, idx) => (
           <div className={styles.selected} key={idx}>
@@ -82,7 +89,7 @@ const ClosetWishList: React.FC = () => {
             <div className={styles.seletedTexts}>
               <p className={styles.selectedSource}>{item.source}</p>
               <h4 className={styles.selectedTitle}>{item.name}</h4>
-              <p className={styles.selectedPrice}>{item.price}원</p>
+              <p className={styles.selectedPrice}>{item.price.substring(1).replace(/\*/g, '')}원</p>
               <div className={styles.selectedBtn}>
                 <img
                   className={styles.selectedDeleteBtn}

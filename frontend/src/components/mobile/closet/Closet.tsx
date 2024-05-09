@@ -1,7 +1,7 @@
 import React, { useEffect, startTransition, useState, useMemo } from 'react'
 import userStore from '@/store/store'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { closetItemList, closetItemDelete } from '@/api/apiCloset'
+import { closetItemList, closetItemDelete, closetCategory } from '@/api/apiCloset'
 import { cartItemList, cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/closet.module.scss'
 
@@ -25,35 +25,61 @@ const Closet: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true)
   const { cartCount, updateCartList, addToCart } = userStore()
   const [selectedCategory, setSelectedCategory] = useState('전체')
-
-  const categories = ['전체', '아우터', '상의', '하의', '원피스', '기타']
-
-  const handleCategoryClick = (category: string) => {
-    setSelectedCategory(category)
+  
+  const categories = ['전체', '아우터', '상의', '긴 하의', '짧은 하의','원피스', '기타']
+  
+  const profilePk = Number(user[0]?.profilePk)
+  
+  interface CategoryDictionary {
+    [key: string]: string;
   }
 
+  const categoryDict: CategoryDictionary = {
+    '전체':'all',
+    '아우터':'Outerwear',
+    '상의':'Top',
+    '긴 하의':'Pants',
+    '짧은 하의':'Shorts',
+    '원피스':'Dress',
+    '기타':'Etc'
+  }
+
+  const handleCategoryClick = async (category: string) => {
+    setSelectedCategory(category)
+      const selectCategory = categoryDict[category]
+     
+      if (selectCategory == 'all')
+        {fetchItem(profilePk)
+          return
+        }
+      
+      await closetCategory(Number(profilePk), selectCategory)
+      .then((response)=> {
+        const filteredClothes = response.data.result;
+      setClothList(filteredClothes);
+      })  
+  
+    }
+  
   useEffect(() => {
-    const profilePk = Number(user[0]?.profilePk)
     if (profilePk) {
       fetchItem(profilePk)
     }
   }, [])
-
+  
   const fetchItem = async (profilePk: number) => {
+    setIsLoading(true)
     await closetItemList(profilePk).then((response) => {
       setClothList(response.data.result)
-      setTimeout(() => {
-        setIsLoading(!isLoading)
-      }, 500)
-      setIsLoading(!isLoading)
     })
+    setIsLoading(false)
   }
-
+  
   const deleteCloth = async (pk: number) => {
     const response = await closetItemDelete(pk)
     if (response.status === 200) {
       setClothList((currentList) => currentList.filter((item) => item.closetPk !== pk))
-      alert('옷장에서 삭제되었습니다!')
+      confirm('옷장에서 삭제되었습니다!')
     } else {
       console.error('Failed to delete', pk)
     }
@@ -132,7 +158,7 @@ const Closet: React.FC = () => {
     const profilePk = Number(sessionStorage.getItem('profilePk'))
     const response = await cartItemList(profilePk)
     if (response.status === 200) {
-      // console.log('마킹', response.data.result, profilePk)
+      
       const cartList = response.data.result
       updateCartList(cartList)
       userStore.getState().setCartCount(cartList.length)
@@ -212,7 +238,7 @@ const Closet: React.FC = () => {
               <div className={styles.slide}></div>
             </div>
             <div className={styles.mainTitle}>
-              <p className={styles.userName}>{userName} 님의 옷장</p>
+              <p className={styles.userName}>{userName}님의 옷장</p>
             </div>
             <div className={styles.mainClothes}>
               <div className={styles.clothesContent}>
@@ -236,8 +262,9 @@ const Closet: React.FC = () => {
                         alt="deleteBtn"
                       />
                     </div>
+                    <p className={styles.clothesSource}>{cloth.source}</p>
                     <p className={styles.clothesName}>{cloth.name}</p>
-                    <p className={styles.clothesPrice}>{cloth.price.substring(1)}원</p>
+                    <p className={styles.clothesPrice}>{cloth.price.substring(1).replace(/\*/g, '')}원</p>
                   </div>
                 ))}
               </div>

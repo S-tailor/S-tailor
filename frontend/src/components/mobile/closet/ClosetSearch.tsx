@@ -6,6 +6,7 @@ import styles from '../../../scss/closetsearch.module.scss'
 const ClosetSearch: React.FC = () => {
   const [searchText, setSearchText] = useState<string>('')
   const [searchResults, setSearchResults] = useState<any[]>([])
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
   const profilePk = sessionStorage.getItem('profilePk')
 
@@ -14,18 +15,17 @@ const ClosetSearch: React.FC = () => {
   }
 
   const handleSearch = async () => {
+    setIsLoading(true)
     if (!searchText) {
       alert('검색어를 입력해주세요!')
       return
     }
     try {
       const response = await closetSearch({ profilePk, content: searchText })
-      console.log(profilePk)
-      console.log(response.data)
       setSearchResults(response.data.result)
     } catch (error) {
-      console.log('에러 발생:', error)
     }
+    setIsLoading(false)
   }
 
   const clearSearch = () => {
@@ -66,16 +66,20 @@ const ClosetSearch: React.FC = () => {
 
         </div>
       </div> 
- 
       <div className={styles.searchClothes}>
         {searchResults.map((item, index) => (
           <div key={index} className={styles.resultItem}>
             <img className={styles.resultItemImg} src={item.image} alt={item.name} />
-            <p className={styles.clothesSource}>판매처: {item.source}</p>
+            <p className={styles.clothesSource}>{item.source}</p>
             <p className={styles.clothesName}>{item.name}</p>
-            <p className={styles.clothesPrice}>가격: {item.price}</p>
+            <p className={styles.clothesPrice}>{item.price.substring(1).replace(/\*/g, '')}원</p>
           </div>
         ))}
+        {isLoading && (
+          <div className={styles.loadingInner}>
+            <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
+          </div>
+        )}
       </div>
     </div>
   )

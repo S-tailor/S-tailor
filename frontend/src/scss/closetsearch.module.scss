@@ -25,7 +25,7 @@
 }
 
 .backBtn {
-  width: 5vw;
+  width: 20px;
   cursor: pointer;
   display: flex;
   opacity: 60%;
@@ -73,14 +73,17 @@
 }
 
 .searchClothes {
+  padding-top: 10px;
+  padding-left: 1px;
+  padding-right: 1px;
   width: 90vw;
-  margin-top: 3vh;
+  margin-top: 2vh;
   margin-bottom: 10vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 1.2vw;
   overflow: scroll;
 }
 
@@ -94,7 +97,7 @@
 
 .resultItemImg {
   width: 100%;
-  height: 15vh;
+  height: 120px;
   border-radius: 5px;
   filter: drop-shadow(0px 0px 1px #c4c4c4);
 }
@@ -131,4 +134,19 @@
   margin: 0;
   padding-top: 5px;
   color :#3d3d3d;
+}
+
+.loadingInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -75%);
+}
+
+.loading {
+  width: 20vw;
 }

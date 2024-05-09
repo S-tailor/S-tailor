@@ -14,20 +14,20 @@ const Main: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.bgVideo}>
-        <video className={styles.bgVideoContent} autoPlay muted loop>
+        <video className={styles.bgVideoContent} autoPlay muted loop >
           <source src='/assets/background.mp4' />
         </video>
       </div>
       <section className={styles.topTitle}>
         <div className={styles.topTitleInner}>
-          <p className={styles.texts}>FASHION IS</p>
-          <p className={styles.texts}>INSTANT</p>
-          <p className={styles.texts}>LANGUAGE</p>
+          <p className={styles.texts1}>FASHION IS</p>
+          <p className={styles.texts1}>INSTANT</p>
+          <p className={styles.texts1}>LANGUAGE</p>
         </div>
       </section>
       <section className={styles.middleTitle}>
         <div className={styles.middleTitleInner}>
-          <p className={styles.texts}>S-TAILOR</p>
+          <p className={styles.texts2}>S-TAILOR</p>
         </div>
       </section>
       <section className={styles.bottomButton}>

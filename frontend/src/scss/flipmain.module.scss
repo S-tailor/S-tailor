@@ -28,13 +28,14 @@ p {
 
 .topTitle {
   width: 100vw;
-  height: 40%;
+  height: 37%;
   display: flex;
   align-items: flex-end;
 }
 
 .topTitleInner {
   animation: text-flicker-in-glow 1s linear both;
+  flex-wrap: nowrap;
 }
 
 .middleTitle {
@@ -51,10 +52,11 @@ p {
 
 .texts {
   font-family: 'main-title';
-  font-size: 19em;
+  font-size: 300px;
   color: white;
-  margin-top: -7vh;
-  margin-left: -1vw;
+  line-height: 1;
+  margin-left: 0vw;
+  flex-wrap: nowrap;
 }
 
 .touch {
@@ -67,9 +69,9 @@ p {
 .touchImg {
   position: absolute;
   cursor: pointer;
-  top: 50%;
+  top: 53%;
   left: 45%;
-  width: 300px;
+  width: 250px;
   animation: ping 2.5s ease-in-out infinite both;
 }
 
@@ -77,10 +79,10 @@ p {
   width: 90%;
   position: fixed;
   top: 52%;
-  font-size: 6em;
+  font-size: 90px;
   color: white;
   font-family: 'Pretendard-SemiBold';
-  animation:tracking-in-expand-fwd .8s cubic-bezier(.215,.61,.355,1.000) both
+  animation: tracking-in-expand-fwd 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) both;
 }
 
 @keyframes ping {
@@ -243,4 +245,17 @@ p {
   }
 }
 
-@keyframes tracking-in-expand-fwd{0%{letter-spacing:-.5em;transform:translateZ(-700px);opacity:0}40%{opacity:.6}100%{transform:translateZ(0);opacity:1}}
+@keyframes tracking-in-expand-fwd {
+  0% {
+    letter-spacing: -0.5em;
+    transform: translateZ(-700px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateZ(0);
+    opacity: 1;
+  }
+}

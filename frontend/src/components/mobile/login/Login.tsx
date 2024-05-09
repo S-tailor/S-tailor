@@ -8,7 +8,7 @@ const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
-
+  const [isLoading, setIsLoading] = useState(false)
   const id = location.state?.id
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +20,7 @@ const Login: React.FC = () => {
   }
 
   const LoginClick = async () => {
+    setIsLoading(true)
     try {
       const response = await userLogin(id, password)
       if (response.data.statusCode === 200) {
@@ -44,6 +45,7 @@ const Login: React.FC = () => {
     } catch (error) {
       console.error('로그인 실패', error)
     }
+    setIsLoading(false)
   }
 
   const goEmail = () => {
@@ -55,7 +57,7 @@ const Login: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.bgVideo}>
-        <video className={styles.bgVideoContent} autoPlay muted loop>
+        <video className={styles.bgVideoContent} autoPlay muted loop >
           <source src='/assets/background_light.mp4' />
         </video>
       </div>
@@ -106,7 +108,11 @@ const Login: React.FC = () => {
       <article className={styles.bottomArticle}>
         <section className={styles.bottomButton}>
           <button className={styles.btn} onClick={LoginClick}>
-            로그인
+          {isLoading ? (
+                  <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
+                ) : (
+                  "로그인"
+                )}
           </button>
         </section>
       </article>

@@ -5,7 +5,7 @@ import styles from '../../../scss/start.module.scss';
 
 const Start: React.FC = () => {
   const [isUser, setIsUser] = useState('')
-
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
 
   const checkEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,6 +13,7 @@ const Start: React.FC = () => {
   }
 
   const ContinueClick = async () => {
+    setIsLoading(true)
     try {
       // 이메일 존재 여부 확인
       const response = await userCheck(isUser)
@@ -31,6 +32,7 @@ const Start: React.FC = () => {
       // 오류 발생 시 로그 출력
       console.error('DB 오류', error)
     }
+    setIsLoading(true)
   }
 
   const goHome = () => {
@@ -42,7 +44,7 @@ const Start: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.bgVideo}>
-        <video className={styles.bgVideoContent} autoPlay muted loop>
+        <video className={styles.bgVideoContent} autoPlay muted loop >
           <source src='/assets/background_light.mp4' />
         </video>
 			</div>
@@ -69,7 +71,13 @@ const Start: React.FC = () => {
       </section>
 
       <section className={styles.bottomButton}>
-        <button className={styles.btn} onClick={ContinueClick}>계속하기</button>
+        <button className={styles.btn} onClick={ContinueClick}>
+        {isLoading ? (
+                  <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
+                ) : (
+                  "계속하기"
+                )}
+        </button>
       </section>
 
     </div>

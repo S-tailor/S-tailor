@@ -8,7 +8,7 @@ const Signup: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const navigate = useNavigate()
   const location = useLocation()
-
+  const [isLoading, setIsLoading] = useState(false)
   const id = location.state?.id
   if (!id) {
     console.error('No ID provided from Start page.')
@@ -36,8 +36,9 @@ const Signup: React.FC = () => {
       alert('비밀번호가 일치하지 않습니다.')
       return
     }
-
+    
     try {
+      setIsLoading(true)
       const response = await userCreate(id, password)
       if (response.data.statusCode === 200) {
         const configData = JSON.parse(response.config.data)
@@ -51,6 +52,8 @@ const Signup: React.FC = () => {
     } catch (error) {
       console.error('회원가입 실패', error)
     }
+
+    setIsLoading(false)
   }
 
   const goEmail = () => {
@@ -62,7 +65,7 @@ const Signup: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.bgVideo}>
-        <video className={styles.bgVideoContent} autoPlay muted loop>
+        <video className={styles.bgVideoContent} autoPlay muted loop >
           <source src='/assets/background_light.mp4' />
         </video>
 			</div>
@@ -119,7 +122,11 @@ const Signup: React.FC = () => {
         </section>
         <section className={styles.bottomButton}>
           <button className={styles.btn} onClick={SignupClick}>
-            회원가입
+          {isLoading ? (
+                  <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
+                ) : (
+                  "회원가입"
+                )}
           </button>
         </section>
       </article>

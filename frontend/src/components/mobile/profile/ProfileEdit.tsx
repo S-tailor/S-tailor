@@ -199,7 +199,7 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
     return (
         <div className={styles.container}>
           <div className={styles.bgVideo}>
-            <video className={styles.bgVideoContent} autoPlay muted loop>
+            <video className={styles.bgVideoContent} autoPlay muted loop >
               <source src='/assets/background_light.mp4' />
             </video>
           </div>

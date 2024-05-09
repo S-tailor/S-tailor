@@ -2,10 +2,10 @@ import React, { startTransition, useMemo, useState, useRef, useEffect } from 're
 import { useLocation, useNavigate } from 'react-router-dom'
 import { chatbot, reset } from '@/api/apiAsk'
 import userStore from '@/store/store'
-// import { cartItemAdd } from '@/api/apiCart'
 import styles from '../../../scss/ask.module.scss'
 
 const Ask: React.FC = () => {
+  const [isFocused, setIsFocused] = useState(false)
   const [fileUrl, setFileUrl] = useState<string>('')
   const [file, setFile] = useState<File | null>()
   const [text, setText] = useState<string>('')
@@ -14,31 +14,38 @@ const Ask: React.FC = () => {
   const location = useLocation()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const formData = new FormData()
-  const [cartCount, setCartCount] = useState<number>(0)
-  // const {user} = userStore()
+  const { cartCount } = userStore()
   const [isLoading, setIsLoading] = useState(false)
+
+  const inputRef = useRef<HTMLInputElement>(null)
+  const buttonRef = useRef<HTMLImageElement>(null)
+
   const { user } = userStore() as {
     user: { profilePk: number; image?: string; profileName: string }[]
   }
   const userName = user[0]?.profileName ?? 'Guest'
-  
+
   const profilePk = String(sessionStorage.getItem('profilePk'))
   const saveText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value)
   }
 
-  const resetConversation = async() => {
+  const resetConversation = async () => {
     await reset(profilePk)
-    .then((response)=>{console.log(response)})
-    .catch(()=>{console.error})
+      .then((response) => {
+        console.log(response)
+      })
+      .catch(() => {
+        console.error
+      })
   }
-
 
   const sendInfo = async () => {
     setText('')
     setFileUrl('')
     setFile(null)
     if (!text) return // 텍스트가 비어있는 경우 전송하지 않음
+
     const newMessage = { sender: 'user', text: text, image: fileUrl }
     setMessages([...messages, newMessage])
 
@@ -52,13 +59,15 @@ const Ask: React.FC = () => {
     await chatbot(formData)
       .then((response) => {
         const botResponse = { sender: 'bot', text: response.data.body, image: fileUrl }
-        setMessages(prev => [...prev, botResponse])
+        setMessages((prev) => [...prev, botResponse])
       })
       .catch(() => {
         const errorMessage = { sender: 'bot', text: '오류가 발생했습니다.', image: fileUrl }
-        setMessages(prev => [...prev, errorMessage])
+        setMessages((prev) => [...prev, errorMessage])
       })
+
     setIsLoading(false)
+    handleFocus()
   }
 
   const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,33 +81,51 @@ const Ask: React.FC = () => {
     }
   }
 
+  const handleFocus = () => {
+    setIsFocused(true)
+  }
+
+
+  const handleClickOutside = (event: TouchEvent | any) => {
+    if (event.target.tagName !== 'IMG' && event.target.tagName !== 'input') {
+      setIsFocused(false)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('touchstart', handleClickOutside)
+    return () => {
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
+  }, [inputRef, buttonRef])
+
   /////////// 하단 내비게이션 바 선택 시 아이콘(컬러) 변경 //////////////
   const getIconSrc = (iconName: string) => {
     const path = location.pathname
     const iconPaths: { [key: string]: { [icon: string]: string } } = {
       '/mobile/closet': {
-        'closet': '/assets/closetFill.png',
+        closet: '/assets/closetFill.png',
         'add-cloth': '/assets/upload.png',
-        'ask': '/assets/shirt.png',
-        'mypage': user[0]?.image || '/assets/avatar.PNG'
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/add-cloth': {
-        'closet': '/assets/closet.png',
+        closet: '/assets/closet.png',
         'add-cloth': '/assets/uploadFill.png',
-        'ask': '/assets/shirt.png',
-        'mypage': user[0]?.image || '/assets/avatar.PNG'
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/ask': {
-        'closet': '/assets/closet.png',
+        closet: '/assets/closet.png',
         'add-cloth': '/assets/upload.png',
-        'ask': '/assets/shirtFill.png',
-        'mypage': user[0]?.image || '/assets/avatar.PNG'
+        ask: '/assets/shirtFill.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       },
       '/mobile/mypage': {
-        'closet': '/assets/closet.png',
+        closet: '/assets/closet.png',
         'add-cloth': '/assets/upload.png',
-        'ask': '/assets/shirt.png',
-        'mypage': user[0]?.image || '/assets/avatar.PNG'
+        ask: '/assets/shirt.png',
+        mypage: user[0]?.image || '/assets/avatar.PNG'
       }
     }
     return iconPaths[path][iconName] || '/assets/' + iconName + '.png'
@@ -115,24 +142,6 @@ const Ask: React.FC = () => {
       ? { fontFamily: 'Pretendard-Bold', color: '#9091FB', marginTop: '1px' }
       : {}
   }
-  ////////////////////////////////////////////////////////////////////
-
-  // const addCart = async (pk: number) => {
-  //   await cartItemAdd(pk)
-  //     .then(() => {
-  //       alert('위시리스트에 추가되었습니다!')
-  //       const newCartCount = cartCount + 1
-  //       localStorage.setItem('cartCount', JSON.stringify(newCartCount))
-  //       setCartCount(newCartCount)
-  //     })
-  // }
-
-  useEffect(() => {
-    const storedCartCount = localStorage.getItem('cartCount')
-    if (storedCartCount) {
-      setCartCount(JSON.parse(storedCartCount))
-    }
-  }, [])
 
   return (
     <div className={styles.container}>
@@ -181,12 +190,12 @@ const Ask: React.FC = () => {
               <div className={msg.sender === 'user' ? styles.userNameRight : styles.userNameLeft}>
                 {msg.sender === 'user' ? `${userName}님` : 'S-Tailor'}
               </div>
-              {msg.image && <img className={styles.sentPhoto} src={msg.image} alt="전송한 사진" />}
               <span
                 className={msg.sender === 'user' ? styles.userMessageText : styles.botMessageText}
-              >
+                >
+                {msg.image && <img className={styles.sentPhoto} src={msg.image} alt="전송한 사진" />}
                 {msg.text}
-              </span >
+              </span>
             </div>
           ))}
         </div>
@@ -195,7 +204,7 @@ const Ask: React.FC = () => {
         {isLoading && <img className={styles.loading} src="/assets/loading.gif" alt="로딩중" />}
       </div>
 
-      <section className={styles.textSend}>
+      <section className={`${styles.textSend} ${isFocused ? styles.fixedInput : ''}`}>
         <div className={styles.textSendInner}>
           <img
             className={styles.addImg}
@@ -204,6 +213,7 @@ const Ask: React.FC = () => {
             onClick={() => {
               fileInputRef.current?.click()
             }}
+            ref={buttonRef}
           />
           <input
             id="profileImg"
@@ -221,24 +231,27 @@ const Ask: React.FC = () => {
               setFileUrl('')
               setFile(null)
             }}
+            ref={buttonRef}
           />
           <input
             className={styles.textField}
             type="text"
             onChange={saveText}
             value={text}
-            autoFocus
+            onFocus={handleFocus}
+            ref={inputRef}
           />
           <img
             className={styles.sendImg}
             src="/assets/send.svg"
             alt="삼각형의 전송버튼"
             onClick={sendInfo}
+            ref={buttonRef}
           />
         </div>
       </section>
 
-      <footer className={styles.bottomNav}>
+      <footer className={styles.bottomNav} style={{ display: isFocused ? 'none' : 'flex' }}>
         <div className={styles.bottomNavInner}>
           <label className={styles.bottomNavInnerBtn}>
             <img
