@@ -87,8 +87,8 @@ const AddCloth: React.FC = () => {
           canvas.toBlob(resolve, 'image/png')
         })
         if (blob) {
-          const file = new File([blob], 'captured-image.png', { type: 'image/png' })
-          const url = URL.createObjectURL(blob)
+          const url = URL.createObjectURL(blob).split('/')
+          const file = new File([blob], `${url[url.length - 1]}.png`, { type: 'image/png' })
           console.log('Capture successful:', url)
           saveImage(file)
         }
