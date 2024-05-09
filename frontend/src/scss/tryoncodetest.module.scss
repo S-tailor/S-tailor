@@ -37,13 +37,13 @@ p {
 
 .topText {
   font-family: 'Pretendard-Bold';
-  font-size: 3.5em;
+  font-size: 150px;
   margin-bottom: 6vh;
 }
 
 .subText1, .subText2, .subText3 {
   font-family: 'Pretendard-Bold';
-  font-size: 1.65em;
+  font-size: 68px;
   margin-top: 1vh;
 }
 
@@ -52,10 +52,10 @@ p {
   height: 7vh;
   background-color: #222222;
   color: white;
-  border-radius: 50px;
+  border-radius: 300px;
   margin-top: 3vh;
   margin-bottom: 2vh;
-  font-size: 1.65em;
+  font-size: 68px;
   letter-spacing: 1px;
   outline: none;
   font-family: 'Pretendard-SemiBold';
@@ -63,7 +63,7 @@ p {
 
 .remainTime, .qrcodeInnerText1, .bottomTextInner {
   font-family: 'Pretendard-Regular';
-  font-size: 1.6em;
+  font-size: 65px;
   text-align: center;
 }
 
@@ -77,17 +77,28 @@ p {
 
 .qrcode {
   margin-top: 2vh;
-}
-
-.qrcodeImg {
-  width: 80vw;
-  margin-bottom: 2vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
+.qrcodeCreate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.qrcodeImg {
+  width: 1600px;
+  height: 1600px;
+  margin-bottom: 2vh;
+}
+
 .remainTime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }

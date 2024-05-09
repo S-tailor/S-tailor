@@ -26,12 +26,8 @@ const Profile: React.FC = () => {
   // 유저 프로필 리스트
   const fetchUser = async (id: string) => {
     const response = await profileList(id)
-    // console.log(response)
-
     setUserList(response.data.result)
-    // console.log(response.data.result)
     setIsLoading(!isLoading)
-
     setIsLoading(!isLoading)
   }
 
@@ -69,7 +65,7 @@ const Profile: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.bgVideo}>
-        <video className={styles.bgVideoContent} autoPlay muted loop>
+        <video className={styles.bgVideoContent} autoPlay muted loop >
           <source src="/assets/background_light.mp4" />
         </video>
       </div>
