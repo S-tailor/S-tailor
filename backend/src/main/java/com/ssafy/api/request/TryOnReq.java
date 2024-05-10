@@ -12,4 +12,5 @@ public class TryOnReq {
     MultipartFile model;
     String cloth;
     int profilePk;
+    String category;
 }
