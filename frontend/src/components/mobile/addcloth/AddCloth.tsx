@@ -351,9 +351,7 @@ const AddCloth: React.FC = () => {
             <img onClick={goCloset} className={styles.logo} src="/assets/logo.png" alt="logo" />
           </div>
         </div>
-      </div>
 
-      <section className={styles.addClothMain}>
         <div className={styles.searchbar}>
           <input
             className={styles.searchbarInner}
@@ -387,6 +385,11 @@ const AddCloth: React.FC = () => {
           </p>
         </div>
 
+      </div>
+
+      <section className={styles.addClothMain}>
+
+
         {isLoading && (
           <div className={styles.loadingInner}>
             <img className={styles.loading} src="/assets/loading.gif" alt="로딩중" />
@@ -397,7 +400,7 @@ const AddCloth: React.FC = () => {
           {showResults ? (
             <RenderResult />
           ) : searchMode === 'camera' && cameraActive ? (
-            <video ref={videoRef} style={videoStyle} autoPlay />
+            <video ref={videoRef} style={videoStyle} autoPlay muted />
           ) : searchMode === 'upload' ? (
             <RenderUploadedImage />
           ) : null}

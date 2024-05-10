@@ -68,7 +68,7 @@
 .search {
   position: absolute;
   right: 19%;
-  width: 6.5vw;
+  width: 6%;
   cursor: pointer;
 }
 
@@ -84,7 +84,6 @@
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 1.2vw;
-  overflow: scroll;
 }
 
 .resultItem {

@@ -72,28 +72,27 @@ const ClosetCodeInput: React.FC = () => {
         <p className={styles.subTitle}>기기에 표시된 QR코드를 촬영해주세요.</p>
       </div>
 
-      <div className={styles.main}>
-        <div className={styles.camera}>
-          {camera && (
-            <QrReader
-              className={styles.qrreder}
-              constraints={{ facingMode: 'environment' }}
-              onResult={(result: any | null, error) => {
-                if (result) {
-                  setData(result.text)
-                }
-                if (error) {
-                  console.info(error)
-                }
-              }}
-            />
-          )}
-        </div>
 
+        {camera && (
+          <QrReader
+            className={styles.qrreder}
+            constraints={{ facingMode: 'environment' }}
+            onResult={(result: any | null, error) => {
+              if (result) {
+                setData(result.text)
+              }
+              if (error) {
+                console.info(error)
+              }
+            }}
+            videoStyle={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+          />
+        )}
+
+      <section className={styles.bottomButton}>
         {data && <div className={styles.infoText}>{message}</div>}
-
         <button className={styles.btn} onClick={handleVerify}>확인</button>
-      </div>
+      </section>
 
     </div>
   )

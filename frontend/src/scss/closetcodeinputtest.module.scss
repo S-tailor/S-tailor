@@ -60,20 +60,12 @@
 
 .topTitle {
   width: 80vw;
+  height: 24%;
   margin-top: 9vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
-}
-
-.main {
-  width: 100vw;
-  margin-top: -2vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .mainTitle {
@@ -95,24 +87,44 @@
 
 .camera {
   width: 100vw;
+  padding: 0;
+}
+
+.qrreder {
+  width: 100vw;
+}
+
+.bottomButton{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  width: 100vw;
+  height: 24%;
 }
 
 .btn {
-  margin-top: 14vh;
   width: 80vw;
   height: 7vh;
+  border: none;
   background-color: #222222;
   color: white;
   border-radius: 50px;
+  font-weight: 600;
+  font-family: 'Pretendard-SemiBold';
   font-size: 0.9em;
   letter-spacing: 1px;
-  font-family: 'Pretendard-SemiBold';
 }
 
 
 .infoText {
-  position: fixed;
-  top: 75%;
-  font-size: 0.9em;
+  width: 80vw;
+  height: auto;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
   font-family: 'Pretendard-SemiBold';
+  margin-bottom: 4vh;
 }

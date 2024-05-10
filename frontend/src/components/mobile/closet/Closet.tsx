@@ -204,34 +204,39 @@ const Closet: React.FC = () => {
               </div>
 
               <div className={styles.headerInner3}>
-                <img
-                  className={styles.cart}
-                  src="/assets/shoppingbag.svg"
-                  alt="cart"
-                  onClick={() => {
-                    startTransition(() => {
-                      navigate('/mobile/closet/wishlist')
-                    })
-                  }}
-                />
-                <span className={styles.cartAdd}>{cartCount}</span>
+                <div className={styles.cartInner}>
+                  <img
+                    className={styles.cart}
+                    src="/assets/shoppingbag.svg"
+                    alt="cart"
+                    onClick={() => {
+                      startTransition(() => {
+                        navigate('/mobile/closet/wishlist')
+                      })
+                    }}
+                  />
+                  <span className={styles.cartAdd}>{cartCount}</span>
+                </div>
               </div>
+
             </div>
+
+              <div className={styles.mainCategory}>
+                {categories.map((category) => (
+                  <a
+                    key={category}
+                    href="#"
+                    onClick={() => handleCategoryClick(category)}
+                    style={getCategoryStyle(category)}
+                  >
+                    {category}
+                  </a>
+                ))}
+              </div>
+
           </div>
 
           <section className={styles.closetMain}>
-            <div className={styles.mainCategory}>
-              {categories.map((category) => (
-                <a
-                  key={category}
-                  href="#"
-                  onClick={() => handleCategoryClick(category)}
-                  style={getCategoryStyle(category)}
-                >
-                  {category}
-                </a>
-              ))}
-            </div>
             <div className={styles.slider}>
               <div className={styles.slide}></div>
               <div className={styles.slide}></div>
