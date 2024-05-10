@@ -351,9 +351,7 @@ const AddCloth: React.FC = () => {
             <img onClick={goCloset} className={styles.logo} src="/assets/logo.png" alt="logo" />
           </div>
         </div>
-      </div>
 
-      <section className={styles.addClothMain}>
         <div className={styles.searchbar}>
           <input
             className={styles.searchbarInner}
@@ -386,6 +384,11 @@ const AddCloth: React.FC = () => {
             기능의 최상의 결과를 위해 <b>'깔끔한 배경'</b>, <b>'1장'</b>인 옷을 선택해주세요.
           </p>
         </div>
+
+      </div>
+
+      <section className={styles.addClothMain}>
+
 
         {isLoading && (
           <div className={styles.loadingInner}>
