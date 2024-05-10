@@ -93,17 +93,19 @@ const MyPage: React.FC = () => {
           </div>
 
           <div className={styles.headerInner3}>
-            <img
-              className={styles.cart}
-              src="/assets/shoppingbag.svg"
-              alt="cart"
-              onClick={() => {
-                startTransition(() => {
-                  navigate('/mobile/closet/wishlist')
-                })
-              }}
-            />
-            <span className={styles.cartAdd}>{cartCount}</span>
+            <div className={styles.cartInner}>
+              <img
+                className={styles.cart}
+                src="/assets/shoppingbag.svg"
+                alt="cart"
+                onClick={() => {
+                  startTransition(() => {
+                    navigate('/mobile/closet/wishlist')
+                  })
+                }}
+              />
+              <span className={styles.cartAdd}>{cartCount}</span>
+            </div>
           </div>
         </div>
       </div>

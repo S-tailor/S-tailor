@@ -41,13 +41,13 @@ const AddCloth: React.FC = () => {
   // 카메라 켜기
   const videoRef = useRef<HTMLVideoElement>(null)
   const [camera, setCamera] = useState<CameraMode>('environment')
-  const [stream, setStream] = useState<MediaStream | null>(null)
+  //const [stream, setStream] = useState<MediaStream | null>(null)
 
   const CameraClick = async (newCamera: CameraMode = camera) => {
     const constraints = { video: { facingMode: newCamera } }
     try {
       const newStream = await navigator.mediaDevices.getUserMedia(constraints)
-      setStream(newStream)
+      //setStream(newStream)
       const video = videoRef.current
       if (video) {
         video.srcObject = newStream
@@ -59,16 +59,16 @@ const AddCloth: React.FC = () => {
   }
 
   // 비디오 요소 초기화 및 스트림 설정
-  useEffect(() => {
-    if (videoRef.current && stream) {
-      const video = videoRef.current
-      // 비디오 요소가 재생 중이지 않은 경우에만 재생
-      if (video.paused) {
-        video.srcObject = stream
-        video.play().catch((error) => console.error('비디오 재생 오류:', error))
-      }
-    }
-  }, [stream])
+  // useEffect(() => {
+  //   if (videoRef.current && stream) {
+  //     const video = videoRef.current
+  //     // 비디오 요소가 재생 중이지 않은 경우에만 재생
+  //     if (video.paused) {
+  //       video.srcObject = stream
+  //       video.play().catch((error) => console.error('비디오 재생 오류:', error))
+  //     }
+  //   }
+  // }, [stream])
 
   // 사진 촬영
   const handleCapture = async () => {
@@ -228,6 +228,8 @@ const AddCloth: React.FC = () => {
         if (confirm('해당 사진으로 검색하시겠습니까?')) {
           imageSearch(uploadedFile) // 이미지 검색 함수 실행
           setIsLoading(true)
+        } else {
+          window.location.reload()
         }
         setUploadedFile(null) // 중복 실행 방지
         setImageReady(false) // 상태 초기화
@@ -351,9 +353,7 @@ const AddCloth: React.FC = () => {
             <img onClick={goCloset} className={styles.logo} src="/assets/logo.png" alt="logo" />
           </div>
         </div>
-      </div>
 
-      <section className={styles.addClothMain}>
         <div className={styles.searchbar}>
           <input
             className={styles.searchbarInner}
@@ -386,7 +386,9 @@ const AddCloth: React.FC = () => {
             기능의 최상의 결과를 위해 <b>'깔끔한 배경'</b>, <b>'1장'</b>인 옷을 선택해주세요.
           </p>
         </div>
+      </div>
 
+      <section className={styles.addClothMain}>
         {isLoading && (
           <div className={styles.loadingInner}>
             <img className={styles.loading} src="/assets/loading.gif" alt="로딩중" />
@@ -397,7 +399,7 @@ const AddCloth: React.FC = () => {
           {showResults ? (
             <RenderResult />
           ) : searchMode === 'camera' && cameraActive ? (
-            <video ref={videoRef} style={videoStyle} autoPlay />
+            <video ref={videoRef} style={videoStyle} autoPlay muted />
           ) : searchMode === 'upload' ? (
             <RenderUploadedImage />
           ) : null}

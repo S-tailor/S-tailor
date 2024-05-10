@@ -90,8 +90,11 @@
   justify-content: center;
 }
 
-.uploadedImg {
+.profileImg {
   position: relative;
+}
+
+.uploadedImg {
   object-fit: cover;
   width: 20vw;
   height: 20vw;
@@ -106,8 +109,8 @@ input[type="file"] {
 .labelImg {
   object-fit: cover;
   position: absolute;
-  top: 19.5vh;
-  left: 54vw;
+  bottom: 7%;
+  right: -15%;
   width: 8vw;
   background-color: white;
   border-radius: 50%;
