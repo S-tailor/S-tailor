@@ -28,13 +28,14 @@ p {
 
 .topTitle {
   width: 100vw;
-  height: 38%;
+  height: 35%;
   display: flex;
   align-items: flex-end;
 }
 
 .topTitleInner {
-  animation:text-flicker-in-glow 1s linear both
+  width: 100vw;
+  animation:text-flicker-in-glow 1s linear 1s both
 }
 
 
@@ -48,15 +49,22 @@ p {
 }
 
 .middleTitleInner{
-  animation:text-flicker-in-glow 1s linear 0.5s both
+  animation:text-flicker-in-glow 1s linear 1.5s both
 }
 
-.texts {
+.texts1 {
+  width: 100vw;
   font-family: 'main-title';
-  font-size: 3.5em;
+  font-size: 14vw;
   color: white;
-  margin-top: -6vh;
-  margin-left: 0vw;
+  line-height: 1;
+}
+
+.texts2 {
+  font-family: 'main-title';
+  font-size: 14vw;
+  color: white;
+  line-height: 1;
 }
 
 @keyframes text-flicker-in-glow{
@@ -81,7 +89,7 @@ p {
   font-family: 'Pretendard-SemiBold';
   font-size: 0.9em;
   letter-spacing: 1px;
-  animation:fade-in 1.2s cubic-bezier(.39,.575,.565,1.000) 2s both
+  animation:fade-in 1.2s cubic-bezier(.39,.575,.565,1.000) 2.5s both
 }
 
 @keyframes fade-in{0%{opacity:0}100%{opacity:1}}

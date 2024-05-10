@@ -1,4 +1,4 @@
-@import "fonts";
+@import 'fonts';
 
 .container {
   width: 100vw;
@@ -33,6 +33,10 @@ p {
 
 .topTitle {
   width: 80vw;
+  height: 33vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .topText {
@@ -41,10 +45,20 @@ p {
   margin-bottom: 6vh;
 }
 
-.subText1, .subText2, .subText3 {
+.subText1,
+.subText2,
+.subText3 {
   font-family: 'Pretendard-Bold';
   font-size: 68px;
   margin-top: 1vh;
+}
+
+.middleBtn {
+  height: 42vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: flex-start;
 }
 
 .btn {
@@ -53,15 +67,27 @@ p {
   background-color: #222222;
   color: white;
   border-radius: 300px;
-  margin-top: 3vh;
-  margin-bottom: 2vh;
   font-size: 68px;
   letter-spacing: 1px;
   outline: none;
   font-family: 'Pretendard-SemiBold';
 }
 
-.remainTime, .qrcodeInnerText1, .bottomTextInner {
+.qrcodeInnerText1 {
+  width: 100%;
+  position: fixed;
+  top: 65%;
+  right: 0;
+  font-family: 'Pretendard-Regular';
+  font-size: 65px;
+  text-align: center;
+}
+
+.bottomTextInner {
+  width: 100%;
+  position: fixed;
+  top: 56%;
+  right: 0;
   font-family: 'Pretendard-Regular';
   font-size: 65px;
   text-align: center;
@@ -73,6 +99,7 @@ p {
 
 .bottomTextInner {
   color: rgb(163, 1, 1);
+  margin-top: 2vh;
 }
 
 .qrcode {
@@ -84,15 +111,21 @@ p {
 }
 
 .qrcodeCreate {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // text-align: center;
+  position: fixed;
+  top: 65%;
+  left: 33%;
+  width: 150px;
+  height: 150px;
 }
 
 .qrcodeImg {
-  width: 1500px;
-  height: 1500px;
+  width: 500% !important;
+  height: 500% !important;
+  // height: 1600px;
   margin-bottom: 2vh;
 }
 

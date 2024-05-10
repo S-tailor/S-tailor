@@ -30,4 +30,4 @@ out/
 /certbot
 
 ### jenkins ###
-#/jenkins
+/jenkins

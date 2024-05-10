@@ -16,7 +16,7 @@ public interface S3UpDownloadService {
 
 	public String imageSearchUpload(MultipartFile image);
 
-
+	String saveTryOnModelImage(MultipartFile file, int profilePk);
 	String imageChatUpload(MultipartFile image, String profile);
 }
 

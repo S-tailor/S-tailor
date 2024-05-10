@@ -71,7 +71,6 @@ const Closet: React.FC = () => {
     setIsLoading(true)
     await closetItemList(profilePk).then((response) => {
       setClothList(response.data.result)
-      console.log(response.data.result)
     })
     setIsLoading(false)
   }
