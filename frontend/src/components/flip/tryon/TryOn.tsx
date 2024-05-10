@@ -1,13 +1,13 @@
-import React,{useRef, useState, useEffect, useMemo} from 'react'
-import { CSSProperties } from 'react';
+import React, { useRef, useState, useEffect, useMemo } from 'react'
+import { CSSProperties } from 'react'
 const TryOn: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [isCameraOn, setIsCameraOn] = useState(false);
+  const [isCameraOn, setIsCameraOn] = useState(false)
 
-  useEffect(()=>{
+  useEffect(() => {
     const initCamera = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({video:true})
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true })
         if (videoRef.current) {
           videoRef.current.srcObject = isCameraOn ? stream : null
         }
@@ -15,22 +15,19 @@ const TryOn: React.FC = () => {
         console.error(error)
       }
     }
-  initCamera()
+    initCamera()
 
-  return () => {
-    if (videoRef.current && videoRef.current.srcObject) {
-      const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
-      tracks.forEach((track)=> track.stop())
+    return () => {
+      if (videoRef.current && videoRef.current.srcObject) {
+        const tracks = (videoRef.current.srcObject as MediaStream).getTracks()
+        tracks.forEach((track) => track.stop())
+      }
     }
-  }
-  
   }, [isCameraOn])
 
-
   const toggleCamera = () => {
-    setIsCameraOn((prevState) => !prevState);
-  };
-
+    setIsCameraOn((prevState) => !prevState)
+  }
 
   const videoStyle: CSSProperties = useMemo(
     () => ({
@@ -38,19 +35,16 @@ const TryOn: React.FC = () => {
       height: '100vh',
       objectFit: 'cover',
       transform: 'scaleX(-1)'
-      
     }),
     []
-  ) 
-
+  )
 
   return (
     <>
       <h1>TryOn Component</h1>
-      <button onClick={toggleCamera}>{isCameraOn ? "Turn Off Camera" : "Turn On Camera"}</button>
-   
-    <video autoPlay ref={videoRef} style={videoStyle}></video>
-     
+      <button onClick={toggleCamera}>{isCameraOn ? 'Turn Off Camera' : 'Turn On Camera'}</button>
+
+      <video autoPlay ref={videoRef} style={videoStyle}></video>
     </>
   )
 }
