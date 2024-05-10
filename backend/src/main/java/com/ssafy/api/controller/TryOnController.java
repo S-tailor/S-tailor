@@ -1,14 +1,24 @@
 package com.ssafy.api.controller;
 
+import java.awt.*;
 import java.io.IOException;
+import java.util.Map;
 import java.util.UUID;
 
+import com.ssafy.api.request.TryOnReq;
 import com.ssafy.api.request.TryOnVerifyReq;
+import com.ssafy.api.response.TryOnGenerateRes;
 import com.ssafy.api.service.TryOnService;
+import com.ssafy.common.model.response.BaseResponseBody;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 @RestController
@@ -41,5 +51,14 @@ public class TryOnController {
         } else {
             return ResponseEntity.ok("fail");
         }
+    }
+
+    @PostMapping(value ="/generate")
+    public ResponseEntity<? extends BaseResponseBody> fastApi(@ModelAttribute TryOnReq info) {
+        String generatedImage = tryOnService.getGeneratedImage(info);
+        if(generatedImage != null) {
+            return ResponseEntity.ok(TryOnGenerateRes.of(200,"Success",generatedImage));
+        }
+        return ResponseEntity.ok(BaseResponseBody.of(400,"Fail"));
     }
 }

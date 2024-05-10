@@ -1,5 +1,6 @@
 package com.ssafy.api.service;
 
+import com.ssafy.api.request.TryOnReq;
 import com.ssafy.api.request.TryOnVerifyReq;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -12,4 +13,6 @@ public interface TryOnService {
     SseEmitter getEmitterBySessionId(UUID sessionId);
     Boolean sendUserInfoToMobile(TryOnVerifyReq info, SseEmitter emitter);
     Boolean isYourToken(String token, String id);
+
+    String getGeneratedImage(TryOnReq info);
 }

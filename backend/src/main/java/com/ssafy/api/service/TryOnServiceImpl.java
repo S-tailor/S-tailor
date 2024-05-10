@@ -1,9 +1,17 @@
 package com.ssafy.api.service;
 
+import com.ssafy.api.request.TryOnReq;
 import com.ssafy.api.request.TryOnVerifyReq;
 import com.ssafy.common.util.JwtTokenUtil;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
@@ -15,6 +23,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public class TryOnServiceImpl implements TryOnService{
     private final Map<UUID, SseEmitter> emitters = new ConcurrentHashMap<>();
 
+    @Value("${VTON_URL}")
+    private String VTON_URL;
+
+    @Autowired
+    S3UpDownloadService s3UpDownloadService;
 
     @Override
     public UUID generateSessionId() {
@@ -77,5 +90,31 @@ public class TryOnServiceImpl implements TryOnService{
     public Boolean isYourToken(String token, String id) {
         String decodedUserId = JwtTokenUtil.getDecodedUserId(token);
         return decodedUserId.equals(id);
+    }
+
+    @Override
+    public String getGeneratedImage(TryOnReq info) {
+        String model = s3UpDownloadService.saveTryOnModelImage(info.getModel(),info.getProfilePk());
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        ResponseEntity<String> response = null;
+
+        JSONObject body = new JSONObject();
+        body.put("model",model);
+        body.put("cloth",info.getCloth());
+        body.put("profilePk",String.valueOf(info.getProfilePk()));
+
+        response = restTemplate.postForEntity(VTON_URL,body,String.class);
+
+        JSONParser parser = new JSONParser();
+
+        try {
+            JSONObject responseObject = (JSONObject) parser.parse(response.getBody());
+            String result = (String) responseObject.get("generatedImage");
+            return result;
+        } catch (ParseException e) {
+            return null;
+        }
     }
 }

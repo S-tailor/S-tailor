@@ -94,6 +94,23 @@ public class S3UpDownloadServiceImpl implements S3UpDownloadService{
     }
 
     @Override
+    public String saveTryOnModelImage(MultipartFile file, int profilePk) {
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(file.getSize());
+        metadata.setContentType(file.getContentType());
+
+        String type = file.getContentType().split("/")[1];
+
+        try {
+            amazonS3Client.putObject(bucket, "S-Tailor/TryOnModel/"+profilePk+"/model."+type, file.getInputStream(), metadata);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return cloudfrontUrl+"S-Tailor/TryOnModel/"+profilePk+"/model."+type;
+    }
+
+    @Override
     public String imageChatUpload(MultipartFile image, String profile) {
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentLength(image.getSize());
