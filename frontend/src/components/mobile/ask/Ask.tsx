@@ -32,8 +32,7 @@ const Ask: React.FC = () => {
 
   const resetConversation = async () => {
     await reset(profilePk)
-      .then((response) => {
-        console.log(response)
+      .then(() => {
       })
       .catch(() => {
         console.error
