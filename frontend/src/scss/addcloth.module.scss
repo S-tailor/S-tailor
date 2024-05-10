@@ -84,7 +84,7 @@
 }
 
 .loading {
-  width : 20vw;
+  width: 20vw;
   z-index: 3000;
 }
 
@@ -102,13 +102,12 @@
 
 .infomationText > b {
   font-size: 1.2em;
-  color : #9091FB;
+  color: #9091fb;
 }
 
 .infomationText > u > a {
   cursor: pointer;
 }
-
 
 .resultItem {
   position: relative;
@@ -170,6 +169,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.searchNoResults {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Pretendard-Bold';
+  font-size: 1em;
+  color: #3d3d3d;
+  position: absolute;
+  top: 45%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
 }
 
 .searchClothes {
@@ -290,6 +304,30 @@
     border: 1px solid #222222;
     border-radius: 50px;
   }
+}
+
+.noSelectionContainer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+}
+
+.noSelectionContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+}
+
+.noSelection {
+  font-family: 'Pretendard-Bold';
+  font-size: 0.8em;
+  color: #3d3d3d;
+  text-align: center;
 }
 
 .gallery {
