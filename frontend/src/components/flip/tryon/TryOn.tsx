@@ -1,14 +1,14 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react'
 import { CSSProperties } from 'react'
 import { closetItemList } from '@/api/apiCloset'
-import userStore from '@/store/store'
+// import userStore from '@/store/store'
 import { tryOnGenerate } from '@/api/apiTryOn'
 
 const TryOn: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isCameraOn, setIsCameraOn] = useState(false)
   const [itemList, setItemList] = useState<clothInfo[]>([])
-  const { user } = userStore()
+  // const { user } = userStore()
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const [fileImage, setFileImage] = useState<File>()
@@ -85,15 +85,15 @@ const TryOn: React.FC = () => {
     height: '100vh'
   }
 
-  const buttonStyle: CSSProperties = {
-    position: 'absolute',
-    top: '20px',
-    left: '20px',
-    zIndex: 10,
-    width: '500px',
-    height: '250px',
-    fontSize: '100px'
-  }
+  // const buttonStyle: CSSProperties = {
+  //   position: 'absolute',
+  //   top: '20px',
+  //   left: '20px',
+  //   zIndex: 10,
+  //   width: '500px',
+  //   height: '250px',
+  //   fontSize: '100px'
+  // }
 
   const itemListStyle: CSSProperties = {
     zIndex: 99999,
