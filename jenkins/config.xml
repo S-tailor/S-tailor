@@ -1,18 +1,9 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <hudson>
-  <temporaryOfflineCause class="hudson.node_monitors.DiskSpaceMonitorDescriptor$DiskSpace">
-    <timestamp>1714788281148</timestamp>
-    <path>/var/jenkins_home</path>
-    <size>997400576</size>
-    <totalSize>103865303040</totalSize>
-    <trigger>hudson.node_monitors.DiskSpaceMonitor</trigger>
-    <threshold>1073741824</threshold>
-    <warningThreshold>2147483648</warningThreshold>
-  </temporaryOfflineCause>
   <disabledAdministrativeMonitors>
     <string>hudson.util.DoubleLaunchChecker</string>
   </disabledAdministrativeMonitors>
-  <version>2.456</version>
+  <version>2.455</version>
   <numExecutors>2</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
