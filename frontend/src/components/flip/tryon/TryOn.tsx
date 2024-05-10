@@ -44,6 +44,38 @@ const TryOn: React.FC = () => {
     []
   )
 
+  const containerStyle: CSSProperties = {
+    position: 'relative',
+    width: '100vw',
+    height: '100vh'
+  }
+
+  const buttonStyle: CSSProperties = {
+    position: 'absolute',
+    top: '20px',
+    left: '20px',
+    zIndex: 10,
+    width: '500px',
+    height: '250px',
+    fontSize: '100px'
+  }
+
+  const containerStyle: CSSProperties = {
+    position: 'relative',
+    width: '100vw',
+    height: '100vh'
+  }
+
+  const buttonStyle: CSSProperties = {
+    position: 'absolute',
+    top: '20px',
+    left: '20px',
+    zIndex: 10,
+    width: '500px',
+    height: '250px',
+    fontSize: '100px'
+  }
+
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     setFileImage(file)
@@ -78,7 +110,7 @@ const TryOn: React.FC = () => {
       </label>
 
       <div>{resultUrl && <img alt="result" src={resultUrl} />}</div>
-      <video autoPlay ref={videoRef} style={videoStyle}></video>
+      <video autoPlay muted ref={videoRef} style={videoStyle}></video>
     </>
   )
 }

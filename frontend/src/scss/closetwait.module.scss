@@ -28,12 +28,13 @@ p {
 
 .topTitle {
   width: 100vw;
-  height: 38%;
+  height: 35%;
   display: flex;
   align-items: flex-end;
 }
 
 .topTitleInner {
+  width: 100vw;
   animation:text-flicker-in-glow 1s linear both
 }
 
@@ -43,7 +44,7 @@ p {
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 42%;
+  top: 40%;
   width: 100%;
   font-size: 0.9em;
   font-family: 'Pretendard-Regular';
@@ -69,12 +70,19 @@ p {
   animation:text-flicker-in-glow 1s linear 0.5s both
 }
 
-.texts {
+.texts1 {
+  width: 100vw;
   font-family: 'main-title';
-  font-size: 3.5em;
+  font-size: 14vw;
   color: white;
-  margin-top: -6vh;
-  margin-left: 0vw;
+  line-height: 1;
+}
+
+.texts2 {
+  font-family: 'main-title';
+  font-size: 14vw;
+  color: white;
+  line-height: 1;
 }
 
 @keyframes text-flicker-in-glow{
