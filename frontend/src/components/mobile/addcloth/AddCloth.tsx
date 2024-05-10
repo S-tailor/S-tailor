@@ -41,13 +41,13 @@ const AddCloth: React.FC = () => {
   // 카메라 켜기
   const videoRef = useRef<HTMLVideoElement>(null)
   const [camera, setCamera] = useState<CameraMode>('environment')
-  const [stream, setStream] = useState<MediaStream | null>(null)
+  //const [stream, setStream] = useState<MediaStream | null>(null)
 
   const CameraClick = async (newCamera: CameraMode = camera) => {
     const constraints = { video: { facingMode: newCamera } }
     try {
       const newStream = await navigator.mediaDevices.getUserMedia(constraints)
-      setStream(newStream)
+      //setStream(newStream)
       const video = videoRef.current
       if (video) {
         video.srcObject = newStream
