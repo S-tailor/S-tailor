@@ -16,8 +16,6 @@ interface SearchResultItem {
 // 선택한 옷들의 항목
 interface SelectedClothItem extends SearchResultItem {}
 
-type CameraMode = 'user' | 'environment'
-
 const AddCloth: React.FC = () => {
   const location = useLocation()
   const { user } = userStore() as {
@@ -32,7 +30,7 @@ const AddCloth: React.FC = () => {
   const [imagePath, setImagePath] = useState('')
   const [uploadedFile, setUploadedFile] = useState<File | null>(null)
   const [cameraActive, setCameraActive] = useState(false)
-  const [captureMode, setCaptureMode] = useState(false)
+  // const [captureMode, setCaptureMode] = useState(false)
   const [searchMode, setSearchMode] = useState<'text' | 'upload' | 'camera' | null>(null)
   const [, setImageReady] = useState(false)
 
@@ -40,35 +38,6 @@ const AddCloth: React.FC = () => {
 
   // 카메라 켜기
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [camera, setCamera] = useState<CameraMode>('environment')
-  //const [stream, setStream] = useState<MediaStream | null>(null)
-
-  const CameraClick = async (newCamera: CameraMode = camera) => {
-    const constraints = { video: { facingMode: newCamera } }
-    try {
-      const newStream = await navigator.mediaDevices.getUserMedia(constraints)
-      //setStream(newStream)
-      const video = videoRef.current
-      if (video) {
-        video.srcObject = newStream
-        // video.play().catch((error) => console.error('비디오 재생 오류:', error))
-      }
-    } catch (error) {
-      console.error('카메라 접근 오류:', error)
-    }
-  }
-
-  // 비디오 요소 초기화 및 스트림 설정
-  // useEffect(() => {
-  //   if (videoRef.current && stream) {
-  //     const video = videoRef.current
-  //     // 비디오 요소가 재생 중이지 않은 경우에만 재생
-  //     if (video.paused) {
-  //       video.srcObject = stream
-  //       video.play().catch((error) => console.error('비디오 재생 오류:', error))
-  //     }
-  //   }
-  // }, [stream])
 
   // 사진 촬영
   const handleCapture = async () => {
@@ -96,50 +65,31 @@ const AddCloth: React.FC = () => {
     }
   }
 
+  // 카메라 활성화
   const onCameraClick = async () => {
-    if (cameraActive && captureMode) {
-      await handleCapture()
-      setCaptureMode(false) // 사진 촬영 후 이미지 보여주기 위해 변경
-    } else {
-      try {
-        setCameraActive(true)
-        setCaptureMode(true)
-        setSearchMode('camera')
-        await CameraClick()
-      } catch (error) {
-        console.error('Camera failed to start:', error)
+    try {
+      setCameraActive(true)
+      setSearchMode('camera')
+      const constraints = { video: { facingMode: 'environment' } } // 기본으로 환경 카메라를 사용
+      const newStream = await navigator.mediaDevices.getUserMedia(constraints)
+      const video = videoRef.current
+      if (video) {
+        video.srcObject = newStream
       }
+    } catch (error) {
+      console.error('Camera failed to start:', error)
     }
   }
 
-  // 카메라 전환
-  const toggleCamera = () => {
-    setCamera((prevCamera) => {
-      const newCamera = prevCamera === 'environment' ? 'user' : 'environment'
-      const video = videoRef.current
-      if (video && video.srcObject) {
-        // 이전 스트림 중지
-        const tracks = (video.srcObject as MediaStream).getTracks()
-        tracks.forEach((track) => track.stop())
-      }
-      CameraClick(newCamera) // CameraClick을 호출하여 새로운 camera 상태에 따라 재설정
-      // if (video && video.srcObject && video.paused) {
-      //   video.play().catch((error) => console.error('비디오 재생 오류:', error))
-      // }
-      return newCamera
-    })
-  }
-
-  // 전면 카메라 사용시 거울 모드 적용
+  // 카메라 스타일
   const videoStyle: CSSProperties = useMemo(
     () => ({
       width: '100vw',
       height: '53vh',
-      objectFit: 'cover',
-      transform: camera === 'user' ? 'scaleX(-1)' : 'none' // 여기서 camera 상태에 따라 조건부 스타일 적용
+      objectFit: 'cover'
     }),
-    [camera]
-  ) // camera 상태가 변경될 때마다 videoStyle 업데이트
+    []
+  )
 
   // 옷 선택
   const handleSelectCloth = (cloth: SearchResultItem) => {
@@ -228,8 +178,6 @@ const AddCloth: React.FC = () => {
         if (confirm('해당 사진으로 검색하시겠습니까?')) {
           imageSearch(uploadedFile) // 이미지 검색 함수 실행
           setIsLoading(true)
-        } else {
-          window.location.reload()
         }
         setUploadedFile(null) // 중복 실행 방지
         setImageReady(false) // 상태 초기화
@@ -444,15 +392,15 @@ const AddCloth: React.FC = () => {
               </label>
               <img
                 className={styles.camera}
-                src={captureMode ? '/assets/camerashot.png' : '/assets/camera.png'}
-                alt={captureMode ? 'capture' : 'camera'}
-                onClick={onCameraClick}
+                src="/assets/camerashot.png"
+                alt="camera"
+                onClick={handleCapture}
               />
               <img
                 className={styles.switch}
-                src="/assets/switch.png"
-                alt="switch"
-                onClick={toggleCamera}
+                src="/assets/camera.png"
+                alt="capture"
+                onClick={onCameraClick}
               />
             </>
           )}
