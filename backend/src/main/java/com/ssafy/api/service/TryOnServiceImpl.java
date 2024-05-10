@@ -104,6 +104,7 @@ public class TryOnServiceImpl implements TryOnService{
         body.put("model",model);
         body.put("cloth",info.getCloth());
         body.put("profilePk",String.valueOf(info.getProfilePk()));
+        body.put("category",info.getCategory());
 
         response = restTemplate.postForEntity(VTON_URL,body,String.class);
 

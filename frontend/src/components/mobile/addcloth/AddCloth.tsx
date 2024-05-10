@@ -265,6 +265,14 @@ const AddCloth: React.FC = () => {
 
   // 검색 결과 렌더링
   function RenderResult() {
+    if (results.length === 0) {
+      return (
+        <div className={styles.searchNoResults}>
+          <p>검색 결과가 없습니다!</p>
+        </div>
+      )
+    }
+
     return (
       <div className={styles.searchClothes}>
         {results.map((item: SearchResultItem, index: number) => (
@@ -397,29 +405,35 @@ const AddCloth: React.FC = () => {
 
         <div className={styles.pictureButtons}>
           {showResults ? (
-            selectedCloths.map((cloth) => (
-              <div className={styles.selected} key={cloth.link}>
-                <img className={styles.selectedImg} src={cloth.image} alt={cloth.title} />
-                <div className={styles.seletedTexts}>
-                  <p className={styles.selectedSource}>{cloth.source}</p>
-                  <h4 className={styles.selectedTitle}>{cloth.title}</h4>
-                  <p className={styles.selectedPrice}>
-                    {cloth.price.substring(1).replace(/\*/g, '')}원
-                  </p>
-                  <div className={styles.selectedBtn}>
-                    <img
-                      className={styles.selectedDeleteBtn}
-                      onClick={() => handleSelectCloth(cloth)}
-                      src="/assets/closeBtn.svg"
-                      alt="close"
-                    />
-                    <button className={styles.selectedAddBtn} onClick={handleSaveCloths}>
-                      옷장에 추가
-                    </button>
+            selectedCloths.length > 0 ? (
+              selectedCloths.map((cloth) => (
+                <div className={styles.selected} key={cloth.link}>
+                  <img className={styles.selectedImg} src={cloth.image} alt={cloth.title} />
+                  <div className={styles.seletedTexts}>
+                    <p className={styles.selectedSource}>{cloth.source}</p>
+                    <h4 className={styles.selectedTitle}>{cloth.title}</h4>
+                    <p className={styles.selectedPrice}>
+                      {cloth.price.substring(1).replace(/\*/g, '')}원
+                    </p>
+                    <div className={styles.selectedBtn}>
+                      <img
+                        className={styles.selectedDeleteBtn}
+                        onClick={() => handleSelectCloth(cloth)}
+                        src="/assets/closeBtn.svg"
+                        alt="close"
+                      />
+                      <button className={styles.selectedAddBtn} onClick={handleSaveCloths}>
+                        옷장에 추가
+                      </button>
+                    </div>
                   </div>
                 </div>
+              ))
+            ) : (
+              <div className={styles.noSelectionContainer}>
+                <p className={styles.noSelection}>선택한 옷이 여기에 표시됩니다 :)</p>
               </div>
-            ))
+            )
           ) : (
             <>
               <label htmlFor="gallery">
