@@ -60,7 +60,7 @@ const TryOn: React.FC = () => {
       <button onClick={toggleCamera} style={buttonStyle}>
         {isCameraOn ? 'Turn Off Camera' : 'Turn On Camera'}
       </button>
-      <video autoPlay ref={videoRef} style={videoStyle}></video>
+      <video autoPlay muted ref={videoRef} style={videoStyle}></video>
     </div>
   )
 }

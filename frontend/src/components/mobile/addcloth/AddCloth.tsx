@@ -400,7 +400,7 @@ const AddCloth: React.FC = () => {
           {showResults ? (
             <RenderResult />
           ) : searchMode === 'camera' && cameraActive ? (
-            <video ref={videoRef} style={videoStyle} autoPlay />
+            <video ref={videoRef} style={videoStyle} autoPlay muted />
           ) : searchMode === 'upload' ? (
             <RenderUploadedImage />
           ) : null}
