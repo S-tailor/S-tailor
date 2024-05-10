@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import QRCode from 'qrcode.react'
 import styles from '../../../scss/tryoncodetest.module.scss'
+import userStore from '@/store/store'
 
 // const BASE_URL = 'http://localhost:5000'
 const BASE_URL = 'https://ourtrip.store'
@@ -9,13 +10,14 @@ const BASE_URL = 'https://ourtrip.store'
 const TryOn: React.FC = () => {
   const navigate = useNavigate()
   const [sessionId, setSessionId] = useState('')
-
+  const {setUser} = userStore()
   const handleConnect = () => {
     const sse = new EventSource(`${BASE_URL}/api/tryon/connect`)
 
     sse.addEventListener('connect', (e) => {
       const { data: receivedConnectData } = e
       setSessionId(receivedConnectData)
+      setUser(receivedConnectData)
     })
 
     sse.addEventListener('getUserInfo', (e) => {
