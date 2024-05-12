@@ -8,4 +8,5 @@ public interface CartService {
     boolean cartAdd(int closetPk);
     boolean cartDelete(int closetPk);
     List<Closet> cartList(int profilePk);
+    boolean purchase(String price);
 }
