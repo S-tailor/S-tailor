@@ -32,8 +32,7 @@ const Ask: React.FC = () => {
 
   const resetConversation = async () => {
     await reset(profilePk)
-      .then(() => {
-      })
+      .then(() => {})
       .catch(() => {
         console.error
       })
@@ -83,7 +82,6 @@ const Ask: React.FC = () => {
   const handleFocus = () => {
     setIsFocused(true)
   }
-
 
   const handleClickOutside = (event: TouchEvent | any) => {
     if (event.target.tagName !== 'IMG' && event.target.tagName !== 'input') {
@@ -193,8 +191,10 @@ const Ask: React.FC = () => {
               </div>
               <span
                 className={msg.sender === 'user' ? styles.userMessageText : styles.botMessageText}
-                >
-                {msg.image && <img className={styles.sentPhoto} src={msg.image} alt="전송한 사진" />}
+              >
+                {msg.image && (
+                  <img className={styles.sentPhoto} src={msg.image} alt="전송한 사진" />
+                )}
                 {msg.text}
               </span>
             </div>
@@ -291,14 +291,17 @@ const Ask: React.FC = () => {
               className={styles.recommendImg}
               src={getIconSrc('ask')}
               alt="style-recomm"
+              // onClick={() => {
+              //   startTransition(() => {
+              //     navigate('/mobile/ask')
+              //   })
+              // }}
               onClick={() => {
-                startTransition(() => {
-                  navigate('/mobile/ask')
-                })
+                alert('서비스 준비 중입니다!')
               }}
             />
             <p className={styles.bottomNavLabel3} style={getActiveStyle('/mobile/ask')}>
-              스타일추천
+              스타일 추천
             </p>
           </label>
 

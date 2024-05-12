@@ -25,57 +25,54 @@ const Closet: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true)
   const { cartCount, updateCartList, addToCart } = userStore()
   const [selectedCategory, setSelectedCategory] = useState('전체')
-  
-  const categories = ['전체', '아우터', '상의', '긴 하의', '짧은 하의','원피스', '기타']
-  
+
+  const categories = ['전체', '아우터', '상의', '긴 하의', '짧은 하의', '원피스', '기타']
+
   const profilePk = Number(user[0]?.profilePk)
-  
+
   interface CategoryDictionary {
-    [key: string]: string;
+    [key: string]: string
   }
 
   const categoryDict: CategoryDictionary = {
-    '전체':'all',
-    '아우터':'Outerwear',
-    '상의':'Top',
-    '긴 하의':'Pants',
-    '짧은 하의':'Shorts',
-    '원피스':'Dress',
-    '기타':'Etc'
+    전체: 'all',
+    아우터: 'Outerwear',
+    상의: 'Top',
+    '긴 하의': 'Pants',
+    '짧은 하의': 'Shorts',
+    원피스: 'Dress',
+    기타: 'Etc'
   }
 
   const handleCategoryClick = async (category: string) => {
     setSelectedCategory(category)
-      const selectCategory = categoryDict[category]
-     
-      if (selectCategory == 'all')
-        {fetchItem(profilePk)
-          return
-        }
-      
-      await closetCategory(Number(profilePk), selectCategory)
-      .then((response)=> {
-        const filteredClothes = response.data.result;
-      setClothList(filteredClothes);
-      })  
-  
+    const selectCategory = categoryDict[category]
+
+    if (selectCategory == 'all') {
+      fetchItem(profilePk)
+      return
     }
-  
+
+    await closetCategory(Number(profilePk), selectCategory).then((response) => {
+      const filteredClothes = response.data.result
+      setClothList(filteredClothes)
+    })
+  }
+
   useEffect(() => {
     if (profilePk) {
       fetchItem(profilePk)
     }
   }, [])
-  
+
   const fetchItem = async (profilePk: number) => {
     setIsLoading(true)
     await closetItemList(profilePk).then((response) => {
       setClothList(response.data.result)
-      
     })
     setIsLoading(false)
   }
-  
+
   const deleteCloth = async (pk: number) => {
     const response = await closetItemDelete(pk)
     if (response.status === 200) {
@@ -159,7 +156,6 @@ const Closet: React.FC = () => {
     const profilePk = Number(sessionStorage.getItem('profilePk'))
     const response = await cartItemList(profilePk)
     if (response.status === 200) {
-      
       const cartList = response.data.result
       updateCartList(cartList)
       userStore.getState().setCartCount(cartList.length)
@@ -219,22 +215,20 @@ const Closet: React.FC = () => {
                   <span className={styles.cartAdd}>{cartCount}</span>
                 </div>
               </div>
-
             </div>
 
-              <div className={styles.mainCategory}>
-                {categories.map((category) => (
-                  <a
-                    key={category}
-                    href="#"
-                    onClick={() => handleCategoryClick(category)}
-                    style={getCategoryStyle(category)}
-                  >
-                    {category}
-                  </a>
-                ))}
-              </div>
-
+            <div className={styles.mainCategory}>
+              {categories.map((category) => (
+                <a
+                  key={category}
+                  href="#"
+                  onClick={() => handleCategoryClick(category)}
+                  style={getCategoryStyle(category)}
+                >
+                  {category}
+                </a>
+              ))}
+            </div>
           </div>
 
           <section className={styles.closetMain}>
@@ -270,12 +264,14 @@ const Closet: React.FC = () => {
                     </div>
                     <p className={styles.clothesSource}>{cloth.source}</p>
                     <p className={styles.clothesName}>{cloth.name}</p>
-                    <p className={styles.clothesPrice}>{cloth.price.substring(1).replace(/\*/g, '')}원</p>
+                    <p className={styles.clothesPrice}>
+                      {cloth.price.substring(1).replace(/\*/g, '')}원
+                    </p>
                   </div>
                 ))}
               </div>
             </div>
-            <div className={styles.wearingBtn}>
+            {/* <div className={styles.wearingBtn}>
               <button
                 className={styles.btn}
                 onClick={() => {
@@ -286,7 +282,7 @@ const Closet: React.FC = () => {
               >
                 옷 입어보기
               </button>
-            </div>
+            </div> */}
           </section>
 
           <footer className={styles.bottomNav}>
@@ -328,14 +324,17 @@ const Closet: React.FC = () => {
                   className={styles.recommendImg}
                   src={getIconSrc('ask')}
                   alt="style-recomm"
+                  // onClick={() => {
+                  //   startTransition(() => {
+                  //     navigate('/mobile/ask')
+                  //   })
+                  // }}
                   onClick={() => {
-                    startTransition(() => {
-                      navigate('/mobile/ask')
-                    })
+                    alert('서비스 준비 중입니다!')
                   }}
                 />
                 <p className={styles.bottomNavLabel3} style={getActiveStyle('/mobile/ask')}>
-                  스타일추천
+                  스타일 추천
                 </p>
               </label>
 

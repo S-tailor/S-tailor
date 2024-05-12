@@ -446,14 +446,17 @@ const AddCloth: React.FC = () => {
               className={styles.recommendImg}
               src={getIconSrc('ask')}
               alt="style-recomm"
+              // onClick={() => {
+              //   startTransition(() => {
+              //     navigate('/mobile/ask')
+              //   })
+              // }}
               onClick={() => {
-                startTransition(() => {
-                  navigate('/mobile/ask')
-                })
+                alert('서비스 준비 중입니다!')
               }}
             />
             <p className={styles.bottomNavLabel3} style={getActiveStyle('/mobile/ask')}>
-              스타일추천
+              스타일 추천
             </p>
           </label>
 
