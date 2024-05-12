@@ -107,7 +107,7 @@ const Login: React.FC = () => {
 
       <article className={styles.bottomArticle}>
         <section className={styles.bottomButton}>
-          <button className={styles.btn} onClick={LoginClick}>
+        <button className={styles.btn} onClick={LoginClick} style={{ backgroundColor: password.length > 0 ? '#222222' : 'transparent', color: password.length > 0 ? 'white' : '#222222' }}>
           {isLoading ? (
                   <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
                 ) : (

@@ -188,10 +188,7 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
   font-family: 'Pretendard-SemiBold';
   font-size: 0.9em;
   letter-spacing: 1px;
-  &:hover {
-    background-color: #222222;
-    color: white;
-  }
+
 }
 
 .loading {
