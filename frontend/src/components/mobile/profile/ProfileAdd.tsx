@@ -215,7 +215,7 @@ const ProfileAdd: React.FC = () => {
                 placeholder="프로필 이름을 입력해주세요."
                 value={name}
                 onChange={handleNameChange}
-                autoFocus
+                
               />
               <p className={styles.line}></p>
               <br />
@@ -312,7 +312,7 @@ const ProfileAdd: React.FC = () => {
                   placeholder="키를 입력해주세요."
                   value={height}
                   onChange={handleHeightChange}
-                  autoFocus
+                  
                 />
                 <label className={styles.cm} htmlFor="">
                   cm
@@ -361,7 +361,7 @@ const ProfileAdd: React.FC = () => {
                   placeholder="몸무게를 입력해주세요."
                   value={weight}
                   onChange={handleWeightChange}
-                  autoFocus
+                  
                 />
                 <label className={styles.cm} htmlFor="">
                   kg

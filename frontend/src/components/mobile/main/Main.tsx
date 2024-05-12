@@ -32,7 +32,7 @@ const Main: React.FC = () => {
       </section>
       <section className={styles.bottomButton}>
         <button className={styles.btn} onClick={StartClick}>
-          <span className={styles.btnText}></span>  
+          <span className={styles.btnText}>시작하기</span>  
         </button>
       </section>
     </div>
