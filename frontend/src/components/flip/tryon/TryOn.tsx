@@ -1,8 +1,6 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react'
 import { CSSProperties } from 'react'
 import { closetItemList } from '@/api/apiCloset'
-
-// import userStore from '@/store/store'
 import { tryOnGenerate } from '@/api/apiTryOn'
 
 const TryOn: React.FC = () => {
