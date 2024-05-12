@@ -390,19 +390,30 @@ const AddCloth: React.FC = () => {
             <>
               <label htmlFor="gallery">
                 <img className={styles.gallery} src="/assets/gallery.png" alt="gallery" />
-                <input id="gallery" type="file" onChange={saveImage}></input>
+                <input
+                  id="gallery"
+                  type="file"
+                  onClick={(event) => {
+                    event.preventDefault() // 파일 선택 창이 열리는 기본 동작을 방지합니다.
+                    alert('서비스 준비 중입니다 :)')
+                  }}
+                ></input>
               </label>
               <img
                 className={styles.camera}
                 src="/assets/camerashot.png"
                 alt="camera"
-                onClick={handleCapture}
+                onClick={() => {
+                  alert('서비스 준비 중입니다 :)')
+                }}
               />
               <img
                 className={styles.switch}
                 src="/assets/camera.png"
                 alt="capture"
-                onClick={onCameraClick}
+                onClick={() => {
+                  alert('서비스 준비 중입니다 :)')
+                }}
               />
             </>
           )}
@@ -448,14 +459,17 @@ const AddCloth: React.FC = () => {
               className={styles.recommendImg}
               src={getIconSrc('ask')}
               alt="style-recomm"
+              // onClick={() => {
+              //   startTransition(() => {
+              //     navigate('/mobile/ask')
+              //   })
+              // }}
               onClick={() => {
-                startTransition(() => {
-                  navigate('/mobile/ask')
-                })
+                alert('서비스 준비 중입니다 :)')
               }}
             />
             <p className={styles.bottomNavLabel3} style={getActiveStyle('/mobile/ask')}>
-              스타일추천
+              스타일 추천
             </p>
           </label>
 
