@@ -323,9 +323,7 @@ const AddCloth: React.FC = () => {
             <u>
               <a
                 onClick={() => {
-                  startTransition(() => {
-                    navigate('/mobile/closet/code/input/test')
-                  })
+                  alert('서비스 준비 중입니다 :)')
                 }}
               >
                 옷 입어보기
