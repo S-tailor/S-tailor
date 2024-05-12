@@ -191,7 +191,7 @@
   position: sticky;
   bottom: 12%;
   width: 100vw;
-  height: 7vh;
+  height: 60px;
   background-color: #f6f6f8;
   display: flex;
   align-items: center;
@@ -245,10 +245,10 @@
 .textField {
   margin-left: 3vw;
   margin-right: 2vw;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 2vw;
+  padding-right: 2vw;
   width: 70vw;
-  height: 4vh;
+  height: 38px;
   border-radius: 50px;
   outline: none;
   border: none;
@@ -269,27 +269,28 @@
 }
 
 .closetImg {
-  width: 30px;
-  height: 35px;
+  width: 25px;
+  height: 30px;
   margin-left: 1px;
 }
 
 .addClothesImg {
-  width: 30px;
-  height: 35px;
+  width: 25px;
+  height: 30px;
 }
 
 .recommendImg {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
 }
 
 .mypageImg {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius: 100px;
   filter: drop-shadow(0px 0px 1.5px #000000);
 }
+
 
 .btn {
   width: 80vw;

@@ -65,13 +65,13 @@ const Start: React.FC = () => {
           <p className={styles.subtexts}>먼저 로그인이 필요해요 :)</p>
         </div>
         <div className={styles.textfield}>
-          <input className={styles.emailInput} type="email" onChange={checkEmail} placeholder="이메일 주소를 입력해주세요." autoFocus />
+          <input className={styles.emailInput} type="email" onChange={checkEmail} placeholder="이메일 주소를 입력해주세요." />
           <p className={styles.line}></p>
         </div>
       </section>
 
       <section className={styles.bottomButton}>
-        <button className={styles.btn} onClick={ContinueClick}>
+      <button className={styles.btn} onClick={ContinueClick} style={{ backgroundColor: isUser.length > 0 ? '#222222' : 'transparent', color: isUser.length > 0 ? 'white' : '#222222' }}>
         {isLoading ? (
                   <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
                 ) : (

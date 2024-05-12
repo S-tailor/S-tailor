@@ -234,7 +234,7 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
                 type="text"
                 placeholder={name}
                 onChange={handleNameChange}
-                autoFocus
+                
               />
               <p className={styles.line}></p>
               <br />
@@ -318,7 +318,7 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
                 placeholder={height}
                 value={height}
                 onChange={handleHeightChange}
-                autoFocus
+                
               />
               <label className={styles.cm} htmlFor="">cm</label>
               <p className={styles.line2}></p>
@@ -363,7 +363,7 @@ const changePic = (e: React.ChangeEvent<HTMLInputElement>) => {
                 placeholder={weight} 
                 value={weight}
                 onChange={handleWeightChange}
-                autoFocus
+                
               />
               <label className={styles.cm} htmlFor="">kg</label>
               <p className={styles.line2}></p>

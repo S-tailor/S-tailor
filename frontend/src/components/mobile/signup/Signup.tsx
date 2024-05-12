@@ -94,7 +94,7 @@ const Signup: React.FC = () => {
             value={password}
             onChange={handlePasswordChange}
             placeholder="비밀번호를 입력해주세요."
-            autoFocus
+            
           />
           <p className={styles.line}></p>
         </section>
