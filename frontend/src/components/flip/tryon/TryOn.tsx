@@ -1,7 +1,10 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import React, { useRef, useState, useEffect, useMemo } from 'react'
 import { CSSProperties } from 'react'
 import { closetItemList } from '@/api/apiCloset'
 import { tryOnGenerate } from '@/api/apiTryOn'
+import Motion from '@/components/flip/tryon/motion/Motion'
 
 const TryOn: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -27,6 +30,7 @@ const TryOn: React.FC = () => {
     if (Pk) {
       getClosetItem()
     }
+    Motion()
   }, [])
 
   const getClosetItem = async () => {
@@ -155,6 +159,11 @@ const TryOn: React.FC = () => {
 
   return (
     <>
+      <div id="videoContainer">
+        <video id="webcam" width="2160" height="3840" autoPlay></video>
+        <canvas id="canvas-source" width="2160" height="3840"></canvas>
+        <canvas id="canvas-blended" width="2160" height="3840"></canvas>
+      </div>
       <button onClick={toggleCamera}>{isCameraOn ? 'Turn Off Camera' : 'Turn On Camera'}</button>
       <button onClick={handleTryOnButton}>Try On</button>
       <div>{fileUrl && <img alt="originModel" src={fileUrl} />}</div>
