@@ -1,27 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import './App.css';
+import { BrowserRouter as Router } from 'react-router-dom'
+import RenderRoutes from './routes';
+
+import { startTransition, useEffect } from 'react'
 
 function App() {
-  const [count, setCount] = useState(0)
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register('/sw.js')
+          .then(() => { 
+          })
+          .catch((err) => {
+            console.log('Service Worker registration failed:', err)
+          })
+      })
+    }
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <Router>
+      <RenderRoutesWithTransition />
+    </Router>
   )
+}
+
+function RenderRoutesWithTransition() {
+  const fetchData = () => {
+    // 비동기 데이터 로딩 시작
+    startTransition(() => {
+      // 데이터 가져오는 비동기 작업
+    })
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  return <RenderRoutes />
 }
 
 export default App

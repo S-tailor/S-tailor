@@ -1,0 +1,363 @@
+@import "fonts";
+
+.wait {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading {
+  width: 20vw;
+}
+
+.loadingMessage {
+  font-family: 'main-title';
+  color: #A48FFC;
+  opacity: 50%;
+  font-size: 1em;
+}
+
+.header {
+  padding-top: 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 1005;
+  background-color: white;
+}
+
+.headerInner {
+  width: 90vw;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+}
+
+.headerInner1 {
+  width: 100px;
+  margin-left: 8px;
+  display: flex;
+  justify-content: center;
+  margin-right: auto;
+  cursor: pointer;
+}
+
+.headerInner2, .headerInner3 {
+  width: 12vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.cartInner {
+  position: relative;
+}
+
+.logo{
+  width: 115px;
+  height: 68px;
+  margin-left: -10px;
+}
+
+.search {
+  width: 28px;
+}
+
+.cart {
+  margin-top: 2px;
+  width: 19px;
+}
+
+.cartAdd {
+  width: 15px;
+  height: 15px;
+  background-color: #D99AFC;
+  border-radius: 100px;
+  position: absolute;
+  bottom: -10%;
+  right: -40%;
+  color: white;
+  font-family: 'Pretendard-SemiBold';
+  font-size: 0.7em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1px;
+  padding-bottom: 1px;
+}
+
+.closetMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+}
+
+.mainCategory {
+  font-family: 'Pretendard-Medium';
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 0.8em;
+  height: 40px;
+  background-color: white;
+  color:rgb(179, 179, 179);
+  z-index: 1004;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.slider {
+  margin-top: 14vh;
+}
+
+.slider {
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  height: 25vh;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  animation: slider 7.5s infinite linear;
+}
+
+.slide:nth-child(1) {
+  background-image: url("/assets/ad1.png");
+  animation-delay: 0;
+}
+.slide:nth-child(2) {
+  background-image: url("/assets/ad2.png");
+  animation-delay: -2.5s;
+}
+.slide:nth-child(3) {
+  background-image: url("/assets/ad3.png");
+  animation-delay: -5s;
+}
+
+@keyframes slider {
+  0% {
+    transform: translateX(0);
+  }
+
+  26% {
+    transform: translateX(0);
+  }
+  33% {
+    transform: translateX(-100%);
+    animation-timing-function: step-end;
+  }
+  93% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.mainTitle {
+  display: flex;
+  align-items: center;
+  width: 90vw;
+  height: 7vh;
+}
+
+.userName {
+  width: 100%;
+  font-family: 'Pretendard-Bold';
+  font-size: 1.6em;
+  color :#3d3d3d;
+}
+
+.mainClothes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clothesContent {
+  width: 90vw;
+  margin-bottom: 22vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.clothesItem {
+  position: relative;
+  width: 29vw;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+
+.clothesImg {
+  width: 29vw;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
+  filter: drop-shadow(0px 0px 1px #c4c4c4);
+}
+
+.clothesSource {
+  margin: 0;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100px;
+  padding-top: 10px;
+  font-size: 0.7em;
+  font-family: 'Pretendard-Regular';
+  color :#3d3d3d;
+}
+
+.clothesName {
+  margin: 0;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100px;
+  padding-top: 0.5vh;
+  font-size: 0.7em;
+  font-family: 'Pretendard-Bold';
+  color :#3d3d3d;
+}
+
+.clothesPrice {
+  font-family: 'Pretendard-Bold';
+  font-size: 0.7em;
+  margin: 0;
+  padding-top: 5px;
+  color :#3d3d3d;
+}
+
+.addCartBtn {
+  width: 2vw;
+  cursor: pointer;
+  position: absolute;
+  bottom: 65px;
+  right: 20px;
+}
+
+.deleteCartBtn {
+  width: 5vw;
+  cursor: pointer;
+  position: absolute;
+  top: 2px;
+  right: 0px;
+}
+
+.addCartBtnImg {
+  width: 20px;
+  filter: drop-shadow(1px 1px 3px #000000);
+}
+
+.deleteCartBtnImg {
+  width: 7px;
+  filter: drop-shadow(2px 2px 1px #ffffff);
+}
+
+.bottomNavInnerBtn {
+  cursor: pointer;
+}
+
+.closetImg {
+  width: 30px;
+  height: 35px;
+  margin-left: 1px;
+}
+
+.addClothesImg {
+  width: 30px;
+  height: 35px;
+}
+
+.recommendImg {
+  width: 35px;
+  height: 35px;
+}
+
+.mypageImg {
+  width: 35px;
+  height: 35px;
+  border-radius: 100px;
+  filter: drop-shadow(0px 0px 1.5px #000000);
+}
+
+.wearingBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  position: fixed;
+  bottom: 15%;
+  left: 0;
+  z-index: 1000;
+}
+
+.btn {
+  width: 80vw;
+  height: 7vh;
+  border: 1px solid #222222;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #222222;
+  border-radius: 50px;
+  font-family: 'Pretendard-Bold';
+  font-size: 0.9em;
+  letter-spacing: 2px;
+  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
+  &:hover {
+    background-color: #222222;
+    color: white;
+  }
+}
+
+.bottomNav{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 12%;
+  background-color: #ffffff;
+  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-around;
+}
+
+.bottomNavInner {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  width: 100vw;
+  margin-top: -2vh;
+}
+
+.bottomNavLabel1, .bottomNavLabel2, .bottomNavLabel3, .bottomNavLabel4 {
+  font-family: 'Pretendard-Regular';
+  font-size: 0.55em;
+  text-align: center;
+  margin-top: 4px;
+}

@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ssafy.common.util.CopyHttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,34 +46,30 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		// Read the Authorization header, where the JWT Token should be
-        String header = request.getHeader(JwtTokenUtil.HEADER_STRING);
+//        String uri = request.getRequestURI();
+//        CopyHttpServletRequest copyHttpServletRequest = new CopyHttpServletRequest(request);
 
-        // If header does not contain BEARER or is null delegate to Spring impl and exit
-        if (header == null || !header.startsWith(JwtTokenUtil.TOKEN_PREFIX)) {
+//        request.getInputStream();
 
-            /*
-            아래 if문 주석 삭제하면 로그인과 회원가입을 제외한 모든 API 요청시 헤더에 JWT 토큰을 포함 해야 함
-            */
+//        if((uri.equals("/api/user/login") ||
+//                uri.equals("/api/user/create")
+//        )) {
+//            filterChain.doFilter(copyHttpServletRequest, response);
+//            return;
+//        }
+//
+//        String header = request.getHeader(JwtTokenUtil.HEADER_STRING);
+//
+//        try {
+//            // If header is present, try grab user principal from database and perform authorization
+//            Authentication authentication = getAuthentication(copyHttpServletRequest);
+//            // jwt 토큰으로 부터 획득한 인증 정보(authentication) 설정.
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
+//        } catch (Exception ex) {
+//            ResponseBodyWriteUtil.sendError(copyHttpServletRequest, response, ex);
+//            return;
+//        }
 
-//            if(!(request.getRequestURI().equals("/api/user/login") || request.getRequestURI().equals("/api/user/create"))) {
-//                ResponseBodyWriteUtil.sendError(request, response, new Exception());
-//                return;
-//            }
-            filterChain.doFilter(request, response);
-            return;
-        }
-        
-        try {
-            // If header is present, try grab user principal from database and perform authorization
-            Authentication authentication = getAuthentication(request);
-            // jwt 토큰으로 부터 획득한 인증 정보(authentication) 설정.
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        } catch (Exception ex) {
-            ResponseBodyWriteUtil.sendError(request, response, ex);
-            return;
-        }
-        
         filterChain.doFilter(request, response);
 	}
 	

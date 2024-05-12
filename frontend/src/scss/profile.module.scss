@@ -1,0 +1,177 @@
+@import "fonts";
+
+.container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.bgVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.bgVideoContent {
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
+}
+
+.memberContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.editImg {
+  width: 45px;
+  cursor: pointer;
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -75%);
+  opacity: 100%;
+  filter: drop-shadow(2px 2px 1px #ffffff);
+}
+
+.editBtn {
+  background: inherit; 
+  font-family: 'Pretendard-Bold';
+  border: none; 
+  box-shadow: none; 
+  border-radius: 0; 
+  padding: 0; 
+  overflow: visible;
+  cursor: pointer;
+  font-size: 1em;
+  padding-right: 1px;
+}
+
+.wait {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10vh;
+}
+
+.loading {
+  width: 20vw;
+}
+
+.memberImg {
+  transition: opacity 0.3s ease;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.memberImg.modify {
+  opacity: 0.5;
+}
+
+
+.member1 p, .member2 p, .member3 p, .member4 p {
+  text-align: center;
+  font-family: 'Pretendard-Bold';
+  color: #222222;
+  font-size: 0.9em;
+}
+
+.member1 span, .member2 span, .member3 span, .member4 span {
+  width: 100px;
+  display: inline-block;
+}
+
+.member1Img, .member2Img, .member3Img, .member4Img {
+  object-fit: cover;
+  width: 20vw;
+  border-radius: 100%;
+  margin-bottom: 1vh;
+  cursor: pointer;
+}
+
+.profileName {
+  font-family: 'Pretendard-Bold';
+}
+
+.addIcon {
+  width: 80px;
+  height: 80px;
+  border: 1px solid #222222;
+  border-radius: 100%;
+  margin-bottom: 3vh;
+  cursor: pointer;
+}
+
+.header {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerInner{
+  display: flex;
+  align-items: center;
+  width: 80vw;
+}
+
+.backBtn {
+  width: 20px;
+  margin-right: auto;
+  cursor: pointer;
+}
+
+.topInfo{
+  width: 100vw;
+  height: 27%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.texts {
+  font-family: 'Pretendard-Bold';
+  font-size: 10vw;
+  padding: 0;
+  margin: 0;
+  width: 80vw;
+}
+
+.select {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 39%;
+}
+
+.selectInner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+  flex-wrap: wrap;
+  gap: 40px;
+  text-align: center;
+}
+
+.subtexts {
+  font-family: 'Pretendard-Bold';
+  padding-left: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+  padding-top: 1.5vh;
+  color: #222222;
+  opacity: 80%;
+  font-size: 0.9em;
+  width: 80vw;
+}

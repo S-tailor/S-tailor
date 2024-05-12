@@ -27,17 +27,17 @@ services:
       options:
         max-size: "${DOCKER_LOGS_MAX_SIZE:-100M}"
 
-  ai-compose:
-    build:
-      dockerfile: Dockerfile
-      context: ./ai
-    expose:
-      - "8000"
-    networks:
-      - service-connection
-    logging:
-      options:
-        max-size: "${DOCKER_LOGS_MAX_SIZE:-100M}"
+        #  ai-compose:
+        #build:
+        #dockerfile: Dockerfile
+        #context: ./ai
+        #expose:
+        #- "8000"
+        #networks:
+        # - service-connection
+        #logging:
+        #options:
+        #max-size: "${DOCKER_LOGS_MAX_SIZE:-100M}"
 
   nginx:
     image: nginx:1.15-alpine
@@ -94,6 +94,7 @@ services:
         max-size: "${DOCKER_LOGS_MAX_SIZE:-100M}"
 
   ### http ###
+
   # nginx:
   #   restart: always
   #   build:

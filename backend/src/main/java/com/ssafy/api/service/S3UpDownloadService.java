@@ -11,8 +11,13 @@ import java.util.Map;
  */
 public interface S3UpDownloadService {
 
-	public String saveImage(@RequestParam MultipartFile multipartFile,String fileName,int userPk) throws IOException;
+	public String saveProfileImage(@RequestParam MultipartFile multipartFile,String fileName,int profilePk) throws IOException;
 	public Map<String, Object> getFile(String s3FileName) throws IOException;
+
+	public String imageSearchUpload(MultipartFile image);
+
+	String saveTryOnModelImage(MultipartFile file, int profilePk);
+	String imageChatUpload(MultipartFile image, String profile);
 }
 
 

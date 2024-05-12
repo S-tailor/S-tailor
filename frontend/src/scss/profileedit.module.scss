@@ -1,0 +1,424 @@
+@import "fonts";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100vw;
+  height: 100vh;
+}
+.bgVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.bgVideoContent {
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
+}
+.header {
+  width: 100vw;
+  height: 10%;
+  display: flex;
+  align-items: center;
+}
+
+.headerInner1{
+  width: 25%;
+  display: flex;
+  align-items: center;
+}
+
+.headerInner2 {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+
+.headerInner3 {
+  width: 25%;
+}
+
+.backBtn {
+  width: 20px;
+  margin-left: 10vw;
+  cursor: pointer;
+}
+
+.profileadd {
+  font-family: 'Pretendard-Bold';
+  font-size: 1.2em;
+}
+
+.create {
+  width: 100vw;
+  height: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3vh;
+  margin-bottom: -3vh;
+}
+
+.create2 {
+  width: 100vw;
+  height: 18%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty {
+  width: 100vw;
+  height: 40%;
+}
+
+.create3 {
+  width: 100vw;
+  height: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileImg {
+  position: relative;
+}
+
+.uploadedImg {
+  object-fit: cover;
+  width: 20vw;
+  height: 20vw;
+  border-radius: 100%;
+  margin-bottom: 1vh;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.labelImg {
+  object-fit: cover;
+  position: absolute;
+  bottom: 7%;
+  right: -15%;
+  width: 8vw;
+  background-color: white;
+  border-radius: 50%;
+  padding: 1vw;
+  cursor: pointer;
+  &:active {
+    background-color: gray;
+  }
+}
+
+.profileNameInput {
+  outline: none;
+  background-color: transparent;
+  font-family: 'Pretendard-SemiBold';
+  font-size: 1.4em;
+  color: #222222;
+  opacity: 50%;
+  padding-top: 4vh;
+  margin-bottom: 1.5vh;
+  border: 0;
+  width: 80vw;
+}
+
+.profileNameInput2 {
+  outline: none;
+  background-color: transparent;
+  font-family: 'Pretendard-SemiBold';
+  font-size: 1.4em;
+  color: #222222;
+  opacity: 50%;
+  padding-top: 3vh;
+  border: 0;
+  width: 80vw;
+}
+
+.line {
+  display: inline-block;
+  width: 80vw; 
+  height: 3px; 
+  padding: 0;
+  margin: 0;
+  position: relative;
+
+  &:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #222222;
+    opacity: 30%;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+    position: absolute;
+    bottom: 0;
+    animation: underline-slide 1s ease forwards;
+  }
+}
+
+.line2 {
+  display: inline-block;
+  width: 80vw; 
+  height: 3px; 
+  position: relative;
+
+  &:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #222222;
+    opacity: 30%;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+    position: absolute;
+    bottom: 0;
+    animation: underline-slide 1s ease forwards;
+  }
+}
+
+@keyframes underline-slide {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.topInfo{
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.middleInfo {
+  margin-left: 10vw;
+  margin-top: 3vh;
+}
+
+.texts {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: 'Pretendard-Bold';
+  font-size: 2.5em;
+  width: 80vw;
+  margin: 0;
+}
+
+.subtexts {
+  font-family: 'Pretendard-Bold';
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 80vw;
+  color: #222222;
+  opacity: 80%;
+  font-size: 0.9em;
+  margin-top: 1vh;
+}
+
+.checkboxLabel {
+  font-family: 'Pretendard-Bold';
+  margin-left: 10vw;
+  width: 80vw;
+  color: #222222;
+  opacity: 80%;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.checkboxIcon {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #222222;
+  margin-right: 10px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+}
+
+input[type="checkbox"]:checked + .checkboxIcon::before {
+  content: '✓';
+  position: absolute;
+  top: -0.3vh;
+  text-align: center;
+  color: #222222;
+}
+
+.bottomButton{
+  height: 55%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100vw;
+}
+
+.bottomButton2 {
+  height: 24%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+
+.bottomButton3 {
+  height: 57%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100vw;
+}
+
+.bottomButton4 {
+  height: 64%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100vw;
+  margin-top: 5vh;
+  margin-bottom: -5vh;
+}
+
+.btn {
+  width: 80vw;
+  height: 55px;
+  border: 1px solid #222222;
+  background-color: transparent;
+  color: #222222;
+  border-radius: 50px;
+  font-family: 'Pretendard-Bold';
+
+  font-size: 0.9em;
+  letter-spacing: 1px;
+  &:hover {
+    background-color: #222222;
+    color: white;
+  }
+}
+
+.btn2 {
+  width: 80vw;
+  height: 55px;
+  border: 1px solid #222222;
+  background-color: transparent;
+  color: #222222;
+  border-radius: 50px;
+  font-family: 'Pretendard-Bold';
+
+  font-size: 0.9em;
+  letter-spacing: 1px;
+  &:hover {
+    background-color: #222222;
+    color: white;
+  }
+  &:active {
+    background-color: #222222;
+    color: white;
+  }
+  &:focus {
+    background-color: #222222;
+    color: white;
+  }
+}
+
+.btn3 {
+  width: 80vw;
+  height: 55px;
+  border: 1px solid #222222;
+  background-color: transparent;
+  color: #222222;
+  border-radius: 50px;
+  font-family: 'Pretendard-Bold';
+
+  font-size: 0.9em;
+  letter-spacing: 1px;
+  &:hover {
+    background-color: #222222;
+    color: white;
+  }
+}
+
+.toggleSwitch {
+  display: flex;
+  border: 1px solid #222222;
+  border-radius: 50px;
+  overflow: hidden;
+  width: 80vw;
+  background-color: transparent;
+  margin-top: 3vh;
+}
+
+.toggleButton {
+  font-family: 'Pretendard-Bold';
+  letter-spacing: 2px;
+  flex: 1;
+  border: none;
+  background-color: transparent;
+  padding: 13px 20px;
+  transition: background-color 0.3s;
+}
+
+.toggleButton:focus {
+  background-color: #222222;
+  color: #fff;
+}
+
+
+//////////////////
+
+.cm {
+  position: fixed;
+  top: 30%;
+  right: 10%;
+  font-family: 'Pretendard-Bold';
+  font-size: 2em;
+  opacity: 30%;
+}
+
+.subtexts2 {
+  font-family: 'Pretendard-Bold';
+  color: #222222;
+  opacity: 40%;
+  font-size: 0.8em;
+  margin-bottom: 1.5vh;
+}
+
+.message {
+  font-family: 'Pretendard-Bold';
+  font-size: 1em;
+  letter-spacing: 1px;
+  color: rgb(226, 92, 92); 
+  position: fixed;
+  top: 38%;
+  height: 15px;
+}
+
+.showMessage {
+  display: flex;
+  align-items: center;
+  font-size: 0.8em;
+  height: 15px;
+}

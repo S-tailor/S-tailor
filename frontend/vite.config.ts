@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -12,35 +13,41 @@ export default defineConfig({
         enabled: true
       },
       workbox: {
-    	navigateFallbackDenylist: [/^\/jenkins/]
+        navigateFallbackDenylist: [/^\/jenkins/]
       },
       manifest: {
-        name: 'S-tailor',
-        short_name: 'S-tailor',
+        theme_color: '#ffffff',
+        name: 'S-Tailor',
+        short_name: 'S-Tailor',
         start_url: '/',
         display: 'standalone',
         description: 'A virtual cloth app.',
         icons: [
           {
-            src: 'favicon-196x196.png',
+            src: 'favicon-192x192.png',
             type: 'image/png',
-            sizes: '196x196',
+            sizes: '192x192',
             purpose: 'any'
           },
           {
             src: 'favicon-512x512.png',
             type: 'image/png',
             sizes: '512x512',
-            purpose: 'any'
+            purpose: 'any',
           },
           {
             src: 'favicon-maskable-512x512.png',
             type: 'image/png',
             sizes: '512x512',
-            purpose: 'maskable'
+            purpose: 'maskable',
           }
         ]
       }
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  }
 })
