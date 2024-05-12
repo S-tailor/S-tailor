@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react'
 import { CSSProperties } from 'react'
 import { closetItemList } from '@/api/apiCloset'
+
 // import userStore from '@/store/store'
 import { tryOnGenerate } from '@/api/apiTryOn'
 
@@ -8,12 +9,15 @@ const TryOn: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isCameraOn, setIsCameraOn] = useState(false)
   const [itemList, setItemList] = useState<clothInfo[]>([])
-  // const { user } = userStore()
-  const [currentIndex, setCurrentIndex] = useState(0)
 
+  const [currentIndex, setCurrentIndex] = useState(0)
   const [fileImage, setFileImage] = useState<File>()
   const [fileUrl, setFileUrl] = useState<string>('')
+
+  // const { user } = userStore()
+  
   const [resultUrl, setResultUrl] = useState<string>('')
+
 
   // const Pk = user[0]?.profilePk
   const Pk = sessionStorage.getItem('profilePk')
@@ -148,9 +152,11 @@ const TryOn: React.FC = () => {
     formData.append('profilePk', '12')
     formData.append('category', 'lower_body')
 
+
     const response = await tryOnGenerate(formData)
     setResultUrl(response.data.generatedImageURL)
   }
+
   return (
     <>
       <button onClick={toggleCamera}>{isCameraOn ? 'Turn Off Camera' : 'Turn On Camera'}</button>
