@@ -1,5 +1,6 @@
 package com.ssafy.api.controller;
 
+import com.ssafy.api.request.CartPurchaseReq;
 import com.ssafy.api.response.CartListRes;
 import com.ssafy.api.service.CartService;
 import com.ssafy.common.model.response.BaseResponseBody;
@@ -45,4 +46,12 @@ public class CartController {
         }
     }
 
+    @PostMapping("/purchase")
+    public ResponseEntity<? extends BaseResponseBody> purchase(@RequestBody CartPurchaseReq info) {
+        if(cartService.purchase(info.getPrice())) {
+            return ResponseEntity.ok(BaseResponseBody.of(200, "Success"));
+        } else {
+            return ResponseEntity.ok(BaseResponseBody.of(400, "Fail"));
+        }
+    }
 }
