@@ -297,7 +297,7 @@ const Ask: React.FC = () => {
               //   })
               // }}
               onClick={() => {
-                alert('서비스 준비 중입니다!')
+                alert('서비스 준비 중입니다 :)')
               }}
             />
             <p className={styles.bottomNavLabel3} style={getActiveStyle('/mobile/ask')}>
