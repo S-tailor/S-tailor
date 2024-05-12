@@ -70,7 +70,7 @@ const TryOn: React.FC = () => {
     () => ({
       width: '100vw',
       height: '100vh',
-      objectFit: 'cover',
+      // objectFit: 'cover',
       transform: 'scaleX(-1)'
     }),
     []
@@ -159,11 +159,6 @@ const TryOn: React.FC = () => {
 
   return (
     <>
-      <div id="videoContainer">
-        <video id="webcam" width="2160" height="3840" autoPlay></video>
-        <canvas id="canvas-source" width="2160" height="3840"></canvas>
-        <canvas id="canvas-blended" width="2160" height="3840"></canvas>
-      </div>
       <button onClick={toggleCamera}>{isCameraOn ? 'Turn Off Camera' : 'Turn On Camera'}</button>
       <button onClick={handleTryOnButton}>Try On</button>
       <div>{fileUrl && <img alt="originModel" src={fileUrl} />}</div>
@@ -172,6 +167,11 @@ const TryOn: React.FC = () => {
       </label>
 
       <div>{resultUrl && <img alt="result" src={resultUrl} />}</div>
+                    <div id="videoContainer"  ref={videoRef} >
+                      <video id="webcam" width="2160" height="3840"style={videoStyle} autoPlay></video>
+                      <canvas id="canvas-source" width="2160" height="3840" style={{display:'none'}}></canvas>
+                      <canvas id="canvas-blended" width="2160" height="3840" style={{display:'none'}}></canvas>
+                    </div>
       {/* <video autoPlay ref={videoRef} style={videoStyle}></video> */}
       <div style={containerStyle}>
         {isCameraOn && itemList.length > 0 && (
@@ -240,7 +240,7 @@ const TryOn: React.FC = () => {
             }
           </section>
         )}
-        <video autoPlay ref={videoRef} style={videoStyle}></video>
+        {/* <video autoPlay ref={videoRef} style={videoStyle}></video> */}
       </div>
     </>
   )

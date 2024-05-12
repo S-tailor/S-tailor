@@ -2,9 +2,9 @@
 // @ts-nocheck
 
 export default function () {
-  var video = document.querySelector('#webcam') //$('#webcam')[0];
+  let video = document.querySelector('#webcam') //$('#webcam')[0];
 
-  var webcamError = function (e) {
+  let webcamError = function (e) {
     alert('Webcam error!', e)
   }
 
@@ -35,27 +35,27 @@ export default function () {
     //video.src = 'somevideo.webm'; // fallback.
   }
 
-  var lastImageData
-  var canvasSource = document.querySelector('#canvas-source') //$("#canvas-source")[0];
-  var canvasBlended = document.querySelector('#canvas-blended') //$("#canvas-blended")[0];
+  let lastImageData
+  let canvasSource = document.querySelector('#canvas-source') //$("#canvas-source")[0];
+  let canvasBlended = document.querySelector('#canvas-blended') //$("#canvas-blended")[0];
 
-  var contextSource = canvasSource.getContext('2d')
-  var contextBlended = canvasBlended.getContext('2d')
+  let contextSource = canvasSource.getContext('2d')
+  let contextBlended = canvasBlended.getContext('2d')
 
-  var notes = []
+  let notes = []
 
   contextSource.translate(canvasSource.width, 0)
   contextSource.scale(-1, 1)
 
-  var c = 5
+
 
   function initialize() {
     setTimeout(finishedLoading, 1000)
   }
 
-  function finishedLoading(bufferList) {
-    for (var i = 0; i < 3; i++) {
-      var note = {
+  function finishedLoading() {
+    for (let i = 0; i < 3; i++) {
+      let note = {
         ready: true,
         visual: i
       }
@@ -85,7 +85,7 @@ export default function () {
 
     obj.ready = false
 
-    setTimeout(setNoteReady, 600, obj)
+    setTimeout(setNoteReady, 500, obj)
   }
 
   function setNoteReady(obj) {
@@ -121,14 +121,14 @@ export default function () {
   }
 
   function blend() {
-    var width = canvasSource.width
-    var height = canvasSource.height
+    let width = canvasSource.width
+    let height = canvasSource.height
     // get webcam image data
-    var sourceData = contextSource.getImageData(0, 0, width, height)
+    let sourceData = contextSource.getImageData(0, 0, width, height)
     // create an image if the previous image doesn’t exist
     if (!lastImageData) lastImageData = contextSource.getImageData(0, 0, width, height)
     // create a ImageData instance to receive the blended result
-    var blendedData = contextSource.createImageData(width, height)
+    let blendedData = contextSource.createImageData(width, height)
     // blend the 2 images
     differenceAccuracy(blendedData.data, sourceData.data, lastImageData.data)
     // draw the result in a canvas
@@ -148,11 +148,11 @@ export default function () {
 
   function differenceAccuracy(target, data1, data2) {
     if (data1.length != data2.length) return null
-    var i = 0
+    let i = 0
     while (i < data1.length * 0.25) {
-      var average1 = (data1[4 * i] + data1[4 * i + 1] + data1[4 * i + 2]) / 3
-      var average2 = (data2[4 * i] + data2[4 * i + 1] + data2[4 * i + 2]) / 3
-      var diff = threshold(fastAbs(average1 - average2))
+      let average1 = (data1[4 * i] + data1[4 * i + 1] + data1[4 * i + 2]) / 3
+      let average2 = (data2[4 * i] + data2[4 * i + 1] + data2[4 * i + 2]) / 3
+      let diff = threshold(fastAbs(average1 - average2))
       target[4 * i] = diff
       target[4 * i + 1] = diff
       target[4 * i + 2] = diff
@@ -162,21 +162,21 @@ export default function () {
   }
 
   function checkAreas() {
-    var areas = [
+    let areas = [
       { x: video.width * 0.5, y: 300, width: 30, height: 30 },
       { x: 300, y: video.height * 0.5, width: 30, height: 30 },
       { x: video.width - 300, y: video.height * 0.5, width: 10, height: 10 }
     ]
 
     areas.forEach((area, index) => {
-      var blendedData = contextBlended.getImageData(area.x, area.y, area.width, area.height)
-      var i = 0
-      var average = 0
-      var pixelCount = blendedData.data.length / 4
+      let blendedData = contextBlended.getImageData(area.x, area.y, area.width, area.height)
+      let i = 0
+      let average = 0
+      let pixelCount = blendedData.data.length / 4
 
       // Loop over the pixels to calculate the average intensity in the area
       while (i < pixelCount) {
-        var offset = i * 4
+        let offset = i * 4
         average +=
           (blendedData.data[offset] + blendedData.data[offset + 1] + blendedData.data[offset + 2]) /
           3
