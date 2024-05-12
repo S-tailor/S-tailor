@@ -1,6 +1,6 @@
 import React, { startTransition } from 'react'
 import { useNavigate } from 'react-router-dom'
-import styles from '../../../scss/main.module.scss';
+import styles from '../../../scss/main.module.scss'
 
 const Main: React.FC = () => {
   const navigate = useNavigate()
@@ -14,8 +14,8 @@ const Main: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.bgVideo}>
-        <video className={styles.bgVideoContent} autoPlay muted loop >
-          <source src='/assets/background.mp4' />
+        <video className={styles.bgVideoContent} autoPlay muted loop>
+          <source src="/assets/background.mp4" />
         </video>
       </div>
       <section className={styles.topTitle}>
@@ -32,11 +32,11 @@ const Main: React.FC = () => {
       </section>
       <section className={styles.bottomButton}>
         <button className={styles.btn} onClick={StartClick}>
-          <span className={styles.btnText}>시작하기</span>  
+          <span className={styles.btnText}></span>
         </button>
       </section>
     </div>
   )
 }
 
-export default Main;
+export default Main
