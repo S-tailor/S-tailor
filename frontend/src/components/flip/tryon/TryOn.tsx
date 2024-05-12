@@ -102,8 +102,8 @@ const TryOn: React.FC = () => {
   const itemListStyle: CSSProperties = {
     zIndex: 99999,
     position: 'absolute',
-    top: '50%', // 화면 세로 중앙에 위치
-    left: '50%', // 화면 가로 중앙에 위치
+    top: '70%', // 화면 세로 중앙에 위치
+    left: '30%', // 화면 가로 중앙에 위치
     transform: 'translate(-50%, -50%)', // 중앙 정확히 맞추기
     display: 'flex',
     alignItems: 'center',
@@ -166,8 +166,8 @@ const TryOn: React.FC = () => {
         <input type="file" name="imgFile" id="imgFile" onChange={handleFileChange} />
       </label>
 
-      <div>{resultUrl && <img alt="result" src={resultUrl} />}</div>
-      <video autoPlay ref={videoRef} style={videoStyle}></video>
+      {/* <div>{resultUrl && <img alt="result" src={resultUrl} />}</div> */}
+      {/* <video autoPlay ref={videoRef} style={videoStyle}></video> */}
       <div style={containerStyle}>
         {isCameraOn && itemList.length > 0 && (
           <section>
