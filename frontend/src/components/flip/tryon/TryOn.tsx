@@ -1,7 +1,9 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react'
 import { CSSProperties } from 'react'
 import { closetItemList } from '@/api/apiCloset'
-// import { tryOnGenerate } from '@/api/apiTryOn'
+
+// import userStore from '@/store/store'
+import { tryOnGenerate } from '@/api/apiTryOn'
 
 const TryOn: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -11,7 +13,12 @@ const TryOn: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [fileImage, setFileImage] = useState<File>()
   const [fileUrl, setFileUrl] = useState<string>('')
-  const [resultUrl] = useState<string>('')
+
+  // const { user } = userStore()
+  
+  const [resultUrl, setResultUrl] = useState<string>('')
+
+
   // const Pk = user[0]?.profilePk
   const Pk = sessionStorage.getItem('profilePk')
   interface clothInfo {
@@ -145,7 +152,9 @@ const TryOn: React.FC = () => {
     formData.append('profilePk', '12')
     formData.append('category', 'lower_body')
 
-    // const response = await tryOnGenerate(formData)
+
+    const response = await tryOnGenerate(formData)
+    setResultUrl(response.data.generatedImageURL)
   }
 
   return (
@@ -158,7 +167,7 @@ const TryOn: React.FC = () => {
       </label>
 
       <div>{resultUrl && <img alt="result" src={resultUrl} />}</div>
-      <video autoPlay muted ref={videoRef} style={videoStyle}></video>
+      <video autoPlay ref={videoRef} style={videoStyle}></video>
       <div style={containerStyle}>
         {isCameraOn && itemList.length > 0 && (
           <section>
