@@ -15,9 +15,8 @@ const TryOn: React.FC = () => {
   const [fileUrl, setFileUrl] = useState<string>('')
 
   // const { user } = userStore()
-  
-  const [resultUrl, setResultUrl] = useState<string>('')
 
+  const [resultUrl, setResultUrl] = useState<string>('')
 
   // const Pk = user[0]?.profilePk
   const Pk = sessionStorage.getItem('profilePk')
@@ -152,7 +151,6 @@ const TryOn: React.FC = () => {
     formData.append('profilePk', '12')
     formData.append('category', 'lower_body')
 
-
     const response = await tryOnGenerate(formData)
     setResultUrl(response.data.generatedImageURL)
   }
@@ -166,7 +164,7 @@ const TryOn: React.FC = () => {
         <input type="file" name="imgFile" id="imgFile" onChange={handleFileChange} />
       </label>
 
-      {/* <div>{resultUrl && <img alt="result" src={resultUrl} />}</div> */}
+      <div>{resultUrl && <img alt="result" src={resultUrl} />}</div>
       {/* <video autoPlay ref={videoRef} style={videoStyle}></video> */}
       <div style={containerStyle}>
         {isCameraOn && itemList.length > 0 && (
