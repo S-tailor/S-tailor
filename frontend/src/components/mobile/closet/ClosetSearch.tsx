@@ -52,7 +52,7 @@ const ClosetSearch: React.FC = () => {
               value={searchText}
               onChange={(e) => saveText(e.target.value)}
               placeholder="옷장 안의 옷을 검색해보세요 :)"
-              autoFocus
+              
             />
             <img
               className={styles.search}

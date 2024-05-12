@@ -86,7 +86,7 @@ const Login: React.FC = () => {
             value={password}
             onChange={handlePasswordChange}
             placeholder="비밀번호를 입력하세요."
-            autoFocus
+            
           />
           <p className={styles.line}></p>
           <br />
