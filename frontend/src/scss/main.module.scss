@@ -35,7 +35,7 @@ p {
 
 .topTitleInner {
   width: 100vw;
-  animation:text-flicker-in-glow 1s linear 1s both
+  // animation:text-flicker-in-glow 1s linear 1s both
 }
 
 
@@ -48,9 +48,9 @@ p {
   flex-wrap: nowrap;
 }
 
-.middleTitleInner{
-  animation:text-flicker-in-glow 1s linear 1.5s both
-}
+// .middleTitleInner{
+//   animation:text-flicker-in-glow 1s linear 1.5s both
+// }
 
 .texts1 {
   width: 100vw;
@@ -80,7 +80,7 @@ p {
 
 .btn {
   width: 80vw;
-  height: 7vh;
+  height: 60px;
   border: none;
   background-color: #222222;
   color: white;
@@ -89,7 +89,7 @@ p {
   font-family: 'Pretendard-SemiBold';
   font-size: 0.9em;
   letter-spacing: 1px;
-  animation:fade-in 1.2s cubic-bezier(.39,.575,.565,1.000) 2.5s both
+  // animation:fade-in 1.2s cubic-bezier(.39,.575,.565,1.000) 2.5s both
 }
 
 @keyframes fade-in{0%{opacity:0}100%{opacity:1}}
