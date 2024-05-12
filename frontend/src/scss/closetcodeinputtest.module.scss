@@ -97,11 +97,11 @@
 .bottomButton{
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   text-align: center;
   width: 100vw;
-  height: 24%;
+  height: 30%;
 }
 
 .btn {
@@ -120,11 +120,11 @@
 
 .infoText {
   width: 80vw;
-  height: auto;
+  height: 25px;
   display: block;
   justify-content: center;
   align-items: center;
   font-size: 14px;
   font-family: 'Pretendard-SemiBold';
-  margin-bottom: 4vh;
+  margin-bottom: 2vh;
 }
