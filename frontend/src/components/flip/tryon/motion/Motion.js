@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
-export default function () {
+export default function (handleCapture) {
   let video = document.querySelector('#webcam') //$('#webcam')[0];
 
   let webcamError = function (e) {
@@ -47,8 +47,6 @@ export default function () {
   contextSource.translate(canvasSource.width, 0)
   contextSource.scale(-1, 1)
 
-
-
   function initialize() {
     setTimeout(finishedLoading, 1000)
   }
@@ -80,7 +78,8 @@ export default function () {
     }
 
     if (key == 0) {
-      console.log('선택하기')
+      console.log('촬영하기')
+      setTimeout(handleCapture, 5000)
     }
 
     obj.ready = false

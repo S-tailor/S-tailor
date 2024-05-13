@@ -5,6 +5,7 @@ import { CSSProperties } from 'react'
 import { closetItemList } from '@/api/apiCloset'
 import { tryOnGenerate } from '@/api/apiTryOn'
 import Motion from '@/components/flip/tryon/motion/Motion'
+import styles from '@/scss/addcloth.module.scss'
 
 const TryOn: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -18,6 +19,12 @@ const TryOn: React.FC = () => {
   // const { user } = userStore()
 
   const [resultUrl, setResultUrl] = useState<string>('')
+  // const [showResults, setShowResults] = useState(false)
+  const [imagePath, setImagePath] = useState('')
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null)
+  // const [cameraActive, setCameraActive] = useState(false)
+  // const [captureMode, setCaptureMode] = useState(false)
+  // const [searchMode, setSearchMode] = useState<'text' | 'upload' | 'camera' | null>(null)
 
   // const Pk = user[0]?.profilePk
   const Pk = sessionStorage.getItem('profilePk')
@@ -30,7 +37,7 @@ const TryOn: React.FC = () => {
     if (Pk) {
       getClosetItem()
     }
-    Motion()
+    Motion(handleCapture)
   }, [])
 
   const getClosetItem = async () => {
@@ -157,8 +164,74 @@ const TryOn: React.FC = () => {
     setResultUrl(response.data.generatedImageURL)
   }
 
+  const handleCapture = async () => {
+    const canvas = document.createElement('canvas')
+    const video = videoRef.current
+
+    if (video && video.videoWidth > 0) {
+      canvas.width = video.videoWidth
+      canvas.height = video.videoHeight
+
+      const ctx = canvas.getContext('2d')
+
+      if (ctx) {
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+        const blob = await new Promise<Blob | null>((resolve) => {
+          canvas.toBlob(resolve, 'image/png')
+        })
+        if (blob) {
+          const url = URL.createObjectURL(blob).split('/')
+          const file = new File([blob], `${url[url.length - 1]}.png`, { type: 'image/png' })
+          console.log('Capture successful:', url)
+          saveImage(file)
+        }
+      }
+    }
+  }
+  // 업로드 이미지 저장
+  function saveImage(input: File) {
+    let file: File
+    if (input instanceof File) {
+      // 직접 File 객체가 입력된 경우
+      file = input
+    } else if (input.target.files && input.target.files[0]) {
+      // 이벤트를 통해 파일이 입력된 경우
+      file = input.target.files[0]
+    }
+
+    // 파일이 존재하는 경우 처리
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = () => {
+        setImagePath(reader.result as string)
+        setUploadedFile(file)
+        setImageReady(true)
+        setSearchMode('upload')
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  // 업로드 이미지 띄우기
+  function RenderUploadedImage() {
+    return (
+      <div>
+        <img src={imagePath} style={videoStyle}></img>
+      </div>
+    )
+  }
   return (
     <>
+      <div className={styles.picture}>
+        imagePath&&
+        <RenderUploadedImage />
+      </div>
+      <img
+        className={styles.camera}
+        src="/assets/camerashot.png"
+        alt="camera"
+        onClick={handleCapture}
+      />
       <button onClick={toggleCamera}>{isCameraOn ? 'Turn Off Camera' : 'Turn On Camera'}</button>
       <button onClick={handleTryOnButton}>Try On</button>
       <div>{fileUrl && <img alt="originModel" src={fileUrl} />}</div>
@@ -167,8 +240,15 @@ const TryOn: React.FC = () => {
       </label>
 
       <div>{resultUrl && <img alt="result" src={resultUrl} />}</div>
-      <div id="videoContainer" ref={videoRef}>
-        <video id="webcam" width="2160" height="3840" style={videoStyle} autoPlay></video>
+      <div id="videoContainer">
+        <video
+          id="webcam"
+          width="2160"
+          height="3840"
+          ref={videoRef}
+          style={videoStyle}
+          autoPlay
+        ></video>
         <canvas id="canvas-source" width="2160" height="3840" style={{ display: 'none' }}></canvas>
         <canvas id="canvas-blended" width="2160" height="3840" style={{ display: 'none' }}></canvas>
       </div>
