@@ -2,7 +2,6 @@ import React, { useMemo, startTransition, useEffect, useState } from 'react'
 import userStore from '@/store/store'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styles from '../../../scss/mypage.module.scss'
-import { closetData } from '@/api/apiCloset'
 import { myPageTryonList } from '@/api/apiMyPage'
 
 const MyPage: React.FC = () => {
@@ -35,8 +34,6 @@ const MyPage: React.FC = () => {
 
   const [tryonList, setTryOnList] = useState<tryonInfo[]>([])
   const [closetList, setClosetList] = useState<clothInfo[]>([])
-
-  const [flag, setFlag] = useState(false)
 
   const ClosetSearchClick = () => {
     startTransition(() => {
