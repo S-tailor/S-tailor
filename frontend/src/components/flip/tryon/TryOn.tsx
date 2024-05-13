@@ -5,7 +5,7 @@ import { CSSProperties } from 'react'
 import { closetItemList } from '@/api/apiCloset'
 import { tryOnGenerate } from '@/api/apiTryOn'
 import Motion from '@/components/flip/tryon/motion/Motion'
-import styles from '@/scss/addcloth.module.scss'
+// import styles from '@/scss/addcloth.module.scss'
 
 const TryOn: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -20,8 +20,8 @@ const TryOn: React.FC = () => {
 
   const [resultUrl, setResultUrl] = useState<string>('')
   // const [showResults, setShowResults] = useState(false)
-  const [imagePath, setImagePath] = useState('')
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null)
+  // const [imagePath, setImagePath] = useState('')
+  // const [uploadedFile, setUploadedFile] = useState<File | null>(null)
   // const [cameraActive, setCameraActive] = useState(false)
   // const [captureMode, setCaptureMode] = useState(false)
   // const [searchMode, setSearchMode] = useState<'text' | 'upload' | 'camera' | null>(null)
@@ -148,18 +148,18 @@ const TryOn: React.FC = () => {
   //   }
   // }
 
-  const handleTryOnButton = async () => {
-    const formData = new FormData()
-    if (fileImage instanceof File) {
-      formData.append('model', fileImage)
-    }
-    formData.append('profilePk', '1')
-    formData.append('category', 'dresses')
-    formData.append('closetPk', '86')
+  // const handleTryOnButton = async () => {
+  //   const formData = new FormData()
+  //   if (fileImage instanceof File) {
+  //     formData.append('model', fileImage)
+  //   }
+  //   formData.append('profilePk', '1')
+  //   formData.append('category', 'dresses')
+  //   formData.append('closetPk', '86')
 
-    const response = await tryOnGenerate(formData)
-    setResultUrl(response.data.generatedImageURL)
-  }
+  //   const response = await tryOnGenerate(formData)
+  //   setResultUrl(response.data.result.generatedImage)
+  // }
 
   const handleTryOn = async (file) => {
     const formData = new FormData()
@@ -171,7 +171,7 @@ const TryOn: React.FC = () => {
     formData.append('closetPk', '86')
 
     const response = await tryOnGenerate(formData)
-    setResultUrl(response.data.generatedImageURL)
+    setResultUrl(response.data.result.generatedImage)
   }
 
   const handleCapture = async () => {
@@ -202,6 +202,11 @@ const TryOn: React.FC = () => {
   // 업로드 이미지 저장
   function saveImage(input: File) {
     let file: File
+    // const file = input.target.files?.[0]
+    // setFileImage(file)
+    // if (file) {
+    //   setFileUrl(URL.createObjectURL(file))
+    // }
     handleTryOn(input)
     if (input instanceof File) {
       // 직접 File 객체가 입력된 경우
@@ -217,9 +222,9 @@ const TryOn: React.FC = () => {
       reader.onload = () => {
         setFileImage(file)
         setImagePath(reader.result as string)
-        setFileUrl(reader.result as string)
+        setFileUrl(URL.createObjectURL(file))
 
-        setUploadedFile(file)
+        // setUploadedFile(file)
         setImageReady(true)
         setSearchMode('upload')
       }
@@ -228,27 +233,27 @@ const TryOn: React.FC = () => {
   }
 
   // 업로드 이미지 띄우기
-  function RenderUploadedImage() {
-    return (
-      <div>
-        <img width="2160" height="3840" src={imagePath} style={videoStyle}></img>
-      </div>
-    )
-  }
+  // function RenderUploadedImage() {
+  //   return (
+  //     <div>
+  //       <img width="2160" height="3840" src={imagePath} style={videoStyle}></img>
+  //     </div>
+  //   )
+  // }
   return (
     <>
-      <div className={styles.picture}>
+      {/* <div className={styles.picture}>
         imagePath&&
         <RenderUploadedImage />
-      </div>
-      <img
+      </div> */}
+      {/* <img
         className={styles.camera}
         src="/assets/camerashot.png"
         alt="camera"
         onClick={handleCapture}
-      />
+      /> */}
       <button onClick={toggleCamera}>{isCameraOn ? 'Turn Off Camera' : 'Turn On Camera'}</button>
-      <button onClick={handleTryOnButton}>Try On</button>
+      {/* <button onClick={handleTryOnButton}>Try On</button> */}
       <div>captured image {fileUrl && <img alt="originModel" src={fileUrl} />}</div>
       {/* <label htmlFor="imgFile">
         <input type="file" name="imgFile" id="imgFile" onChange={handleFileChange} />
