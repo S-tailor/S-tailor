@@ -160,4 +160,13 @@ public class ClosetServiceImpl implements ClosetService{
             return null;
         }
     }
+
+    @Override
+    public Closet closetData(int closetPk) {
+        try {
+            return closetRepository.findByClosetPk(closetPk);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
