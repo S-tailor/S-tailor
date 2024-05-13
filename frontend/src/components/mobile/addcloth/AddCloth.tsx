@@ -27,11 +27,11 @@ const AddCloth: React.FC = () => {
   const [, setMessage] = useState('')
   const [selectedCloths, setSelectedCloths] = useState<SelectedClothItem[]>([])
   const [showResults, setShowResults] = useState(false)
-  const [imagePath, setImagePath] = useState('')
+  const [imagePath] = useState('')
   const [uploadedFile, setUploadedFile] = useState<File | null>(null)
-  const [cameraActive, setCameraActive] = useState(false)
+  const [cameraActive] = useState(false)
   // const [captureMode, setCaptureMode] = useState(false)
-  const [searchMode, setSearchMode] = useState<'text' | 'upload' | 'camera' | null>(null)
+  const [searchMode] = useState<'text' | 'upload' | 'camera' | null>(null)
   const [, setImageReady] = useState(false)
 
   const [isLoading, setIsLoading] = useState(false)
@@ -40,46 +40,46 @@ const AddCloth: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   // 사진 촬영
-  const handleCapture = async () => {
-    const canvas = document.createElement('canvas')
-    const video = videoRef.current
+  // const handleCapture = async () => {
+  //   const canvas = document.createElement('canvas')
+  //   const video = videoRef.current
 
-    if (video && video.videoWidth > 0) {
-      canvas.width = video.videoWidth
-      canvas.height = video.videoHeight
+  //   if (video && video.videoWidth > 0) {
+  //     canvas.width = video.videoWidth
+  //     canvas.height = video.videoHeight
 
-      const ctx = canvas.getContext('2d')
+  //     const ctx = canvas.getContext('2d')
 
-      if (ctx) {
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
-        const blob = await new Promise<Blob | null>((resolve) => {
-          canvas.toBlob(resolve, 'image/png')
-        })
-        if (blob) {
-          const url = URL.createObjectURL(blob).split('/')
-          const file = new File([blob], `${url[url.length - 1]}.png`, { type: 'image/png' })
-          console.log('Capture successful:', url)
-          saveImage(file)
-        }
-      }
-    }
-  }
+  //     if (ctx) {
+  //       ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+  //       const blob = await new Promise<Blob | null>((resolve) => {
+  //         canvas.toBlob(resolve, 'image/png')
+  //       })
+  //       if (blob) {
+  //         const url = URL.createObjectURL(blob).split('/')
+  //         const file = new File([blob], `${url[url.length - 1]}.png`, { type: 'image/png' })
+  //         console.log('Capture successful:', url)
+  //         saveImage(file)
+  //       }
+  //     }
+  //   }
+  // }
 
   // 카메라 활성화
-  const onCameraClick = async () => {
-    try {
-      setCameraActive(true)
-      setSearchMode('camera')
-      const constraints = { video: { facingMode: 'environment' } } // 기본으로 환경 카메라를 사용
-      const newStream = await navigator.mediaDevices.getUserMedia(constraints)
-      const video = videoRef.current
-      if (video) {
-        video.srcObject = newStream
-      }
-    } catch (error) {
-      console.error('Camera failed to start:', error)
-    }
-  }
+  // const onCameraClick = async () => {
+  //   try {
+  //     setCameraActive(true)
+  //     setSearchMode('camera')
+  //     const constraints = { video: { facingMode: 'environment' } } // 기본으로 환경 카메라를 사용
+  //     const newStream = await navigator.mediaDevices.getUserMedia(constraints)
+  //     const video = videoRef.current
+  //     if (video) {
+  //       video.srcObject = newStream
+  //     }
+  //   } catch (error) {
+  //     console.error('Camera failed to start:', error)
+  //   }
+  // }
 
   // 카메라 스타일
   const videoStyle: CSSProperties = useMemo(
@@ -148,28 +148,28 @@ const AddCloth: React.FC = () => {
   }
 
   // 업로드 이미지 저장
-  function saveImage(input: any) {
-    let file: any
-    if (input instanceof File) {
-      // 직접 File 객체가 입력된 경우
-      file = input
-    } else if (input.target.files && input.target.files[0]) {
-      // 이벤트를 통해 파일이 입력된 경우
-      file = input.target.files[0]
-    }
+  // function saveImage(input: any) {
+  //   let file: any
+  //   if (input instanceof File) {
+  //     // 직접 File 객체가 입력된 경우
+  //     file = input
+  //   } else if (input.target.files && input.target.files[0]) {
+  //     // 이벤트를 통해 파일이 입력된 경우
+  //     file = input.target.files[0]
+  //   }
 
-    // 파일이 존재하는 경우 처리
-    if (file) {
-      const reader = new FileReader()
-      reader.onload = () => {
-        setImagePath(reader.result as string)
-        setUploadedFile(file)
-        setImageReady(true)
-        setSearchMode('upload')
-      }
-      reader.readAsDataURL(file)
-    }
-  }
+  //   // 파일이 존재하는 경우 처리
+  //   if (file) {
+  //     const reader = new FileReader()
+  //     reader.onload = () => {
+  //       setImagePath(reader.result as string)
+  //       setUploadedFile(file)
+  //       setImageReady(true)
+  //       setSearchMode('upload')
+  //     }
+  //     reader.readAsDataURL(file)
+  //   }
+  // }
 
   useEffect(() => {
     if (uploadedFile) {
