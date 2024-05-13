@@ -3,6 +3,10 @@ package com.ssafy.api.service;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -101,13 +105,21 @@ public class S3UpDownloadServiceImpl implements S3UpDownloadService{
 
         String type = file.getContentType().split("/")[1];
 
+        LocalDate now = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy_MM_dd");
+        String timeString = now.format(formatter);
+
+        LocalTime date = LocalTime.now();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH_mm_ss");
+        String dateString = date.format(dateTimeFormatter);
+
         try {
-            amazonS3Client.putObject(bucket, "S-Tailor/TryOnModel/"+profilePk+"/model."+type, file.getInputStream(), metadata);
+            amazonS3Client.putObject(bucket, "S-Tailor/TryOnModel/"+profilePk+"/" + dateString + "_" + timeString + "_model." +type, file.getInputStream(), metadata);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return cloudfrontUrl+"S-Tailor/TryOnModel/"+profilePk+"/model."+type;
+        return cloudfrontUrl+"S-Tailor/TryOnModel/"+profilePk+ "/" + dateString + "_" + timeString + "_model." +type;
     }
 
     @Override
