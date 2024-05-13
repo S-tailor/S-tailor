@@ -220,9 +220,8 @@ const TryOn: React.FC = () => {
     if (file) {
       const reader = new FileReader()
       reader.onload = () => {
+        setFileUrl(reader.result as string)
         setFileImage(file)
-        setImagePath(reader.result as string)
-        setFileUrl(URL.createObjectURL(file))
 
         // setUploadedFile(file)
         setImageReady(true)
