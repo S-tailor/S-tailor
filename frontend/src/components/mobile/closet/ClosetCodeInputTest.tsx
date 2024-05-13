@@ -85,7 +85,7 @@ const ClosetCodeInput: React.FC = () => {
                 console.info(error)
               }
             }}
-            videoStyle={{ width: '100%', height: '90%', objectFit: 'cover' }}
+            videoStyle={{ width: '100%', height: '30vh', objectFit: 'cover' }}
           />
         )}
 

@@ -218,9 +218,11 @@ const MyPage: React.FC = () => {
               <div className={styles.closetContent}> 
                 <p className={styles.triedOnClothesText}>입어 본 상품</p>
                 <img className={styles.closetListImage} src={closetList[currentIndex]?.image}></img>
-                <p className={styles.sourceText}>{closetList[currentIndex]?.source}</p>
-                <p className={styles.nameText}>{closetList[currentIndex]?.name}</p>
-                <p className={styles.priceText}>{closetList[currentIndex]?.price.replace(/\*/g, '')}원</p>
+                <div className={styles.tests}>
+                  <p className={styles.sourceText}>{closetList[currentIndex]?.source}</p>
+                  <p className={styles.nameText}>{closetList[currentIndex]?.name}</p>
+                  <p className={styles.priceText}>{closetList[currentIndex]?.price.replace(/\*/g, '')}원</p>
+                </div>
                 <button className={styles.wishListAddBtn} onClick={() => addCart(closetList[currentIndex].closetPk)}>위시리스트 추가</button>
                 <button className={styles.goShoppingBtn} onClick={() => goShopping(closetList[currentIndex]?.link)}>구매하러가기</button>
               </div>
