@@ -140,25 +140,35 @@ const TryOn: React.FC = () => {
     )
   }
 
-  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    setFileImage(file)
-    if (file) {
-      setFileUrl(URL.createObjectURL(file))
-    }
-  }
+  // const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0]
+  //   setFileImage(file)
+  //   if (file) {
+  //     setFileUrl(URL.createObjectURL(file))
+  //   }
+  // }
 
   const handleTryOnButton = async () => {
     const formData = new FormData()
     if (fileImage instanceof File) {
       formData.append('model', fileImage)
     }
-    formData.append(
-      'cloth',
-      'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQrZOJkf9outGmhW7vnfRic8qHvuJ-ZbpQ9ucUQJAeITpd5inhVtjN7_e-acDIFNS-tWUG2IcKEctJ27M2xELGtB2RuUwSrPw6wWEngHikdk_k8SmVDje45_g&usqp=CAE'
-    )
-    formData.append('profilePk', '12')
-    formData.append('category', 'lower_body')
+    formData.append('profilePk', '1')
+    formData.append('category', 'dresses')
+    formData.append('closetPk', '86')
+
+    const response = await tryOnGenerate(formData)
+    setResultUrl(response.data.generatedImageURL)
+  }
+
+  const handleTryOn = async (file) => {
+    const formData = new FormData()
+    if (file instanceof File) {
+      formData.append('model', file)
+    }
+    formData.append('profilePk', '1')
+    formData.append('category', 'dresses')
+    formData.append('closetPk', '86')
 
     const response = await tryOnGenerate(formData)
     setResultUrl(response.data.generatedImageURL)
@@ -188,9 +198,11 @@ const TryOn: React.FC = () => {
       }
     }
   }
+
   // 업로드 이미지 저장
   function saveImage(input: File) {
     let file: File
+    handleTryOn(input)
     if (input instanceof File) {
       // 직접 File 객체가 입력된 경우
       file = input
@@ -203,7 +215,10 @@ const TryOn: React.FC = () => {
     if (file) {
       const reader = new FileReader()
       reader.onload = () => {
+        setFileImage(file)
         setImagePath(reader.result as string)
+        setFileUrl(reader.result as string)
+
         setUploadedFile(file)
         setImageReady(true)
         setSearchMode('upload')
@@ -216,7 +231,7 @@ const TryOn: React.FC = () => {
   function RenderUploadedImage() {
     return (
       <div>
-        <img src={imagePath} style={videoStyle}></img>
+        <img width="2160" height="3840" src={imagePath} style={videoStyle}></img>
       </div>
     )
   }
@@ -234,12 +249,12 @@ const TryOn: React.FC = () => {
       />
       <button onClick={toggleCamera}>{isCameraOn ? 'Turn Off Camera' : 'Turn On Camera'}</button>
       <button onClick={handleTryOnButton}>Try On</button>
-      <div>{fileUrl && <img alt="originModel" src={fileUrl} />}</div>
-      <label htmlFor="imgFile">
+      <div>captured image {fileUrl && <img alt="originModel" src={fileUrl} />}</div>
+      {/* <label htmlFor="imgFile">
         <input type="file" name="imgFile" id="imgFile" onChange={handleFileChange} />
-      </label>
+      </label> */}
 
-      <div>{resultUrl && <img alt="result" src={resultUrl} />}</div>
+      <div>result image {resultUrl && <img alt="result" src={resultUrl} />}</div>
       <div id="videoContainer">
         <video
           id="webcam"

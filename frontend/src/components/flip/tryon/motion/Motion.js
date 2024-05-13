@@ -43,6 +43,7 @@ export default function (handleCapture) {
   let contextBlended = canvasBlended.getContext('2d')
 
   let notes = []
+  let isCaptured = false
 
   contextSource.translate(canvasSource.width, 0)
   contextSource.scale(-1, 1)
@@ -77,9 +78,10 @@ export default function (handleCapture) {
       //rightButton.click()
     }
 
-    if (key == 0) {
+    if (key == 0 && !isCaptured) {
       console.log('촬영하기')
       setTimeout(handleCapture, 5000)
+      isCaptured = true
     }
 
     obj.ready = false
