@@ -207,25 +207,24 @@ const MyPage: React.FC = () => {
           </button>
         </div>
 
-  
-            {tryonList.length > 0 && (
-              <div className={styles.triedOnClothesContainer}>
-                <div className={styles.tryonContent} key={currentIndex}>
-                  <img className={styles.tryonListImage} src={tryonList[currentIndex].generatedImage}></img>
-                  <img className={styles.previousBtn} onClick={prevItem} src="/assets/backBtn.svg" alt="backBtn" />
-                  <img className={styles.nextBtn} onClick={nextItem} src="/assets/backBtnRight.svg" alt="backBtnRight" />
-                </div>
-              
-                <div className={styles.closetContent}> 
-                  <p className={styles.triedOnClothesText}>입어 본 상품</p>
-                  <img className={styles.closetListImage} src={closetList[currentIndex]?.image}></img>
-                  <p className={styles.sourceText}>{closetList[currentIndex]?.source}</p>
-                  <p className={styles.nameText}>{closetList[currentIndex]?.name}</p>
-                  <p className={styles.priceText}>{closetList[currentIndex]?.price.replace(/\*/g, '')}원</p>
-                  <button className={styles.wishListAddBtn} onClick={() => addCart(closetList[currentIndex].closetPk)}>위시리스트 추가</button>
-                  <button className={styles.goShoppingBtn} onClick={() => goShopping(closetList[currentIndex]?.link)}>구매하러가기</button>
-                </div>
+          {tryonList.length > 0 && (
+            <div className={styles.triedOnClothesContainer}>
+              <div className={styles.tryonContent} key={currentIndex}>
+                <img className={styles.tryonListImage} src={tryonList[currentIndex].generatedImage}></img>
+                <img className={styles.previousBtn} onClick={prevItem} src="/assets/backBtn.svg" alt="backBtn" />
+                <img className={styles.nextBtn} onClick={nextItem} src="/assets/backBtnRight.svg" alt="backBtnRight" />
               </div>
+            
+              <div className={styles.closetContent}> 
+                <p className={styles.triedOnClothesText}>입어 본 상품</p>
+                <img className={styles.closetListImage} src={closetList[currentIndex]?.image}></img>
+                <p className={styles.sourceText}>{closetList[currentIndex]?.source}</p>
+                <p className={styles.nameText}>{closetList[currentIndex]?.name}</p>
+                <p className={styles.priceText}>{closetList[currentIndex]?.price.replace(/\*/g, '')}원</p>
+                <button className={styles.wishListAddBtn} onClick={() => addCart(closetList[currentIndex].closetPk)}>위시리스트 추가</button>
+                <button className={styles.goShoppingBtn} onClick={() => goShopping(closetList[currentIndex]?.link)}>구매하러가기</button>
+              </div>
+            </div>
           )}
           
           {isLoading && (
