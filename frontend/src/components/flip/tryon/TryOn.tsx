@@ -13,7 +13,7 @@ const TryOn: React.FC = () => {
   const [itemList, setItemList] = useState<clothInfo[]>([])
 
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [fileImage, setFileImage] = useState<File>()
+
   const [fileUrl, setFileUrl] = useState<string>('')
 
   // const { user } = userStore()
@@ -221,11 +221,6 @@ const TryOn: React.FC = () => {
       const reader = new FileReader()
       reader.onload = () => {
         setFileUrl(reader.result as string)
-        setFileImage(file)
-
-        // setUploadedFile(file)
-        setImageReady(true)
-        setSearchMode('upload')
       }
       reader.readAsDataURL(file)
     }
