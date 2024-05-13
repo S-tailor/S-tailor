@@ -167,11 +167,11 @@ const TryOn: React.FC = () => {
       </label>
 
       <div>{resultUrl && <img alt="result" src={resultUrl} />}</div>
-                    <div id="videoContainer"  ref={videoRef} >
-                      <video id="webcam" width="2160" height="3840"style={videoStyle} autoPlay></video>
-                      <canvas id="canvas-source" width="2160" height="3840" style={{display:'none'}}></canvas>
-                      <canvas id="canvas-blended" width="2160" height="3840" style={{display:'none'}}></canvas>
-                    </div>
+      <div id="videoContainer" ref={videoRef}>
+        <video id="webcam" width="2160" height="3840" style={videoStyle} autoPlay></video>
+        <canvas id="canvas-source" width="2160" height="3840" style={{ display: 'none' }}></canvas>
+        <canvas id="canvas-blended" width="2160" height="3840" style={{ display: 'none' }}></canvas>
+      </div>
       {/* <video autoPlay ref={videoRef} style={videoStyle}></video> */}
       <div style={containerStyle}>
         {isCameraOn && itemList.length > 0 && (
