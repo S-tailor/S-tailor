@@ -1,9 +1,10 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import React, { useRef, useState, useEffect, useMemo } from 'react'
 import { CSSProperties } from 'react'
 import { closetItemList } from '@/api/apiCloset'
-
-// import userStore from '@/store/store'
 import { tryOnGenerate } from '@/api/apiTryOn'
+import Motion from '@/components/flip/tryon/motion/Motion'
 
 const TryOn: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -29,6 +30,7 @@ const TryOn: React.FC = () => {
     if (Pk) {
       getClosetItem()
     }
+    Motion()
   }, [])
 
   const getClosetItem = async () => {
@@ -68,7 +70,7 @@ const TryOn: React.FC = () => {
     () => ({
       width: '100vw',
       height: '100vh',
-      objectFit: 'cover',
+      // objectFit: 'cover',
       transform: 'scaleX(-1)'
     }),
     []
@@ -165,6 +167,11 @@ const TryOn: React.FC = () => {
       </label>
 
       <div>{resultUrl && <img alt="result" src={resultUrl} />}</div>
+      <div id="videoContainer" ref={videoRef}>
+        <video id="webcam" width="2160" height="3840" style={videoStyle} autoPlay></video>
+        <canvas id="canvas-source" width="2160" height="3840" style={{ display: 'none' }}></canvas>
+        <canvas id="canvas-blended" width="2160" height="3840" style={{ display: 'none' }}></canvas>
+      </div>
       {/* <video autoPlay ref={videoRef} style={videoStyle}></video> */}
       <div style={containerStyle}>
         {isCameraOn && itemList.length > 0 && (
@@ -233,7 +240,7 @@ const TryOn: React.FC = () => {
             }
           </section>
         )}
-        <video autoPlay ref={videoRef} style={videoStyle}></video>
+        {/* <video autoPlay ref={videoRef} style={videoStyle}></video> */}
       </div>
     </>
   )

@@ -42,6 +42,10 @@ async function closetCategory(profilePk: number, category: string) {
   return await api.get(`/closet/filter?profilePk=${profilePk}&category=${category}`)
 }
 
+async function closetData(closetPk: number) {
+  return await api.get(`/closet/data?closetPk=${closetPk}`)
+}
+
 export {
   closetImgSearch,
   closetTextSearch,
@@ -49,5 +53,6 @@ export {
   closetItemList,
   closetSearch,
   closetItemDelete,
-  closetCategory
+  closetCategory,
+  closetData
 }
