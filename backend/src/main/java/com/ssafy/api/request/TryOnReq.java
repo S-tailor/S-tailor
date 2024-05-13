@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 @ToString
 public class TryOnReq {
     MultipartFile model;
-    String cloth;
+    int closetPk;
     int profilePk;
     String category;
 }

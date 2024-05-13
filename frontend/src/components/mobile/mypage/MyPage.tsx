@@ -1,17 +1,42 @@
-import React, { useMemo, startTransition } from 'react'
+import React, { useMemo, startTransition, useEffect, useState } from 'react'
 import userStore from '@/store/store'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styles from '../../../scss/mypage.module.scss'
+import { closetData } from '@/api/apiCloset'
+import { myPageTryonList } from '@/api/apiMyPage'
 
 const MyPage: React.FC = () => {
+  interface clothInfo {
+    name: string
+    price: string
+    image?: string
+    link: string
+    closetPk: number
+    source: string
+  }
+
+  interface tryonInfo {
+    tryonPk: number
+    profilePk: number
+    closetPk: number
+    generatedImage: string
+  }
+
   const navigate = useNavigate()
   const location = useLocation()
   const { cartCount } = userStore()
   const { user } = userStore() as {
     user: { profilePk: number; image?: string; profileName: string }[]
   }
+
   const profileName = user[0]?.profileName ?? 'Guest'
   const profileImg = user[0]?.image
+  const profilePk = Number(user[0]?.profilePk)
+
+  const [tryonList, setTryOnList] = useState<tryonInfo[]>([])
+  const [closetList, setClosetList] = useState<clothInfo[]>([])
+
+  const [flag, setFlag] = useState(false)
 
   const ClosetSearchClick = () => {
     startTransition(() => {
@@ -75,6 +100,19 @@ const MyPage: React.FC = () => {
       : {}
   }
 
+  const makeList = async () => {
+    const response = await myPageTryonList(profilePk)
+    console.log(response)
+    setTryOnList(await response.data.tryonList)
+    setClosetList(await response.data.closetList)
+  }
+
+  useEffect(() => {
+    if (tryonList.length == 0) {
+      makeList()
+    }
+  })
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -131,7 +169,14 @@ const MyPage: React.FC = () => {
           </button>
         </div>
 
-        <div></div>
+        {/* 생성한 이미지 + 원본 옷 이미지 */}
+        {tryonList.length > 0 &&
+          tryonList.map((element, idx) => (
+            <div key={idx} style={{ marginTop: '10px' }}>
+              <img style={{ width: '200px', height: '200px' }} src={element.generatedImage}></img>
+              <img style={{ width: '100px', height: '100px' }} src={closetList[idx].image}></img>
+            </div>
+          ))}
       </section>
 
       <footer className={styles.bottomNav}>

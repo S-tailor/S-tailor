@@ -16,4 +16,6 @@ public interface ClosetService {
     boolean closetDelete(int closetPk);
 
     List<Closet> closetSearch(ClosetSearchReq info);
+
+    Closet closetData(int closetPk);
 }
