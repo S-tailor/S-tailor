@@ -302,7 +302,7 @@ const ProfileAdd: React.FC = () => {
             <section className={styles.create3}>
               <div className={styles.topInfo}>
                 <p className={styles.texts}>키 입력</p>
-                <p className={styles.subtexts}>가상 피팅 시 맞춤 사이즈 추천에 필요해요!</p>
+                <p className={styles.subtexts}>가상 피팅 시 맞춤사이즈 추천에 필요해요!</p>
               </div>
 
               <div className={styles.middleInfo}>
