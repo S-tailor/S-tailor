@@ -32,7 +32,7 @@ const MyPage: React.FC = () => {
   const profileName = user[0]?.profileName ?? 'Guest'
   const profileImg = user[0]?.image
   const profilePk = Number(user[0]?.profilePk)
-  const [clothList, setClothList] = useState<clothInfo[]>([])
+  const [clothList,] = useState<clothInfo[]>([])
   const [tryonList, setTryOnList] = useState<tryonInfo[]>([])
   const [closetList, setClosetList] = useState<clothInfo[]>([])
   const [currentIndex, setCurrentIndex] = useState(0);
