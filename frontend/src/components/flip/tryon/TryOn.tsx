@@ -11,11 +11,11 @@ const TryOn: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isCameraOn, setIsCameraOn] = useState(false)
   const [itemList, setItemList] = useState<clothInfo[]>([])
-
+  const [listLength, setListLength] = useState(0)
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const [fileUrl, setFileUrl] = useState<string>('')
-
+  const lengthRef = useRef()
   // const { user } = userStore()
 
   const [resultUrl, setResultUrl] = useState<string>('')
@@ -37,13 +37,16 @@ const TryOn: React.FC = () => {
     if (Pk) {
       getClosetItem()
     }
-    Motion(handleCapture)
+    Motion(handleCapture, handlePrev, handleNext)
   }, [])
 
   const getClosetItem = async () => {
     await closetItemList(Number(Pk))
       .then((res) => {
         setItemList(res.data.result)
+        lengthRef.current = res.data.result.length
+        console.log('length', lengthRef.current)
+        console.log(`setItemList ${res.data.result[0]['image']}`)
       })
       .catch((err) => console.log('다시 시도해주세요', err))
   }
@@ -85,11 +88,13 @@ const TryOn: React.FC = () => {
   )
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 2) % itemList.length) // 다음 아이템
+    // console.log('handleNext', item)
+    setCurrentIndex((prev) => (prev + 2) % lengthRef.current) // 다음 아이템
   }
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 2 + itemList.length) % itemList.length) // 이전 아이템
+    // console.log('handlePrev', item)
+    setCurrentIndex((prev) => (prev - 2 + lengthRef.current) % lengthRef.current) // 이전 아이템
   }
 
   const containerStyle: CSSProperties = {
@@ -132,6 +137,7 @@ const TryOn: React.FC = () => {
 
   const renderItem = (index: number) => {
     const item = itemList[index % itemList.length] // Use modulo for wrapping
+    console.log('2222223333333333333S', currentIndex)
     return (
       <div>
         <img src={item.image} alt="옷 사진" style={{ width: '300px', height: '300px' }} />
@@ -293,9 +299,13 @@ const TryOn: React.FC = () => {
                     >
                       {'<'}
                     </button>
-                    {renderItem(currentIndex)}
-                    {renderItem(currentIndex + 1)}
-                    {renderItem(currentIndex + 2)}
+                    {itemList && (
+                      <section>
+                        {renderItem(currentIndex)}
+                        {renderItem(currentIndex + 1)}
+                        {renderItem(currentIndex + 2)}
+                      </section>
+                    )}
                     <button
                       onClick={handleNext}
                       style={{

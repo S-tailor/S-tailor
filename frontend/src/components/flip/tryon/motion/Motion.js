@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
-export default function (handleCapture) {
+export default function (handleCapture, handlePrev, handleNext) {
   let video = document.querySelector('#webcam') //$('#webcam')[0];
 
   let webcamError = function (e) {
@@ -49,7 +49,7 @@ export default function (handleCapture) {
   contextSource.scale(-1, 1)
 
   function initialize() {
-    setTimeout(finishedLoading, 1000)
+    setTimeout(finishedLoading, 5000)
   }
 
   function finishedLoading() {
@@ -71,11 +71,13 @@ export default function (handleCapture) {
     if (key == 1) {
       console.log('왼쪽으로 넘기기')
       //leftButton.click();
+      handlePrev()
     }
 
     if (key == 2) {
       console.log('오른쪽으로 넘기기')
       //rightButton.click()
+      handleNext()
     }
 
     if (key == 0 && !isCaptured) {
