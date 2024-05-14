@@ -252,14 +252,14 @@ const ProfileAdd: React.FC = () => {
 
               <div className={styles.toggleSwitch}>
                 <button
-                  className={styles.toggleButton}
+                  className={styles.toggleButtonMan}
                   onClick={handleGenderChange}
                   onBlur={handleGenderBlur}
                 >
                   남성
                 </button>
                 <button
-                  className={styles.toggleButton}
+                  className={styles.toggleButtonWoman}
                   onClick={handleGenderChange}
                   onBlur={handleGenderBlur}
                 >
