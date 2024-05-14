@@ -78,7 +78,8 @@ const TryOn: React.FC = () => {
       width: '100vw',
       height: '100vh',
       // objectFit: 'cover',
-      transform: 'scaleX(-1)'
+      transform: 'scaleX(-1)',
+      position: 'relative'
     }),
     []
   )
@@ -92,7 +93,6 @@ const TryOn: React.FC = () => {
   }
 
   const containerStyle: CSSProperties = {
-    position: 'relative',
     width: '100vw',
     height: '100vh'
   }
@@ -254,7 +254,76 @@ const TryOn: React.FC = () => {
       </label> */}
 
       <div>result image {resultUrl && <img alt="result" src={resultUrl} />}</div>
-      <div id="videoContainer">
+      <div id="videoContainer" style={{ position: 'relative' }}>
+        <div style={containerStyle}>
+          {isCameraOn && (
+            <section>
+              {
+                <div style={itemListStyle}>
+                  <button onClick={handlePrev} style={{ ...arrowStyle, left: '20px' }}>
+                    {'<'}
+                  </button>
+
+                  <div
+                    style={{
+                      zIndex: 99999,
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}
+                  >
+                    <button
+                      onClick={handlePrev}
+                      style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '20px',
+                        transform: 'translateY(-50%)',
+                        fontSize: '2rem',
+                        color: 'white',
+                        background: 'rgba(0, 0, 0, 0.5)',
+                        border: 'none',
+                        padding: '10px 20px',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {'<'}
+                    </button>
+                    {renderItem(currentIndex)}
+                    {renderItem(currentIndex + 1)}
+                    {renderItem(currentIndex + 2)}
+                    <button
+                      onClick={handleNext}
+                      style={{
+                        position: 'absolute',
+                        top: '50%',
+                        right: '20px',
+                        transform: 'translateY(-50%)',
+                        fontSize: '2rem',
+                        color: 'white',
+                        background: 'rgba(0, 0, 0, 0.5)',
+                        border: 'none',
+                        padding: '10px 20px',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {'>'}
+                    </button>
+                  </div>
+
+                  <button onClick={handleNext} style={{ ...arrowStyle, right: '20px' }}>
+                    {'>'}
+                  </button>
+                </div>
+              }
+            </section>
+          )}
+          {/* <video autoPlay ref={videoRef} style={videoStyle}></video> */}
+        </div>
         <video
           id="webcam"
           width="2160"
@@ -267,75 +336,6 @@ const TryOn: React.FC = () => {
         <canvas id="canvas-blended" width="2160" height="3840" style={{ display: 'none' }}></canvas>
       </div>
       {/* <video autoPlay ref={videoRef} style={videoStyle}></video> */}
-      <div style={containerStyle}>
-        {isCameraOn && itemList.length > 0 && (
-          <section>
-            {
-              <div style={itemListStyle}>
-                <button onClick={handlePrev} style={{ ...arrowStyle, left: '20px' }}>
-                  {'<'}
-                </button>
-
-                <div
-                  style={{
-                    zIndex: 99999,
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
-                >
-                  <button
-                    onClick={handlePrev}
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '20px',
-                      transform: 'translateY(-50%)',
-                      fontSize: '2rem',
-                      color: 'white',
-                      background: 'rgba(0, 0, 0, 0.5)',
-                      border: 'none',
-                      padding: '10px 20px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {'<'}
-                  </button>
-                  {renderItem(currentIndex)}
-                  {renderItem(currentIndex + 1)}
-                  {renderItem(currentIndex + 2)}
-                  <button
-                    onClick={handleNext}
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      right: '20px',
-                      transform: 'translateY(-50%)',
-                      fontSize: '2rem',
-                      color: 'white',
-                      background: 'rgba(0, 0, 0, 0.5)',
-                      border: 'none',
-                      padding: '10px 20px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {'>'}
-                  </button>
-                </div>
-
-                <button onClick={handleNext} style={{ ...arrowStyle, right: '20px' }}>
-                  {'>'}
-                </button>
-              </div>
-            }
-          </section>
-        )}
-        {/* <video autoPlay ref={videoRef} style={videoStyle}></video> */}
-      </div>
     </>
   )
 }
