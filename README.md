@@ -114,9 +114,9 @@ API Gateway
    - 연동된 기기끼리만 소통 가능
 
 ## 5. 서비스 화면
-![1.jpg]() <img src="readme_images/1.jpg"  width="120">
-![2.jpg]() <img src="readme_images/2.jpg"  width="120">
-![3.jpg]() <img src="readme_images/3.jpg"  width="120">
-![4.jpg]() <img src="readme_images/4.jpg"  width="120">
+![1.jpg]() <img src="readme_images/1.jpg"  width="100">
+![2.jpg]() <img src="readme_images/2.jpg"  width="100">
+![3.jpg]() <img src="readme_images/3.jpg"  width="100">
+![4.jpg]() <img src="readme_images/4.jpg"  width="100">
 
 ## 6.시스템 아키텍쳐
