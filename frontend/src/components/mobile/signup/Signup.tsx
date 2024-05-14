@@ -160,7 +160,7 @@ const Signup: React.FC = () => {
                 <tr>
                   <td>회원 식별 및 회원제 서비스 제공</td>
                   <td>별명, 이메일, 비밀번호</td>
-                  <td rowSpan={2}>개인정보 보호법 제15조 제1항</td>
+                  <td rowSpan={2}>개인정보 보호법 제 15조 제 1항</td>
                 </tr>
                 <tr>
                   <td>고객 맞춤화 서비스 제공</td>
