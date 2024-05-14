@@ -16,7 +16,7 @@ const ProfileAdd: React.FC = () => {
   const [height, setHeight] = useState<string>('')
   const [weight, setWeight] = useState<string>('')
   const [fileUrl, setFileUrl] = useState<string>('')
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const { setUser } = userStore()
   interface userProfile {
     profileName: string
@@ -75,19 +75,18 @@ const ProfileAdd: React.FC = () => {
 
       const response = await profileCreate(formData)
       if (response.status == 200) {
-        
         const profilePk = response.data.profilePk
-        sessionStorage.setItem('profilePk', profilePk);
+        sessionStorage.setItem('profilePk', profilePk)
 
-        if (typeof name === 'string' && (profilePk)) {
+        if (typeof name === 'string' && profilePk) {
           const userProfileData: userProfile = {
             profileName: name,
             profilePk: profilePk,
             image: fileUrl
-          };
+          }
           setUser(userProfileData)
           startTransition(() => {
-            navigate('/mobile/closet')
+            navigate('/mobile/profile')
           })
         }
       }
@@ -170,12 +169,12 @@ const ProfileAdd: React.FC = () => {
   return (
     <>
       <div className={styles.container}>
-      <div className={styles.bgVideo}>
-        <video className={styles.bgVideoContent} autoPlay muted loop >
-          <source src='/assets/background_light.mp4' />
-        </video>
-			</div>
-        
+        <div className={styles.bgVideo}>
+          <video className={styles.bgVideoContent} autoPlay muted loop>
+            <source src="/assets/background_light.mp4" />
+          </video>
+        </div>
+
         {page1 && (
           <>
             <div className={styles.header}>
@@ -215,7 +214,6 @@ const ProfileAdd: React.FC = () => {
                 placeholder="프로필 이름을 입력해주세요."
                 value={name}
                 onChange={handleNameChange}
-                
               />
               <p className={styles.line}></p>
               <br />
@@ -254,14 +252,14 @@ const ProfileAdd: React.FC = () => {
 
               <div className={styles.toggleSwitch}>
                 <button
-                  className={styles.toggleButton}
+                  className={styles.toggleButtonMan}
                   onClick={handleGenderChange}
                   onBlur={handleGenderBlur}
                 >
                   남성
                 </button>
                 <button
-                  className={styles.toggleButton}
+                  className={styles.toggleButtonWoman}
                   onClick={handleGenderChange}
                   onBlur={handleGenderBlur}
                 >
@@ -312,7 +310,6 @@ const ProfileAdd: React.FC = () => {
                   placeholder="키를 입력해주세요."
                   value={height}
                   onChange={handleHeightChange}
-                  
                 />
                 <label className={styles.cm} htmlFor="">
                   cm
@@ -361,7 +358,6 @@ const ProfileAdd: React.FC = () => {
                   placeholder="몸무게를 입력해주세요."
                   value={weight}
                   onChange={handleWeightChange}
-                  
                 />
                 <label className={styles.cm} htmlFor="">
                   kg
@@ -377,7 +373,7 @@ const ProfileAdd: React.FC = () => {
                 {isSubmitting ? (
                   <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
                 ) : (
-                  "완료"
+                  '완료'
                 )}
               </button>
             </section>

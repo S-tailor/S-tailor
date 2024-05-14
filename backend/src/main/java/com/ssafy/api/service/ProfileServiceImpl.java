@@ -48,8 +48,12 @@ public class ProfileServiceImpl implements ProfileService{
             if(count == null) {
                 count = 0;
             }
-            profile.setImage(s3UpDownloadService.saveProfileImage(image,image.getOriginalFilename(),count+1));
-            Profile savedProfile = profileRepository.save(profile);
+            if(image == null) {
+                profile.setImage("https://d1l1xjarwde94g.cloudfront.net/S-Tailor/profileImg/141/avatar.PNG");
+            } else {
+                profile.setImage(s3UpDownloadService.saveProfileImage(image,image.getOriginalFilename(),count+1));
+            }
+           Profile savedProfile = profileRepository.save(profile);
 
             return savedProfile;
         } catch (Exception e) {
