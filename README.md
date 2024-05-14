@@ -119,5 +119,6 @@ API Gateway
 ![2.jpg](readme_images/2.jpg)
 ![3.jpg](readme_images/3.jpg)
 ![4.jpg](readme_images/4.jpg)
+![1.jpg]() <img src="readme_images/1.jpg"  width="20">
 
 ## 6.시스템 아키텍쳐
