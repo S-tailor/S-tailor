@@ -30,6 +30,8 @@ const TryOn: React.FC = () => {
   const count = 3
   const isCaptured = useRef(false)
   const flag = useRef(0)
+  const yesFlag = useRef(false)
+
   interface clothInfo {
     name: string
     image: string
@@ -57,19 +59,20 @@ const TryOn: React.FC = () => {
   }, [])
 
   const handleYes = () => {
-    if(captureFlag.current) {
+    if(captureFlag.current || yesFlag.current) {
       return
     }
     console.log('yes')
     console.log(phaseRef.current)
     phaseRef.current = 1
+    yesFlag.current = true
     setTimeout(()=>{handleCapture(1)},3000)
   }
 
   const handleNo = () => {
-    if(captureFlag.current) {
+    if(captureFlag.current || yesFlag.current) {
       return
-    } 
+    }
     setNextPhase(2)
     console.log('no')
     phaseRef.current = 2
@@ -213,7 +216,7 @@ const TryOn: React.FC = () => {
         captureFlag.current = false
         isCaptured.current = false
         setModal(false)
-        
+        yesFlag.current = false
         return
       }
       if (phase == 0) {
@@ -221,6 +224,7 @@ const TryOn: React.FC = () => {
         location.reload()
         return
       } else if (phase == 1) {
+        console.log("capture")
         setModal(false)
   
         const canvas = document.createElement('canvas')
