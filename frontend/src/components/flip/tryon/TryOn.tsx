@@ -5,7 +5,7 @@ import { CSSProperties } from 'react'
 import { closetItemList } from '@/api/apiCloset'
 import { tryOnGenerate } from '@/api/apiTryOn'
 import Motion from '@/components/flip/tryon/motion/Motion'
-import styles from '../../../scss/'
+import styles from '../../../scss/tryon.module.scss'
 // import styles from '@/scss/addcloth.module.scss'
 
 const TryOn: React.FC = () => {
@@ -18,13 +18,18 @@ const TryOn: React.FC = () => {
   const [fileUrl, setFileUrl] = useState<string>('')
   const [modal, setModal] = useState(false)
   const lengthRef = useRef()
-  const [flag, setFlag] = useState(0)
+  //const [flag, setFlag] = useState(0)
   const [nextPhase, setNextPhase] = useState(0)
   const [resultUrl, setResultUrl] = useState<string>('')
   const phaseRef = useRef(0)
   const itemListRef = useRef([])
   const currentIndexRef = useRef(0)
   const Pk = sessionStorage.getItem('profilePk')
+  const captureFlag = useRef(false)
+  const initFlag = useRef(false)
+  const count = 3
+  const isCaptured = useRef(false)
+  const flag = useRef(0)
   interface clothInfo {
     name: string
     image: string
@@ -48,18 +53,28 @@ const TryOn: React.FC = () => {
     if (Pk) {
       getClosetItem()
     }
-    Motion(handleCapture, handlePrev, handleNext, flag, handleYes, handleNo)
+    Motion(getIsCaptured , beforeCapture, handleCapture, handlePrev, handleNext, flag, handleYes, handleNo)
   }, [])
 
   const handleYes = () => {
+    if(captureFlag.current) {
+      return
+    }
     console.log('yes')
+    console.log(phaseRef.current)
     phaseRef.current = 1
+    setTimeout(()=>{handleCapture(1)},3000)
   }
 
   const handleNo = () => {
-    console.log('no')
+    if(captureFlag.current) {
+      return
+    } 
     setNextPhase(2)
+    console.log('no')
     phaseRef.current = 2
+    flag.current = 0
+    handleCapture(2)
   }
 
   const getClosetItem = async () => {
@@ -101,11 +116,11 @@ const TryOn: React.FC = () => {
 
   const videoStyle: CSSProperties = useMemo(
     () => ({
-      width: '100vw',
-      height: '100vh',
+      // width: '100vw',
+      // height: '100vh',
       // objectFit: 'cover',
-      position: 'relative',
-      transform: 'scaleX(-1)'
+      // position: 'relative',
+      // transform: 'scaleX(-1)'
     }),
     []
   )
@@ -126,38 +141,33 @@ const TryOn: React.FC = () => {
     }
   }
 
-  const containerStyle: CSSProperties = {
-    width: '100vw',
-    height: '100vh'
-  }
-
   const itemListStyle: CSSProperties = {
-    zIndex: 99999,
-    position: 'absolute',
-    top: '70%',
-    left: '30%',
-    transform: 'translate(-50%, -50%)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
+    // zIndex: 99999,
+    // position: 'absolute',
+    // top: '70%',
+    // left: '30%',
+    // transform: 'translate(-50%, -50%)',
+    // display: 'flex',
+    // alignItems: 'center',
+    // justifyContent: 'center'
   }
 
   const arrowStyle: CSSProperties = {
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    fontSize: '2rem',
-    color: 'white',
-    background: 'rgba(0, 0, 0, 0.5)',
-    border: 'none',
-    padding: '10px 20px'
+    // position: 'absolute',
+    // top: '50%',
+    // transform: 'translateY(-50%)',
+    // fontSize: '2rem',
+    // color: 'white',
+    // background: 'rgba(0, 0, 0, 0.5)',
+    // border: 'none',
+    // padding: '10px 20px'
   }
 
   const renderItem = (index: number) => {
     const item = itemListRef.current[index % lengthRef.current]
     return (
       <div>
-        <img src={item.image} alt="옷 사진" style={{ width: '300px', height: '300px' }} />
+        <img src={item.image} alt="옷 사진" className={styles.img} />
         <p>{item.name}</p>
       </div>
     )
@@ -176,45 +186,68 @@ const TryOn: React.FC = () => {
     setResultUrl(response.data.result.generatedImage)
   }
 
-  const handleCapture = async () => {
-    setFlag(1)
+  const beforeCapture = async () => {
+    console.log("123")
+    flag.current = 1
+    isCaptured.current = true
     setModal(true)
-    if (phaseRef.current == 2) {
-      setModal(false)
-      phaseRef.current = 0
-      location.reload()
-      return
-    }
-    if (phaseRef.current == 0) {
-      setModal(false)
-      location.reload()
-      return
-    } else if (phaseRef.current == 1) {
-      setModal(false)
-      phaseRef.current = 0
+  }
 
-      const canvas = document.createElement('canvas')
-      const video = videoRef.current
+  useEffect(()=>{
+    console.log("flag ",flag.current)
+  },[flag.current])
 
-      if (video && video.videoWidth > 0) {
-        canvas.width = video.videoWidth
-        canvas.height = video.videoHeight
+  const getIsCaptured = () => {
+    return isCaptured.current
+  }
 
-        const ctx = canvas.getContext('2d')
-
-        if (ctx) {
-          ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
-          const blob = await new Promise<Blob | null>((resolve) => {
-            canvas.toBlob(resolve, 'image/png')
-          })
-          if (blob) {
-            const url = URL.createObjectURL(blob).split('/')
-            const file = new File([blob], `${url[url.length - 1]}.png`, { type: 'image/png' })
-            console.log('Capture successful:', url)
-            saveImage(file)
+  const handleCapture = async (phase: number) => {
+    console.log('capture')
+    console.log(phaseRef.current)
+    if(!captureFlag.current) {
+      captureFlag.current = true;
+      if (phase == 2) {
+        flag.current = 0
+        setModal(false)
+        phaseRef.current = 0
+        captureFlag.current = false
+        isCaptured.current = false
+        setModal(false)
+        
+        return
+      }
+      if (phase == 0) {
+        setModal(false)
+        location.reload()
+        return
+      } else if (phase == 1) {
+        setModal(false)
+  
+        const canvas = document.createElement('canvas')
+        const video = videoRef.current
+  
+        if (video && video.videoWidth > 0) {
+          canvas.width = video.videoWidth
+          canvas.height = video.videoHeight
+  
+          const ctx = canvas.getContext('2d')
+  
+          if (ctx) {
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+            const blob = await new Promise<Blob | null>((resolve) => {
+              canvas.toBlob(resolve, 'image/png')
+            })
+            if (blob) {
+              const url = URL.createObjectURL(blob).split('/')
+              const file = new File([blob], `${url[url.length - 1]}.png`, { type: 'image/png' })
+              console.log('Capture successful:', url)
+              saveImage(file)
+            }
           }
         }
       }
+    } else {
+      return
     }
   }
 
@@ -239,87 +272,93 @@ const TryOn: React.FC = () => {
   }
 
   return (
-    <>
-      <button onClick={toggleCamera}>{isCameraOn ? 'Turn Off Camera' : 'Turn On Camera'}</button>
-      <div>captured image {fileUrl && <img alt="originModel" src={fileUrl} />}</div>
-
-      <div>result image {resultUrl && <img alt="result" src={resultUrl} />}</div>
-      <div id="videoContainer" style={{ position: 'relative' }}>
-        <div style={containerStyle}>
-          {isCameraOn && (
-            <section>
-              {
-                <div style={itemListStyle}>
-                  {flag == 1 ? (
-                    <img
-                      src="/assets/noR.png"
-                      alt="no"
-                      onClick={handleNo}
-                      style={{ ...arrowStyle, left: '680px' }}
-                    />
-                  ) : (
-                    <img
-                      src="/assets/rightW.png"
-                      alt="right"
-                      onClick={handlePrev}
-                      style={{ ...arrowStyle, left: '680px' }}
-                    />
-                  )}
-
-                  <div
-                    style={{
-                      zIndex: 99999,
-                      position: 'absolute',
-                      top: '50%',
-                      left: '300px',
-                      transform: 'translate(-50%, -50%)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    <a style={{ position: 'absolute', top: '40%' }}>
-                      {/* <h1>{modal && <img src="/assets/modal.png" alt="" />}</h1> */}
-                    </a>
-                    <a style={{ border: '30px solid green' }}>
-                      {renderItem(currentIndexRef.current)}
-                    </a>
-                    {renderItem(currentIndexRef.current + 1)}
-                    {renderItem(currentIndexRef.current + 2)}
-                  </div>
-
-                  {flag == 1 ? (
-                    <img
-                      src="/assets/yesG"
-                      alt="yes"
-                      onClick={handleYes}
-                      style={{ ...arrowStyle, right: '-100px' }}
-                    />
-                  ) : (
-                    <img
-                      src="/assets/leftW.png"
-                      onClick={handleNext}
-                      style={{ ...arrowStyle, right: '-100px' }}
-                      alt="left"
-                    />
-                  )}
-                </div>
-              }
-            </section>
-          )}
-        </div>
+    <div className={styles.mainContainer}>
+      
+      <div className={styles.bgVideo}>
         <video
+          className={styles.bgVideoContent}
           id="webcam"
           width="2160"
           height="3840"
           ref={videoRef}
-          style={videoStyle}
           autoPlay
         ></video>
+      </div>
+      
+      <button 
+        className={styles.turnOnBtn}
+        onClick={toggleCamera}>
+        {isCameraOn ? 'Turn Off Camera' : 'Turn On Camera'}
+      </button>
+
+      <div className={styles.capturedImg}>captured image {fileUrl && <img alt="originModel" src={fileUrl} />}</div>
+      <div className={styles.resultImg}>result image {resultUrl && <img alt="result" src={resultUrl} />}</div>
+      <div>{count}</div>
+          <div className={styles.carouselContainer}>
+          {isCameraOn && (
+            <div className={styles.carousel}>
+              {
+                <div className={styles.carouselInner}>
+
+                  <div className={styles.carouselLeft}>
+                    {flag.current == 1 ? (
+                      <img
+                        src="/assets/yesG.png"
+                        alt="yes"
+                        onClick={handleYes}
+                        className={styles.yesBtn}
+                      />
+                    ) : (
+                      <img
+                        src="/assets/leftW.png"
+                        onClick={handleNext}
+                        className={styles.leftArrow}
+                        alt="left"
+                      />
+                    )}
+                  </div>
+
+                  <div className={styles.carouselMiddle}>
+ 
+                      <a style={{ position: 'absolute', top: '40%' }}>
+                      </a>
+                      <a style={{ border: '30px solid green' }}>
+                        {renderItem(currentIndexRef.current)}
+                      </a>
+             
+                      {renderItem(currentIndexRef.current + 1)}
+               
+                      {renderItem(currentIndexRef.current + 2)}
+            
+                  </div>
+
+                  <div className={styles.carouselRight}>
+                    {flag.current == 1 ? (
+                      <img
+                        src="/assets/noR.png"
+                        alt="no"
+                        onClick={handleNo}
+                        className={styles.noBtn}
+                      />
+                    ) : (
+                      <img
+                        src="/assets/rightW.png"
+                        alt="right"
+                        onClick={handlePrev}
+                        className={styles.rightArrow}
+                      />
+                    )}
+                  </div>
+
+                </div>
+                }
+            </div>
+          )}
+
         <canvas id="canvas-source" width="2160" height="3840" style={{ display: 'none' }}></canvas>
         <canvas id="canvas-blended" width="2160" height="3840" style={{ display: 'none' }}></canvas>
       </div>
-    </>
+    </div>
   )
 }
 

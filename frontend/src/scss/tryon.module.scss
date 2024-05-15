@@ -1,20 +1,85 @@
 .mainContainer {
-}
-
-.video {
   width: 100vw;
   height: 100vh;
-  z-index: 10000;
-}
-
-.itemListStyle {
-  z-index: 10001;
   display: flex;
   flex-direction: column;
-  width: 80vw;
-  height: 10vh;
+  align-items: center;
 }
 
-.rightW {
+.bgVideo {
+  transform: scaleX(-1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  object-fit: cover;
+}
+
+.bgVideoContent {
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
+}
+
+.turnOnBtn {
+  width: 80vw;
+  height: 10vh;
+  font-size: 500%;
+}
+
+.leftArrow {
   width: 5vw;
+}
+
+.carouselLeft {
+  width: 5vw;
+
+}
+
+.rightArrow {
+  width: 5vw;
+}
+
+.carouselRight {
+  width: 5vw;
+
+}
+
+.carouselContainer {
+  width: 90vw;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel {
+  display: flex;
+  width: 90vw;
+  align-items: center;
+  justify-content: center;
+}
+
+.carouselInner {
+  width: 90vw;
+  height: 90vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carouselMiddle {
+  width: 70vw;
+  display: flex;
+  justify-content: center;
+}
+
+.img {
+  width: 10vw;
+}
+
+.noBtn, .yesBtn{
+  width: 10vw;
 }
