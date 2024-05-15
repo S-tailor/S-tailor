@@ -1,16 +1,15 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React, { useRef, useState, useEffect, useMemo } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { CSSProperties } from 'react'
 import { closetItemList } from '@/api/apiCloset'
 import { tryOnGenerate } from '@/api/apiTryOn'
 import Motion from '@/components/flip/tryon/motion/Motion'
 import styles from '../../../scss/tryon.module.scss'
-// import styles from '@/scss/addcloth.module.scss'
 
 const TryOn: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [isCameraOn, setIsCameraOn] = useState(false)
+  const [isCameraOn, setIsCameraOn] = useState(true)
   const [itemList, setItemList] = useState<clothInfo[]>([])
   const [listLength, setListLength] = useState(0)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -18,7 +17,6 @@ const TryOn: React.FC = () => {
   const [fileUrl, setFileUrl] = useState<string>('')
   const [modal, setModal] = useState(false)
   const lengthRef = useRef()
-  //const [flag, setFlag] = useState(0)
   const [nextPhase, setNextPhase] = useState(0)
   const [resultUrl, setResultUrl] = useState<string>('')
   const phaseRef = useRef(0)
@@ -27,10 +25,22 @@ const TryOn: React.FC = () => {
   const Pk = sessionStorage.getItem('profilePk')
   const captureFlag = useRef(false)
   const initFlag = useRef(false)
-  const count = 3
+
   const isCaptured = useRef(false)
   const flag = useRef(0)
   const yesFlag = useRef(false)
+  const [showVideo, setShowVideo] = useState(false)
+  const [showResultImg, setShowResultImg] = useState(false)
+  const [timeLeft, setTimeLeft] = useState<number>(6)
+  const messageRef = useRef('')
+  const count = useRef()
+  count.current = timeLeft
+    const timer = () => setInterval(() => {
+      setTimeLeft((prevTime) => prevTime - 1)
+      if (count.current < 2) {
+        return () => clearInterval(timer), yesFlag.current = false
+      }
+    }, 1000)
 
   interface clothInfo {
     name: string
@@ -62,11 +72,10 @@ const TryOn: React.FC = () => {
     if(captureFlag.current || yesFlag.current) {
       return
     }
-    console.log('yes')
-    console.log(phaseRef.current)
     phaseRef.current = 1
     yesFlag.current = true
-    setTimeout(()=>{handleCapture(1)},3000)
+    timer()
+    setTimeout(()=>{handleCapture(1)},5000)
   }
 
   const handleNo = () => {
@@ -113,20 +122,9 @@ const TryOn: React.FC = () => {
     }
   }, [isCameraOn])
 
-  const toggleCamera = () => {
-    setIsCameraOn((prevState) => !prevState)
-  }
-
-  const videoStyle: CSSProperties = useMemo(
-    () => ({
-      // width: '100vw',
-      // height: '100vh',
-      // objectFit: 'cover',
-      // position: 'relative',
-      // transform: 'scaleX(-1)'
-    }),
-    []
-  )
+  // const toggleCamera = () => {
+  //   setIsCameraOn((prevState) => !prevState)
+  // }
 
   const handleNext = () => {
     currentIndexRef.current = (currentIndexRef.current + 1) % lengthRef.current
@@ -134,9 +132,6 @@ const TryOn: React.FC = () => {
   }
 
   const handlePrev = () => {
-    // console.log('handlePrev', item)
-    // currentIndexRef.current = (currentIndexRef.current - 1) % lengthRef.current
-    // setCurrentIndex((prev) => (prev - 1 + lengthRef.current) % lengthRef.current)
     if (lengthRef.current > 0) {
       const newIndex = (currentIndexRef.current - 1 + lengthRef.current) % lengthRef.current
       currentIndexRef.current = newIndex
@@ -144,34 +139,15 @@ const TryOn: React.FC = () => {
     }
   }
 
-  const itemListStyle: CSSProperties = {
-    // zIndex: 99999,
-    // position: 'absolute',
-    // top: '70%',
-    // left: '30%',
-    // transform: 'translate(-50%, -50%)',
-    // display: 'flex',
-    // alignItems: 'center',
-    // justifyContent: 'center'
-  }
-
-  const arrowStyle: CSSProperties = {
-    // position: 'absolute',
-    // top: '50%',
-    // transform: 'translateY(-50%)',
-    // fontSize: '2rem',
-    // color: 'white',
-    // background: 'rgba(0, 0, 0, 0.5)',
-    // border: 'none',
-    // padding: '10px 20px'
-  }
-
   const renderItem = (index: number) => {
+    if (!lengthRef.current || lengthRef.current == 0) {
+      return <p>옷장이 비었습니다.</p>
+    }
     const item = itemListRef.current[index % lengthRef.current]
     return (
-      <div>
-        <img src={item.image} alt="옷 사진" className={styles.img} />
-        <p>{item.name}</p>
+      <div className={styles.carouselContent}>
+        <img src={item.image} alt="옷 사진" className={styles.carouselImg} />
+        <p className={styles.carouselName}>{item.name}</p>
       </div>
     )
   }
@@ -194,6 +170,7 @@ const TryOn: React.FC = () => {
     flag.current = 1
     isCaptured.current = true
     setModal(true)
+    messageRef.current = '이 옷으로 입어보시겠습니까?'
   }
 
   useEffect(()=>{
@@ -213,6 +190,7 @@ const TryOn: React.FC = () => {
         flag.current = 0
         setModal(false)
         phaseRef.current = 0
+        messageRef.current=''
         captureFlag.current = false
         isCaptured.current = false
         setModal(false)
@@ -275,9 +253,39 @@ const TryOn: React.FC = () => {
     }
   }
 
+  useEffect(() => {
+    if (fileUrl) {
+      setTimeout(() => {
+        setShowVideo(true)
+      }, 2000)
+    }
+  }, [fileUrl])
+
+  const handleVideoEnd = () => {
+    setShowVideo(false)
+    setShowResultImg(true)
+  }
+
   return (
     <div className={styles.mainContainer}>
-      
+    {showVideo ? (
+      <video 
+        src="/assets/ssfAd.mp4" 
+        autoPlay 
+        onEnded={handleVideoEnd}
+        style={{ width: '100vw', height: '100vh' }}
+      />
+      ) : showResultImg ? (
+        <img 
+          src="/assets/ad11.png"
+          alt="Result" 
+          style={{ width: '100vw', height: '100vh', objectFit: 'cover' }}
+        />
+    ) : (
+    fileUrl ? (
+      <img className={styles.capturedImg} alt="Captured model" src={fileUrl} />
+    ) : (
+      <>
       <div className={styles.bgVideo}>
         <video
           className={styles.bgVideoContent}
@@ -290,16 +298,23 @@ const TryOn: React.FC = () => {
       </div>
       
       <button 
-        className={styles.turnOnBtn}
-        onClick={toggleCamera}>
-        {isCameraOn ? 'Turn Off Camera' : 'Turn On Camera'}
+        className={styles.turnOnBtn} 
+        >
+        Try on
       </button>
 
-      <div className={styles.capturedImg}>captured image {fileUrl && <img alt="originModel" src={fileUrl} />}</div>
-      <div className={styles.resultImg}>result image {resultUrl && <img alt="result" src={resultUrl} />}</div>
-      <div>{count}</div>
-          <div className={styles.carouselContainer}>
-          {isCameraOn && (
+      
+      {/* <div>{resultUrl && <img className={styles.resultImg} alt="result" src={resultUrl} />}</div> */}
+      {/* <div>{resultUrl && <img className={styles.resultImg} alt="result" src="/assets/ad11.png" />}</div> */}
+      {yesFlag.current && 
+      <div className={styles.timer}>
+        {count.current}
+      </div>}
+      
+            {<div className={styles.tryonMessage}>
+              {messageRef.current}
+            </div>}
+          
             <div className={styles.carousel}>
               {
                 <div className={styles.carouselInner}>
@@ -315,7 +330,7 @@ const TryOn: React.FC = () => {
                     ) : (
                       <img
                         src="/assets/leftW.png"
-                        onClick={handleNext}
+                        onClick={handlePrev}
                         className={styles.leftArrow}
                         alt="left"
                       />
@@ -323,16 +338,16 @@ const TryOn: React.FC = () => {
                   </div>
 
                   <div className={styles.carouselMiddle}>
- 
-                      <a style={{ position: 'absolute', top: '40%' }}>
-                      </a>
-                      <a style={{ border: '30px solid green' }}>
+                      
+                      <div className={styles.firstImg}>
+                        {renderItem((currentIndexRef.current - 1 + lengthRef.current) % lengthRef.current)}
+                      </div>
+                      <div className={styles.secondImg}>
                         {renderItem(currentIndexRef.current)}
-                      </a>
-             
-                      {renderItem(currentIndexRef.current + 1)}
-               
-                      {renderItem(currentIndexRef.current + 2)}
+                      </div>
+                      <div className={styles.thirdImg}>
+                        {renderItem((currentIndexRef.current + 1) % lengthRef.current)} 
+                      </div>
             
                   </div>
 
@@ -348,7 +363,7 @@ const TryOn: React.FC = () => {
                       <img
                         src="/assets/rightW.png"
                         alt="right"
-                        onClick={handlePrev}
+                        onClick={handleNext}
                         className={styles.rightArrow}
                       />
                     )}
@@ -357,11 +372,13 @@ const TryOn: React.FC = () => {
                 </div>
                 }
             </div>
-          )}
+         
 
         <canvas id="canvas-source" width="2160" height="3840" style={{ display: 'none' }}></canvas>
         <canvas id="canvas-blended" width="2160" height="3840" style={{ display: 'none' }}></canvas>
-      </div>
+    </>
+    )
+    )}
     </div>
   )
 }
