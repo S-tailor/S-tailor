@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
-export default function (handleCapture, handlePrev, handleNext, flag, handleYes, handleNo) {
+export default function (getIsCaptured, beforeCapture ,handleCapture, handlePrev, handleNext, flag, handleYes, handleNo) {
   let video = document.querySelector('#webcam') //$('#webcam')[0];
 
   let webcamError = function (e) {
@@ -43,7 +43,7 @@ export default function (handleCapture, handlePrev, handleNext, flag, handleYes,
   let contextBlended = canvasBlended.getContext('2d')
 
   let notes = []
-  let isCaptured = false
+  //let isCaptured = false
 
   contextSource.translate(canvasSource.width, 0)
   contextSource.scale(-1, 1)
@@ -64,15 +64,16 @@ export default function (handleCapture, handlePrev, handleNext, flag, handleYes,
   }
 
   function playSound(obj) {
+    let isCaptured = getIsCaptured()
     if (!obj.ready) return
 
     let key = obj.visual
 
     if (key == 1) {
       console.log('왼쪽으로 넘기기')
-      console.log(flag)
+      console.log("isCaptured",isCaptured)
       //leftButton.click();
-
+      
       if (isCaptured) {
         handleYes()
       } else {
@@ -83,7 +84,7 @@ export default function (handleCapture, handlePrev, handleNext, flag, handleYes,
     if (key == 2) {
       console.log('오른쪽으로 넘기기')
       //rightButton.click()
-
+      console.log("isCaptured",isCaptured)
       if (isCaptured) {
         handleNo()
       } else {
@@ -94,7 +95,7 @@ export default function (handleCapture, handlePrev, handleNext, flag, handleYes,
     if (key == 0 && !isCaptured) {
       console.log('촬영하기')
       isCaptured = true
-      setTimeout(handleCapture, 5000)
+      beforeCapture()
     }
 
     obj.ready = false
@@ -178,8 +179,8 @@ export default function (handleCapture, handlePrev, handleNext, flag, handleYes,
   function checkAreas() {
     let areas = [
       { x: video.width * 0.5, y: 300, width: 30, height: 30 },
-      { x: 300, y: video.height * 0.5, width: 30, height: 30 },
-      { x: video.width - 300, y: video.height * 0.5, width: 10, height: 10 }
+      { x: 700, y: video.height * 0.5, width: 30, height: 30 },
+      { x: video.width - 700, y: video.height * 0.5, width: 10, height: 10 }
     ]
 
     areas.forEach((area, index) => {
