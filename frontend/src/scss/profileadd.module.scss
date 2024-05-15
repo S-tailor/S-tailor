@@ -61,12 +61,11 @@
 
 .create {
   width: 100vw;
-  height: 35%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3vh;
-  margin-bottom: -3vh;
+  justify-content: center;
+  margin-bottom: 6vh;
 }
 
 .create2 {
@@ -93,27 +92,33 @@
 }
 
 .uploadedImg {
-  position: relative;
   object-fit: cover;
-  width: 20vw;
-  height: 20vw;
+  width: 90px;
+  height: 90px;
   border-radius: 100%;
-  margin-bottom: 1vh;
 }
 
 input[type="file"] {
   display: none;
 }
 
+.profileImg {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+}
+
 .labelImg {
   object-fit: cover;
   position: absolute;
-  top: 19.5vh;
-  left: 54vw;
-  width: 8vw;
+  bottom: 0%;
+  right: 0%;
+  width: 30px;
   background-color: white;
   border-radius: 50%;
-  padding: 1vw;
+  padding: 3px;
   cursor: pointer;
   &:active {
     background-color: gray;
@@ -207,6 +212,7 @@ input[type="file"] {
 .middleInfo {
   margin-left: 10vw;
   margin-top: 3vh;
+  position: relative;
 }
 
 .texts {
@@ -303,7 +309,7 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
 
 .btn {
   width: 80vw;
-  height: 7vh;
+  height: 50px;
   border: 1px solid #222222;
   background-color: transparent;
   color: #222222;
@@ -320,7 +326,7 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
 
 .btn2 {
   width: 80vw;
-  height: 7vh;
+  height: 50px;
   border: 1px solid #222222;
   background-color: transparent;
   color: #222222;
@@ -349,7 +355,7 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
   justify-content: center;
   align-items: center;
   width: 80vw;
-  height: 7vh;
+  height: 50px;
   border: 1px solid #222222;
   background-color: transparent;
   color: #222222;
@@ -376,13 +382,13 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
   display: flex;
   border: 1px solid #222222;
   border-radius: 50px;
-  overflow: hidden;
   width: 80vw;
+  height: 50px;
   background-color: transparent;
   margin-top: 3vh;
 }
 
-.toggleButton {
+.toggleButtonMan, .toggleButtonWoman {
   font-family: 'Pretendard-Bold';
   letter-spacing: 2px;
   flex: 1;
@@ -392,8 +398,17 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
   transition: background-color 0.3s;
 }
 
-.toggleButton:focus {
+.toggleButtonMan:focus {
   background-color: #222222;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  color: #fff;
+}
+
+.toggleButtonWoman:focus {
+  background-color: #222222;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
   color: #fff;
 }
 
@@ -401,9 +416,9 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
 //////////////////
 
 .cm {
-  position: fixed;
-  top: 30%;
-  right: 10%;
+  position: absolute;
+  top: 20%;
+  right: 10vw;
   font-family: 'Pretendard-Bold';
   font-size: 2em;
   opacity: 30%;

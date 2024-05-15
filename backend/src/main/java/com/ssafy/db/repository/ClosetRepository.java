@@ -33,4 +33,6 @@ public interface ClosetRepository extends JpaRepository<Closet, Long> {
             "category NOT IN ('Outerwear', 'Top', 'Pants', 'Shorts', 'Skirt', 'Miniskirt', 'Dress') and " +
             " isdelete = false", nativeQuery = true)
     List<Closet>findRestByProfilePkAndIsDelete(int profilePk);
+
+    Closet findByClosetPk(int closetPk);
 }

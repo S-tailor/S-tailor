@@ -85,14 +85,18 @@ const ClosetCodeInput: React.FC = () => {
                 console.info(error)
               }
             }}
-            videoStyle={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+            videoStyle={{ width: '100%', height: '40vh', objectFit: 'cover' }}
           />
         )}
 
       <section className={styles.bottomButton}>
-        {data && <div className={styles.infoText}>{message}</div>}
-        <button className={styles.btn} onClick={handleVerify}>확인</button>
-      </section>
+        {data && 
+          <>
+            <div className={styles.infoText}>{message}</div>
+            <button className={styles.btn} onClick={handleVerify}>확인</button>
+          </>
+        }
+        </section>
 
     </div>
   )

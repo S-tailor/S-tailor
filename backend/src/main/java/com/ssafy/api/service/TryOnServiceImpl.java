@@ -3,6 +3,10 @@ package com.ssafy.api.service;
 import com.ssafy.api.request.TryOnReq;
 import com.ssafy.api.request.TryOnVerifyReq;
 import com.ssafy.common.util.JwtTokenUtil;
+import com.ssafy.db.entity.Closet;
+import com.ssafy.db.entity.Tryon;
+import com.ssafy.db.repository.ClosetRepository;
+import com.ssafy.db.repository.TryonRepository;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -15,8 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
@@ -28,6 +31,12 @@ public class TryOnServiceImpl implements TryOnService{
 
     @Autowired
     S3UpDownloadService s3UpDownloadService;
+
+    @Autowired
+    ClosetRepository closetRepository;
+
+    @Autowired
+    TryonRepository tryonRepository;
 
     @Override
     public UUID generateSessionId() {
@@ -93,7 +102,15 @@ public class TryOnServiceImpl implements TryOnService{
     }
 
     @Override
-    public String getGeneratedImage(TryOnReq info) {
+    public Tryon getGeneratedImage(TryOnReq info) {
+        String cloth;
+
+        try {
+            cloth = closetRepository.findByClosetPk(info.getClosetPk()).getImage();
+        } catch (Exception e) {
+            return null;
+        }
+
         String model = s3UpDownloadService.saveTryOnModelImage(info.getModel(),info.getProfilePk());
 
         RestTemplate restTemplate = new RestTemplate();
@@ -102,7 +119,7 @@ public class TryOnServiceImpl implements TryOnService{
 
         JSONObject body = new JSONObject();
         body.put("model",model);
-        body.put("cloth",info.getCloth());
+        body.put("cloth",cloth);
         body.put("profilePk",String.valueOf(info.getProfilePk()));
         body.put("category",info.getCategory());
 
@@ -112,9 +129,39 @@ public class TryOnServiceImpl implements TryOnService{
 
         try {
             JSONObject responseObject = (JSONObject) parser.parse(response.getBody());
-            String result = (String) responseObject.get("generatedImage");
+            String generatedImage = (String) responseObject.get("generatedImage");
+
+            Tryon tryon = new Tryon();
+
+            tryon.setGeneratedImage(generatedImage);
+            tryon.setClosetPk(info.getClosetPk());
+            tryon.setProfilePk(info.getProfilePk());
+
+            Tryon result = tryonRepository.save(tryon);
             return result;
         } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Map<String, Object> getList(int profilePk) {
+        try {
+            List<Tryon> tryonList = tryonRepository.findAllByProfilePk(profilePk);
+
+            List<Closet> closetList = new ArrayList<>();
+
+            for (Tryon tryon : tryonList) {
+                Closet closet = closetRepository.findByClosetPk(tryon.getClosetPk());
+                closetList.add(closet);
+            }
+
+            Map<String, Object> result = new HashMap<>();
+            result.put("tryonList",tryonList);
+            result.put("closetList",closetList);
+
+            return result;
+        } catch (Exception e) {
             return null;
         }
     }

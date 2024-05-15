@@ -367,7 +367,7 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
   border-radius: 50px;
   overflow: hidden;
   width: 80vw;
-  height: 50px;
+  height: 8vh;
   background-color: transparent;
   margin-top: 3vh;
 }
@@ -378,7 +378,6 @@ input[type="checkbox"]:checked + .checkboxIcon::before {
   flex: 1;
   border: none;
   background-color: transparent;
-  padding: 13px 20px;
   transition: background-color 0.3s;
 }
 

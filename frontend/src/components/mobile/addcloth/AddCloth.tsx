@@ -219,6 +219,7 @@ const AddCloth: React.FC = () => {
       return (
         <div className={styles.searchNoResults}>
           <p>검색 결과가 없습니다!</p>
+          
         </div>
       )
     }
