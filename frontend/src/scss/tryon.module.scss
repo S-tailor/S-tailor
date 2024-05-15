@@ -6,6 +6,20 @@
   align-items: center;
 }
 
+.capturedImg {
+  width: 100vw;
+  height: 100vh;
+  z-index: 20000;
+  transform: scaleX(-1);
+}
+
+.resultImg {
+  width: 100vw;
+  height: 100vh;
+  z-index: 20001;
+  transform: scaleX(-1);
+}
+
 .bgVideo {
   transform: scaleX(-1);
   position: absolute;
@@ -24,63 +38,159 @@
 }
 
 .turnOnBtn {
+  margin-top: 5%;
   width: 80vw;
   height: 10vh;
   font-size: 500%;
+  z-index: 1000; 
+  background-color: #222222;
+  color: white;
+  border: 5px solid #222222;
+  border-radius: 700px;
+  font-family: 'Pretendard-Bold';
 }
 
 .leftArrow {
-  width: 5vw;
+  width: 100px;
+  z-index: 10000;
 }
 
 .carouselLeft {
-  width: 5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18vw;
 
 }
 
 .rightArrow {
-  width: 5vw;
+  width: 100px;
+  z-index: 10000;
 }
 
 .carouselRight {
-  width: 5vw;
-
-}
-
-.carouselContainer {
-  width: 90vw;
-  height: 80vh;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  width: 18vw;
+
 }
+
 
 .carousel {
   display: flex;
-  width: 90vw;
+  width: 100vw;
+  height: 100vh;
   align-items: center;
   justify-content: center;
 }
 
 .carouselInner {
-  width: 90vw;
-  height: 90vh;
+  width: 100vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .carouselMiddle {
-  width: 70vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 64vw;
+}
+
+// 캐러셀 내부
+.carouselContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.carouselImg {
+  width: 700px;
+  height: 900px;
+  transition: transform 0.5s ease;
+  transform: scale(1);
+  border-radius: 40px;
+  object-fit: cover;
+}
+
+.firstImg {
+  transform: scale(0.7);
+  opacity: 50%;
+  display: flex;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.thirdImg {
+  transform: scale(0.7);
+  opacity: 50%;
+  display: flex;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.secondImg {
+  flex: 1;
+  z-index: 10;
   display: flex;
   justify-content: center;
 }
 
-.img {
+.carouselName {
+  width: 600px;
+  font-size: 70px;
+  color: white;
+  margin: 0;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-top: 1vh;
+  font-family: 'Pretendard-SemiBold';
+}
+//
+
+.noBtn {
   width: 10vw;
-  height: 300px;
+  z-index: 10000;
 }
 
-.noBtn, .yesBtn{
+.yesBtn {
   width: 10vw;
+  z-index: 10000;
+}
+
+.timer {
+  position: fixed;
+  top: 15%;
+  font-size: 500px;
+  z-index: 20002;
+  color: white;
+  font-family: 'Pretendard-SemiBold';
+  animation:focus-in-expand-fwd 1s cubic-bezier(.25,.46,.45,.94) 5 both
+}
+
+.tryonMessage {
+  font-family: 'Pretendard-SemiBold';
+  font-size: 70px;
+  color: #222222;
+}
+
+@keyframes focus-in-expand-fwd {
+  0%{
+    letter-spacing: -0.5em;
+    transform: translateZ(-800px);
+    filter:blur(12px);
+    opacity:0;
+  }
+  100%{
+    transform:translateZ(0);
+    filter:blur(0);
+    opacity: 1;
+  }
 }
