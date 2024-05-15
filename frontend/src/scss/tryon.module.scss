@@ -1,0 +1,20 @@
+.mainContainer {
+}
+
+.video {
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+}
+
+.itemListStyle {
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  height: 10vh;
+}
+
+.rightW {
+  width: 5vw;
+}

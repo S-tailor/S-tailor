@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
-export default function (handleCapture, handlePrev, handleNext) {
+export default function (handleCapture, handlePrev, handleNext, flag, handleYes, handleNo) {
   let video = document.querySelector('#webcam') //$('#webcam')[0];
 
   let webcamError = function (e) {
@@ -70,20 +70,31 @@ export default function (handleCapture, handlePrev, handleNext) {
 
     if (key == 1) {
       console.log('왼쪽으로 넘기기')
+      console.log(flag)
       //leftButton.click();
-      handlePrev()
+
+      if (isCaptured) {
+        handleYes()
+      } else {
+        handlePrev()
+      }
     }
 
     if (key == 2) {
       console.log('오른쪽으로 넘기기')
       //rightButton.click()
-      handleNext()
+
+      if (isCaptured) {
+        handleNo()
+      } else {
+        handleNext()
+      }
     }
 
     if (key == 0 && !isCaptured) {
       console.log('촬영하기')
-      setTimeout(handleCapture, 5000)
       isCaptured = true
+      setTimeout(handleCapture, 5000)
     }
 
     obj.ready = false
@@ -102,9 +113,9 @@ export default function (handleCapture, handlePrev, handleNext) {
   window.requestAnimFrame = (function () {
     return (
       window.requestAnimationFrame ||
-      window.webkitRequestAnimationFrame ||
-      window.mozRequestAnimationFrame ||
-      window.oRequestAnimationFrame ||
+      window.webkitRequAnimationFrame ||
+      window.oRequestAestAnimationFrame ||
+      window.mozRequestnimationFrame ||
       window.msRequestAnimationFrame ||
       function (callback) {
         window.setTimeout(callback, 1000 / 60)
