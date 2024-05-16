@@ -26,7 +26,7 @@ const TryOn: React.FC = () => {
   const itemListRef = useRef([])
   const currentIndexRef = useRef(0)
   const {user} = userStore()
-  const Pk = user[0].profilePk
+  const Pk = sessionStorage.getItem('profilePk')
   const captureFlag = useRef(false)
   const initFlag = useRef(false)
 
