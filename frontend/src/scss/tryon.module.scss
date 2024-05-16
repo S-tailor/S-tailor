@@ -9,6 +9,7 @@
 .capturedImg {
   width: 100vw;
   height: 100vh;
+  object-fit: cover;
   z-index: 20000;
   transform: scaleX(-1);
 }
@@ -198,4 +199,9 @@
     filter:blur(0);
     opacity: 1;
   }
+}
+
+.emptyText {
+  font-size: 70px;
+  font-family: 'Pretendard-SemiBold';
 }

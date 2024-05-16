@@ -163,7 +163,7 @@ const TryOn: React.FC = () => {
 
   const renderItem = (index: number) => {
     if (!lengthRef.current || lengthRef.current == 0) {
-      return <p>옷장이 비었습니다.</p>
+      return <p className={styles.emptyText}>옷장이 비었습니다.</p>
     }
     const item = itemListRef.current[index % lengthRef.current]
     return (
