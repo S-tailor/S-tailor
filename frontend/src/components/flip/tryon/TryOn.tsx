@@ -25,8 +25,8 @@ const TryOn: React.FC = () => {
   const phaseRef = useRef(0)
   const itemListRef = useRef([])
   const currentIndexRef = useRef(0)
-  const {user} = userStore()
-  const Pk = sessionStorage.getItem('profilePk')
+  const { user } = userStore()
+  // const Pk = sessionStorage.getItem('profilePk')
   const captureFlag = useRef(false)
   const initFlag = useRef(false)
 
@@ -39,10 +39,11 @@ const TryOn: React.FC = () => {
   const messageRef = useRef('')
   const count = useRef()
   count.current = timeLeft
-    const timer = () => setInterval(() => {
+  const timer = () =>
+    setInterval(() => {
       setTimeLeft((prevTime) => prevTime - 1)
       if (count.current < 2) {
-        return () => clearInterval(timer), yesFlag.current = false
+        return () => clearInterval(timer), (yesFlag.current = false)
       }
     }, 1000)
 
@@ -64,44 +65,57 @@ const TryOn: React.FC = () => {
     Miniskrit: 'lower_body',
     Dress: 'dresses'
   }
-  
+
   const [startTimeLeft, setStartTimeLeft] = useState<number>(6)
   const [timerAtStart, setTimerAtStart] = useState<boolean>(false)
   const startCount = useRef()
   startCount.current = startTimeLeft
-  const startTimer = () => setInterval(() => {
-    setStartTimeLeft((prevTime) => prevTime - 1)
-    if (startCount.current < 1) {
-      return () => clearInterval(startTimer)
-    }
+  const startTimer = () =>
+    setInterval(() => {
+      setStartTimeLeft((prevTime) => prevTime - 1)
+      if (startCount.current < 1) {
+        return () => clearInterval(startTimer)
+      }
     }, 1000)
 
   useEffect(() => {
+    const Pk = sessionStorage.getItem('profilePk')
     if (Pk) {
-      getClosetItem()
+      getClosetItem(Pk)
     }
     setTimerAtStart(true)
     startTimer()
     setTimeout(() => {
       setTimerAtStart(false)
-    },6000)
-    Motion(getIsCaptured , beforeCapture, handleCapture, handlePrev, handleNext, flag, handleYes, handleNo)
+    }, 6000)
+    Motion(
+      getIsCaptured,
+      beforeCapture,
+      handleCapture,
+      handlePrev,
+      handleNext,
+      flag,
+      handleYes,
+      handleNo
+    )
   }, [])
 
   const handleYes = () => {
-    if(captureFlag.current || yesFlag.current) {
+    if (captureFlag.current || yesFlag.current) {
       return
     }
     phaseRef.current = 1
     yesFlag.current = true
     setArrowActive({ ...arrowActive, left: true })
     timer()
-    messageRef.current='5초 후 사용자의 모습을 촬영합니다.'
-    setTimeout(()=>{handleCapture(1)},5000)
+    messageRef.current = '5초 후 사용자의 모습을 촬영합니다.'
+    setTimeout(() => {
+      handleCapture(1)
+    }, 5000)
   }
-  
+
   const handleNo = () => {
-    if(captureFlag.current || yesFlag.current) {
+    if (captureFlag.current || yesFlag.current) {
       return
     }
     setNextPhase(2)
@@ -112,7 +126,7 @@ const TryOn: React.FC = () => {
     handleCapture(2)
   }
 
-  const getClosetItem = async () => {
+  const getClosetItem = async (Pk) => {
     await closetItemList(Number(Pk))
       .then((res) => {
         setItemList(res.data.result)
@@ -145,12 +159,10 @@ const TryOn: React.FC = () => {
     }
   }, [isCameraOn])
 
-
   const handleNext = () => {
     currentIndexRef.current = (currentIndexRef.current + 1) % lengthRef.current
     setCurrentIndex((prev) => (prev + 1) % lengthRef.current)
     setArrowActive({ ...arrowActive, right: true })
-    
   }
 
   const handlePrev = () => {
@@ -189,7 +201,7 @@ const TryOn: React.FC = () => {
   }
 
   const beforeCapture = async () => {
-    console.log("123")
+    console.log('123')
     flag.current = 1
     isCaptured.current = true
     setModal(true)
@@ -197,9 +209,9 @@ const TryOn: React.FC = () => {
     setIsBeforeCapture(true)
   }
 
-  useEffect(()=>{
-    console.log("flag ",flag.current)
-  },[flag.current])
+  useEffect(() => {
+    console.log('flag ', flag.current)
+  }, [flag.current])
 
   const getIsCaptured = () => {
     return isCaptured.current
@@ -208,14 +220,14 @@ const TryOn: React.FC = () => {
   const handleCapture = async (phase: number) => {
     console.log('capture')
     console.log(phaseRef.current)
-    if(!captureFlag.current) {
-      captureFlag.current = true;
+    if (!captureFlag.current) {
+      captureFlag.current = true
       if (phase == 2) {
         setArrowActive({ ...arrowActive, right: true })
         flag.current = 0
         setModal(false)
         phaseRef.current = 0
-        messageRef.current=''
+        messageRef.current = ''
         captureFlag.current = false
         isCaptured.current = false
         setModal(false)
@@ -227,19 +239,18 @@ const TryOn: React.FC = () => {
         location.reload()
         return
       } else if (phase == 1) {
-        console.log("capture")
+        console.log('capture')
         setModal(false)
-       
-  
+
         const canvas = document.createElement('canvas')
         const video = videoRef.current
-  
+
         if (video && video.videoWidth > 0) {
           canvas.width = video.videoWidth
           canvas.height = video.videoHeight
-  
+
           const ctx = canvas.getContext('2d')
-  
+
           if (ctx) {
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
             const blob = await new Promise<Blob | null>((resolve) => {
@@ -296,68 +307,62 @@ const TryOn: React.FC = () => {
     if (arrowActive.left || arrowActive.right) {
       const timeout = setTimeout(() => {
         setArrowActive({ left: false, right: false })
-      }, 300);
+      }, 300)
       return () => clearTimeout(timeout)
     }
   }, [arrowActive])
 
   return (
     <div className={styles.mainContainer}>
-    {showVideo ? (
-      <video 
-        src="/assets/ssfAd.mp4" 
-        autoPlay 
-        onEnded={handleVideoEnd}
-        style={{ width: '100vw', height: '100vh' }}
-      />
+      {showVideo ? (
+        <video
+          src="/assets/ssfAd.mp4"
+          autoPlay
+          onEnded={handleVideoEnd}
+          style={{ width: '100vw', height: '100vh' }}
+        />
       ) : showResultImg ? (
-        <img 
+        <img
           src={resultUrl}
-          alt="Result" 
+          alt="Result"
           style={{ width: '100vw', height: '100vh', objectFit: 'cover' }}
         />
-    ) : (
-    fileUrl ? (
-      <img className={styles.capturedImg} alt="Captured model" src={fileUrl} />
-    ) : (
-      <>
-      <div className={styles.bgVideo}>
-        <video
-          className={styles.bgVideoContent}
-          id="webcam"
-          width="2160"
-          height="3840"
-          ref={videoRef}
-          autoPlay
-        ></video>
-      </div>
-      {!timerAtStart &&
-      <button 
-        className={styles.turnOnBtn} 
-        style={{ backgroundColor: isBeforeCapture ? '#222222' : 'transparent', color: isBeforeCapture ? 'white' : '#222222' }}
-        >
-        Try on
-      </button>}
+      ) : fileUrl ? (
+        <img className={styles.capturedImg} alt="Captured model" src={fileUrl} />
+      ) : (
+        <>
+          <div className={styles.bgVideo}>
+            <video
+              className={styles.bgVideoContent}
+              id="webcam"
+              width="2160"
+              height="3840"
+              ref={videoRef}
+              autoPlay
+            ></video>
+          </div>
+          {!timerAtStart && (
+            <button
+              className={styles.turnOnBtn}
+              style={{
+                backgroundColor: isBeforeCapture ? '#222222' : 'transparent',
+                color: isBeforeCapture ? 'white' : '#222222'
+              }}
+            >
+              Try on
+            </button>
+          )}
 
-      {yesFlag.current && 
-      <div className={styles.timer}>
-        {count.current}
-      </div>}
+          {yesFlag.current && <div className={styles.timer}>{count.current}</div>}
 
-      {timerAtStart &&
-      <div className={styles.timer}>
-        {startCount.current}
-      </div>}  
-      
-      {<div className={styles.tryonMessage}>
-        {messageRef.current}
-      </div>}
-          
-          {!timerAtStart &&
+          {timerAtStart && <div className={styles.timer}>{startCount.current}</div>}
+
+          {<div className={styles.tryonMessage}>{messageRef.current}</div>}
+
+          {!timerAtStart && (
             <div className={styles.carousel}>
               {
                 <div className={styles.carouselInner}>
-
                   <div className={styles.carouselLeft}>
                     {flag.current == 1 ? (
                       <img
@@ -377,17 +382,15 @@ const TryOn: React.FC = () => {
                   </div>
 
                   <div className={styles.carouselMiddle}>
-                      
-                      <div className={styles.firstImg}>
-                        {renderItem((currentIndexRef.current - 1 + lengthRef.current) % lengthRef.current)}
-                      </div>
-                      <div className={styles.secondImg}>
-                        {renderItem(currentIndexRef.current)}
-                      </div>
-                      <div className={styles.thirdImg}>
-                        {renderItem((currentIndexRef.current + 1) % lengthRef.current)} 
-                      </div>
-            
+                    <div className={styles.firstImg}>
+                      {renderItem(
+                        (currentIndexRef.current - 1 + lengthRef.current) % lengthRef.current
+                      )}
+                    </div>
+                    <div className={styles.secondImg}>{renderItem(currentIndexRef.current)}</div>
+                    <div className={styles.thirdImg}>
+                      {renderItem((currentIndexRef.current + 1) % lengthRef.current)}
+                    </div>
                   </div>
 
                   <div className={styles.carouselRight}>
@@ -407,18 +410,25 @@ const TryOn: React.FC = () => {
                       />
                     )}
                   </div>
-
                 </div>
-                }
+              }
             </div>
-            }
-         
+          )}
 
-        <canvas id="canvas-source" width="2160" height="3840" style={{ display: 'none' }}></canvas>
-        <canvas id="canvas-blended" width="2160" height="3840" style={{ display: 'none' }}></canvas>
-    </>
-    )
-    )}
+          <canvas
+            id="canvas-source"
+            width="2160"
+            height="3840"
+            style={{ display: 'none' }}
+          ></canvas>
+          <canvas
+            id="canvas-blended"
+            width="2160"
+            height="3840"
+            style={{ display: 'none' }}
+          ></canvas>
+        </>
+      )}
     </div>
   )
 }
