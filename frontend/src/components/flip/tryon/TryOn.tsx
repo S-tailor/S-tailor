@@ -6,7 +6,7 @@ import { closetItemList } from '@/api/apiCloset'
 import { tryOnGenerate } from '@/api/apiTryOn'
 import Motion from '@/components/flip/tryon/motion/Motion'
 import styles from '../../../scss/tryon.module.scss'
-
+import userStore from '@/store/store'
 const TryOn: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isCameraOn, setIsCameraOn] = useState(true)
@@ -25,7 +25,8 @@ const TryOn: React.FC = () => {
   const phaseRef = useRef(0)
   const itemListRef = useRef([])
   const currentIndexRef = useRef(0)
-  const Pk = sessionStorage.getItem('profilePk')
+  const {user} = userStore()
+  const Pk = user[0].profilePk
   const captureFlag = useRef(false)
   const initFlag = useRef(false)
 
@@ -76,14 +77,14 @@ const TryOn: React.FC = () => {
     }, 1000)
 
   useEffect(() => {
+    if (Pk) {
+      getClosetItem()
+    }
     setTimerAtStart(true)
     startTimer()
     setTimeout(() => {
       setTimerAtStart(false)
     },6000)
-    if (Pk) {
-      getClosetItem()
-    }
     Motion(getIsCaptured , beforeCapture, handleCapture, handlePrev, handleNext, flag, handleYes, handleNo)
   }, [])
 
@@ -311,7 +312,7 @@ const TryOn: React.FC = () => {
       />
       ) : showResultImg ? (
         <img 
-          src="/assets/ad11.png"
+          src={resultUrl}
           alt="Result" 
           style={{ width: '100vw', height: '100vh', objectFit: 'cover' }}
         />
@@ -338,9 +339,6 @@ const TryOn: React.FC = () => {
         Try on
       </button>}
 
-      
-      {/* <div>{resultUrl && <img className={styles.resultImg} alt="result" src={resultUrl} />}</div> */}
-      {/* <div>{resultUrl && <img className={styles.resultImg} alt="result" src="/assets/ad11.png" />}</div> */}
       {yesFlag.current && 
       <div className={styles.timer}>
         {count.current}
