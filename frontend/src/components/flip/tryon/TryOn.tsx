@@ -144,9 +144,6 @@ const TryOn: React.FC = () => {
     }
   }, [isCameraOn])
 
-  // const toggleCamera = () => {
-  //   setIsCameraOn((prevState) => !prevState)
-  // }
 
   const handleNext = () => {
     currentIndexRef.current = (currentIndexRef.current + 1) % lengthRef.current
