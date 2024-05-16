@@ -192,7 +192,7 @@ const TryOn: React.FC = () => {
     if (file instanceof File) {
       formData.append('model', file)
     }
-    formData.append('profilePk', sessionStorage.setItem('profilePk', userInfo.profilePk))
+    formData.append('profilePk', sessionStorage.getItem('profilePk'))
     formData.append('category', categoryList[itemListRef.current[currentIndexRef.current].category])
     formData.append('closetPk', itemListRef.current[currentIndexRef.current].closetPk)
     console.log(itemListRef.current[currentIndexRef.current].closetPk)
