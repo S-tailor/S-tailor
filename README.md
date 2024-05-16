@@ -22,18 +22,17 @@
 
 ## 2. 팀 역할 소개
 
-    이지은 : Leader, FrontEnd
+    이지은 : Leader, FrontEnd, Interface, Presentation
 
-    나하나 : FrontEnd, Design
+    나하나 : FrontEnd, Design, PPT
 
-    조상민 : FrontEnd, 
+    조상민 : FrontEnd, Interface, UCC
 
     김재민 : BackEnd, Infra
 
     이수형 : BackEnd, AI
 
     장선웅 : BackEnd, Cloud
-
 
 ## 3. 프로젝트 개발 환경
 
@@ -67,7 +66,7 @@ Zustand 4.5.2
 ```
 Docker Compose 3
 Google Cloud Platform
-Jenkins 
+Jenkins
 Nginx
 Certbot
 EC2
@@ -83,29 +82,35 @@ API Gateway
 ## 4. 주요 기능
 
 1. 옷장
+
    - 사용자가 추가한 옷들을 전체 확인 가능
    - 사용자가 추가했던 옷들을 카테고리 별로 나눠서 학인 기능
 
 2. 옷 추가
+
    - 텍스트로 상품 검색 기능
    - 사진/저장된 이미지로 상품 검색 기능
    - 옷 선택 시 자동으로 카테고리 지정
 
 3. 위시리스트
+
    - 옷장에 있는 옷을 위시리스트에 저장
    - 위시리스트에서 바로 구매사이트로 이동 가능
 
 4. 챗봇
+
    - 패션/옷에 대한 조언 기능
-      - 텍스트로 대화 가능
-      - 이미지 + 텍스트로 대화 가능
+     - 텍스트로 대화 가능
+     - 이미지 + 텍스트로 대화 가능
    - 옷 추천 기능
 
 5. 가상 시착
+
    - 옷장에 저장된 옷을 사진/저장된 이미지로 시착 가능
-      - 상의, 하의, 전신 적용 가능
+     - 상의, 하의, 전신 적용 가능
 
 6. 마이페이지
+
    - 프로필 변경 기능
    - 로그아웃 기능
 
@@ -114,6 +119,7 @@ API Gateway
    - 연동된 기기끼리만 소통 가능
 
 ## 5. 서비스 화면
+
 ![1.jpg]() <img src="readme_images/1.jpg"  width="120" margin="10">
 ![2.jpg]() <img src="readme_images/2.jpg"  width="120" margin="10">
 ![3.jpg]() <img src="readme_images/3.jpg"  width="120" margin="10">
