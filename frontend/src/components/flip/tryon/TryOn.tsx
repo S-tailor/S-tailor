@@ -10,6 +10,9 @@ import styles from '../../../scss/tryon.module.scss'
 const TryOn: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isCameraOn, setIsCameraOn] = useState(true)
+  const [isBeforeCapture, setIsBeforeCapture] = useState(false)
+  const [arrowActive, setArrowActive] = useState({ left: false, right: false })
+
   const [itemList, setItemList] = useState<clothInfo[]>([])
   const [listLength, setListLength] = useState(0)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -31,7 +34,7 @@ const TryOn: React.FC = () => {
   const yesFlag = useRef(false)
   const [showVideo, setShowVideo] = useState(false)
   const [showResultImg, setShowResultImg] = useState(false)
-  const [timeLeft, setTimeLeft] = useState<number>(6)
+  const [timeLeft, setTimeLeft] = useState<number>(5)
   const messageRef = useRef('')
   const count = useRef()
   count.current = timeLeft
@@ -60,8 +63,24 @@ const TryOn: React.FC = () => {
     Miniskrit: 'lower_body',
     Dress: 'dresses'
   }
+  
+  const [startTimeLeft, setStartTimeLeft] = useState<number>(6)
+  const [timerAtStart, setTimerAtStart] = useState<boolean>(false)
+  const startCount = useRef()
+  startCount.current = startTimeLeft
+  const startTimer = () => setInterval(() => {
+    setStartTimeLeft((prevTime) => prevTime - 1)
+    if (startCount.current < 1) {
+      return () => clearInterval(startTimer)
+    }
+    }, 1000)
 
   useEffect(() => {
+    setTimerAtStart(true)
+    startTimer()
+    setTimeout(() => {
+      setTimerAtStart(false)
+    },6000)
     if (Pk) {
       getClosetItem()
     }
@@ -74,15 +93,18 @@ const TryOn: React.FC = () => {
     }
     phaseRef.current = 1
     yesFlag.current = true
+    setArrowActive({ ...arrowActive, left: true })
     timer()
+    messageRef.current='5초 후 사용자의 모습을 촬영합니다.'
     setTimeout(()=>{handleCapture(1)},5000)
   }
-
+  
   const handleNo = () => {
     if(captureFlag.current || yesFlag.current) {
       return
     }
     setNextPhase(2)
+    setIsBeforeCapture(false)
     console.log('no')
     phaseRef.current = 2
     flag.current = 0
@@ -122,13 +144,12 @@ const TryOn: React.FC = () => {
     }
   }, [isCameraOn])
 
-  // const toggleCamera = () => {
-  //   setIsCameraOn((prevState) => !prevState)
-  // }
 
   const handleNext = () => {
     currentIndexRef.current = (currentIndexRef.current + 1) % lengthRef.current
     setCurrentIndex((prev) => (prev + 1) % lengthRef.current)
+    setArrowActive({ ...arrowActive, right: true })
+    
   }
 
   const handlePrev = () => {
@@ -136,6 +157,7 @@ const TryOn: React.FC = () => {
       const newIndex = (currentIndexRef.current - 1 + lengthRef.current) % lengthRef.current
       currentIndexRef.current = newIndex
       setCurrentIndex(newIndex)
+      setArrowActive({ ...arrowActive, left: true })
     }
   }
 
@@ -170,7 +192,8 @@ const TryOn: React.FC = () => {
     flag.current = 1
     isCaptured.current = true
     setModal(true)
-    messageRef.current = '이 옷으로 입어보시겠습니까?'
+    messageRef.current = '이 옷을 입어보시겠습니까?'
+    setIsBeforeCapture(true)
   }
 
   useEffect(()=>{
@@ -187,6 +210,7 @@ const TryOn: React.FC = () => {
     if(!captureFlag.current) {
       captureFlag.current = true;
       if (phase == 2) {
+        setArrowActive({ ...arrowActive, right: true })
         flag.current = 0
         setModal(false)
         phaseRef.current = 0
@@ -204,6 +228,7 @@ const TryOn: React.FC = () => {
       } else if (phase == 1) {
         console.log("capture")
         setModal(false)
+       
   
         const canvas = document.createElement('canvas')
         const video = videoRef.current
@@ -266,6 +291,15 @@ const TryOn: React.FC = () => {
     setShowResultImg(true)
   }
 
+  useEffect(() => {
+    if (arrowActive.left || arrowActive.right) {
+      const timeout = setTimeout(() => {
+        setArrowActive({ left: false, right: false })
+      }, 300);
+      return () => clearTimeout(timeout)
+    }
+  }, [arrowActive])
+
   return (
     <div className={styles.mainContainer}>
     {showVideo ? (
@@ -296,12 +330,13 @@ const TryOn: React.FC = () => {
           autoPlay
         ></video>
       </div>
-      
+      {!timerAtStart &&
       <button 
         className={styles.turnOnBtn} 
+        style={{ backgroundColor: isBeforeCapture ? '#222222' : 'transparent', color: isBeforeCapture ? 'white' : '#222222' }}
         >
         Try on
-      </button>
+      </button>}
 
       
       {/* <div>{resultUrl && <img className={styles.resultImg} alt="result" src={resultUrl} />}</div> */}
@@ -310,11 +345,17 @@ const TryOn: React.FC = () => {
       <div className={styles.timer}>
         {count.current}
       </div>}
+
+      {timerAtStart &&
+      <div className={styles.timer}>
+        {startCount.current}
+      </div>}  
       
-            {<div className={styles.tryonMessage}>
-              {messageRef.current}
-            </div>}
+      {<div className={styles.tryonMessage}>
+        {messageRef.current}
+      </div>}
           
+          {!timerAtStart &&
             <div className={styles.carousel}>
               {
                 <div className={styles.carouselInner}>
@@ -325,13 +366,13 @@ const TryOn: React.FC = () => {
                         src="/assets/yesG.png"
                         alt="yes"
                         onClick={handleYes}
-                        className={styles.yesBtn}
+                        className={`${styles.yesBtn} ${arrowActive.left ? styles.active : ''}`}
                       />
                     ) : (
                       <img
                         src="/assets/leftW.png"
                         onClick={handlePrev}
-                        className={styles.leftArrow}
+                        className={`${styles.leftArrow} ${arrowActive.left ? styles.active : ''}`}
                         alt="left"
                       />
                     )}
@@ -357,14 +398,14 @@ const TryOn: React.FC = () => {
                         src="/assets/noR.png"
                         alt="no"
                         onClick={handleNo}
-                        className={styles.noBtn}
+                        className={`${styles.noBtn} ${arrowActive.right ? styles.active : ''}`}
                       />
                     ) : (
                       <img
                         src="/assets/rightW.png"
                         alt="right"
                         onClick={handleNext}
-                        className={styles.rightArrow}
+                        className={`${styles.rightArrow} ${arrowActive.right ? styles.active : ''}`}
                       />
                     )}
                   </div>
@@ -372,6 +413,7 @@ const TryOn: React.FC = () => {
                 </div>
                 }
             </div>
+            }
          
 
         <canvas id="canvas-source" width="2160" height="3840" style={{ display: 'none' }}></canvas>
