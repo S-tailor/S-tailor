@@ -27,6 +27,7 @@ const TryOn: React.FC = () => {
   const currentIndexRef = useRef(0)
   const {user} = userStore()
   const Pk = user[0].profilePk
+  console.log(Pk)
   const captureFlag = useRef(false)
   const initFlag = useRef(false)
 
