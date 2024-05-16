@@ -1,18 +1,19 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, startTransition } from 'react'
 import { CSSProperties } from 'react'
 import { closetItemList } from '@/api/apiCloset'
 import { tryOnGenerate } from '@/api/apiTryOn'
 import Motion from '@/components/flip/tryon/motion/Motion'
 import styles from '../../../scss/tryon.module.scss'
 import userStore from '@/store/store'
+import { useNavigate } from 'react-router-dom'
 const TryOn: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isCameraOn, setIsCameraOn] = useState(true)
   const [isBeforeCapture, setIsBeforeCapture] = useState(false)
   const [arrowActive, setArrowActive] = useState({ left: false, right: false })
-
+  const navigate = useNavigate()
   const [itemList, setItemList] = useState<clothInfo[]>([])
   const [listLength, setListLength] = useState(0)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -297,11 +298,16 @@ const TryOn: React.FC = () => {
         setShowVideo(true)
       }, 2000)
     }
+   
   }, [fileUrl])
 
   const handleVideoEnd = () => {
     setShowVideo(false)
     setShowResultImg(true)
+    messageRef.current = '결과는 모바일 마이페이지에서 다시 확인하실 수 있습니다.'
+    setTimeout(()=>{
+      messageRef.current=''
+    }, 5000)
   }
 
   useEffect(() => {
@@ -313,6 +319,13 @@ const TryOn: React.FC = () => {
     }
   }, [arrowActive])
 
+
+  const toMain = () =>{
+    sessionStorage.clear()
+    startTransition(()=>{
+      navigate('/flip/main')
+    })
+  }
   return (
     <div className={styles.mainContainer}>
       {showVideo ? (
@@ -323,11 +336,19 @@ const TryOn: React.FC = () => {
           style={{ width: '100vw', height: '100vh' }}
         />
       ) : showResultImg ? (
+        <>
+        <div className={styles.resultBtns}>
+          <button className={styles.retryonBtn} onClick={()=>{location.reload()}}>다시 입어보기</button>
+          <button className={styles.goMainBtn} onClick={toMain}>메인으로</button>
+        </div>
+       <div className={styles.tryonMessage}>{messageRef.current}</div>
         <img
           src={resultUrl}
+          // src='/assets/ad11.png'
           alt="Result"
-          style={{ width: '100vw', height: '100vh', objectFit: 'cover' }}
-        />
+          style={{ width: '2160', height: '3840' }}
+          />
+          </>
       ) : fileUrl ? (
         <img className={styles.capturedImg} alt="Captured model" src={fileUrl} />
       ) : (
