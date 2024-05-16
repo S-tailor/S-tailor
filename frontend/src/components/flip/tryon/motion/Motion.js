@@ -179,8 +179,8 @@ export default function (getIsCaptured, beforeCapture ,handleCapture, handlePrev
   function checkAreas() {
     let areas = [
       { x: video.width * 0.5, y: 300, width: 30, height: 30 },
-      { x: 700, y: video.height * 0.5, width: 30, height: 30 },
-      { x: video.width - 700, y: video.height * 0.5, width: 10, height: 10 }
+      { x: 700, y: video.height * 0.5 + 250, width: 30, height: 50 },
+      { x: video.width - 700, y: video.height * 0.5 + 250, width: 30, height: 50 }
     ]
 
     areas.forEach((area, index) => {
