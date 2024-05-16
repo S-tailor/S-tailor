@@ -22,8 +22,7 @@ const TryOn: React.FC = () => {
 
     sse.addEventListener('getUserInfo', (e) => {
       const { data: receivedUserInfo } = e
-      console.log('receivedUserInfo')
-      console.log(receivedUserInfo)
+      sessionStorage.setItem('profilePk', receivedUserInfo.profilePk)
       if (receivedUserInfo != '') {
         const userInfo = JSON.parse(receivedUserInfo)
         console.log('userInfo')
