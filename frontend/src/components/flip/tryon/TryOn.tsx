@@ -26,7 +26,7 @@ const TryOn: React.FC = () => {
   const phaseRef = useRef(0)
   const itemListRef = useRef([])
   const currentIndexRef = useRef(0)
-  const {user} = userStore()
+  const { user } = userStore()
   const Pk = user[0].profilePk
   console.log(Pk)
   const captureFlag = useRef(false)
@@ -298,15 +298,14 @@ const TryOn: React.FC = () => {
         setShowVideo(true)
       }, 2000)
     }
-   
   }, [fileUrl])
 
   const handleVideoEnd = () => {
     setShowVideo(false)
     setShowResultImg(true)
     messageRef.current = '결과는 모바일 마이페이지에서 다시 확인하실 수 있습니다.'
-    setTimeout(()=>{
-      messageRef.current=''
+    setTimeout(() => {
+      messageRef.current = ''
     }, 5000)
   }
 
@@ -319,10 +318,9 @@ const TryOn: React.FC = () => {
     }
   }, [arrowActive])
 
-
-  const toMain = () =>{
+  const toMain = () => {
     sessionStorage.clear()
-    startTransition(()=>{
+    startTransition(() => {
       navigate('/flip/main')
     })
   }
@@ -337,18 +335,27 @@ const TryOn: React.FC = () => {
         />
       ) : showResultImg ? (
         <>
-        <div className={styles.resultBtns}>
-          <button className={styles.retryonBtn} onClick={()=>{location.reload()}}>다시 입어보기</button>
-          <button className={styles.goMainBtn} onClick={toMain}>메인으로</button>
-        </div>
-       <div className={styles.tryonMessage}>{messageRef.current}</div>
-        <img
-          src={resultUrl}
-          // src='/assets/ad11.png'
-          alt="Result"
-          style={{ width: '2160', height: '3840' }}
+          <div className={styles.resultBtns}>
+            <button
+              className={styles.retryonBtn}
+              onClick={() => {
+                location.reload()
+              }}
+            >
+              다시 입어보기
+            </button>
+            <button className={styles.goMainBtn} onClick={toMain}>
+              메인으로
+            </button>
+          </div>
+          <div className={styles.tryonMessage}>{messageRef.current}</div>
+          <img
+            src={resultUrl}
+            // src='/assets/ad11.png'
+            alt="Result"
+            style={{ width: '2160px', height: '3840px', objectFit: 'cover' }}
           />
-          </>
+        </>
       ) : fileUrl ? (
         <img className={styles.capturedImg} alt="Captured model" src={fileUrl} />
       ) : (
