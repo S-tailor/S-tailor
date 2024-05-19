@@ -1,24 +1,21 @@
 package com.ssafy.api.controller;
 
-import java.awt.*;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import com.ssafy.api.request.TryOnReq;
 import com.ssafy.api.request.TryOnVerifyReq;
 import com.ssafy.api.response.TryOnGenerateRes;
+import com.ssafy.api.response.TryOnListRes;
 import com.ssafy.api.service.TryOnService;
 import com.ssafy.common.model.response.BaseResponseBody;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.ssafy.db.entity.Tryon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 @RestController
@@ -53,11 +50,20 @@ public class TryOnController {
         }
     }
 
-    @PostMapping(value ="/generate")
+    @PostMapping("/generate")
     public ResponseEntity<? extends BaseResponseBody> fastApi(@ModelAttribute TryOnReq info) {
-        String generatedImage = tryOnService.getGeneratedImage(info);
-        if(generatedImage != null) {
-            return ResponseEntity.ok(TryOnGenerateRes.of(200,"Success",generatedImage));
+        Tryon result = tryOnService.getGeneratedImage(info);
+        if(result != null) {
+            return ResponseEntity.ok(TryOnGenerateRes.of(200,"Success",result));
+        }
+        return ResponseEntity.ok(BaseResponseBody.of(400,"Fail"));
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<? extends BaseResponseBody> list(int profilePk) {
+        Map<String, Object> result = tryOnService.getList(profilePk);
+        if(result != null) {
+            return ResponseEntity.ok(TryOnListRes.of(200,"Success",result));
         }
         return ResponseEntity.ok(BaseResponseBody.of(400,"Fail"));
     }

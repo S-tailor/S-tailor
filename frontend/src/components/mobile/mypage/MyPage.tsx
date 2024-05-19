@@ -1,17 +1,42 @@
-import React, { useMemo, startTransition } from 'react'
+import React, { useMemo, startTransition, useEffect, useState } from 'react'
 import userStore from '@/store/store'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styles from '../../../scss/mypage.module.scss'
+import { myPageTryonList } from '@/api/apiMyPage'
+import { cartItemList, cartItemAdd } from '@/api/apiCart'
 
 const MyPage: React.FC = () => {
+  interface clothInfo {
+    name: string
+    price: string
+    image?: string
+    link: string
+    closetPk: number
+    source: string
+  }
+
+  interface tryonInfo {
+    tryonPk: number
+    profilePk: number
+    closetPk: number
+    generatedImage: string
+  }
+
   const navigate = useNavigate()
   const location = useLocation()
-  const { cartCount } = userStore()
+  const { cartCount, updateCartList, addToCart } = userStore()
   const { user } = userStore() as {
     user: { profilePk: number; image?: string; profileName: string }[]
   }
+
   const profileName = user[0]?.profileName ?? 'Guest'
   const profileImg = user[0]?.image
+  const profilePk = Number(user[0]?.profilePk)
+  const [clothList,] = useState<clothInfo[]>([])
+  const [tryonList, setTryOnList] = useState<tryonInfo[]>([])
+  const [closetList, setClosetList] = useState<clothInfo[]>([])
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(false)
 
   const ClosetSearchClick = () => {
     startTransition(() => {
@@ -74,6 +99,57 @@ const MyPage: React.FC = () => {
       ? { fontFamily: 'Pretendard-Bold', color: '#9091FB', marginTop: '3px' }
       : {}
   }
+  
+  const nextItem = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % tryonList.length);
+  };
+
+  const prevItem = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + tryonList.length) % tryonList.length);
+  };
+
+  useEffect(() => {
+    if (tryonList.length == 0) {
+      makeList()
+    }
+  }, [])
+
+  const makeList = async () => {
+    setIsLoading(true)
+    try {
+      const response = await myPageTryonList(profilePk)
+      setTryOnList(await response.data.tryonList)
+      setClosetList(await response.data.closetList)
+    } catch (error) {
+    }
+    setIsLoading(false)
+  }
+
+  const goShopping = (link: string) => {
+    window.open(link, '_blank')
+  }
+
+  const addCart = async (pk: number) => {
+    const response = await cartItemAdd(pk)
+    if (response.status === 200) {
+      const newItem = clothList.find((item) => item.closetPk === pk)
+      if (newItem) {
+        addToCart(newItem)
+        updateCartCount()
+        alert('위시리스트에 추가되었습니다!')
+      }
+    }
+  }
+
+  const updateCartCount = async () => {
+    const profilePk = Number(sessionStorage.getItem('profilePk'))
+    const response = await cartItemList(profilePk)
+    if (response.status === 200) {
+      const cartList = response.data.result
+      updateCartList(cartList)
+      userStore.getState().setCartCount(cartList.length)
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -131,7 +207,33 @@ const MyPage: React.FC = () => {
           </button>
         </div>
 
-        <div></div>
+          {tryonList.length > 0 && (
+            <div className={styles.triedOnClothesContainer}>
+              <div className={styles.tryonContent} key={currentIndex}>
+                <img className={styles.tryonListImage} src={tryonList[currentIndex].generatedImage}></img>
+                <img className={styles.previousBtn} onClick={prevItem} src="/assets/backBtn.svg" alt="backBtn" />
+                <img className={styles.nextBtn} onClick={nextItem} src="/assets/backBtnRight.svg" alt="backBtnRight" />
+              </div>
+            
+              <div className={styles.closetContent}> 
+                <p className={styles.triedOnClothesText}>입어 본 상품</p>
+                <img className={styles.closetListImage} src={closetList[currentIndex]?.image}></img>
+                <div className={styles.tests}>
+                  <p className={styles.sourceText}>{closetList[currentIndex]?.source}</p>
+                  <p className={styles.nameText}>{closetList[currentIndex]?.name}</p>
+                  <p className={styles.priceText}>{closetList[currentIndex]?.price.replace(/\*/g, '')}원</p>
+                </div>
+                <button className={styles.wishListAddBtn} onClick={() => addCart(closetList[currentIndex].closetPk)}>위시리스트 추가</button>
+                <button className={styles.goShoppingBtn} onClick={() => goShopping(closetList[currentIndex]?.link)}>구매하러가기</button>
+              </div>
+            </div>
+          )}
+          
+          {isLoading && (
+          <div className={styles.loadingInner}>
+            <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
+          </div>
+          )}
       </section>
 
       <footer className={styles.bottomNav}>

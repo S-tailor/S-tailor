@@ -80,7 +80,7 @@ p {
 
 .btn {
   width: 80vw;
-  height: 7vh;
+  height: 60px;
   border: none;
   background-color: #222222;
   color: white;
@@ -92,7 +92,12 @@ p {
   animation:fade-in 1.2s cubic-bezier(.39,.575,.565,1.000) 2.5s both
 }
 
-@keyframes fade-in{0%{opacity:0}100%{opacity:1}}
+@keyframes fade-in{
+  0%{
+    opacity:0
+  }100%{
+    opacity:1
+  }}
 
 .btnText::before {
   content: '시작하기';

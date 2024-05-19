@@ -219,6 +219,7 @@ const AddCloth: React.FC = () => {
       return (
         <div className={styles.searchNoResults}>
           <p>검색 결과가 없습니다!</p>
+          
         </div>
       )
     }
@@ -350,7 +351,9 @@ const AddCloth: React.FC = () => {
             <video ref={videoRef} style={videoStyle} autoPlay muted />
           ) : searchMode === 'upload' ? (
             <RenderUploadedImage />
-          ) : null}
+          ) : (
+            <img src="/assets/example.png" alt="Example" className={styles.example} />
+          )}
         </div>
 
         <div className={styles.pictureButtons}>

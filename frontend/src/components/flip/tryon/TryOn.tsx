@@ -1,40 +1,141 @@
-import React, { useRef, useState, useEffect, useMemo } from 'react'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+import React, { useRef, useState, useEffect, startTransition } from 'react'
 import { CSSProperties } from 'react'
 import { closetItemList } from '@/api/apiCloset'
-
-// import userStore from '@/store/store'
 import { tryOnGenerate } from '@/api/apiTryOn'
-
+import Motion from '@/components/flip/tryon/motion/Motion'
+import styles from '../../../scss/tryon.module.scss'
+import userStore from '@/store/store'
+import { useNavigate } from 'react-router-dom'
 const TryOn: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [isCameraOn, setIsCameraOn] = useState(false)
+  const [isCameraOn, setIsCameraOn] = useState(true)
+  const [isBeforeCapture, setIsBeforeCapture] = useState(false)
+  const [arrowActive, setArrowActive] = useState({ left: false, right: false })
+  const navigate = useNavigate()
   const [itemList, setItemList] = useState<clothInfo[]>([])
-
+  const [listLength, setListLength] = useState(0)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [fileImage, setFileImage] = useState<File>()
+  const [handleConfirm, setHandleConfirm] = useState(false)
   const [fileUrl, setFileUrl] = useState<string>('')
-
-  // const { user } = userStore()
-
+  const [modal, setModal] = useState(false)
+  const lengthRef = useRef()
+  const [nextPhase, setNextPhase] = useState(0)
   const [resultUrl, setResultUrl] = useState<string>('')
+  const phaseRef = useRef(0)
+  const itemListRef = useRef([])
+  const currentIndexRef = useRef(0)
+  const { user } = userStore()
+  const Pk = user[0].profilePk
+  console.log(Pk)
+  const captureFlag = useRef(false)
+  const initFlag = useRef(false)
 
-  // const Pk = user[0]?.profilePk
-  const Pk = sessionStorage.getItem('profilePk')
+  const isCaptured = useRef(false)
+  const flag = useRef(0)
+  const yesFlag = useRef(false)
+  const [showVideo, setShowVideo] = useState(false)
+  const [showResultImg, setShowResultImg] = useState(false)
+  const [timeLeft, setTimeLeft] = useState<number>(5)
+  const messageRef = useRef('')
+  const count = useRef()
+  count.current = timeLeft
+  const timer = () =>
+    setInterval(() => {
+      setTimeLeft((prevTime) => prevTime - 1)
+      if (count.current < 2) {
+        return () => clearInterval(timer), (yesFlag.current = false)
+      }
+    }, 1000)
+
   interface clothInfo {
     name: string
     image: string
   }
 
+  const categoryList = {
+    Outerwear: 'upper_body',
+    Jacket: 'upper_body',
+    Coat: 'upper_body',
+    Top: 'upper_body',
+    Shirt: 'upper_body',
+    Pants: 'lower_body',
+    Shorts: 'lower_body',
+    Jeans: 'lower_body',
+    Skirt: 'lower_body',
+    Miniskrit: 'lower_body',
+    Dress: 'dresses'
+  }
+
+  const [startTimeLeft, setStartTimeLeft] = useState<number>(6)
+  const [timerAtStart, setTimerAtStart] = useState<boolean>(false)
+  const startCount = useRef()
+  startCount.current = startTimeLeft
+  const startTimer = () =>
+    setInterval(() => {
+      setStartTimeLeft((prevTime) => prevTime - 1)
+      if (startCount.current < 1) {
+        return () => clearInterval(startTimer)
+      }
+    }, 1000)
+
   useEffect(() => {
+    const Pk = sessionStorage.getItem('profilePk')
     if (Pk) {
-      getClosetItem()
+      getClosetItem(Pk)
     }
+    setTimerAtStart(true)
+    startTimer()
+    setTimeout(() => {
+      setTimerAtStart(false)
+    }, 6000)
+    Motion(
+      getIsCaptured,
+      beforeCapture,
+      handleCapture,
+      handlePrev,
+      handleNext,
+      flag,
+      handleYes,
+      handleNo
+    )
   }, [])
 
-  const getClosetItem = async () => {
+  const handleYes = () => {
+    if (captureFlag.current || yesFlag.current) {
+      return
+    }
+    phaseRef.current = 1
+    yesFlag.current = true
+    setArrowActive({ ...arrowActive, left: true })
+    timer()
+    messageRef.current = '5초 후 사용자의 모습을 촬영합니다.'
+    setTimeout(() => {
+      handleCapture(1)
+    }, 5000)
+  }
+
+  const handleNo = () => {
+    if (captureFlag.current || yesFlag.current) {
+      return
+    }
+    setNextPhase(2)
+    setIsBeforeCapture(false)
+    console.log('no')
+    phaseRef.current = 2
+    flag.current = 0
+    handleCapture(2)
+  }
+
+  const getClosetItem = async (Pk) => {
     await closetItemList(Number(Pk))
       .then((res) => {
         setItemList(res.data.result)
+        itemListRef.current = res.data.result
+        lengthRef.current = res.data.result.length
+        console.log('length', lengthRef.current)
+        console.log(`setItemList ${res.data.result[0]['image']}`)
       })
       .catch((err) => console.log('다시 시도해주세요', err))
   }
@@ -60,182 +161,304 @@ const TryOn: React.FC = () => {
     }
   }, [isCameraOn])
 
-  const toggleCamera = () => {
-    setIsCameraOn((prevState) => !prevState)
-  }
-
-  const videoStyle: CSSProperties = useMemo(
-    () => ({
-      width: '100vw',
-      height: '100vh',
-      objectFit: 'cover',
-      transform: 'scaleX(-1)'
-    }),
-    []
-  )
-
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 2) % itemList.length) // 다음 아이템
+    currentIndexRef.current = (currentIndexRef.current + 1) % lengthRef.current
+    setCurrentIndex((prev) => (prev + 1) % lengthRef.current)
+    setArrowActive({ ...arrowActive, right: true })
   }
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 2 + itemList.length) % itemList.length) // 이전 아이템
-  }
-
-  const containerStyle: CSSProperties = {
-    position: 'relative',
-    width: '100vw',
-    height: '100vh'
-  }
-
-  // const buttonStyle: CSSProperties = {
-  //   position: 'absolute',
-  //   top: '20px',
-  //   left: '20px',
-  //   zIndex: 10,
-  //   width: '500px',
-  //   height: '250px',
-  //   fontSize: '100px'
-  // }
-
-  const itemListStyle: CSSProperties = {
-    zIndex: 99999,
-    position: 'absolute',
-    top: '70%', // 화면 세로 중앙에 위치
-    left: '30%', // 화면 가로 중앙에 위치
-    transform: 'translate(-50%, -50%)', // 중앙 정확히 맞추기
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-
-  const arrowStyle: CSSProperties = {
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    fontSize: '2rem',
-    color: 'white',
-    background: 'rgba(0, 0, 0, 0.5)',
-    border: 'none',
-    padding: '10px 20px',
-    cursor: 'pointer'
+    if (lengthRef.current > 0) {
+      const newIndex = (currentIndexRef.current - 1 + lengthRef.current) % lengthRef.current
+      currentIndexRef.current = newIndex
+      setCurrentIndex(newIndex)
+      setArrowActive({ ...arrowActive, left: true })
+    }
   }
 
   const renderItem = (index: number) => {
-    const item = itemList[index % itemList.length] // Use modulo for wrapping
+    if (!lengthRef.current || lengthRef.current == 0) {
+      return <p className={styles.emptyText}>옷장이 비었습니다.</p>
+    }
+    const item = itemListRef.current[index % lengthRef.current]
     return (
-      <div>
-        <img src={item.image} alt="옷 사진" style={{ width: '300px', height: '300px' }} />
-        <p>{item.name}</p>
+      <div className={styles.carouselContent}>
+        <img src={item.image} alt="옷 사진" className={styles.carouselImg} />
+        <p className={styles.carouselName}>{item.name}</p>
       </div>
     )
   }
 
-  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    setFileImage(file)
-    if (file) {
-      setFileUrl(URL.createObjectURL(file))
-    }
-  }
-
-  const handleTryOnButton = async () => {
+  const handleTryOn = async (file) => {
     const formData = new FormData()
-    if (fileImage instanceof File) {
-      formData.append('model', fileImage)
+    if (file instanceof File) {
+      formData.append('model', file)
     }
-    formData.append(
-      'cloth',
-      'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQrZOJkf9outGmhW7vnfRic8qHvuJ-ZbpQ9ucUQJAeITpd5inhVtjN7_e-acDIFNS-tWUG2IcKEctJ27M2xELGtB2RuUwSrPw6wWEngHikdk_k8SmVDje45_g&usqp=CAE'
-    )
-    formData.append('profilePk', '12')
-    formData.append('category', 'lower_body')
-
+    formData.append('profilePk', sessionStorage.getItem('profilePk'))
+    formData.append('category', categoryList[itemListRef.current[currentIndexRef.current].category])
+    formData.append('closetPk', itemListRef.current[currentIndexRef.current].closetPk)
+    console.log(itemListRef.current[currentIndexRef.current].closetPk)
     const response = await tryOnGenerate(formData)
-    setResultUrl(response.data.generatedImageURL)
+    setResultUrl(response.data.result.generatedImage)
   }
 
-  return (
-    <>
-      <button onClick={toggleCamera}>{isCameraOn ? 'Turn Off Camera' : 'Turn On Camera'}</button>
-      <button onClick={handleTryOnButton}>Try On</button>
-      <div>{fileUrl && <img alt="originModel" src={fileUrl} />}</div>
-      <label htmlFor="imgFile">
-        <input type="file" name="imgFile" id="imgFile" onChange={handleFileChange} />
-      </label>
+  const beforeCapture = async () => {
+    console.log('123')
+    flag.current = 1
+    isCaptured.current = true
+    setModal(true)
+    messageRef.current = '이 옷을 입어보시겠습니까?'
+    setIsBeforeCapture(true)
+  }
 
-      <div>{resultUrl && <img alt="result" src={resultUrl} />}</div>
-      {/* <video autoPlay ref={videoRef} style={videoStyle}></video> */}
-      <div style={containerStyle}>
-        {isCameraOn && itemList.length > 0 && (
-          <section>
-            {
-              <div style={itemListStyle}>
-                <button onClick={handlePrev} style={{ ...arrowStyle, left: '20px' }}>
-                  {'<'}
-                </button>
+  useEffect(() => {
+    console.log('flag ', flag.current)
+  }, [flag.current])
 
-                <div
-                  style={{
-                    zIndex: 99999,
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
-                >
-                  <button
-                    onClick={handlePrev}
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '20px',
-                      transform: 'translateY(-50%)',
-                      fontSize: '2rem',
-                      color: 'white',
-                      background: 'rgba(0, 0, 0, 0.5)',
-                      border: 'none',
-                      padding: '10px 20px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {'<'}
-                  </button>
-                  {renderItem(currentIndex)}
-                  {renderItem(currentIndex + 1)}
-                  {renderItem(currentIndex + 2)}
-                  <button
-                    onClick={handleNext}
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      right: '20px',
-                      transform: 'translateY(-50%)',
-                      fontSize: '2rem',
-                      color: 'white',
-                      background: 'rgba(0, 0, 0, 0.5)',
-                      border: 'none',
-                      padding: '10px 20px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {'>'}
-                  </button>
-                </div>
+  const getIsCaptured = () => {
+    return isCaptured.current
+  }
 
-                <button onClick={handleNext} style={{ ...arrowStyle, right: '20px' }}>
-                  {'>'}
-                </button>
-              </div>
+  const handleCapture = async (phase: number) => {
+    console.log('capture')
+    console.log(phaseRef.current)
+    if (!captureFlag.current) {
+      captureFlag.current = true
+      if (phase == 2) {
+        setArrowActive({ ...arrowActive, right: true })
+        flag.current = 0
+        setModal(false)
+        phaseRef.current = 0
+        messageRef.current = ''
+        captureFlag.current = false
+        isCaptured.current = false
+        setModal(false)
+        yesFlag.current = false
+        return
+      }
+      if (phase == 0) {
+        setModal(false)
+        location.reload()
+        return
+      } else if (phase == 1) {
+        console.log('capture')
+        setModal(false)
+
+        const canvas = document.createElement('canvas')
+        const video = videoRef.current
+
+        if (video && video.videoWidth > 0) {
+          canvas.width = video.videoWidth
+          canvas.height = video.videoHeight
+
+          const ctx = canvas.getContext('2d')
+
+          if (ctx) {
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+            const blob = await new Promise<Blob | null>((resolve) => {
+              canvas.toBlob(resolve, 'image/png')
+            })
+            if (blob) {
+              const url = URL.createObjectURL(blob).split('/')
+              const file = new File([blob], `${url[url.length - 1]}.png`, { type: 'image/png' })
+              console.log('Capture successful:', url)
+              saveImage(file)
             }
-          </section>
-        )}
-        <video autoPlay ref={videoRef} style={videoStyle}></video>
-      </div>
-    </>
+          }
+        }
+      }
+    } else {
+      return
+    }
+  }
+
+  // 업로드 이미지 저장
+  function saveImage(input: File) {
+    let file: File
+    handleTryOn(input)
+    if (input instanceof File) {
+      // 직접 File 객체가 입력된 경우
+      file = input
+    } else if (input.target.files && input.target.files[0]) {
+      // 이벤트를 통해 파일이 입력된 경우
+      file = input.target.files[0]
+    }
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = () => {
+        setFileUrl(reader.result as string)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  useEffect(() => {
+    if (fileUrl) {
+      setTimeout(() => {
+        setShowVideo(true)
+      }, 2000)
+    }
+  }, [fileUrl])
+
+  const handleVideoEnd = () => {
+    setShowVideo(false)
+    setShowResultImg(true)
+    messageRef.current = '결과는 모바일 마이페이지에서 다시 확인하실 수 있습니다.'
+    setTimeout(() => {
+      messageRef.current = ''
+    }, 5000)
+  }
+
+  useEffect(() => {
+    if (arrowActive.left || arrowActive.right) {
+      const timeout = setTimeout(() => {
+        setArrowActive({ left: false, right: false })
+      }, 300)
+      return () => clearTimeout(timeout)
+    }
+  }, [arrowActive])
+
+  const toMain = () => {
+    sessionStorage.clear()
+    startTransition(() => {
+      navigate('/flip/main')
+    })
+  }
+  return (
+    <div className={styles.mainContainer}>
+      {showVideo ? (
+        <video
+          src="/assets/ssfAd.mp4"
+          autoPlay
+          onEnded={handleVideoEnd}
+          style={{ width: '100vw', height: '100vh' }}
+        />
+      ) : showResultImg ? (
+        <>
+          <div className={styles.resultBtns}>
+            <button
+              className={styles.retryonBtn}
+              onClick={() => {
+                location.reload()
+              }}
+            >
+              다시 입어보기
+            </button>
+            <button className={styles.goMainBtn} onClick={toMain}>
+              메인으로
+            </button>
+          </div>
+          <div className={styles.tryonMessage}>{messageRef.current}</div>
+          <img
+            src={resultUrl}
+            // src='/assets/ad11.png'
+            alt="Result"
+            style={{ width: '2160px', height: '3840px', objectFit: 'cover' }}
+          />
+        </>
+      ) : fileUrl ? (
+        <img className={styles.capturedImg} alt="Captured model" src={fileUrl} />
+      ) : (
+        <>
+          <div className={styles.bgVideo}>
+            <video
+              className={styles.bgVideoContent}
+              id="webcam"
+              width="2160"
+              height="3840"
+              ref={videoRef}
+              autoPlay
+            ></video>
+          </div>
+          {!timerAtStart && (
+            <button
+              className={styles.turnOnBtn}
+              style={{
+                backgroundColor: isBeforeCapture ? '#222222' : 'transparent',
+                color: isBeforeCapture ? 'white' : '#222222'
+              }}
+            >
+              Try on
+            </button>
+          )}
+
+          {yesFlag.current && <div className={styles.timer}>{count.current}</div>}
+
+          {timerAtStart && <div className={styles.timer}>{startCount.current}</div>}
+
+          {<div className={styles.tryonMessage}>{messageRef.current}</div>}
+
+          {!timerAtStart && (
+            <div className={styles.carousel}>
+              {
+                <div className={styles.carouselInner}>
+                  <div className={styles.carouselLeft}>
+                    {flag.current == 1 ? (
+                      <img
+                        src="/assets/yesG.png"
+                        alt="yes"
+                        onClick={handleYes}
+                        className={`${styles.yesBtn} ${arrowActive.left ? styles.active : ''}`}
+                      />
+                    ) : (
+                      <img
+                        src="/assets/leftW.png"
+                        onClick={handlePrev}
+                        className={`${styles.leftArrow} ${arrowActive.left ? styles.active : ''}`}
+                        alt="left"
+                      />
+                    )}
+                  </div>
+
+                  <div className={styles.carouselMiddle}>
+                    <div className={styles.firstImg}>
+                      {renderItem(
+                        (currentIndexRef.current - 1 + lengthRef.current) % lengthRef.current
+                      )}
+                    </div>
+                    <div className={styles.secondImg}>{renderItem(currentIndexRef.current)}</div>
+                    <div className={styles.thirdImg}>
+                      {renderItem((currentIndexRef.current + 1) % lengthRef.current)}
+                    </div>
+                  </div>
+
+                  <div className={styles.carouselRight}>
+                    {flag.current == 1 ? (
+                      <img
+                        src="/assets/noR.png"
+                        alt="no"
+                        onClick={handleNo}
+                        className={`${styles.noBtn} ${arrowActive.right ? styles.active : ''}`}
+                      />
+                    ) : (
+                      <img
+                        src="/assets/rightW.png"
+                        alt="right"
+                        onClick={handleNext}
+                        className={`${styles.rightArrow} ${arrowActive.right ? styles.active : ''}`}
+                      />
+                    )}
+                  </div>
+                </div>
+              }
+            </div>
+          )}
+
+          <canvas
+            id="canvas-source"
+            width="2160"
+            height="3840"
+            style={{ display: 'none' }}
+          ></canvas>
+          <canvas
+            id="canvas-blended"
+            width="2160"
+            height="3840"
+            style={{ display: 'none' }}
+          ></canvas>
+        </>
+      )}
+    </div>
   )
 }
 

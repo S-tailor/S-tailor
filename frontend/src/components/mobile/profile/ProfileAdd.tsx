@@ -16,7 +16,7 @@ const ProfileAdd: React.FC = () => {
   const [height, setHeight] = useState<string>('')
   const [weight, setWeight] = useState<string>('')
   const [fileUrl, setFileUrl] = useState<string>('')
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const { setUser } = userStore()
   interface userProfile {
     profileName: string
@@ -75,19 +75,18 @@ const ProfileAdd: React.FC = () => {
 
       const response = await profileCreate(formData)
       if (response.status == 200) {
-        
         const profilePk = response.data.profilePk
-        sessionStorage.setItem('profilePk', profilePk);
+        sessionStorage.setItem('profilePk', profilePk)
 
-        if (typeof name === 'string' && (profilePk)) {
+        if (typeof name === 'string' && profilePk) {
           const userProfileData: userProfile = {
             profileName: name,
             profilePk: profilePk,
             image: fileUrl
-          };
+          }
           setUser(userProfileData)
           startTransition(() => {
-            navigate('/mobile/closet')
+            navigate('/mobile/profile')
           })
         }
       }
@@ -170,15 +169,15 @@ const ProfileAdd: React.FC = () => {
   return (
     <>
       <div className={styles.container}>
-      <div className={styles.bgVideo}>
-        <video className={styles.bgVideoContent} autoPlay muted loop >
-          <source src='/assets/background_light.mp4' />
-        </video>
-			</div>
-        
+        <div className={styles.bgVideo}>
+          <video className={styles.bgVideoContent} autoPlay muted loop>
+            <source src="/assets/background_light.mp4" />
+          </video>
+        </div>
+
         {page1 && (
           <>
-            <header>
+            <div className={styles.header}>
               <div className={styles.headerInner1}>
                 <img
                   onClick={goSelect}
@@ -191,7 +190,7 @@ const ProfileAdd: React.FC = () => {
                 <p className={styles.profileadd}>프로필 추가</p>
               </div>
               <div className={styles.headerInner3}></div>
-            </header>
+            </div>
 
             <section className={styles.create}>
               <div className={styles.profileImg}>
@@ -215,7 +214,6 @@ const ProfileAdd: React.FC = () => {
                 placeholder="프로필 이름을 입력해주세요."
                 value={name}
                 onChange={handleNameChange}
-                autoFocus
               />
               <p className={styles.line}></p>
               <br />
@@ -232,7 +230,7 @@ const ProfileAdd: React.FC = () => {
 
         {page2 && (
           <>
-            <header>
+            <div className={styles.header}>
               <div className={styles.headerInner1}>
                 <img
                   className={styles.backBtn}
@@ -245,7 +243,7 @@ const ProfileAdd: React.FC = () => {
                 <p className={styles.profileadd}>프로필 추가</p>
               </div>
               <div className={styles.headerInner3}></div>
-            </header>
+            </div>
 
             <section className={styles.create2}>
               <div className={styles.topInfo}>
@@ -254,14 +252,14 @@ const ProfileAdd: React.FC = () => {
 
               <div className={styles.toggleSwitch}>
                 <button
-                  className={styles.toggleButton}
+                  className={styles.toggleButtonMan}
                   onClick={handleGenderChange}
                   onBlur={handleGenderBlur}
                 >
                   남성
                 </button>
                 <button
-                  className={styles.toggleButton}
+                  className={styles.toggleButtonWoman}
                   onClick={handleGenderChange}
                   onBlur={handleGenderBlur}
                 >
@@ -284,7 +282,7 @@ const ProfileAdd: React.FC = () => {
 
         {page3 && (
           <>
-            <header>
+            <div className={styles.header}>
               <div className={styles.headerInner1}>
                 <img
                   className={styles.backBtn}
@@ -297,12 +295,12 @@ const ProfileAdd: React.FC = () => {
                 <p className={styles.profileadd}>프로필 추가</p>
               </div>
               <div className={styles.headerInner3}></div>
-            </header>
+            </div>
 
             <section className={styles.create3}>
               <div className={styles.topInfo}>
                 <p className={styles.texts}>키 입력</p>
-                <p className={styles.subtexts}>가상 피팅 시 맞춤 사이즈 추천에 필요해요!</p>
+                <p className={styles.subtexts}>가상 피팅 시 맞춤사이즈 추천에 필요해요!</p>
               </div>
 
               <div className={styles.middleInfo}>
@@ -312,7 +310,6 @@ const ProfileAdd: React.FC = () => {
                   placeholder="키를 입력해주세요."
                   value={height}
                   onChange={handleHeightChange}
-                  autoFocus
                 />
                 <label className={styles.cm} htmlFor="">
                   cm
@@ -333,7 +330,7 @@ const ProfileAdd: React.FC = () => {
 
         {page4 && (
           <>
-            <header>
+            <div className={styles.header}>
               <div className={styles.headerInner1}>
                 <img
                   className={styles.backBtn}
@@ -346,7 +343,7 @@ const ProfileAdd: React.FC = () => {
                 <p className={styles.profileadd}>프로필 추가</p>
               </div>
               <div className={styles.headerInner3}></div>
-            </header>
+            </div>
 
             <section className={styles.create3}>
               <div className={styles.topInfo}>
@@ -361,7 +358,6 @@ const ProfileAdd: React.FC = () => {
                   placeholder="몸무게를 입력해주세요."
                   value={weight}
                   onChange={handleWeightChange}
-                  autoFocus
                 />
                 <label className={styles.cm} htmlFor="">
                   kg
@@ -377,7 +373,7 @@ const ProfileAdd: React.FC = () => {
                 {isSubmitting ? (
                   <img className={styles.loading} src="/assets/loading.gif" alt="로딩 중" />
                 ) : (
-                  "완료"
+                  '완료'
                 )}
               </button>
             </section>

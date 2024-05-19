@@ -139,7 +139,7 @@
 }
 
 .slide:nth-child(1) {
-  background-image: url("/assets/ad1.png");
+  background-image: url("/assets/ad11.png");
   animation-delay: 0;
 }
 .slide:nth-child(2) {
@@ -182,7 +182,7 @@
 .userName {
   width: 100%;
   font-family: 'Pretendard-Bold';
-  font-size: 1.6em;
+  font-size: 1.3em;
   color :#3d3d3d;
 }
 
@@ -198,7 +198,7 @@
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 1%;
 }
 
 .clothesItem {
@@ -283,24 +283,24 @@
 }
 
 .closetImg {
-  width: 30px;
-  height: 35px;
+  width: 25px;
+  height: 30px;
   margin-left: 1px;
 }
 
 .addClothesImg {
-  width: 30px;
-  height: 35px;
+  width: 25px;
+  height: 30px;
 }
 
 .recommendImg {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
 }
 
 .mypageImg {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius: 100px;
   filter: drop-shadow(0px 0px 1.5px #000000);
 }
@@ -360,4 +360,15 @@
   font-size: 0.55em;
   text-align: center;
   margin-top: 4px;
+}
+
+@media (max-width: 360px) {
+  .clothesContent .clothesItem {
+    width: 48%;
+    margin-bottom: 20px;
+  }
+  .clothesImg {
+    width: 100%;
+    height: 100px;
+  }
 }

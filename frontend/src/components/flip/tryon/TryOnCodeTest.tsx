@@ -10,7 +10,7 @@ const BASE_URL = 'https://ourtrip.store'
 const TryOn: React.FC = () => {
   const navigate = useNavigate()
   const [sessionId, setSessionId] = useState('')
-  const {setUser} = userStore()
+  const { setUser } = userStore()
   const handleConnect = () => {
     const sse = new EventSource(`${BASE_URL}/api/tryon/connect`)
 
@@ -22,8 +22,12 @@ const TryOn: React.FC = () => {
 
     sse.addEventListener('getUserInfo', (e) => {
       const { data: receivedUserInfo } = e
-
+      sessionStorage.setItem('profilePk', receivedUserInfo.profilePk)
       if (receivedUserInfo != '') {
+        const userInfo = JSON.parse(receivedUserInfo)
+        console.log('userInfo')
+        console.log(userInfo)
+        sessionStorage.setItem('profilePk', userInfo.profilePk)
         sse.close()
         navigate('/flip/tryon')
       }

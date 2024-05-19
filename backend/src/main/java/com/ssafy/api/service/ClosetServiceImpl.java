@@ -121,7 +121,7 @@ public class ClosetServiceImpl implements ClosetService{
     @Override
     public List<Closet> closetList(int profilePk) {
         try {
-            return closetRepository.findAllByProfilePkAndIsDelete(profilePk, false);
+            return closetRepository.findAllByProfilePkAndIsDeleteOrderByClosetPkDesc(profilePk, false);
         } catch (Exception e) {
             return null;
         }
@@ -131,7 +131,7 @@ public class ClosetServiceImpl implements ClosetService{
     public List<Closet> closetFilter(int profilePk, String category) {
         try {
             if(!category.equals("Etc"))
-                return closetRepository.findAllByProfilePkAndCategoryAndIsDelete(profilePk, category,false);
+                return closetRepository.findAllByProfilePkAndCategoryAndIsDeleteOrderByClosetPkDesc(profilePk, category,false);
             else
                 return closetRepository.findRestByProfilePkAndIsDelete(profilePk);
         } catch (Exception e) {
@@ -156,6 +156,15 @@ public class ClosetServiceImpl implements ClosetService{
     public List<Closet> closetSearch(ClosetSearchReq info) {
         try {
             return closetRepository.closetSearch(info.getContent(), info.getProfilePk());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Closet closetData(int closetPk) {
+        try {
+            return closetRepository.findByClosetPk(closetPk);
         } catch (Exception e) {
             return null;
         }

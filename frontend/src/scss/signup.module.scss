@@ -71,7 +71,7 @@
 
 .title1 {
   font-family: 'Pretendard-Bold';
-  font-size: 2.5em;
+  font-size: 9vw;
   margin-left: 10vw;
   margin-bottom: 1vh;
   padding-top: 2vh;
@@ -79,7 +79,7 @@
 
 .title2 {
   font-family: 'Pretendard-Bold';
-  font-size: 2.5em;
+  font-size: 9vw;
   margin-left: 10vw;
   padding-top: 2vh;
   margin-bottom: 1vh;
@@ -158,11 +158,11 @@
 
 .topArticle {
   width: 100vw;
-  height: 60%;
+  height: 70%;
 }
 
 .bottomArticle {
-  height: 24%;
+  height: 29.5%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -170,8 +170,8 @@
 }
 
 .privacyPolicy {
-  position: fixed;
-  top: 80%;
+  display: flex;
+  margin-bottom: 2vh;
 }
 
 .privacy {
@@ -214,3 +214,72 @@
   margin: 0;
   width: 35px;
 }
+
+.checkboxLabel {
+  font-family: 'Pretendard-Bold';
+  width: 7vw;
+  color: #222222;
+  opacity: 80%;
+  font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  &:active {
+    color: rgb(184, 184, 184);
+  }
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.checkboxIcon {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #222222;
+  margin-right: 10px;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+}
+
+input[type="checkbox"]:checked + .checkboxIcon::before {
+  content: '✓';
+  position: absolute;
+  top: -0.3vh;
+  text-align: center;
+  color: #222222;
+}
+
+table {
+  border-collapse: collapse; 
+  width: 100%; 
+}
+
+th, td {
+  border: 1px solid black; 
+  padding: 8px;
+  text-align: left; 
+}
+
+h2 {
+  font-family: 'Pretendard-Bold';
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+.privacyMainText {
+  font-family: 'Pretendard-Regular';
+  margin-bottom: 2vh;
+}
+
+.privacySubText {
+  font-family: 'Pretendard-Regular';
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+.table {
+  font-family: 'Pretendard-Regular';
+  font-size: 0.8em;
+}
+
