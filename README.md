@@ -126,3 +126,6 @@ API Gateway
 ![4.jpg]() <img src="readme_images/4.jpg"  width="120" margin="10">
 
 ## 6.시스템 아키텍쳐
+
+![System.jpg]() <img src="readme_images/System.png">
+![Cloud.jpg]() <img src="readme_images/Cloud.png">
