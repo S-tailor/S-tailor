@@ -1,7 +1,7 @@
 
 ## Porting Manual - Ect
 
-노션 링크
+AWS 노션 링크
 [https://www.notion.so/iamjam/82e0d9eb09b144c1adf90909d4be716c](https://www.notion.so/iamjam/82e0d9eb09b144c1adf90909d4be716c)
 
 ## AWS 접속
