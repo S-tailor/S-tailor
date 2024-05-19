@@ -26,8 +26,8 @@ const TryOn: React.FC = () => {
       sessionStorage.setItem('profilePk', receivedUserInfo.profilePk)
       if (receivedUserInfo != '') {
         const userInfo = JSON.parse(receivedUserInfo)
-        console.log('userInfo')
-        console.log(userInfo)
+        // console.log('userInfo')
+        // console.log(userInfo)
         sessionStorage.setItem('profilePk', userInfo.profilePk)
         sse.close()
         navigate('/flip/tryon')

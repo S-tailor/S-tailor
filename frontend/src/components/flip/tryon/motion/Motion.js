@@ -1,7 +1,16 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
-export default function (getIsCaptured, beforeCapture ,handleCapture, handlePrev, handleNext, flag, handleYes, handleNo) {
+export default function (
+  getIsCaptured,
+  beforeCapture,
+  handleCapture,
+  handlePrev,
+  handleNext,
+  flag,
+  handleYes,
+  handleNo
+) {
   let video = document.querySelector('#webcam') //$('#webcam')[0];
 
   let webcamError = function (e) {
@@ -70,10 +79,10 @@ export default function (getIsCaptured, beforeCapture ,handleCapture, handlePrev
     let key = obj.visual
 
     if (key == 1) {
-      console.log('왼쪽으로 넘기기')
-      console.log("isCaptured",isCaptured)
+      // console.log('왼쪽으로 넘기기')
+      // console.log('isCaptured', isCaptured)
       //leftButton.click();
-      
+
       if (isCaptured) {
         handleYes()
       } else {
@@ -82,9 +91,9 @@ export default function (getIsCaptured, beforeCapture ,handleCapture, handlePrev
     }
 
     if (key == 2) {
-      console.log('오른쪽으로 넘기기')
+      // console.log('오른쪽으로 넘기기')
       //rightButton.click()
-      console.log("isCaptured",isCaptured)
+      // console.log("isCaptured",isCaptured)
       if (isCaptured) {
         handleNo()
       } else {
@@ -93,7 +102,7 @@ export default function (getIsCaptured, beforeCapture ,handleCapture, handlePrev
     }
 
     if (key == 0 && !isCaptured) {
-      console.log('촬영하기')
+      // console.log('촬영하기')
       isCaptured = true
       beforeCapture()
     }
