@@ -13,7 +13,7 @@ const TryOn: React.FC = () => {
   const [sessionId, setSessionId] = useState('')
   const { setUser } = userStore()
   const handleConnect = () => {
-    const sse = new EventSource(`${BASE_URL}/api/tryon/connect`)
+    const sse = new EventSource(`${BASE_URL}/tryon/connect`)
 
     sse.addEventListener('connect', (e) => {
       const { data: receivedConnectData } = e
