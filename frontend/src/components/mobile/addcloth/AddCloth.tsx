@@ -58,7 +58,7 @@ const AddCloth: React.FC = () => {
         if (blob) {
           const url = URL.createObjectURL(blob).split('/')
           const file = new File([blob], `${url[url.length - 1]}.png`, { type: 'image/png' })
-          console.log('Capture successful:', url)
+          // console.log('Capture successful:', url)
           saveImage(file)
         }
       }
@@ -219,7 +219,6 @@ const AddCloth: React.FC = () => {
       return (
         <div className={styles.searchNoResults}>
           <p>검색 결과가 없습니다!</p>
-          
         </div>
       )
     }

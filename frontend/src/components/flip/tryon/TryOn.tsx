@@ -28,7 +28,7 @@ const TryOn: React.FC = () => {
   const currentIndexRef = useRef(0)
   const { user } = userStore()
   const Pk = user[0].profilePk
-  console.log(Pk)
+  // console.log(Pk)
   const captureFlag = useRef(false)
   const initFlag = useRef(false)
 
@@ -122,7 +122,7 @@ const TryOn: React.FC = () => {
     }
     setNextPhase(2)
     setIsBeforeCapture(false)
-    console.log('no')
+    // console.log('no')
     phaseRef.current = 2
     flag.current = 0
     handleCapture(2)
@@ -134,8 +134,8 @@ const TryOn: React.FC = () => {
         setItemList(res.data.result)
         itemListRef.current = res.data.result
         lengthRef.current = res.data.result.length
-        console.log('length', lengthRef.current)
-        console.log(`setItemList ${res.data.result[0]['image']}`)
+        // console.log('length', lengthRef.current)
+        // console.log(`setItemList ${res.data.result[0]['image']}`)
       })
       .catch((err) => console.log('다시 시도해주세요', err))
   }
@@ -197,13 +197,13 @@ const TryOn: React.FC = () => {
     formData.append('profilePk', sessionStorage.getItem('profilePk'))
     formData.append('category', categoryList[itemListRef.current[currentIndexRef.current].category])
     formData.append('closetPk', itemListRef.current[currentIndexRef.current].closetPk)
-    console.log(itemListRef.current[currentIndexRef.current].closetPk)
+    // console.log(itemListRef.current[currentIndexRef.current].closetPk)
     const response = await tryOnGenerate(formData)
     setResultUrl(response.data.result.generatedImage)
   }
 
   const beforeCapture = async () => {
-    console.log('123')
+    // console.log('123')
     flag.current = 1
     isCaptured.current = true
     setModal(true)
@@ -212,7 +212,7 @@ const TryOn: React.FC = () => {
   }
 
   useEffect(() => {
-    console.log('flag ', flag.current)
+    // console.log('flag ', flag.current)
   }, [flag.current])
 
   const getIsCaptured = () => {
@@ -220,8 +220,8 @@ const TryOn: React.FC = () => {
   }
 
   const handleCapture = async (phase: number) => {
-    console.log('capture')
-    console.log(phaseRef.current)
+    // console.log('capture')
+    // console.log(phaseRef.current)
     if (!captureFlag.current) {
       captureFlag.current = true
       if (phase == 2) {
@@ -241,7 +241,7 @@ const TryOn: React.FC = () => {
         location.reload()
         return
       } else if (phase == 1) {
-        console.log('capture')
+        // console.log('capture')
         setModal(false)
 
         const canvas = document.createElement('canvas')
@@ -261,7 +261,7 @@ const TryOn: React.FC = () => {
             if (blob) {
               const url = URL.createObjectURL(blob).split('/')
               const file = new File([blob], `${url[url.length - 1]}.png`, { type: 'image/png' })
-              console.log('Capture successful:', url)
+              // console.log('Capture successful:', url)
               saveImage(file)
             }
           }
