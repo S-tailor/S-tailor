@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { QrReader } from 'react-qr-reader'
 import styles from '../../../scss/closetcodeinputtest.module.scss'
-
-const BASE_URL = 'https://ourtrip.store/api/tryon'
+const { BASE_URL } = import.meta.env
+// const BASE_URL = 'https://ourtrip.store/api/tryon'
 // const BASE_URL = 'http://localhost:5000/api/tryon'
 
 const ClosetCodeInput: React.FC = () => {
@@ -26,7 +26,7 @@ const ClosetCodeInput: React.FC = () => {
       }
 
       await axios
-        .post(`${BASE_URL}/verify`, params)
+        .post(`${BASE_URL}/api/tryon/verify`, params)
         .then(function (response) {
           if (response.data == 'success') {
             setCamera(false)
@@ -43,27 +43,25 @@ const ClosetCodeInput: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      
       <div className={styles.header}>
         <div className={styles.headerInner}>
-            <div className={styles.headerInner1}>
-            <img 
+          <div className={styles.headerInner1}>
+            <img
               onClick={() =>
-              startTransition(() => {
-                navigate('/mobile/closet')
-              })
+                startTransition(() => {
+                  navigate('/mobile/closet')
+                })
               }
-              className={styles.backBtn} 
-              src="/assets/backBtn.svg" 
+              className={styles.backBtn}
+              src="/assets/backBtn.svg"
               alt="backBtn"
             />
-            </div>
-        
-            <div className={styles.headerInner2}>
-              <p className={styles.title}>옷 입어보기</p>
-            </div>
-            <div className={styles.headerInner3}>
-            </div>
+          </div>
+
+          <div className={styles.headerInner2}>
+            <p className={styles.title}>옷 입어보기</p>
+          </div>
+          <div className={styles.headerInner3}></div>
         </div>
       </div>
 
@@ -72,32 +70,32 @@ const ClosetCodeInput: React.FC = () => {
         <p className={styles.subTitle}>기기에 표시된 QR코드를 촬영해주세요.</p>
       </div>
 
-
-        {camera && (
-          <QrReader
-            className={styles.qrreder}
-            constraints={{ facingMode: 'environment' }}
-            onResult={(result: any | null, error) => {
-              if (result) {
-                setData(result.text)
-              }
-              if (error) {
-                console.info(error)
-              }
-            }}
-            videoStyle={{ width: '100%', height: '40vh', objectFit: 'cover' }}
-          />
-        )}
+      {camera && (
+        <QrReader
+          className={styles.qrreder}
+          constraints={{ facingMode: 'environment' }}
+          onResult={(result: any | null, error) => {
+            if (result) {
+              setData(result.text)
+            }
+            if (error) {
+              console.info(error)
+            }
+          }}
+          videoStyle={{ width: '100%', height: '40vh', objectFit: 'cover' }}
+        />
+      )}
 
       <section className={styles.bottomButton}>
-        {data && 
+        {data && (
           <>
             <div className={styles.infoText}>{message}</div>
-            <button className={styles.btn} onClick={handleVerify}>확인</button>
+            <button className={styles.btn} onClick={handleVerify}>
+              확인
+            </button>
           </>
-        }
-        </section>
-
+        )}
+      </section>
     </div>
   )
 }
