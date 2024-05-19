@@ -57,8 +57,16 @@ const Ask: React.FC = () => {
 
     await chatbot(formData)
       .then((response) => {
-        const botResponse = { sender: 'bot', text: response.data.result[0].title!=null?response.data.result[0].title + " 어떠세요?":response.data.body, image: response.data.result[0].image!=null?response.data.result[0].image:fileUrl }
-        setMessages((prev) => [...prev, botResponse])
+        if(response.data.result!=undefined) {
+          
+          const botResponse = { sender: 'bot', text: response.data.result[0].title!=null?response.data.result[0].title + " 어떠세요?":response.data.body, image: response.data.result[0].image!=null?response.data.result[0].image:fileUrl }
+          setMessages((prev) => [...prev, botResponse])
+        }
+        
+        else {
+          const botResponse = { sender: 'bot', text: response.data.body, image:fileUrl }
+          setMessages((prev) => [...prev, botResponse])
+        }
       })
       .catch(() => {
         const errorMessage = { sender: 'bot', text: '오류가 발생했습니다.', image: fileUrl }
