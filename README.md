@@ -26,7 +26,7 @@
 
     나하나 : FrontEnd, Design, PPT
 
-    조상민 : FrontEnd, Interface, UCC
+    조상민 : FrontEnd, Interface, UCC, API연결
 
     김재민 : BackEnd, Infra
 
