@@ -1,4 +1,4 @@
-# SSAFY 10기 자율 프로젝트
+# SSAFY 10기 자율 프로젝트 
 
 # S-Tailor
 
