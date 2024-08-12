@@ -22,7 +22,7 @@
 
 ## 2. 팀 역할 소개
 
-    이지은 : Leader, FrontEnd, Interface, Presentation
+    이지은 : Leader, FrontEnd, Interface, Presentation 
 
     나하나 : FrontEnd, Design, PPT
 
