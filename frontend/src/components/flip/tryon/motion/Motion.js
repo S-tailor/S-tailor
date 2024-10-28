@@ -80,8 +80,6 @@ export default function (
 
     if (key == 1) {
       // console.log('왼쪽으로 넘기기')
-      // console.log('isCaptured', isCaptured)
-      //leftButton.click();
 
       if (isCaptured) {
         handleYes()
@@ -92,8 +90,7 @@ export default function (
 
     if (key == 2) {
       // console.log('오른쪽으로 넘기기')
-      //rightButton.click()
-      // console.log("isCaptured",isCaptured)
+      
       if (isCaptured) {
         handleNo()
       } else {
@@ -103,12 +100,12 @@ export default function (
 
     if (key == 0 && !isCaptured) {
       // console.log('촬영하기')
+      
       isCaptured = true
       beforeCapture()
     }
 
     obj.ready = false
-
     setTimeout(setNoteReady, 500, obj)
   }
 
